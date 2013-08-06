@@ -23,12 +23,12 @@ int main()
 	dtbConfig.Read("0:DTB.INI");
 //	Ethernet_test();
 
-//	eth_init();
-//	while(1){
-//		eth_write("abcdefg");
-//		printf(eth_read());
-//		usleep(50000);
-//	}
+	eth_init();
+	while(1){
+		eth_write("abcdefg");
+		printf(eth_read());
+		usleep(50000);
+	}
 	rpc_Dispatcher(*tb.GetIo());
 
 	return 0;
