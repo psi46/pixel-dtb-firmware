@@ -1,9 +1,14 @@
 // ethernet.h
 
+#include "rpc_io.h"
 #pragma once
 
-int eth_init();
-
-void eth_write(const char* data);
-void eth_flush();
-char* eth_read();
+class Ethernet : public CRpcIo
+{
+public:
+	Ethernet();
+	bool RxFull();
+	bool Write(const void *buffer, unsigned int size);
+	void Flush();
+	bool Read(void *buffer, unsigned int size);
+};

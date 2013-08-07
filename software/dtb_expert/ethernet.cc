@@ -19,6 +19,7 @@ template <class T>
 inline volatile T* Uncache(T *x) { return (T*)(((unsigned long)x) | 0x80000000); }
 
 const int FRAME_SIZE = 1024;
+const int BUFFER_SIZE = 5*FRAME_SIZE;
 // Create a transmit frame
 unsigned char tx_frame[FRAME_SIZE] = {
 	0x00,0x00, 						// for 32-bit alignment
@@ -30,7 +31,9 @@ unsigned char tx_frame[FRAME_SIZE] = {
 
 // Create a receive frame
 unsigned char rx_frame[FRAME_SIZE] = { 0 };
-unsigned char rx_buffer[5*FRAME_SIZE] = { 0 };
+unsigned char rx_buffer[BUFFER_SIZE] = { 0 };
+unsigned int rx_buff_offset = 0;
+unsigned int rx_buff_size   = 0;
 
 // Create sgdma transmit and receive devices
 alt_sgdma_dev * sgdma_tx_dev;
@@ -43,10 +46,21 @@ alt_sgdma_descriptor tx_descriptor_end	__attribute__ (( section ( ".descriptor_m
 alt_sgdma_descriptor rx_descriptor  	__attribute__ (( section ( ".descriptor_memory" )));
 alt_sgdma_descriptor rx_descriptor_end  __attribute__ (( section ( ".descriptor_memory" )));
 
+void buff_write(char c){
+        rx_buffer[(rx_buff_offset + rx_buff_size) % BUFFER_SIZE] = c;
+        rx_buff_size++;
+}
+
+char buff_read(){
+        char c = rx_buffer[rx_buff_offset];
+        rx_buff_size--;
+        rx_buff_offset = (rx_buff_offset+1) % BUFFER_SIZE;
+        return c;
+}
+
 /****************************************************************************************
  * Subroutine to read incoming Ethernet frames
 ****************************************************************************************/
-unsigned int rxPayloadSize = 0;
 unsigned int RX_MAX_PAYLOAD_SIZE = 5*FRAME_SIZE;
 void rx_ethernet_isr (void *context)
 {
@@ -54,22 +68,17 @@ void rx_ethernet_isr (void *context)
 	// Wait until receive descriptor transfer is complete
 	while (alt_avalon_sgdma_check_descriptor_status(&rx_descriptor) != 0);
 	alt_dcache_flush(rx_frame, 1024);
-
 	// Create new receive sgdma descriptor
 	alt_avalon_sgdma_construct_stream_to_mem_desc( &rx_descriptor, &rx_descriptor_end, (alt_u32*)rx_frame, 0, 0 );
-
 	// Set up non-blocking transfer of sgdma receive descriptor
 	alt_avalon_sgdma_do_async_transfer( sgdma_rx_dev, &rx_descriptor );
-	printf((char*)rx_frame);
 	char c = rx_frame[14];
 	unsigned int i = 15;
-	while(c != '\0' && i < (5*FRAME_SIZE-1)){
-		rx_buffer[rxPayloadSize] = c;
-		rxPayloadSize++;
+	while(c != '\0' && i < (BUFFER_SIZE-1)){
+		buff_write(c);
 		i++;
 		c = rx_frame[i];
 	}
-	rx_buffer[rxPayloadSize+1] = '\0';
 }
 
 int eth_init(){
@@ -138,34 +147,18 @@ int eth_init(){
 	return 0;
 }
 
-char* eth_read(){
-	char* buffer = (char*)malloc(strlen((char*)rx_buffer)+1);
-	strcpy(buffer, (char*)rx_buffer);
-	rxPayloadSize = 0;
-	rx_buffer[0] = '\0';
-	return buffer;
+bool eth_read(void* buffer, unsigned int size){
+	int i = 0;
+	while(rx_buff_size != 0 && i < size){
+		*(((char*)buffer)+i) = buff_read();
+		i++;
+	}
+	return true;
 }
+
 
 unsigned int txPayloadSize = 0;
 const unsigned int TX_MAX_PAYLOAD_SIZE = FRAME_SIZE - 17; //16 address bytes plus null terminator
-void eth_write(const char* data){
-
-	int i = 0;
-	char c = data[0];
-
-	while(c != '\0'){
-		txPayloadSize++;
-		if(txPayloadSize == TX_MAX_PAYLOAD_SIZE){
-//			printf("%d",txPayloadSize);
-			eth_flush();
-		}
-		tx_frame[16 + txPayloadSize] = c;
-		i++;
-		c = data[i];
-	}
-	tx_frame[17+txPayloadSize] = '\0';
-}
-
 void eth_flush(){
 	tx_frame[14] = (char)(txPayloadSize >> 8);
 	tx_frame[15] = (char)txPayloadSize;
@@ -182,6 +175,38 @@ void eth_flush(){
 	// Wait until transmit descriptor transfer is complete
 	while (alt_avalon_sgdma_check_descriptor_status(&tx_descriptor) != 0);
 	txPayloadSize = 0;
+	for(int i = 16; i < FRAME_SIZE; i++) tx_frame[i] = 0; //clear frame
+}
+
+bool eth_write(const void* data, unsigned int size){
+	for(int i = 0 ; i < size; i++){
+		txPayloadSize++;
+		if(txPayloadSize == TX_MAX_PAYLOAD_SIZE){
+			eth_flush();
+		}
+		tx_frame[16 + txPayloadSize] = ((char*)data)[i];
+	}
+	return true;
 }
 
 
+
+
+/* Ethernet
+ * Object wrapper for Ethernet interface
+ */
+Ethernet::Ethernet(){
+	eth_init();
+}
+bool Ethernet::Read(void* buffer, unsigned int size){
+	return eth_read(buffer, size);
+}
+bool Ethernet::Write(const void * buffer, unsigned int size){
+	return eth_write(buffer,size);
+}
+void Ethernet::Flush(){
+	eth_flush();
+}
+bool Ethernet::RxFull(){
+	return rx_buff_size == BUFFER_SIZE;
+}
