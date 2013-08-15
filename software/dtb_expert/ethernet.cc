@@ -18,15 +18,14 @@
 template <class T>
 inline volatile T* Uncache(T *x) { return (T*)(((unsigned long)x) | 0x80000000); }
 
-const int FRAME_SIZE = 1024;
-const int BUFFER_SIZE = 5*FRAME_SIZE;
+const unsigned int FRAME_SIZE = 1024;
+const unsigned int BUFFER_SIZE = 5*FRAME_SIZE;
 // Create a transmit frame
 unsigned char tx_frame[FRAME_SIZE] = {
 	0x00,0x00, 						// for 32-bit alignment
 	0xFF,0xFF,0xFF,0xFF,0xFF,0xFF, 	// destination address (broadcast)
 	0x01,0x60,0x6E,0x11,0x02,0x0F, 	// source address //updated later
-	0x08,0x01, 						// length or type of the payload data
-	'\0' 							// payload data (ended with termination character)
+	0x08,0x01  						// length or type of the payload data
 };
 
 // Create a receive frame
@@ -58,13 +57,16 @@ char buff_read(){
         return c;
 }
 
+
+unsigned char src_addr[6];
+unsigned char dst_addr[6];
+unsigned int message_size = 0;
 /****************************************************************************************
  * Subroutine to read incoming Ethernet frames
 ****************************************************************************************/
 unsigned int RX_MAX_PAYLOAD_SIZE = 5*FRAME_SIZE;
 void rx_ethernet_isr (void *context)
 {
-	printf("\nRunning eth isr\n");
 	// Wait until receive descriptor transfer is complete
 	while (alt_avalon_sgdma_check_descriptor_status(&rx_descriptor) != 0);
 	alt_dcache_flush(rx_frame, 1024);
@@ -72,16 +74,23 @@ void rx_ethernet_isr (void *context)
 	alt_avalon_sgdma_construct_stream_to_mem_desc( &rx_descriptor, &rx_descriptor_end, (alt_u32*)rx_frame, 0, 0 );
 	// Set up non-blocking transfer of sgdma receive descriptor
 	alt_avalon_sgdma_do_async_transfer( sgdma_rx_dev, &rx_descriptor );
-	char c = rx_frame[14];
-	unsigned int i = 15;
-	while(c != '\0' && i < (BUFFER_SIZE-1)){
-		buff_write(c);
-		i++;
-		c = rx_frame[i];
+
+	for(int k= 0; k<6; k++)
+		dst_addr[k] = rx_frame[k+2];
+	for(int k= 0; k<6; k++)
+		src_addr[k] = rx_frame[k+8];
+
+	message_size = rx_frame[14];
+	message_size = (message_size << 8) | rx_frame[15];
+
+	if(message_size > 1500) return; //packet not from psi46*
+	for(unsigned int k = 0; k < message_size; k++){
+		buff_write(rx_frame[16+k]);
 	}
+
 }
 
-int eth_init(){
+int eth_init(bool& initiated){
 	// Open the sgdma transmit device
 	sgdma_tx_dev = alt_avalon_sgdma_open ("/dev/sgdma_tx");
 	if (sgdma_tx_dev == NULL)
@@ -122,12 +131,12 @@ int eth_init(){
 	tse[4] = tse[4] | ((MAC >> 8) & 0xFF);
 	tse[4] = tse[4] | ((MAC << 8) & 0xFF00);
 
-	tx_frame[8] = (int)(MAC >> 40);
-	tx_frame[9] = (int)(MAC >> 32);
-	tx_frame[10] = (int)(MAC >> 24);
-	tx_frame[11] = (int)(MAC >> 16);
-	tx_frame[12] = (int)(MAC >> 8);
-	tx_frame[13] = (int)MAC;
+	tx_frame[8] =  (char)(MAC >> 40);
+	tx_frame[9] =  (char)(MAC >> 32);
+	tx_frame[10] = (char)(MAC >> 24);
+	tx_frame[11] = (char)(MAC >> 16);
+	tx_frame[12] = (char)(MAC >> 8);
+	tx_frame[13] = (char)MAC;
 
 	// Specify the addresses of the PHY devices to be accessed through MDIO interface
 	tse[0x0F] = 0x12; // mdio_addr0
@@ -144,13 +153,22 @@ int eth_init(){
 
 	// Enable read and write transfers, gigabit Ethernet operation, and CRC forwarding
 	tse[2] |= 0x0000004B; // 0100 1011 command config: CRC_FWD, ETH_SPEED, RX_ENA, TX_ENA
+	initiated = true;
 	return 0;
 }
 
 bool eth_read(void* buffer, unsigned int size){
-	int i = 0;
-	while(rx_buff_size != 0 && i < size){
-		*(((char*)buffer)+i) = buff_read();
+	unsigned int i = 0;
+
+	int timeout = 10000000;
+	while(i < size){
+		if(rx_buff_size == 0){
+			timeout--;
+			if(!timeout) return false;
+			continue;
+		}
+		timeout = 10000000;
+		((unsigned char*)buffer)[i] = buff_read();
 		i++;
 	}
 	return true;
@@ -175,16 +193,16 @@ void eth_flush(){
 	// Wait until transmit descriptor transfer is complete
 	while (alt_avalon_sgdma_check_descriptor_status(&tx_descriptor) != 0);
 	txPayloadSize = 0;
-	for(int i = 16; i < FRAME_SIZE; i++) tx_frame[i] = 0; //clear frame
 }
 
 bool eth_write(const void* data, unsigned int size){
-	for(int i = 0 ; i < size; i++){
+	for(unsigned int i = 0 ; i < size; i++){
 		txPayloadSize++;
 		if(txPayloadSize == TX_MAX_PAYLOAD_SIZE){
 			eth_flush();
+			txPayloadSize++;
 		}
-		tx_frame[16 + txPayloadSize] = ((char*)data)[i];
+		tx_frame[15 + txPayloadSize] = ((char*)data)[i];
 	}
 	return true;
 }
@@ -196,17 +214,25 @@ bool eth_write(const void* data, unsigned int size){
  * Object wrapper for Ethernet interface
  */
 Ethernet::Ethernet(){
-	eth_init();
+	initiated = false;
 }
 bool Ethernet::Read(void* buffer, unsigned int size){
+	if(!initiated) eth_init(initiated);
 	return eth_read(buffer, size);
 }
 bool Ethernet::Write(const void * buffer, unsigned int size){
+	if(!initiated) eth_init(initiated);
 	return eth_write(buffer,size);
 }
 void Ethernet::Flush(){
+	if(!initiated) eth_init(initiated);
 	eth_flush();
 }
 bool Ethernet::RxFull(){
+	if(!initiated) eth_init(initiated);
 	return rx_buff_size == BUFFER_SIZE;
+}
+bool Ethernet::RxEmpty(){
+	if(!initiated) eth_init(initiated);
+	return rx_buff_size == 0;
 }

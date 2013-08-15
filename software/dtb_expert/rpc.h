@@ -81,6 +81,15 @@ public:
 	void Put_INT64(int64_t x) { Put_UINT32(uint32_t(x)); Put_UINT32(uint32_t(x>>32)); }
 	void Put_UINT64(uint64_t x) { Put_UINT32(uint32_t(x)); Put_UINT32(uint32_t(x>>32)); }
 
+	void Print_Message(){
+		printf("\nMESSAGE RECEIVED!!!\n");
+		printf("m_cmd: %d\n",m_cmd);
+		printf("m_size: %d\n",m_size);
+		for(int i = 0; i < m_size; i++) printf("%02x",m_par[i]);
+		printf("\nm_pos: %d\n",m_pos);
+		printf("m_type: %d\n",m_type);
+	}
+
 	bool Send(CRpcIo &rpc_io);
 	bool Receive(CRpcIo &rpc_io);
 	bool CheckSize(uint8_t size)

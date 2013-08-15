@@ -776,7 +776,9 @@ void CTestboard::Pg_Loop(unsigned short period)
 	IOWR_32DIRECT(PATTERNGEN_CTRL_BASE, 0, 0x84);
 }
 
-
+uint16_t CTestboard::GetUser1Version(){
+	return 0;
+}
 
 // === ROC/Module Communication =========================================
 
@@ -1138,5 +1140,22 @@ void CTestboard::Daq_Select_Deser160(uint8_t shift)
 	// enable deser160
 	daq_select_deser160 = true;
 	IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, (shift & 0x7) | 0x8);
+}
+
+/* Ethernet Testing */
+
+void CTestboard::Ethernet_Send(string &message){
+	printf("I need to get rid of some packets!\n");
+	ethernet.Write(message.c_str(),message.length());
+	ethernet.Flush();
+}
+uint32_t CTestboard::Ethernet_RecvPackets(){
+	printf("I'm getting a packet, stand by,\n");
+	char buffer[30];
+	while(!ethernet.RxEmpty()){
+		ethernet.Read(buffer,30);
+		printf(buffer);
+	}
+	return 0;
 }
 

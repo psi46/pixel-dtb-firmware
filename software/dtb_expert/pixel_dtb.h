@@ -5,7 +5,9 @@
 #include "dtb_hal.h"
 #include "rpc.h"
 #include "FlashMemory.h"
+#include "ethernet.h"
 
+#define USE_ETHERNET
 
 // size of module
 #define MOD_NUMROCS  16
@@ -54,6 +56,7 @@ class CTestboard
 {
 	CRpcIo *rpc_io;
 	CUSB usb;
+	Ethernet ethernet;
 
 	static const uint16_t flashUpgradeVersion;
 	uint16_t ugRecordCounter;
@@ -101,7 +104,11 @@ class CTestboard
 	static unsigned char ROWCODE(unsigned char x) { return (x>>1)^x; }
 
 public:
+#ifdef USE_ETHERNET
+	CTestboard() : rpc_io(&ethernet), flashMem(0), daq_mem_base(0), daq_mem_size(0) { Init(); }
+#else
 	CTestboard() : rpc_io(&usb), flashMem(0), daq_mem_base(0), daq_mem_size(0) { Init(); }
+#endif
 	CRpcIo* GetIo() { return rpc_io; }
 
 
@@ -263,6 +270,7 @@ public:
 	RPC_EXPORT void Pg_Trigger();
 	RPC_EXPORT void Pg_Loop(uint16_t period);
 
+	RPC_EXPORT uint16_t GetUser1Version();
 
 	// --- data aquisition --------------------------------------------------
 	RPC_EXPORT uint32_t Daq_Open(uint32_t buffersize = 10000000);
@@ -334,6 +342,10 @@ public:
 
 	// Wafer test functions
 	RPC_EXPORT bool testColPixel(uint8_t col, uint8_t trimbit, vectorR<uint8_t> &res);
+
+	// Ethernet test functions
+	RPC_EXPORT void Ethernet_Send(string &message);
+	RPC_EXPORT uint32_t Ethernet_RecvPackets();
 };
 
 extern CTestboard tb;

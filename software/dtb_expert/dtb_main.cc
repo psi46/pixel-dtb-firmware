@@ -4,10 +4,6 @@
 #include "pixel_dtb.h"
 #include "dtb_config.h"
 #include "debug.h"
-#include "ethernet.h"
-
-//int Ethernet_test(void);
-
 
 CTestboard tb;
 
@@ -22,15 +18,6 @@ int main()
 	dtbConfig.Init();
 	dtbConfig.Read("0:DTB.INI");
 
-	Ethernet e;
-	char* data = "abcdefg";
-	char store[10];
-	while(1){
-		e.Write(data,strlen(data));
-		e.Read(store, 10);
-		printf("\n%s\n",store);
-		usleep(50000);
-	}
 	rpc_Dispatcher(*tb.GetIo());
 
 	return 0;
