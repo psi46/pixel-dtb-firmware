@@ -190,7 +190,7 @@ CRT0 :=
 SYS_LIB :=
 
 # Define path to the root of the BSP.
-BSP_ROOT_DIR := ../dtb_bsp
+BSP_ROOT_DIR := X:/source/FPGA/software/dtb_bsp/
 
 # List of application specific include directories, library directories and library names
 APP_INCLUDE_DIRS += libfatfs/core

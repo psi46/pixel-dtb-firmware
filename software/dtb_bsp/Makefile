@@ -67,8 +67,6 @@ ABS_BSP_ROOT := $(call adjust-path-mixed,$(shell pwd))
 # Stash all BSP object files here
 OBJ_DIR := ./obj
 
-NEWLIB_DIR = $(BSP_ROOT_DIR)/newlib
-
 
 #------------------------------------------------------------------------------
 #                              MANAGED CONTENT
@@ -95,12 +93,12 @@ NEWLIB_DIR = $(BSP_ROOT_DIR)/newlib
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 13.0
-ACDS_VERSION := 13.0
+# ACDS_VERSION: 12.0sp2
+ACDS_VERSION := 12.0sp2
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 156
+# BUILD_NUMBER: 263
 
 SETTINGS_FILE := settings.bsp
 SOPC_FILE := ../../dtb/dtb_system.sopcinfo
@@ -774,17 +772,8 @@ $(OBJ_DIR)/%.i: %.cxx
 #------------------------------------------------------------------------------
 #                               NEWLIB RULES
 #------------------------------------------------------------------------------
-
-ifneq ($(COMPILE_NEWLIB),)
-NEWLIB_FLAGS += $(BSP_CFLAGS)
-endif
-
-ifneq ($(NEWLIB_FLAGS),)
-ALT_LIBRARY_DIRS += $(NEWLIB_DIR)/nios2-elf/lib
-endif
-
-$(NEWLIB_DIR):
-ifneq ($(NEWLIB_FLAGS),)
+ifneq ($(NEWLIB_DIR),)
+$(NEWLIB_DIR): 
 	@$(ECHO) Creating $(NEWLIB_DIR)...
 	nios2-newlib-gen --no-multilib $(NEWLIB_DIR)-build-tmp $(NEWLIB_DIR) --custom "$(NEWLIB_FLAGS)"		
 	@$(ECHO) Removing $(NEWLIB_DIR)-build-tmp...

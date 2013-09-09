@@ -1,7 +1,7 @@
 // debug.cc
 
 #include <stdio.h>
-#include <sys/alt_flash.h>
+#include <sys\alt_flash.h>
 #include "system.h"
 
 

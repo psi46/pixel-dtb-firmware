@@ -7,7 +7,7 @@
 using namespace std;
 
 #define fw_version 0x0101
-#define sw_version 0x0106
+#define sw_version 0x0107
 
 
 struct DTB_CONFIG

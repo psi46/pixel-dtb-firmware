@@ -5,7 +5,7 @@
 #include "dtb_config.h"
 #include "rpc.h"
 #include "SRecordReader.h"
-#include "io.h"
+
 
 // === id ===================================================================
 
@@ -90,23 +90,22 @@ uint16_t CTestboard::GetSWVersion()
 
 // === service ==============================================================
 
-#define DELAY 120
 void CTestboard::Welcome()
 {
-	_SetLED(0x01);	mDelay(DELAY);
-	_SetLED(0x02);	mDelay(DELAY);
-	_SetLED(0x08);	mDelay(DELAY);
-	_SetLED(0x04);	mDelay(DELAY);
+	_SetLED(0x01);	mDelay(60);
+	_SetLED(0x02);	mDelay(60);
+	_SetLED(0x08);	mDelay(60);
+	_SetLED(0x04);	mDelay(60);
 
-	_SetLED(0x01);	mDelay(DELAY);
-	_SetLED(0x02);	mDelay(DELAY);
-	_SetLED(0x08);	mDelay(DELAY);
-	_SetLED(0x04);	mDelay(DELAY);
+	_SetLED(0x01);	mDelay(60);
+	_SetLED(0x02);	mDelay(60);
+	_SetLED(0x08);	mDelay(60);
+	_SetLED(0x04);	mDelay(60);
 
-	_SetLED(0x01);	mDelay(DELAY);
-	_SetLED(0x03);	mDelay(DELAY);
-	_SetLED(0x0b);	mDelay(DELAY);
-	_SetLED(0x0f);	mDelay(DELAY*3);
+	_SetLED(0x01);	mDelay(60);
+	_SetLED(0x03);	mDelay(60);
+	_SetLED(0x0b);	mDelay(60);
+	_SetLED(0x0f);	mDelay(200);
 	_SetLED(0x00);
 }
 
@@ -951,7 +950,7 @@ uint32_t CTestboard::Daq_Open(uint32_t buffersize)
 
 	// set DMA to allocated memory
 	DAQ_WRITE(DAQ_MEM_BASE, (unsigned long)daq_mem_base);
-	DAQ_WRITE(DAQ_MEM_SIZE, (unsigned long)daq_mem_size);
+	DAQ_WRITE(DAQ_MEM_SIZE, daq_mem_size);
 
 	return daq_mem_size;
 }

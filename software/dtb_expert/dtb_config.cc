@@ -13,7 +13,7 @@ void DTB_CONFIG::Init()
 	board = 0;
 	hw_version = "";
 	usb_id = "";
-	mac_address = 0x99;
+	mac_address = 0;
 	hostname = "";
 	comment = "";
 }
