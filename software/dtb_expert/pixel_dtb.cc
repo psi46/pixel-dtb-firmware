@@ -791,21 +791,21 @@ void CTestboard::tbm_Enable(bool on)
 }
 
 
-void CTestboard::tbm_Addr(unsigned char hub, unsigned char port)
+void CTestboard::tbm_Addr(uint8_t hub, uint8_t port)
 {
 	MOD_present = false;
 	HUB_address = ((hub & 0x1f)<<3) + (port & 0x07);
 }
 
 
-void CTestboard::mod_Addr(unsigned char hub)
+void CTestboard::mod_Addr(uint8_t hub)
 {
 	MOD_present = true;
 	HUB_address = ((hub & 0x1f)<<3);
 }
 
 
-void CTestboard::tbm_Set(unsigned char reg, unsigned char value)
+void CTestboard::tbm_Set(uint8_t reg, uint8_t value)
 {
 	if (!TBM_present) return;
 
@@ -816,7 +816,7 @@ void CTestboard::tbm_Set(unsigned char reg, unsigned char value)
 	SetI2cHs(0, 3);
 }
 
-bool CTestboard::tbm_GetRaw(unsigned char reg, long &value)
+bool CTestboard::tbm_GetRaw(uint8_t reg, uint32_t &value)
 {
 	if (!TBM_present) { value = -1; return false; }
     
@@ -834,7 +834,7 @@ bool CTestboard::tbm_GetRaw(unsigned char reg, long &value)
 	return value >= 0;
 }
 
-bool CTestboard::tbm_Get(unsigned char reg, unsigned char &value)
+bool CTestboard::tbm_Get(uint8_t reg, uint8_t &value)
 {
 	long x;
 	reg |= 1;
