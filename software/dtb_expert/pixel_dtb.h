@@ -317,19 +317,19 @@ public:
 
 	// --- TBM
 
-//	RPC_EXPORT bool TBMPresent();
+	RPC_EXPORT bool TBMPresent();
 
-//	RPC_EXPORT void tbm_Enable(bool on);
+	RPC_EXPORT void tbm_Enable(bool on);
 
-//	RPC_EXPORT void tbm_Addr(unsigned char hub, unsigned char port);
+	RPC_EXPORT void tbm_Addr(unsigned char hub, unsigned char port);
 
-//	RPC_EXPORT void mod_Addr(unsigned char hub);
+	RPC_EXPORT void mod_Addr(unsigned char hub);
 
-//	RPC_EXPORT void tbm_Set(unsigned char reg, unsigned char value);
+	RPC_EXPORT void tbm_Set(unsigned char reg, unsigned char value);
 
-//	RPC_EXPORT bool tbm_Get(unsigned char reg, unsigned char &value);
+	RPC_EXPORT bool tbm_Get(unsigned char reg, unsigned char &value);
 
-//	RPC_EXPORT bool tbm_GetRaw(unsigned char reg, long &value);
+	RPC_EXPORT bool tbm_GetRaw(unsigned char reg, long &value);
 
 
 	// Wafer test functions
