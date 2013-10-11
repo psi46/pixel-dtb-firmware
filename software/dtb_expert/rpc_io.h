@@ -12,4 +12,5 @@ public:
 	virtual bool Write(const void *buffer, unsigned int size) = 0;
 	virtual void Flush() = 0;
 	virtual bool Read(void *buffer, unsigned int size) = 0;
+	virtual bool IsOpen() = 0;
 };

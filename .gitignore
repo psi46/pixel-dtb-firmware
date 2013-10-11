@@ -6,8 +6,14 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
+*.d
 
 # Compiled Static libraries
 *.lai
 *.la
 *.a
+
+# Image Files
+*.elf
+*.objdump
+*.map

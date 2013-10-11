@@ -3,14 +3,16 @@
 #include "rpc_io.h"
 #pragma once
 
-class Ethernet : public CRpcIo
+class CEthernet : public CRpcIo
 {
-	bool initiated;
 public:
-	Ethernet();
+	CEthernet();
 	bool RxFull();
 	bool RxEmpty();
 	bool Write(const void *buffer, unsigned int size);
 	void Flush();
 	bool Read(void *buffer, unsigned int size);
+	bool IsOpen();
+private:
+	bool initiated; //Signals that hardware is properly initiated
 };
