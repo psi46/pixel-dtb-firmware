@@ -1,0 +1,83 @@
+title "i2c controller";
+
+-- registers       b15 b14 b13 b12 b11 b10 b9  b8  b7  b6  b5  b4  b3  b2  b1  b0
+--  0 w:                                                                   tbm go
+--  0 r:                                                               ful tbm run
+--  1 w: send raw                  S   P   D7  D6  D5  D4  !D4 D3  D2  D1  D0  !D0
+--  2 w: send                                      D7  D6  D5  D4  D3  D2  D1  D0
+--  3 w: send S                                    D7  D6  D5  D4  D3  D2  D1  D0
+--  4 w: send  P                                   D7  D6  D5  D4  D3  D2  D1  D0
+--  5 w: send SP                                   D7  D6  D5  D4  D3  D2  D1  D0
+--  1 r: rdb raw   run 0   0   _s3 _rw _d4 _d0 S   ha4 ha3 ha2 ha1 ha0 pa2 pa1 pa0
+--                 ra7 ra6 ra5 ra4 ra3 ra2 ra1 ra0 rd7 rd6 rd5 rd4 rd3 rd2 rd1 rd0
+--
+--  tbm = read back on
+--  ful = fifo full
+--  go  = start transmission
+--  run = i2c running
+--  S = Start Bit, P = Stop Bit
+--  D   = Send Data
+--  ha  = Hub Address
+--  pa  = Port Address
+--  ra  = Register Address
+--  rd  = Register Data
+
+
+INCLUDE "cdc1.inc";
+
+
+SUBDESIGN i2c_control
+(
+	-- avalon slave
+	clk_sys          : INPUT;
+	address[2..0]    : INPUT;
+	write            : INPUT;
+	writedata[31..0] : INPUT;
+	read             : INPUT;
+	readdata[31..0]  : OUTPUT;
+
+	clk         : INPUT;
+	go          : OUTPUT;
+	full        : INPUT;
+	memd[11..0] : OUTPUT;
+	memw        : OUTPUT;
+	busy        : INPUT;
+	tbm         : OUTPUT;
+	rda[31..0]  : INPUT;
+)
+VARIABLE
+	i2c_data[9..0] : NODE;
+	rdbff : DFFE;
+	cdc : cdc1;
+	sel_go : NODE;
+
+BEGIN
+	memw = write & (address[]>=1) & (address[]<=5);
+	i2c_data[] = (writedata[7..4], !writedata[4],
+	              writedata[3..0], !writedata[0]);
+	CASE address[] IS
+		WHEN 2 => memd[] = (gnd, gnd, i2c_data[]);
+		WHEN 3 => memd[] = (vcc, gnd, i2c_data[]); -- S
+		WHEN 4 => memd[] = (gnd, vcc, i2c_data[]); --  P
+		WHEN 5 => memd[] = (vcc, vcc, i2c_data[]); -- SP
+		WHEN OTHERS => memd[] = writedata[11..0];
+	END CASE;
+	
+	CASE address[] IS
+		WHEN 1 => readdata[] = rda[];
+		WHEN OTHERS => readdata[] = (0, full, rdbff, busy # rda[31]);
+	END CASE;
+
+	-- tbm mode
+	rdbff.clk = clk_sys;
+	rdbff.ena = write & (address[] == 0);
+	rdbff.d   = writedata[1];
+	tbm       = rdbff;
+
+	-- go signal
+	cdc.clk_in  = clk_sys;
+	cdc.clk_out = clk;
+	sel_go  = address[] == 0;
+	cdc.in  = write & writedata[0] & sel_go;
+	go      = cdc.out;
+END;

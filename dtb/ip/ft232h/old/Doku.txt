@@ -1,0 +1,29 @@
+FT232H Register Definition
+==========================
+
+WRITE
+-----
+Reg 0 (16 Bit): Load 8 bit-data (00XXh) into transmit-FIFO. Last word should be 80XXh (gives the USB-chip a signal to immediately send data from transmit-fifo). If transmit-FIFO is full, waitrequest will be activated.
+Reg 1 (16 Bit): Redirected to Reg 0
+
+READ
+----
+Reg 0 (16 Bit): Read data from receive-FIFO if available (00XXh), otherwise 8000h will be readed.
+Reg 1 (16 Bit): 8000h will be readed if transmit-FIFO (!) is full, otherwise 0000h will be readed.
+
+
+Example
+=======
+
+if(IORD_16DIRECT(FT232H_0_BASE, 2) == 0x0000) {
+	IOWR_16DIRECT(FT232H_0_BASE, 0, ('H' | 0x8000));
+}
+else {
+	printf("Buffer full");
+}
+
+
+Quartus
+=======
+
+Make sure that usb_clk is a global clock.

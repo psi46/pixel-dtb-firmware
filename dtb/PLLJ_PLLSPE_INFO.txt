@@ -1,0 +1,20 @@
+PLL_Name	clocks:inst14|altpll1:inst3|altpll:altpll_component|altpll1_altpll:auto_generated|pll1
+PLLJITTER	41
+PLLSPEmax	84
+PLLSPEmin	-53
+
+PLL_Name	clocks:inst14|altpll2:inst5|altpll:altpll_component|altpll2_altpll:auto_generated|pll1
+PLLJITTER	41
+PLLSPEmax	84
+PLLSPEmin	-53
+
+PLL_Name	clocks:inst14|pll_system:inst23|altpll:altpll_component|pll_system_altpll:auto_generated|pll1
+PLLJITTER	37
+PLLSPEmax	84
+PLLSPEmin	-53
+
+PLL_Name	dtb_system:inst|dtb_system_ram_ext:ram_ext|dtb_system_ram_ext_controller_phy:dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy:dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy:dtb_system_ram_ext_phy_alt_mem_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_clk_reset:clk|dtb_system_ram_ext_phy_alt_mem_phy_pll:pll|altpll:altpll_component|altpll_n5k3:auto_generated|pll1
+PLLJITTER	32
+PLLSPEmax	84
+PLLSPEmin	-53
+

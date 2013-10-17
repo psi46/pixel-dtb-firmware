@@ -1,0 +1,50 @@
+D:/digitaldesign/patterngenerator/Version3/quartus/patterngenerator.v {1 {vlog -work work -nocovercells {D:\digitaldesign\patterngenerator\Version3\quartus\patterngenerator.v}
+Model Technology ModelSim ALTERA vlog 10.0c Compiler 2011.09 Sep 21 2011
+-- Compiling module patterngenerator
+
+Top level modules:
+	patterngenerator
+
+} {} {}} D:/digitaldesign/patterngenerator/Version3/quartus/pg_sequencer.v {1 {vlog -work work -nocovercells {D:\digitaldesign\patterngenerator\Version3\quartus\pg_sequencer.v}
+Model Technology ModelSim ALTERA vlog 10.0c Compiler 2011.09 Sep 21 2011
+-- Compiling module pg_sequencer
+
+Top level modules:
+	pg_sequencer
+
+} {} {}} D:/digitaldesign/patterngenerator/Version3/quartus/test_cdc.v {1 {vlog -work work -nocovercells D:/digitaldesign/patterngenerator/Version3/quartus/test_cdc.v
+Model Technology ModelSim ALTERA vlog 10.0c Compiler 2011.09 Sep 21 2011
+-- Compiling module test_cdc
+
+Top level modules:
+	test_cdc
+
+} {} {}} D:/digitaldesign/patterngenerator/Version3/quartus/test_pg.v {1 {vlog -work work -nocovercells {D:\digitaldesign\patterngenerator\Version3\quartus\test_pg.v}
+Model Technology ModelSim ALTERA vlog 10.0c Compiler 2011.09 Sep 21 2011
+-- Compiling module test_pg
+
+Top level modules:
+	test_pg
+
+} {} {}} D:/digitaldesign/patterngenerator/Version3/quartus/pg_ram.v {1 {vlog -work work -nocovercells D:/digitaldesign/patterngenerator/Version3/quartus/pg_ram.v
+Model Technology ModelSim ALTERA vlog 10.0c Compiler 2011.09 Sep 21 2011
+-- Compiling module pg_ram
+
+Top level modules:
+	pg_ram
+
+} {} {}} D:/digitaldesign/patterngenerator/Version3/quartus/cdc_state.v {1 {vlog -work work -nocovercells D:/digitaldesign/patterngenerator/Version3/quartus/cdc_state.v
+Model Technology ModelSim ALTERA vlog 10.0c Compiler 2011.09 Sep 21 2011
+-- Compiling module cdc_state
+
+Top level modules:
+	cdc_state
+
+} {} {}} D:/digitaldesign/patterngenerator/Version3/quartus/cdc_pulse.v {1 {vlog -work work -nocovercells D:/digitaldesign/patterngenerator/Version3/quartus/cdc_pulse.v
+Model Technology ModelSim ALTERA vlog 10.0c Compiler 2011.09 Sep 21 2011
+-- Compiling module cdc_pulse
+
+Top level modules:
+	cdc_pulse
+
+} {} {}}

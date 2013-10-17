@@ -1,0 +1,15 @@
+X:/source/FPGA/dtb/ip/data_dma/data_dma.v {1 {vlog -work work -nocovercells X:/source/FPGA/dtb/ip/data_dma/data_dma.v
+Model Technology ModelSim ALTERA vlog 10.0d Compiler 2012.01 Jan 18 2012
+-- Compiling module data_dma
+
+Top level modules:
+	data_dma
+
+} {} {}} X:/source/FPGA/dtb/ip/data_dma/test_data_dma.v {1 {vlog -work work -nocovercells X:/source/FPGA/dtb/ip/data_dma/test_data_dma.v
+Model Technology ModelSim ALTERA vlog 10.0d Compiler 2012.01 Jan 18 2012
+-- Compiling module test_data_dma
+
+Top level modules:
+	test_data_dma
+
+} {} {}}

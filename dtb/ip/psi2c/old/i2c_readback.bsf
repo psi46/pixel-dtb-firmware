@@ -1,0 +1,80 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2005 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 64 64 192 224)
+	(text "i2c_readback" (rect 5 0 81 14)(font "Arial" (font_size 8)))
+	(text "inst" (rect 16 144 33 156)(font "Arial" ))
+	(port
+		(pt 0 96)
+		(input)
+		(text "go" (rect 0 0 14 14)(font "Arial" (font_size 8)))
+		(text "go" (rect 24 88 38 102)(font "Arial" (font_size 8)))
+		(line (pt 0 96)(pt 16 96)(line_width 1))
+	)
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 15 14)(font "Arial" (font_size 8)))
+		(text "clk" (rect 32 24 47 38)(font "Arial" (font_size 8)))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "sync" (rect 0 0 28 14)(font "Arial" (font_size 8)))
+		(text "sync" (rect 24 40 52 54)(font "Arial" (font_size 8)))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "rda" (rect 0 0 18 14)(font "Arial" (font_size 8)))
+		(text "rda" (rect 21 123 39 137)(font "Arial" (font_size 8)))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "sync2" (rect 0 0 35 14)(font "Arial" (font_size 8)))
+		(text "sync2" (rect 24 56 59 70)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 16 64)(line_width 1))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "i2c_send" (rect 24 72 75 86)(font "Arial" (font_size 8)))
+		(text "i2c_send" (rect 24 72 75 86)(font "Arial" (font_size 8)))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 128 112)
+		(output)
+		(text "d[31..0]" (rect 0 0 42 14)(font "Arial" (font_size 8)))
+		(text "d[31..0]" (rect 65 107 107 121)(font "Arial" (font_size 8)))
+		(line (pt 128 112)(pt 112 112)(line_width 3))
+	)
+	(drawing
+		(line (pt 16 24)(pt 24 32)(line_width 1))
+		(line (pt 24 32)(pt 16 40)(line_width 1))
+		(rectangle (rect 16 16 112 144)(line_width 1))
+	)
+)

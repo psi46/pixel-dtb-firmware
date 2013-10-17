@@ -1,0 +1,5 @@
+Extra Info (176273): Performing register packing on registers with non-logic cell location assignments
+Extra Info (176274): Completed register packing on registers with non-logic cell location assignments
+Extra Info (176236): Started Fast Input/Output/OE register processing
+Extra Info (176237): Finished Fast Input/Output/OE register processing
+Extra Info (176242): Moving registers into I/O cells, LUTs, and RAM blocks to improve timing and density

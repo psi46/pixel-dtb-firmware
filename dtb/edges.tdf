@@ -1,0 +1,27 @@
+TITLE "edges";
+%=======================================================================%
+%	edge detect															%
+%=======================================================================%
+
+SUBDESIGN edges
+(
+	clk  : INPUT;
+	sync : INPUT;
+	in   : INPUT;
+	out  : OUTPUT;
+)
+
+VARIABLE
+	s : MACHINE OF BITS (out) WITH STATES (idle=0, set=1, wait=0);
+
+BEGIN
+	s.clk = clk;
+	s.ena = sync;
+	TABLE
+		s,     in  =>  s;
+		idle,  1   =>  set;
+		set,   x   =>  wait;
+		wait,  0   =>  idle;
+	END TABLE;
+END;
+

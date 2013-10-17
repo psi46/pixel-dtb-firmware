@@ -1,0 +1,224 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2012 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 336 560)
+	(text "data_aqu" (rect 24 0 77 14)(font "Arial" (font_size 8)))
+	(text "inst" (rect 24 472 41 484)(font "Arial" ))
+	(port
+		(pt 0 48)
+		(input)
+		(text "clk_daq" (rect 0 80 43 94)(font "Arial" (font_size 8)))
+		(text "clk_daq" (rect 32 40 75 54)(font "Arial" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "reset" (rect 0 80 29 94)(font "Arial" (font_size 8)))
+		(text "reset" (rect 21 75 50 89)(font "Arial" (font_size 8)))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "sync" (rect 0 80 28 94)(font "Arial" (font_size 8)))
+		(text "sync" (rect 21 91 49 105)(font "Arial" (font_size 8)))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 0 248)
+		(input)
+		(text "trigger" (rect 0 80 36 94)(font "Arial" (font_size 8)))
+		(text "trigger" (rect 21 243 57 257)(font "Arial" (font_size 8)))
+		(line (pt 0 248)(pt 16 248))
+	)
+	(port
+		(pt 0 296)
+		(input)
+		(text "tout" (rect 0 80 21 94)(font "Arial" (font_size 8)))
+		(text "tout" (rect 21 291 42 305)(font "Arial" (font_size 8)))
+		(line (pt 0 296)(pt 16 296))
+	)
+	(port
+		(pt 0 328)
+		(input)
+		(text "sdata_I" (rect 0 80 41 94)(font "Arial" (font_size 8)))
+		(text "sdata_I" (rect 21 323 62 337)(font "Arial" (font_size 8)))
+		(line (pt 0 328)(pt 16 328))
+	)
+	(port
+		(pt 0 344)
+		(input)
+		(text "sdata_II" (rect 0 80 43 94)(font "Arial" (font_size 8)))
+		(text "sdata_II" (rect 21 339 64 353)(font "Arial" (font_size 8)))
+		(line (pt 0 344)(pt 16 344))
+	)
+	(port
+		(pt 0 360)
+		(input)
+		(text "sdata_III" (rect 0 80 46 94)(font "Arial" (font_size 8)))
+		(text "sdata_III" (rect 21 355 67 369)(font "Arial" (font_size 8)))
+		(line (pt 0 360)(pt 16 360))
+	)
+	(port
+		(pt 0 376)
+		(input)
+		(text "sdata_IV" (rect 0 80 50 94)(font "Arial" (font_size 8)))
+		(text "sdata_IV" (rect 21 371 71 385)(font "Arial" (font_size 8)))
+		(line (pt 0 376)(pt 16 376))
+	)
+	(port
+		(pt 0 448)
+		(input)
+		(text "ADC_or" (rect 0 80 44 94)(font "Arial" (font_size 8)))
+		(text "ADC_or" (rect 21 443 65 457)(font "Arial" (font_size 8)))
+		(line (pt 0 448)(pt 16 448))
+	)
+	(port
+		(pt 0 432)
+		(input)
+		(text "ADC_data[11..0]" (rect 0 80 93 94)(font "Arial" (font_size 8)))
+		(text "ADC_data[11..0]" (rect 21 427 114 441)(font "Arial" (font_size 8)))
+		(line (pt 0 432)(pt 16 432)(line_width 3))
+	)
+	(port
+		(pt 0 264)
+		(input)
+		(text "pg[5..0]" (rect 0 80 42 94)(font "Arial" (font_size 8)))
+		(text "pg[5..0]" (rect 21 259 63 273)(font "Arial" (font_size 8)))
+		(line (pt 0 264)(pt 16 264)(line_width 3))
+	)
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk_sys" (rect 24 88 67 102)(font "Arial" (font_size 8)))
+		(text "clk_sys" (rect 32 24 75 38)(font "Arial" (font_size 8)))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "sclk[7..0]" (rect 24 120 74 134)(font "Arial" (font_size 8)))
+		(text "sclk[7..0]" (rect 32 56 82 70)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 16 64)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "ctrl_deser160[3..0]" (rect 24 144 131 158)(font "Arial" (font_size 8)))
+		(text "ctrl_deser160[3..0]" (rect 24 216 131 230)(font "Arial" (font_size 8)))
+		(line (pt 0 224)(pt 16 224)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 272 344)
+		(input)
+		(text "daq0_running" (rect 221 336 298 350)(font "Arial" (font_size 8)))
+		(text "daq0_running" (rect 184 336 261 350)(font "Arial" (font_size 8)))
+		(line (pt 272 344)(pt 256 344))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "ctrl_adc_address[1..0]" (rect 24 128 152 142)(font "Arial" (font_size 8)))
+		(text "ctrl_adc_address[1..0]" (rect 24 120 152 134)(font "Arial" (font_size 8)))
+		(line (pt 0 128)(pt 16 128)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "ctrl_adc_write" (rect 24 144 106 158)(font "Arial" (font_size 8)))
+		(text "ctrl_adc_write" (rect 24 136 106 150)(font "Arial" (font_size 8)))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "ctrl_adc_writedata[15..0]" (rect 24 152 166 166)(font "Arial" (font_size 8)))
+		(text "ctrl_adc_writedata[15..0]" (rect 24 152 166 166)(font "Arial" (font_size 8)))
+		(line (pt 0 160)(pt 16 160))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "ctrl_adc_read" (rect 24 168 103 182)(font "Arial" (font_size 8)))
+		(text "ctrl_adc_read" (rect 24 168 103 182)(font "Arial" (font_size 8)))
+		(line (pt 0 176)(pt 16 176))
+	)
+	(port
+		(pt 0 280)
+		(input)
+		(text "i2c_trigger" (rect 24 272 84 286)(font "Arial" (font_size 8)))
+		(text "i2c_trigger" (rect 24 272 84 286)(font "Arial" (font_size 8)))
+		(line (pt 0 280)(pt 16 280))
+	)
+	(port
+		(pt 272 144)
+		(output)
+		(text "ctr" (rect 112 80 127 94)(font "Arial" (font_size 8)))
+		(text "ctr" (rect 236 139 251 153)(font "Arial" (font_size 8)))
+		(line (pt 272 144)(pt 256 144))
+	)
+	(port
+		(pt 272 232)
+		(output)
+		(text "tin" (rect 112 80 124 94)(font "Arial" (font_size 8)))
+		(text "tin" (rect 239 227 251 241)(font "Arial" (font_size 8)))
+		(line (pt 272 232)(pt 256 232))
+	)
+	(port
+		(pt 272 312)
+		(output)
+		(text "daq0_write" (rect 221 304 285 318)(font "Arial" (font_size 8)))
+		(text "daq0_write" (rect 192 304 256 318)(font "Arial" (font_size 8)))
+		(line (pt 272 312)(pt 256 312))
+	)
+	(port
+		(pt 272 328)
+		(output)
+		(text "daq0_writedata[15..0]" (rect 221 320 346 334)(font "Arial" (font_size 8)))
+		(text "daq0_writedata[15..0]" (rect 136 320 261 334)(font "Arial" (font_size 8)))
+		(line (pt 272 328)(pt 256 328)(color 128 0 255)(line_width 3))
+	)
+	(port
+		(pt 0 192)
+		(output)
+		(text "ctrl_adc_readdata[15..0]" (rect 24 184 163 198)(font "Arial" (font_size 8)))
+		(text "ctrl_adc_readdata[15..0]" (rect 24 184 163 198)(font "Arial" (font_size 8)))
+		(line (pt 0 192)(pt 16 192)(color 128 0 255)(line_width 3))
+	)
+	(port
+		(pt 272 456)
+		(output)
+		(text "TP[5..0]" (rect 221 448 263 462)(font "Arial" (font_size 8)))
+		(text "TP[5..0]" (rect 213 448 255 462)(font "Arial" (font_size 8)))
+		(line (pt 272 456)(pt 256 456)(color 128 0 255)(line_width 3))
+	)
+	(drawing
+		(line (pt 16 24)(pt 24 32))
+		(line (pt 24 32)(pt 16 40))
+		(line (pt 16 40)(pt 24 48))
+		(line (pt 24 48)(pt 16 56))
+		(line (pt 16 56)(pt 24 64))
+		(line (pt 24 64)(pt 16 72))
+		(rectangle (rect 16 16 256 472))
+	)
+)

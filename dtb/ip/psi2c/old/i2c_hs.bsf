@@ -1,0 +1,127 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2005 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 64 64 224 320)
+	(text "i2c_hs" (rect 64 0 120 16)(font "Courier New" (font_size 10)(bold)))
+	(text "inst" (rect 16 240 30 250)(font "Arial" (font_size 6)))
+	(port
+		(pt 0 216)
+		(input)
+		(text "rda" (rect 24 160 42 174)(font "Arial" (font_size 8)))
+		(text "rda" (rect 24 208 42 222)(font "Arial" (font_size 8)))
+		(line (pt 0 216)(pt 16 216))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "address[2..0]" (rect 20 76 96 88)(font "Courier New" (bold)))
+		(text "address[2..0]" (rect 24 104 88 116)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "read" (rect 24 120 49 134)(font "Arial" (font_size 8)))
+		(text "read" (rect 24 136 45 148)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "write" (rect 20 92 49 104)(font "Courier New" (bold)))
+		(text "write" (rect 24 120 46 132)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "clk_sys" (rect 24 80 67 94)(font "Arial" (font_size 8)))
+		(text "clk_sys" (rect 32 88 70 100)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "phase" (rect 24 56 59 70)(font "Arial" (font_size 8)))
+		(text "phase" (rect 24 56 53 68)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "sync" (rect 24 56 52 70)(font "Arial" (font_size 8)))
+		(text "sync" (rect 24 40 48 52)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 28 60 45 72)(font "Courier New" (bold)))
+		(text "clk" (rect 32 24 46 36)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "writedata[31..0]" (rect 20 108 114 120)(font "Courier New" (bold)))
+		(text "writedata[31..0]" (rect 24 152 99 164)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160)(line_width 3))
+	)
+	(port
+		(pt 160 216)
+		(output)
+		(text "sda" (rect 127 164 144 176)(font "Courier New" (bold)))
+		(text "sda" (rect 120 208 141 222)(font "Arial" (font_size 8)))
+		(line (pt 144 216)(pt 160 216)(line_width 1))
+	)
+	(port
+		(pt 160 144)
+		(output)
+		(text "readdata[31..0]" (rect 24 160 110 174)(font "Arial" (font_size 8)))
+		(text "readdata[31..0]" (rect 72 136 146 148)(font "Arial" ))
+		(line (pt 144 144)(pt 160 144)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 160 96)
+		(output)
+		(text "send" (rect 110 96 138 110)(font "Arial" (font_size 8)))
+		(text "send" (rect 110 88 138 102)(font "Arial" (font_size 8)))
+		(line (pt 160 96)(pt 144 96))
+	)
+	(drawing
+		(line (pt 16 192)(pt 144 192)(line_width 1))
+		(line (pt 16 240)(pt 144 240)(line_width 1))
+		(line (pt 128 176)(pt 144 176)(line_width 1))
+		(line (pt 16 176)(pt 32 176)(line_width 1))
+		(line (pt 16 16)(pt 144 16)(line_width 1))
+		(line (pt 16 240)(pt 16 192)(line_width 1))
+		(line (pt 144 240)(pt 144 192)(line_width 1))
+		(line (pt 128 192)(pt 128 176)(line_width 1))
+		(line (pt 32 192)(pt 32 176)(line_width 1))
+		(line (pt 16 24)(pt 24 32)(line_width 1))
+		(line (pt 24 32)(pt 16 40)(line_width 1))
+		(line (pt 16 88)(pt 24 96)(line_width 1))
+		(line (pt 24 96)(pt 16 104)(line_width 1))
+		(line (pt 144 16)(pt 144 176)(line_width 1))
+		(line (pt 16 16)(pt 16 176)(line_width 1))
+	)
+)

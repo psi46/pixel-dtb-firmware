@@ -1,0 +1,107 @@
+title "i2c transmitter";
+
+FUNCTION edge(clk,in) RETURNS (out);
+
+
+SUBDESIGN i2c_bitsend
+(
+	clk      : INPUT;
+	sync     : INPUT;
+	phase    : INPUT;
+	go       : INPUT; 
+	empty    : INPUT;
+	rd       : OUTPUT;
+	busy     : OUTPUT;
+	d[11..0] : INPUT;  -- S P D9 D8 D7 D6 D5 D4 D3 D2 D1 D0
+	sda      : OUTPUT;
+)
+VARIABLE
+    sout  : NODE;
+	hold  : NODE;
+	dreg[2..0] : DFFE;
+	emff : LATCH;
+	data[11..0] : NODE;
+	goff : SRFF;
+--	outff : DFF;
+	rdff : edge;
+
+	bitsm : MACHINE
+	WITH STATES
+	(
+		idle, load, wait, start1, start2,
+		bit0,bit1,bit2,bit3,bit4,bit5,bit6,bit7,bit8,bit9,
+		stop
+	);
+
+BEGIN
+	-- data shift register
+	dreg[].clk = clk;
+	dreg[].ena = !hold;
+	dreg[].d   = (d[10], d[1], d[0]);
+	data[] = (d[11],dreg[2],d[9..2],dreg[1..0]);
+	emff.ena = !hold;
+	emff.d   = empty;
+	goff.clk = clk;
+	goff.s = go;
+	goff.r = (bitsm==bit9) # (bitsm==start2);
+
+	-- bit send state machine
+	bitsm.clk = clk;
+	bitsm.ena = sync;
+	TABLE    	           -- sp
+		bitsm, goff,emff,  data[11..10] => bitsm;
+		idle,   1,  1,     x            => start2;
+		start2, x,  x,     x            => stop;
+
+		idle,   x,  0,     x            => load;
+		load,   x,  x,     x            => wait;
+		wait,   1,  x,     B"1x"        => start1;
+		wait,   1,  x,     B"0x"        => bit9;
+		start1, x,  x,     x            => bit9;
+		bit9,   x,  x,     x            => bit8;
+		bit8,   x,  x,     x            => bit7;
+		bit7,   x,  x,     x            => bit6;
+		bit6,   x,  x,     x            => bit5;
+		bit5,   x,  x,     x            => bit4;
+		bit4,   x,  x,     x            => bit3;
+		bit3,   x,  x,     x            => bit2;
+		bit2,   x,  x,     x            => bit1;
+		bit1,   x,  x,     x            => bit0;
+		bit0,   x,  x,     B"x1"        => stop;
+		bit0,   x,  1,     B"x0"        => idle;
+		bit0,   x,  0,     B"00"        => bit9;
+		bit0,   x,  0,     B"10"        => start1;
+		stop,   x,  1,     x            => idle;
+		stop,   x,  0,     B"0x"        => bit9;
+		stop,   x,  0,     B"1x"        => start1;
+	END TABLE;
+	rdff.clk = clk;
+	rdff.in  = (bitsm == load) # (bitsm == bit1);
+	rd = rdff.out;
+	hold = (bitsm == bit1) # (bitsm == bit0);
+	busy = (bitsm != idle) & (bitsm != load) & (bitsm != wait);
+
+	-- bit pattern generator
+	CASE bitsm IS
+		WHEN start1 => sout = phase;
+		WHEN start2 => sout = phase;
+		WHEN bit0   => sout = data[0];
+		WHEN bit1   => sout = data[1];
+		WHEN bit2   => sout = data[2];
+		WHEN bit3   => sout = data[3];
+		WHEN bit4   => sout = data[4];
+		WHEN bit5   => sout = data[5];
+		WHEN bit6   => sout = data[6];
+		WHEN bit7   => sout = data[7];
+		WHEN bit8   => sout = data[8];
+		WHEN bit9   => sout = data[9];
+		WHEN stop   => sout = !phase;
+		WHEN OTHERS => sout = VCC;
+	END CASE;
+
+	-- output stage
+	-- outff.clk = clk;
+	-- outff.d   = sout;
+	-- sda = outff;
+	sda = sout;
+END;

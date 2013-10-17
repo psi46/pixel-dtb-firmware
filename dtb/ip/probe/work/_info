@@ -1,0 +1,62 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\beat\Desktop
+vprobe
+Z1 ILHo>>U3bV8;hzfCPocdnU3
+Z2 V53zn59dezOYP=W?Z9dBTd0
+Z3 dX:\source\FPGA\dtb\ip\probe
+Z4 w1366492472
+Z5 8X:/source/FPGA/dtb/ip/probe/probe.v
+Z6 FX:/source/FPGA/dtb/ip/probe/probe.v
+L0 33
+Z7 OV;L;10.0d;49
+r1
+31
+Z8 !s108 1366895810.868000
+Z9 !s107 X:/source/FPGA/dtb/ip/probe/probe.v|
+Z10 !s90 -reportprogress|300|-work|work|-nocovercells|X:/source/FPGA/dtb/ip/probe/probe.v|
+Z11 !s102 -nocovercells
+Z12 o-work work -nocovercells -O0
+Z13 !s100 3DQ6;j@aYm:kVG;_hF3h41
+!s85 0
+!s101 -O0
+vprobe_mux4
+Z14 I=oZ`TEJ0`aTSgO2mhaJK33
+Z15 VDMI9<m3?AToR<>:MeHW_91
+R3
+R4
+R5
+R6
+L0 9
+R7
+r1
+31
+R8
+R9
+R10
+R11
+R12
+Z16 !s100 lGg135SizMZna@AYzQIGB3
+!s85 0
+!s101 -O0
+vtest_probe
+!s100 i<OYJ8l5U9W`28Co0Yi:e2
+I=CnY]ao?^8P9=Q;e2_m=d0
+Z17 VFo<C?HcOY<cQB[G6[FhiG1
+R3
+w1366896712
+Z18 8X:\source\FPGA\dtb\ip\probe\test_probe.v
+Z19 FX:\source\FPGA\dtb\ip\probe\test_probe.v
+L0 5
+R7
+r1
+!s85 0
+31
+!s108 1366896717.470000
+!s107 X:\source\FPGA\dtb\ip\probe\test_probe.v|
+Z20 !s90 -reportprogress|300|-work|work|-nocovercells|X:\source\FPGA\dtb\ip\probe\test_probe.v|
+!s101 -O0
+R11
+R12

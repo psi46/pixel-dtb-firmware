@@ -1,0 +1,40 @@
+Warning (10268): Verilog HDL information at deser160_sampling.v(45): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at psi2c_control.v(76): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at adv3224.v(47): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at lvds2lcds.v(43): always construct contains both blocking and non-blocking assignments
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(70): object "MEM_CAS_WR_LAT" differs only in case from object "mem_cas_wr_lat" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(71): object "MEM_ADD_LAT" differs only in case from object "mem_add_lat" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(72): object "MEM_TCL" differs only in case from object "mem_tcl" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(73): object "MEM_TRRD" differs only in case from object "mem_trrd" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(74): object "MEM_TFAW" differs only in case from object "mem_tfaw" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(75): object "MEM_TRFC" differs only in case from object "mem_trfc" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(76): object "MEM_TREFI" differs only in case from object "mem_trefi" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(77): object "MEM_TRCD" differs only in case from object "mem_trcd" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(78): object "MEM_TRP" differs only in case from object "mem_trp" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(79): object "MEM_TWR" differs only in case from object "mem_twr" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(80): object "MEM_TWTR" differs only in case from object "mem_twtr" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(81): object "MEM_TRTP" differs only in case from object "mem_trtp" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(82): object "MEM_TRAS" differs only in case from object "mem_tras" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(83): object "MEM_TRC" differs only in case from object "mem_trc" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(84): object "MEM_AUTO_PD_CYCLES" differs only in case from object "mem_auto_pd_cycles" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_controller.v(97): object "ADDR_ORDER" differs only in case from object "addr_order" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(65): object "MEM_CAS_WR_LAT" differs only in case from object "mem_cas_wr_lat" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(66): object "MEM_ADD_LAT" differs only in case from object "mem_add_lat" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(67): object "MEM_TCL" differs only in case from object "mem_tcl" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(68): object "MEM_TRRD" differs only in case from object "mem_trrd" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(69): object "MEM_TFAW" differs only in case from object "mem_tfaw" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(70): object "MEM_TRFC" differs only in case from object "mem_trfc" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(71): object "MEM_TREFI" differs only in case from object "mem_trefi" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(72): object "MEM_TRCD" differs only in case from object "mem_trcd" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(73): object "MEM_TRP" differs only in case from object "mem_trp" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(74): object "MEM_TWR" differs only in case from object "mem_twr" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(75): object "MEM_TWTR" differs only in case from object "mem_twtr" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(76): object "MEM_TRTP" differs only in case from object "mem_trtp" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(77): object "MEM_TRAS" differs only in case from object "mem_tras" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(78): object "MEM_TRC" differs only in case from object "mem_trc" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(79): object "MEM_AUTO_PD_CYCLES" differs only in case from object "mem_auto_pd_cycles" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_csr.v(82): object "ADDR_ORDER" differs only in case from object "addr_order" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_odt_gen.v(209): object "i" differs only in case from object "I" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_odt_gen.v(388): object "i" differs only in case from object "I" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_state_machine.v(240): object "fetch" differs only in case from object "FETCH" in the same scope
+Info (10281): Verilog HDL Declaration information at alt_ddrx_state_machine.v(626): object "i" differs only in case from object "I" in the same scope

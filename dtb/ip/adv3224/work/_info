@@ -1,0 +1,37 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\FPGA_DTB\first_nios\ip\lvds2lcds
+vadv3224
+!s100 ^_gIEmg4_`ae70T3:L:n;2
+Im;h_XQMmol[;na7CdgA:F2
+Z1 Vl@K[<=Ck]Q64EKEUG4o;I1
+Z2 dC:\FPGA_DTB\first_nios\ip\adv3224
+w1340094079
+Z3 8C:/FPGA_DTB/first_nios/ip/adv3224/adv3224.v
+Z4 FC:/FPGA_DTB/first_nios/ip/adv3224/adv3224.v
+L0 1
+Z5 OV;L;6.6d;45
+r1
+!s85 0
+31
+!s101 -O0
+Z6 !s102 -nocovercells
+Z7 o-work work -nocovercells -O0
+vadv3224_testbench
+Z8 I1a`RVFm=?4gG:l<02[mh_0
+Z9 V0MM9XzQd3:fSFBb>jL;9N3
+R2
+Z10 w1340087285
+Z11 8C:/FPGA_DTB/first_nios/ip/adv3224/adv3224_testbench.v
+Z12 FC:/FPGA_DTB/first_nios/ip/adv3224/adv3224_testbench.v
+L0 4
+R5
+r1
+31
+R6
+R7
+Z13 !s100 9QPb1@QNEQ81CAlzQZYn?3
+!s85 0
+!s101 -O0

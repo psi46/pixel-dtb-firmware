@@ -1,0 +1,9 @@
+set_global_assignment -name IP_TOOL_NAME "ALTDDIO_OUT"
+set_global_assignment -name IP_TOOL_VERSION "12.0"
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "delay.v"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "delay.bsf"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "delay_inst.v"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "delay_bb.v"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "delay.inc"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "delay.cmp"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "delay.ppf"]

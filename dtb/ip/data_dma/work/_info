@@ -1,0 +1,43 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\beat\Desktop
+vdata_dma
+!s100 J2GI[3gE3VKYnj4?zS@MY0
+Iema9BWBc4XTIOPC1<5>in2
+Z1 VfC>[SW0f=H5B=9<kTJ]N:2
+Z2 dX:\source\FPGA\dtb\ip\data_dma
+w1367785363
+Z3 8X:/source/FPGA/dtb/ip/data_dma/data_dma.v
+Z4 FX:/source/FPGA/dtb/ip/data_dma/data_dma.v
+L0 11
+Z5 OV;L;10.0d;49
+r1
+!s85 0
+31
+!s108 1367785365.851000
+!s107 X:/source/FPGA/dtb/ip/data_dma/data_dma.v|
+Z6 !s90 -reportprogress|300|-work|work|-nocovercells|X:/source/FPGA/dtb/ip/data_dma/data_dma.v|
+!s101 -O0
+Z7 !s102 -nocovercells
+Z8 o-work work -nocovercells -O0
+vtest_data_dma
+Z9 I1f135l48aGFhQQCHDL8lS3
+Z10 ViVYQWX^XimjcZ4iV1A>d]2
+R2
+Z11 w1367784301
+Z12 8X:/source/FPGA/dtb/ip/data_dma/test_data_dma.v
+Z13 FX:/source/FPGA/dtb/ip/data_dma/test_data_dma.v
+L0 6
+R5
+r1
+31
+Z14 !s90 -reportprogress|300|-work|work|-nocovercells|X:/source/FPGA/dtb/ip/data_dma/test_data_dma.v|
+R7
+R8
+Z15 !s100 MQclKj_4ZCmHE@cXaje2i3
+Z16 !s108 1367784306.948000
+Z17 !s107 X:/source/FPGA/dtb/ip/data_dma/test_data_dma.v|
+!s85 0
+!s101 -O0

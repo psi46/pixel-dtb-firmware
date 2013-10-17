@@ -1,0 +1,37 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\FPGA_DTB\first_nios\ip\spi_master
+vlvds2lcds
+Z1 I93nJKcAd6;?O5Gj`Q[M6F1
+Z2 VIaUIlLb7?Tz<19eThkHeo0
+Z3 dC:\FPGA_DTB\first_nios\ip\lvds2lcds
+Z4 w1340007779
+Z5 8C:/FPGA_DTB/first_nios/ip/lvds2lcds/lvds2lcds.v
+Z6 FC:/FPGA_DTB/first_nios/ip/lvds2lcds/lvds2lcds.v
+L0 1
+Z7 OV;L;6.6d;45
+r1
+31
+Z8 !s102 -nocovercells
+Z9 o-work work -nocovercells -O0
+Z10 !s100 5VDHnMZCF]Q]4A>Hk`24K0
+!s85 0
+!s101 -O0
+vlvds2lcds_testbench
+!s100 8>oKXmLR]GU6SUZFT6`fX0
+IaJ;?ZX[GlooCknzSeSA^62
+Z11 V]R6Fj7L<6]LcN6DaCAYH=0
+R3
+w1340007895
+Z12 8C:/FPGA_DTB/first_nios/ip/lvds2lcds/lvds2lcds_testbench.v
+Z13 FC:/FPGA_DTB/first_nios/ip/lvds2lcds/lvds2lcds_testbench.v
+L0 4
+R7
+r1
+!s85 0
+31
+!s101 -O0
+R8
+R9

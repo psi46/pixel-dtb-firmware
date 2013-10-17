@@ -1,0 +1,8 @@
+<sld_project_info>
+  <file_info>
+    <file checksum="0x0012D5A7" device="EP1C12Q240C6" path="patterngenerator.sof" usercode="0xFFFFFFFF"/>
+    <file checksum="0x06BDF2B3" device="EPCS4" path="patterngenerator.pof" usercode="0x00000000"/>
+  </file_info>
+  <hub_info ir_width="0" node_count="0"/>
+  <node_info/>
+</sld_project_info>

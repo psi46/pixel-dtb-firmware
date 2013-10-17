@@ -1,0 +1,59 @@
+TITLE "Delay Trigger";
+
+
+FUNCTION dt_counter (start, clk, t_del[9..0], t_width[15..0], sync)
+	RETURNS (pulse, running);
+
+
+SUBDESIGN delay_trigger_core
+(
+	clk           : INPUT;
+	sync          : INPUT;
+	trig_in[3..0] : INPUT;
+	pulse         : OUTPUT;
+
+-- avalon interface
+	clksys           : INPUT;
+	write            : INPUT;
+	writedata[15..0] : INPUT;
+	address[1..0]    : INPUT;
+)
+VARIABLE
+	start       : NODE;
+	sreg[1..0]  : DFFE;
+	enareg      : DFFE;
+	dreg[9..0]  : DFFE;
+	wreg[15..0] : DFFE;
+	delay       : dt_counter;
+BEGIN
+	-- avalon interface
+	(enareg,sreg[]).clk = clksys;
+	(enareg,sreg[]).ena = write & (address[] == 0);
+	(enareg,sreg[]).d   = writedata[2..0];
+	dreg[].clk = clksys;
+	dreg[].ena = write & (address[] == 1);
+	dreg[].d   = writedata[9..0];
+	wreg[].clk = clksys;
+	wreg[].ena = write & (address[] == 2);
+	wreg[].d   = writedata[];
+
+	-- input switch;
+	IF enareg THEN
+		CASE sreg[] IS
+			WHEN 0 => start = trig_in[0];
+			WHEN 1 => start = trig_in[1];
+			WHEN 2 => start = trig_in[2];
+			WHEN 3 => start = trig_in[3];
+		END CASE;
+	ELSE
+		start = gnd;
+	END IF;
+	
+	-- delay timer
+	delay.clk   = clk;
+	delay.sync  = sync;
+	delay.start = start;
+	delay.t_del[]   = dreg[];
+	delay.t_width[] = wreg[];
+	pulse = delay.pulse;
+END;

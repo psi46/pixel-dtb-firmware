@@ -1,0 +1,34 @@
+TITLE "RDA timeout counter";
+
+
+SUBDESIGN srff_timeout
+(
+	clk    : INPUT;
+	sync   : INPUT;
+
+	to_disable : INPUT;
+	s      : INPUT;
+	r      : INPUT;
+	q      : OUTPUT;
+)
+VARIABLE
+	ff : SRFF;
+	timeout_counter[4..0] : DFFE;
+	timeout : NODE;
+
+BEGIN
+	ff.clk = clk;
+	ff.s = s;
+	ff.r = r # timeout;
+	q = ff;
+
+	timeout_counter[].clk = clk;
+	timeout_counter[].ena = sync;
+	IF ff & !to_disable THEN
+		timeout_counter[].d = timeout_counter[] - 1;
+	ELSE
+		timeout_counter[].d = 0;
+	END IF;
+	
+	timeout = timeout_counter[] == 1;
+END;

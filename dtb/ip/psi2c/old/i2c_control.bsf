@@ -1,0 +1,131 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2005 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 64 64 240 280)
+	(text "i2c_control" (rect 5 0 58 12)(font "Arial" ))
+	(text "inst" (rect 16 200 33 212)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 32 24 46 36)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
+	)
+	(port
+		(pt 176 144)
+		(input)
+		(text "busy" (rect 0 0 24 12)(font "Arial" ))
+		(text "busy" (rect 128 136 152 148)(font "Arial" ))
+		(line (pt 160 144)(pt 176 144)(line_width 1))
+	)
+	(port
+		(pt 0 120)
+		(input)
+		(text "write" (rect 0 0 22 12)(font "Arial" ))
+		(text "write" (rect 21 112 43 124)(font "Arial" ))
+		(line (pt 0 120)(pt 16 120)(line_width 1))
+	)
+	(port
+		(pt 0 136)
+		(input)
+		(text "writedata[31..0]" (rect 0 0 75 12)(font "Arial" ))
+		(text "writedata[31..0]" (rect 21 128 96 140)(font "Arial" ))
+		(line (pt 0 136)(pt 16 136)(line_width 3))
+	)
+	(port
+		(pt 0 152)
+		(input)
+		(text "read" (rect 0 0 21 12)(font "Arial" ))
+		(text "read" (rect 21 144 42 156)(font "Arial" ))
+		(line (pt 0 152)(pt 16 152)(line_width 1))
+	)
+	(port
+		(pt 176 48)
+		(input)
+		(text "full" (rect 24 136 40 150)(font "Arial" (font_size 8)))
+		(text "full" (rect 137 40 152 52)(font "Arial" ))
+		(line (pt 160 48)(pt 176 48))
+	)
+	(port
+		(pt 176 184)
+		(input)
+		(text "rda[31..0]" (rect 126 160 180 174)(font "Arial" (font_size 8)))
+		(text "rda[31..0]" (rect 112 176 159 188)(font "Arial" ))
+		(line (pt 176 184)(pt 160 184)(color 128 0 255)(line_width 3))
+	)
+	(port
+		(pt 0 104)
+		(input)
+		(text "address[2..0]" (rect 24 120 99 134)(font "Arial" (font_size 8)))
+		(text "address[2..0]" (rect 24 96 88 108)(font "Arial" ))
+		(line (pt 0 104)(pt 16 104)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 0 56)
+		(input)
+		(text "clk_sys" (rect 24 48 67 62)(font "Arial" (font_size 8)))
+		(text "clk_sys" (rect 32 48 70 60)(font "Arial" ))
+		(line (pt 0 56)(pt 16 56))
+	)
+	(port
+		(pt 176 80)
+		(output)
+		(text "memd[11..0]" (rect 32 0 94 12)(font "Arial" ))
+		(text "memd[11..0]" (rect 104 72 166 84)(font "Arial" ))
+		(line (pt 176 80)(pt 160 80)(line_width 3))
+	)
+	(port
+		(pt 176 104)
+		(output)
+		(text "memw" (rect 32 0 63 12)(font "Arial" ))
+		(text "memw" (rect 128 96 159 108)(font "Arial" ))
+		(line (pt 176 104)(pt 160 104)(line_width 1))
+	)
+	(port
+		(pt 176 32)
+		(output)
+		(text "go" (rect 32 0 43 12)(font "Arial" ))
+		(text "go" (rect 144 24 155 36)(font "Arial" ))
+		(line (pt 176 32)(pt 160 32)(line_width 1))
+	)
+	(port
+		(pt 0 168)
+		(output)
+		(text "readdata[31..0]" (rect 24 104 110 118)(font "Arial" (font_size 8)))
+		(text "readdata[31..0]" (rect 24 160 98 172)(font "Arial" ))
+		(line (pt 0 168)(pt 16 168)(color 128 0 255)(line_width 3))
+	)
+	(port
+		(pt 176 168)
+		(output)
+		(text "tbm" (rect 126 160 146 174)(font "Arial" (font_size 8)))
+		(text "tbm" (rect 126 160 144 172)(font "Arial" ))
+		(line (pt 176 168)(pt 160 168))
+	)
+	(drawing
+		(line (pt 16 24)(pt 24 32)(line_width 1))
+		(line (pt 24 32)(pt 16 40)(line_width 1))
+		(line (pt 16 48)(pt 24 56)(line_width 1))
+		(line (pt 24 56)(pt 16 64)(line_width 1))
+		(rectangle (rect 16 16 160 200)(line_width 1))
+	)
+)
