@@ -1,1 +1,1 @@
-This directory will contain the Quartus II design files for the FPGA.
+This directory contains the Quartus II design files for the FPGA.
