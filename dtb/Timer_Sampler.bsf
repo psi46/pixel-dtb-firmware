@@ -1,0 +1,113 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2012 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 16 16 232 208)
+	(text "Timer_Sampler" (rect 5 0 88 14)(font "Arial" (font_size 8)))
+	(text "inst" (rect 8 176 25 188)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clock" (rect 0 0 29 14)(font "Arial" (font_size 8)))
+		(text "clock" (rect 21 27 50 41)(font "Arial" (font_size 8)))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "res1" (rect 0 0 25 14)(font "Arial" (font_size 8)))
+		(text "res1" (rect 21 43 46 57)(font "Arial" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "sclk[3..0]" (rect 0 0 50 14)(font "Arial" (font_size 8)))
+		(text "sclk[3..0]" (rect 21 59 71 73)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "sdata" (rect 0 0 31 14)(font "Arial" (font_size 8)))
+		(text "sdata" (rect 21 75 52 89)(font "Arial" (font_size 8)))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 216 32)
+		(output)
+		(text "clk_16" (rect 0 0 36 14)(font "Arial" (font_size 8)))
+		(text "clk_16" (rect 159 27 195 41)(font "Arial" (font_size 8)))
+		(line (pt 216 32)(pt 200 32))
+	)
+	(port
+		(pt 216 48)
+		(output)
+		(text "clk_80" (rect 0 0 36 14)(font "Arial" (font_size 8)))
+		(text "clk_80" (rect 159 43 195 57)(font "Arial" (font_size 8)))
+		(line (pt 216 48)(pt 200 48))
+	)
+	(port
+		(pt 216 64)
+		(output)
+		(text "clk_160" (rect 0 0 43 14)(font "Arial" (font_size 8)))
+		(text "clk_160" (rect 152 59 195 73)(font "Arial" (font_size 8)))
+		(line (pt 216 64)(pt 200 64))
+	)
+	(port
+		(pt 216 80)
+		(output)
+		(text "clk_320" (rect 0 0 43 14)(font "Arial" (font_size 8)))
+		(text "clk_320" (rect 152 75 195 89)(font "Arial" (font_size 8)))
+		(line (pt 216 80)(pt 200 80))
+	)
+	(port
+		(pt 216 96)
+		(output)
+		(text "clk_400" (rect 0 0 43 14)(font "Arial" (font_size 8)))
+		(text "clk_400" (rect 152 91 195 105)(font "Arial" (font_size 8)))
+		(line (pt 216 96)(pt 200 96))
+	)
+	(port
+		(pt 216 112)
+		(output)
+		(text "samples[7..0]" (rect 0 0 75 14)(font "Arial" (font_size 8)))
+		(text "samples[7..0]" (rect 120 107 195 121)(font "Arial" (font_size 8)))
+		(line (pt 216 112)(pt 200 112)(line_width 3))
+	)
+	(port
+		(pt 216 128)
+		(output)
+		(text "early_samples[1..0]" (rect 0 0 110 14)(font "Arial" (font_size 8)))
+		(text "early_samples[1..0]" (rect 85 123 195 137)(font "Arial" (font_size 8)))
+		(line (pt 216 128)(pt 200 128)(line_width 3))
+	)
+	(port
+		(pt 216 144)
+		(output)
+		(text "late_samples[1..0]" (rect 0 0 102 14)(font "Arial" (font_size 8)))
+		(text "late_samples[1..0]" (rect 93 139 195 153)(font "Arial" (font_size 8)))
+		(line (pt 216 144)(pt 200 144)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 200 176))
+	)
+)

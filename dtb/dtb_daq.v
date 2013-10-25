@@ -32,14 +32,53 @@ module dtb_daq
 	input [11:0]adc_data,
 	input adc_or,
 	
-	// data channel 1
+	// data channels
 	input sdata1,
-
-	// data output channel 1
+	input sdata2,
+	input sdata3,
+	input sdata4,
+	
+	// data output channel 0
 	output daq0_write,
 	output reg [15:0]daq0_writedata,
 	input daq0_running,
 	
+	// data output channel 1_a
+	output daq1a_write,
+	output [15:0]daq1a_writedata,
+	input daq1_running,
+	
+	// data output channel 1_b
+	output daq1b_write,
+	output [15:0]daq1b_writedata,
+	
+	// data output channel 2_a
+	output daq2a_write,
+	output [15:0]daq2a_writedata,
+	input daq2_running,
+	
+	// data output channel 2_b
+	output daq2b_write,
+	output [15:0]daq2b_writedata,
+	
+	// data output channel 3_a
+	output daq3a_write,
+	output [15:0]daq3a_writedata,
+	input daq3_running,
+	
+	// data output channel 3_b
+	output daq3b_write,
+	output [15:0]daq3b_writedata,
+
+	// data output channel 4_a
+	output daq4a_write,
+	output [15:0]daq4a_writedata,
+	input daq4_running,
+	
+	// data output channel 4_b
+	output daq4b_write,
+	output [15:0]daq4b_writedata,
+
 	output [5:0]TP
 );
 
@@ -100,7 +139,56 @@ module dtb_daq
 		.write(write_roc),
 		.data(data_roc)
 	);
-
+	
+	deser400 channel1_module_400
+	(
+		.clock(clk_daq),
+		.sclk(sclk[3:0]),
+		.res(reset),
+		.run(daq1_running),
+		.input_data(sdata1),
+		.write(daq1_write),
+		.data_a(daq1a_writedata),
+		.data_b(daq1b_writedata),
+	);
+	
+	deser400 channel2_module_400
+	(
+		.clock(clk_daq),
+		.sclk(sclk[3:0]),
+		.res(reset),
+		.input_data(sdata2),
+		.run(daq2_running),
+		.write(daq2_write),
+		.data_a(daq2a_writedata),
+		.data_b(daq2b_writedata),
+	);
+	
+	deser400 channel3_module_400
+	(
+		.clock(clk_daq),
+		.sclk(sclk[3:0]),
+		.res(reset),
+		.run(daq3_running),
+		.input_data(sdata3),
+		.write(daq1_write),
+		.data_a(daq3a_writedata),
+		.data_b(daq3b_writedata),
+	);
+	
+		deser400 channel4_module_400
+	(
+		.clock(clk_daq),
+		.sclk(sclk[3:0]),
+		.res(reset),
+		.run(daq4_running),
+		.input_data(sdata4),
+		.write(daq4_write),
+		.data_a(daq4a_writedata),
+		.data_b(daq4b_writedata),
+	);
+	
+	
 
 	always @(*)
 	begin

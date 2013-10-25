@@ -1,0 +1,33 @@
+TITLE "12 bit data delay line";
+
+PARAMETERS
+(
+	DELAY = 0,
+	WIDTH = 8
+);
+
+
+SUBDESIGN datadelay
+(
+	clk  : INPUT;
+
+	din[WIDTH-1..0]  : INPUT;
+	dout[WIDTH-1..0] : OUTPUT;
+)
+VARIABLE
+	IF DELAY > 0 GENERATE
+		del[DELAY-1..0][WIDTH-1..0] : DFFE;
+	END GENERATE;
+
+BEGIN
+	IF DELAY > 0 GENERATE
+		del[][].clk = clk;
+		IF DELAY > 1 GENERATE
+			del[DELAY-1..1][].d = del[DELAY-2..0][];
+		END GENERATE;
+		del[0][] = din[];
+		dout[] = del[DELAY-1][];
+	ELSE GENERATE
+		dout[] = din[];
+	END GENERATE;
+END;
