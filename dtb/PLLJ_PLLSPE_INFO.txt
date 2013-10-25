@@ -3,13 +3,13 @@ PLLJITTER	41
 PLLSPEmax	84
 PLLSPEmin	-53
 
-PLL_Name	clocks:inst14|altpll2:inst5|altpll:altpll_component|altpll2_altpll:auto_generated|pll1
-PLLJITTER	41
+PLL_Name	clocks:inst14|pll_system:inst23|altpll:altpll_component|pll_system_altpll:auto_generated|pll1
+PLLJITTER	37
 PLLSPEmax	84
 PLLSPEmin	-53
 
-PLL_Name	clocks:inst14|pll_system:inst23|altpll:altpll_component|pll_system_altpll:auto_generated|pll1
-PLLJITTER	37
+PLL_Name	data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|PLL_daq2:inst4|altpll:altpll_component|PLL_daq2_altpll:auto_generated|pll1
+PLLJITTER	30
 PLLSPEmax	84
 PLLSPEmin	-53
 

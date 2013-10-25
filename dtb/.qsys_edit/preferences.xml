@@ -3,7 +3,7 @@
  <debug showDebugMenu="0" />
  <systemtable>
   <columns>
-   <connections preferredWidth="399" />
+   <connections preferredWidth="431" />
    <irq preferredWidth="34" />
    <export preferredWidth="138" />
    <inputclock preferredWidth="143" />
@@ -13,13 +13,13 @@
  </systemtable>
  <clocktable>
   <columns>
-   <clockname preferredWidth="469" />
-   <clocksource preferredWidth="466" />
-   <frequency preferredWidth="458" />
+   <clockname preferredWidth="433" />
+   <clocksource preferredWidth="431" />
+   <frequency preferredWidth="423" />
   </columns>
  </clocktable>
- <window width="1701" height="1113" x="140" y="45" />
- <library expandedCategories="Project,Library,Project/DTB" />
+ <window width="1599" height="818" x="0" y="0" />
+ <library expandedCategories="Library,Project,Project/DTB" />
  <hdlexample language="VERILOG" />
  <generation path="_PROJECT_NAME_" />
 </preferences>

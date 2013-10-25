@@ -69,6 +69,7 @@ class CTestboard
 	uint16_t *daq_mem_base; // DAQ buffer base address (0 = no space reserved)
 	uint32_t daq_mem_size;  // DAQ buffer size in 16 bit words
 	uint16_t daq_fifo_state;
+	uint32_t daq_dma_base;
 
 	bool daq_select_adc;
 	bool daq_select_deser160;
@@ -101,7 +102,7 @@ class CTestboard
 	static unsigned char ROWCODE(unsigned char x) { return (x>>1)^x; }
 
 public:
-	CTestboard() : rpc_io(&usb), flashMem(0), daq_mem_base(0), daq_mem_size(0) { Init(); }
+	CTestboard() : rpc_io(&usb), flashMem(0), daq_mem_base(0), daq_mem_size(0), daq_dma_base(DAQ_DMA_0_BASE) { Init(); }
 	CRpcIo* GetIo() { return rpc_io; }
 
 
@@ -265,7 +266,7 @@ public:
 
 
 	// --- data aquisition --------------------------------------------------
-	RPC_EXPORT uint32_t Daq_Open(uint32_t buffersize = 10000000);
+	RPC_EXPORT uint32_t Daq_Open(uint32_t buffersize = 10000000, unsigned int dma = 0);
 	RPC_EXPORT void Daq_Close();
 	RPC_EXPORT void Daq_Start();
 	RPC_EXPORT void Daq_Stop();

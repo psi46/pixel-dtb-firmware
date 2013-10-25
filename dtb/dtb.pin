@@ -1,4 +1,4 @@
- -- Copyright (C) 1991-2012 Altera Corporation
+ -- Copyright (C) 1991-2013 Altera Corporation
  -- Your use of Altera Corporation's design tools, logic functions 
  -- and other software and tools, and its AMPP partner logic 
  -- functions, and any output files from any of the foregoing 
@@ -63,7 +63,7 @@
  -- Pin directions (input, output or bidir) are based on device operating in user mode.
  ---------------------------------------------------------------------------------
 
-Quartus II 32-bit Version 12.0 Build 263 08/02/2012 Service Pack 2.16 SJ Full Version
+Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 CHIP  "dtb"  ASSIGNED TO AN: EP3C40F484C6
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
@@ -85,7 +85,7 @@ UI_IOs[8]                    : A14       : output : 2.5 V             :         
 UI_IOs[5]                    : A15       : output : 2.5 V             :         : 7         : Y              
 UI_IOs[2]                    : A16       : output : 2.5 V             :         : 7         : Y              
 UIO_trg                      : A17       : input  : 2.5 V             :         : 7         : Y              
-UIO_d1                       : A18       : output : 2.5 V             :         : 7         : Y              
+UIO_d1                       : A18       : input  : 2.5 V             :         : 7         : Y              
 UIO_d2                       : A19       : output : 2.5 V             :         : 7         : Y              
 Power_scl                    : A20       : bidir  : 2.5 V             :         : 7         : Y              
 VCCIO7                       : A21       : power  :                   : 2.5V    : 7         :                

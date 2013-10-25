@@ -95,12 +95,12 @@ NEWLIB_DIR = $(BSP_ROOT_DIR)/newlib
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 13.0
-ACDS_VERSION := 13.0
+# ACDS_VERSION: 13.0sp1
+ACDS_VERSION := 13.0sp1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 156
+# BUILD_NUMBER: 232
 
 SETTINGS_FILE := settings.bsp
 SOPC_FILE := ../../dtb/dtb_system.sopcinfo

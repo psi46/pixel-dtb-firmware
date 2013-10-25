@@ -2,11 +2,11 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Aug 6, 2013 3:12:53 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1375819973723</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>/home/caleb/sources/pixel-dtb-firmware/software/dtb_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>Oct 24, 2013 11:07:47 AM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1382630867172</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>Z:\DTB_new\pixel-dtb-firmware\software\dtb_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
-        <SopcDesignFile>../../dtb/dtb_system.sopcinfo</SopcDesignFile>
+        <SopcDesignFile>..\..\dtb\dtb_system.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>cpu</Cpu>
         <SchemaVersion>1.9</SchemaVersion>
@@ -907,6 +907,18 @@
         <MemoryMap>
                 <slaveDescriptor>daq_dma_0</slaveDescriptor>
                 <addressRange>0x08002040 - 0x0800205F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_1</slaveDescriptor>
+                <addressRange>0x08002080 - 0x0800209F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_2</slaveDescriptor>
+                <addressRange>0x08002100 - 0x0800211F</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes/>
         </MemoryMap>

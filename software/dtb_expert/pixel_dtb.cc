@@ -836,7 +836,7 @@ bool CTestboard::tbm_GetRaw(uint8_t reg, uint32_t &value)
 
 bool CTestboard::tbm_Get(uint8_t reg, uint8_t &value)
 {
-	long x;
+	uint32_t x;
 	reg |= 1;
 	if (!tbm_GetRaw(reg, x)) return false;
 	long y = (((HUB_address & (0x1f<<3)) + 4) << 8) + reg;
@@ -999,7 +999,7 @@ uint16_t daq_fifo_state;
 uint8_t  daq_deser160_state;
 */
 
-uint32_t CTestboard::Daq_Open(uint32_t buffersize)
+uint32_t CTestboard::Daq_Open(uint32_t buffersize, unsigned int dma)
 {
 	// close last DAQ session if still active
 	Daq_Close();
@@ -1013,9 +1013,17 @@ uint32_t CTestboard::Daq_Open(uint32_t buffersize)
 	if (daq_mem_base == 0) return 0;
 	daq_mem_size = buffersize;
 
+	// select DMA
+
+	if(dma == 0 )
+		daq_dma_base = DAQ_DMA_0_BASE;
+	else
+	if(dma == 1 )
+		daq_dma_base = DAQ_DMA_1_BASE;
+
 	// set DMA to allocated memory
-	DAQ_WRITE(DAQ_MEM_BASE, (unsigned long)daq_mem_base);
-	DAQ_WRITE(DAQ_MEM_SIZE, (unsigned long)daq_mem_size);
+	DAQ_WRITE(DAQ_MEM_BASE, (unsigned long)daq_mem_base, daq_dma_base);
+	DAQ_WRITE(DAQ_MEM_SIZE, (unsigned long)daq_mem_size, daq_dma_base);
 
 	return daq_mem_size;
 }
@@ -1037,7 +1045,7 @@ void CTestboard::Daq_Start()
 	if (daq_mem_base)
 	{
 		// clear buffer and enable daq
-		DAQ_WRITE(DAQ_CONTROL, 1);
+		DAQ_WRITE(DAQ_CONTROL, 1, daq_dma_base);
 
 		// switch on data sources
 //		IOWR_ALTERA_AVALON_PIO_DATA(ADC_BASE, daq_adc_state);
@@ -1055,7 +1063,7 @@ void CTestboard::Daq_Stop()
 //		IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, 0);
 
 		// stop daq
-		DAQ_WRITE(DAQ_CONTROL, 0);
+		DAQ_WRITE(DAQ_CONTROL, 0, daq_dma_base);
 	}
 }
 
@@ -1065,9 +1073,9 @@ uint32_t CTestboard::Daq_GetSize()
 	if (daq_mem_base == 0) return 0;
 
 	// read dma status
-	int32_t status = DAQ_READ(DAQ_CONTROL);
-	int32_t rp = DAQ_READ(DAQ_MEM_READ);
-	int32_t wp = DAQ_READ(DAQ_MEM_WRITE);
+	int32_t status = DAQ_READ(DAQ_CONTROL, daq_dma_base);
+	int32_t rp = DAQ_READ(DAQ_MEM_READ, daq_dma_base);
+	int32_t wp = DAQ_READ(DAQ_MEM_WRITE, daq_dma_base);
 
 	// correct write pointer overrun at memory overflow
 	if (status & DAQ_MEM_OVFL) if (--wp < 0) wp += daq_mem_size;
@@ -1103,9 +1111,9 @@ uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
 	if (blocksize > daq_mem_size) blocksize = daq_mem_size;
 
 	// read dma status
-	int32_t status = DAQ_READ(DAQ_CONTROL);
-	int32_t rp = DAQ_READ(DAQ_MEM_READ);
-	int32_t wp = DAQ_READ(DAQ_MEM_WRITE);
+	int32_t status = DAQ_READ(DAQ_CONTROL, daq_dma_base);
+	int32_t rp = DAQ_READ(DAQ_MEM_READ, daq_dma_base);
+	int32_t wp = DAQ_READ(DAQ_MEM_WRITE, daq_dma_base);
 
 	// correct write pointer overrun at memory overflow
 	if (status & DAQ_MEM_OVFL) if (--wp < 0) wp += daq_mem_size;
@@ -1143,7 +1151,7 @@ uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
 	else rp += size1;
 
 	// update read pointer
-	DAQ_WRITE(DAQ_MEM_READ, rp);
+	DAQ_WRITE(DAQ_MEM_READ, rp, daq_dma_base);
 
 	return uint8_t(status);
 }

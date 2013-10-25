@@ -64,11 +64,14 @@ inline unsigned short ADC_READ(short reg)
 #define DAQ_MEM_OVFL  2
 #define DAQ_FIFO_OVFL 4
 
-inline void DAQ_WRITE(short reg, unsigned long value)
-{IOWR_32DIRECT(DAQ_DMA_0_BASE, reg, value); }
+inline void DAQ_WRITE(short reg, unsigned long value, unsigned long base = DAQ_DMA_0_BASE)
+{IOWR_32DIRECT(base, reg, value); }
 
-inline unsigned long DAQ_READ(short reg)
-{ return IORD_32DIRECT(DAQ_DMA_0_BASE, reg); }
+inline unsigned long DAQ_READ(short reg, unsigned long base = DAQ_DMA_0_BASE)
+{ return IORD_32DIRECT(base, reg); }
+
+//inline unsigned long DAQ_READ(short reg)
+//{ return IORD_32DIRECT(DAQ_DMA_0_BASE, reg); }
 
 
 

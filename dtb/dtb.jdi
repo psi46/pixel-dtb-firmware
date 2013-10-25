@@ -1,8 +1,11 @@
 <sld_project_info>
+  <project>
+    <hash md5_digest_80b="c47ef5a0676d6f7608b8"/>
+  </project>
   <file_info>
-    <file checksum="0x01119FD9" device="EP3C40F484C6" path="dtb.sof" usercode="0xFFFFFFFF"/>
+    <file device="EP3C40F484C6" path="dtb.sof" usercode="0xFFFFFFFF"/>
   </file_info>
-  <hub_info ir_width="2" node_count="2"/>
+  <hub_info hub_ir_width="5" ir_width="2" node_addr_width="2" node_count="2"/>
   <node_info>
     <node hpath="dtb_system:inst|dtb_system_jtag_uart:jtag_uart|alt_jtag_atlantic:dtb_system_jtag_uart_alt_jtag_atlantic" instance_id="0" mfg_id="110" node_id="128" sld_node_info="0xC006E00" version="1">
       <parameters>
@@ -138,4 +141,12 @@
       </outputs>
     </node>
   </node_info>
+  <sld_infos>
+    <sld_info hpath="dtb_system:inst" name="inst">
+      <assignment_values>
+        <assignment_value text="QSYS_NAME dtb_system HAS_SOPCINFO 1 GENERATION_ID 1382468070"/>
+      </assignment_values>
+      <parameters/>
+    </sld_info>
+  </sld_infos>
 </sld_project_info>

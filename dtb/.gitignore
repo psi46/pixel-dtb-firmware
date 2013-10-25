@@ -8,4 +8,5 @@ simulation
 *.rpt
 *.bak
 *~
-dtb.sof
+*.sof
+*.cmp

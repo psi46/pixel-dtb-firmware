@@ -41,7 +41,7 @@
 # ========================
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "11.1 SP2"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:13:19  MARCH 21, 2012"
-set_global_assignment -name LAST_QUARTUS_VERSION "12.0 SP2.16"
+set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
 
 # Pin & Location Assignments
 # ==========================
@@ -853,6 +853,7 @@ set_location_assignment PIN_A18 -to UIO_d1
 set_location_assignment PIN_A19 -to UIO_d2
 set_instance_assignment -name FAST_INPUT_REGISTER ON -to I_adc_*
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to SD_cd
+set_global_assignment -name VERILOG_FILE deser_400_serpar.v
 set_global_assignment -name VERILOG_FILE deser160_serpar.v
 set_global_assignment -name VERILOG_FILE deser160_sampling.v
 set_global_assignment -name VERILOG_FILE deser160.v

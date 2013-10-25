@@ -5176,14 +5176,6 @@ applicable agreement for further details.
 	(pt -1392 2488)
 )
 (connector
-	(pt -1392 2488)
-	(pt -1392 2784)
-)
-(connector
-	(pt -1392 2784)
-	(pt -1128 2784)
-)
-(connector
 	(pt -1296 632)
 	(pt -568 632)
 )
@@ -5206,6 +5198,10 @@ applicable agreement for further details.
 (connector
 	(pt -1296 664)
 	(pt -568 664)
+)
+(connector
+	(pt -1528 2784)
+	(pt -1128 2784)
 )
 (junction (pt -1208 744))
 (junction (pt -1200 80))
