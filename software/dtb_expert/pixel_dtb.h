@@ -56,7 +56,7 @@ class CTestboard
 {
 	CRpcIo *rpc_io;
 	CUSB usb;
-	Ethernet ethernet;
+	CEthernet ethernet;
 
 	static const uint16_t flashUpgradeVersion;
 	uint16_t ugRecordCounter;
@@ -104,12 +104,26 @@ class CTestboard
 	static unsigned char ROWCODE(unsigned char x) { return (x>>1)^x; }
 
 public:
-#ifdef USE_ETHERNET
-	CTestboard() : rpc_io(&ethernet), flashMem(0), daq_mem_base(0), daq_mem_size(0) { Init(); }
-#else
-	CTestboard() : rpc_io(&usb), flashMem(0), daq_mem_base(0), daq_mem_size(0) { Init(); }
-#endif
-	CRpcIo* GetIo() { return rpc_io; }
+	CTestboard() : flashMem(0), daq_mem_base(0), daq_mem_size(0) { Init(); }
+	CRpcIo* GetIo() {
+		printf("Getting the io:\n");
+		while(true){
+			if(ethernet.IsOpen()){
+				rpc_io = &ethernet;
+				SetLed(0x0F);
+				printf("Set rpc_io to Ethernet\n");
+				break;
+			}
+			if(usb.IsOpen()){
+				rpc_io = &usb;
+				SetLed(0x09);
+				printf("Set rpc_io to USB\n");
+				break;
+			}
+		}
+		printf("Finished Getting IO:\n");
+		return rpc_io;
+	}
 
 
 	// === RPC ==============================================================

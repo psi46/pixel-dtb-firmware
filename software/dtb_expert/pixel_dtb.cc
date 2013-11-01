@@ -93,6 +93,7 @@ uint16_t CTestboard::GetSWVersion()
 #define DELAY 120
 void CTestboard::Welcome()
 {
+	unsigned int led_data = _GetLED();
 	_SetLED(0x01);	mDelay(DELAY);
 	_SetLED(0x02);	mDelay(DELAY);
 	_SetLED(0x08);	mDelay(DELAY);
@@ -107,7 +108,7 @@ void CTestboard::Welcome()
 	_SetLED(0x03);	mDelay(DELAY);
 	_SetLED(0x0b);	mDelay(DELAY);
 	_SetLED(0x0f);	mDelay(DELAY*3);
-	_SetLED(0x00);
+	_SetLED(led_data);
 }
 
 void CTestboard::SetLed(uint8_t x)

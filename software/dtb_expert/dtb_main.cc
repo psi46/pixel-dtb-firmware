@@ -11,7 +11,7 @@ CTestboard tb;
 int main()
 {
 	tb.Welcome();
-
+	tb.SetLed(0x00);
 	check_epcs();
 
 
