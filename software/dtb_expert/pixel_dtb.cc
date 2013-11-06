@@ -836,7 +836,7 @@ bool CTestboard::tbm_GetRaw(uint8_t reg, uint32_t &value)
 
 bool CTestboard::tbm_Get(uint8_t reg, uint8_t &value)
 {
-	long x;
+	uint32_t x;
 	reg |= 1;
 	if (!tbm_GetRaw(reg, x)) return false;
 	long y = (((HUB_address & (0x1f<<3)) + 4) << 8) + reg;
