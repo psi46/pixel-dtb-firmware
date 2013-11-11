@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2012 Altera Corporation
+Copyright (C) 1991-2013 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -54,30 +54,37 @@ applicable agreement for further details.
 	(port
 		(pt 160 32)
 		(output)
-		(text "data_a" (rect 0 0 38 14)(font "Arial" (font_size 8)))
-		(text "data_a" (rect 101 27 139 41)(font "Arial" (font_size 8)))
-		(line (pt 160 32)(pt 144 32))
+		(text "test[3..0]" (rect 0 0 49 14)(font "Arial" (font_size 8)))
+		(text "test[3..0]" (rect 90 27 139 41)(font "Arial" (font_size 8)))
+		(line (pt 160 32)(pt 144 32)(line_width 3))
 	)
 	(port
 		(pt 160 48)
 		(output)
-		(text "data_b" (rect 0 0 38 14)(font "Arial" (font_size 8)))
-		(text "data_b" (rect 101 43 139 57)(font "Arial" (font_size 8)))
+		(text "data_a" (rect 0 0 38 14)(font "Arial" (font_size 8)))
+		(text "data_a" (rect 101 43 139 57)(font "Arial" (font_size 8)))
 		(line (pt 160 48)(pt 144 48))
 	)
 	(port
 		(pt 160 64)
 		(output)
-		(text "error" (rect 0 0 28 14)(font "Arial" (font_size 8)))
-		(text "error" (rect 111 59 139 73)(font "Arial" (font_size 8)))
+		(text "data_b" (rect 0 0 38 14)(font "Arial" (font_size 8)))
+		(text "data_b" (rect 101 59 139 73)(font "Arial" (font_size 8)))
 		(line (pt 160 64)(pt 144 64))
 	)
 	(port
 		(pt 160 80)
 		(output)
-		(text "clk_400" (rect 0 0 43 14)(font "Arial" (font_size 8)))
-		(text "clk_400" (rect 96 75 139 89)(font "Arial" (font_size 8)))
+		(text "error" (rect 0 0 28 14)(font "Arial" (font_size 8)))
+		(text "error" (rect 111 75 139 89)(font "Arial" (font_size 8)))
 		(line (pt 160 80)(pt 144 80))
+	)
+	(port
+		(pt 160 96)
+		(output)
+		(text "clk_400" (rect 0 0 43 14)(font "Arial" (font_size 8)))
+		(text "clk_400" (rect 96 91 139 105)(font "Arial" (font_size 8)))
+		(line (pt 160 96)(pt 144 96))
 	)
 	(drawing
 		(rectangle (rect 16 16 144 112))

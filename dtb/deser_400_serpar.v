@@ -4,8 +4,8 @@
 
 module deser400_serpar
 (
-	input clk,
-	input clk400,
+	//input clk,
+	input clk160,
 	input reset,
 	input run,
 	
@@ -14,7 +14,8 @@ module deser400_serpar
 	
 	output reg [15:0] par_a,
 	output reg [15:0] par_b,
-	output reg write
+	output reg write,
+	output reg [3:0] test
 );
 
 // data shift register
@@ -22,7 +23,8 @@ module deser400_serpar
 reg [15:0]d_a;
 reg [15:0]d_b;
 
-always @(posedge clk400 or posedge reset)
+
+always @(posedge clk160 or posedge reset)
 begin
 	if (reset)
 	begin
@@ -30,44 +32,17 @@ begin
 		d_b <= 0;
 	end
 	else
-		d_a[15] <= d_a[14];
-		d_a[14] <= d_a[13];
-		d_a[13] <= d_a[12];
-		d_a[12] <= d_a[11];
-		d_a[11] <= d_a[10];
-		d_a[10] <= d_a[9];
-		d_a[9] <= d_a[8];
-		d_a[8] <= d_a[7];
-		d_a[7] <= d_a[6];
-		d_a[6] <= d_a[5];
-		d_a[5] <= d_a[4];
-		d_a[4] <= d_a[3];
-		d_a[3] <= d_a[2];
-		d_a[2] <= d_a[1];
-		d_a[1] <= ser_a;
-		
-		d_b[15] <= d_b[14];
-		d_b[14] <= d_b[13];
-		d_b[13] <= d_b[12];
-		d_b[12] <= d_b[11];
-		d_b[11] <= d_b[10];
-		d_b[10] <= d_b[9];
-		d_b[9] <= d_b[8];
-		d_b[8] <= d_b[7];
-		d_b[7] <= d_b[6];
-		d_b[6] <= d_b[5];
-		d_b[5] <= d_b[4];
-		d_b[4] <= d_b[3];
-		d_b[3] <= d_b[2];
-		d_b[2] <= d_b[1];
-		d_b[1] <= ser_b;
+	begin	
+		d_a <= {d_a[14:0],ser_a};
+		d_b <= {d_b[14:0],ser_b};
+	end
 end
 
 // state machine
 
-reg [15:0]state;
+reg [3:0]state;
 
-always @(posedge clk400 or posedge reset)
+always @(posedge clk160 or posedge reset)
 begin
 	if (reset) state <= 0;
 	else
@@ -93,23 +68,25 @@ begin
 		end
 	end
 	
-always @(posedge clk400 or posedge reset)
+always @(posedge clk160 or posedge reset)
 begin
 	if (reset)
 		begin
-			par_a <= 0;
-			par_b <= 0;
+				par_a <= 0;
+				par_b <= 0;
 		end
 		else
 			if (run && (state == 15))
+			begin
 				par_a <= d_a;
 				par_b <= d_b;
+			end
 end
 
-always @(posedge clk400 or posedge reset)
+always @(posedge clk160 or posedge reset)
 begin
-   if (reset) write <= 0;
-   else write <= (state == 0);
+   if (reset ) write <= 0;
+   else write <= (state == 0) & run & (par_a != 65535) & (par_b != 65535) ; // Supress IDLE
 end
 
 endmodule

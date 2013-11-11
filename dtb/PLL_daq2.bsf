@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2012 Altera Corporation
+Copyright (C) 1991-2013 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -56,26 +56,26 @@ applicable agreement for further details.
 	)
 	(drawing
 		(text "Cyclone III" (rect 178 176 401 363)(font "Arial" ))
-		(text "inclk0 frequency: 40.000 MHz" (rect 50 59 223 129)(font "Arial" ))
+		(text "inclk0 frequency: 80.000 MHz" (rect 50 59 223 129)(font "Arial" ))
 		(text "Operation Mode: Normal" (rect 50 72 199 155)(font "Arial" ))
 		(text "Clk " (rect 51 93 116 197)(font "Arial" ))
 		(text "Ratio" (rect 72 93 164 197)(font "Arial" ))
 		(text "Ph (dg)" (rect 98 93 225 197)(font "Arial" ))
 		(text "DC (%)" (rect 132 93 294 197)(font "Arial" ))
 		(text "c0" (rect 54 107 116 225)(font "Arial" ))
-		(text "2/5" (rect 77 107 165 225)(font "Arial" ))
+		(text "1/5" (rect 77 107 165 225)(font "Arial" ))
 		(text "0.00" (rect 104 107 224 225)(font "Arial" ))
 		(text "50.00" (rect 136 107 293 225)(font "Arial" ))
 		(text "c1" (rect 54 121 115 253)(font "Arial" ))
-		(text "2/1" (rect 77 121 164 253)(font "Arial" ))
+		(text "1/1" (rect 77 121 164 253)(font "Arial" ))
 		(text "0.00" (rect 104 121 224 253)(font "Arial" ))
 		(text "50.00" (rect 136 121 293 253)(font "Arial" ))
 		(text "c2" (rect 54 135 116 281)(font "Arial" ))
-		(text "4/1" (rect 77 135 164 281)(font "Arial" ))
+		(text "2/1" (rect 77 135 164 281)(font "Arial" ))
 		(text "0.00" (rect 104 135 224 281)(font "Arial" ))
 		(text "50.00" (rect 136 135 293 281)(font "Arial" ))
 		(text "c3" (rect 54 149 116 309)(font "Arial" ))
-		(text "8/1" (rect 77 149 164 309)(font "Arial" ))
+		(text "4/1" (rect 77 149 164 309)(font "Arial" ))
 		(text "0.00" (rect 104 149 224 309)(font "Arial" ))
 		(text "50.00" (rect 136 149 293 309)(font "Arial" ))
 		(line (pt 0 0)(pt 241 0))

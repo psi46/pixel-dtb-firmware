@@ -107,7 +107,7 @@ void CTestboard::Welcome()
 	_SetLED(0x03);	mDelay(DELAY);
 	_SetLED(0x0b);	mDelay(DELAY);
 	_SetLED(0x0f);	mDelay(DELAY*3);
-	_SetLED(0x00);
+	//_SetLED(0x00);
 }
 
 void CTestboard::SetLed(uint8_t x)
@@ -999,7 +999,7 @@ uint16_t daq_fifo_state;
 uint8_t  daq_deser160_state;
 */
 
-uint32_t CTestboard::Daq_Open(uint32_t buffersize, unsigned int dma)
+uint32_t CTestboard::Daq_Open(uint32_t buffersize, uint8_t dma)
 {
 	// close last DAQ session if still active
 	Daq_Close();
@@ -1130,7 +1130,7 @@ uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
 
 	// allocate space in vector or return empty data
 	if (blocksize > 0) data.reserve(blocksize);
-	else return uint8_t(status);
+	else return uint8_t(99);
 
 	// --- send 1st part of the data block
 	int32_t size1 = daq_mem_size - rp;

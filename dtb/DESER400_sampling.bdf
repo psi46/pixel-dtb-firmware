@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2012 Altera Corporation
+Copyright (C) 1991-2013 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -55,7 +55,7 @@ applicable agreement for further details.
 	(input)
 	(rect -296 120 -128 136)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "clock" (rect 5 0 31 12)(font "Arial" ))
+	(text "clock" (rect 5 0 30 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -72,7 +72,7 @@ applicable agreement for further details.
 	(input)
 	(rect -296 152 -128 168)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "sclk[3..0]" (rect 5 0 52 12)(font "Arial" ))
+	(text "sclk[3..0]" (rect 5 0 51 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -136,9 +136,25 @@ applicable agreement for further details.
 )
 (pin
 	(output)
+	(rect 840 256 1016 272)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "test[3..0]" (rect 90 0 134 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
 	(rect 904 400 1080 416)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "clk_400" (rect 90 0 127 12)(font "Arial" ))
+	(text "clk_160" (rect 90 0 127 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -181,31 +197,6 @@ applicable agreement for further details.
 		(arc (pt 7 29)(pt 7 19)(rect -14 8 19 41))
 		(arc (pt 49 24)(pt 25 13)(rect -6 13 57 76))
 		(arc (pt 25 35)(pt 49 24)(rect -6 -27 57 36))
-	)
-)
-(symbol
-	(rect -8 224 40 256)
-	(text "NOT" (rect 1 0 21 10)(font "Arial" (font_size 6)))
-	(text "inst2" (rect 3 21 26 33)(font "Arial" ))
-	(port
-		(pt 0 16)
-		(input)
-		(text "IN" (rect 2 7 13 19)(font "Courier New" (bold))(invisible))
-		(text "IN" (rect 2 7 13 19)(font "Courier New" (bold))(invisible))
-		(line (pt 0 16)(pt 13 16))
-	)
-	(port
-		(pt 48 16)
-		(output)
-		(text "OUT" (rect 32 7 49 19)(font "Courier New" (bold))(invisible))
-		(text "OUT" (rect 32 7 49 19)(font "Courier New" (bold))(invisible))
-		(line (pt 39 16)(pt 48 16))
-	)
-	(drawing
-		(line (pt 13 25)(pt 13 7))
-		(line (pt 13 7)(pt 31 16))
-		(line (pt 13 25)(pt 31 16))
-		(circle (rect 31 12 39 20))
 	)
 )
 (symbol
@@ -479,18 +470,6 @@ applicable agreement for further details.
 	(pt 184 144)
 )
 (connector
-	(pt 184 144)
-	(pt 184 240)
-)
-(connector
-	(pt -128 240)
-	(pt -8 240)
-)
-(connector
-	(pt 40 240)
-	(pt 184 240)
-)
-(connector
 	(text "CDR_data" (rect 858 80 909 92)(font "Arial" ))
 	(pt 848 96)
 	(pt 944 96)
@@ -499,10 +478,6 @@ applicable agreement for further details.
 	(text "CDR_error" (rect 858 96 911 108)(font "Arial" ))
 	(pt 848 112)
 	(pt 944 112)
-)
-(connector
-	(pt -136 288)
-	(pt 200 288)
 )
 (connector
 	(text "a" (rect 434 312 439 324)(font "Arial" ))
@@ -525,11 +500,6 @@ applicable agreement for further details.
 	(pt 904 392)
 )
 (connector
-	(text "a" (rect 826 344 831 356)(font "Arial" ))
-	(pt 904 360)
-	(pt 816 360)
-)
-(connector
 	(text "b" (rect 826 360 831 372)(font "Arial" ))
 	(pt 904 376)
 	(pt 816 376)
@@ -545,14 +515,8 @@ applicable agreement for further details.
 	(pt 632 368)
 )
 (connector
-	(text "error" (rect 706 344 728 356)(font "Arial" ))
 	(pt 696 360)
 	(pt 736 360)
-)
-(connector
-	(text "clk400" (rect 826 392 857 404)(font "Arial" ))
-	(pt 904 408)
-	(pt 816 408)
 )
 (connector
 	(text "<<__$DEF_ALIAS4677>>" (rect -126 112 -3 124)(font "Arial" )(invisible))
@@ -613,5 +577,34 @@ applicable agreement for further details.
 	(text "early_samples[1..0]" (rect 480 208 577 220)(font "Arial" ))
 	(pt 464 224)
 	(pt 568 224)
+	(bus)
+)
+(connector
+	(text "input_d" (rect 171 272 206 284)(font "Arial" ))
+	(pt -136 288)
+	(pt 200 288)
+)
+(connector
+	(pt 184 144)
+	(pt 184 240)
+)
+(connector
+	(pt -128 240)
+	(pt 184 240)
+)
+(connector
+	(text "a" (rect 861 344 866 356)(font "Arial" ))
+	(pt 904 360)
+	(pt 816 360)
+)
+(connector
+	(text "clk160" (rect 826 392 857 404)(font "Arial" ))
+	(pt 904 408)
+	(pt 816 408)
+)
+(connector
+	(text "a,CDR_data,CDR_error,decoder_error" (rect 760 248 948 260)(font "Arial" ))
+	(pt 840 264)
+	(pt 752 264)
 	(bus)
 )

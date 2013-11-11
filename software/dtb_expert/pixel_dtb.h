@@ -266,7 +266,7 @@ public:
 
 
 	// --- data aquisition --------------------------------------------------
-	RPC_EXPORT uint32_t Daq_Open(uint32_t buffersize = 10000000, unsigned int dma = 0);
+	RPC_EXPORT uint32_t Daq_Open(uint32_t buffersize = 10000000, uint8_t dma = 1);
 	RPC_EXPORT void Daq_Close();
 	RPC_EXPORT void Daq_Start();
 	RPC_EXPORT void Daq_Stop();

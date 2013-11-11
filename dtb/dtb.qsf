@@ -344,7 +344,7 @@ set_instance_assignment -name IO_STANDARD LVDS -to ADC_clk
 
 # EDA Netlist Writer Assignments
 # ==============================
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_SIMULATION_TOOL "<None>"
 
 # Assembler Assignments
 # =====================
@@ -362,7 +362,7 @@ set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -
 
 	# EDA Netlist Writer Assignments
 	# ==============================
-set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT NONE -section_id eda_simulation
 
 # end EDA_TOOL_SETTINGS(eda_simulation)
 # -------------------------------------
@@ -853,6 +853,10 @@ set_location_assignment PIN_A18 -to UIO_d1
 set_location_assignment PIN_A19 -to UIO_d2
 set_instance_assignment -name FAST_INPUT_REGISTER ON -to I_adc_*
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to SD_cd
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name BDF_FILE DESER400_sampling.bdf
+set_global_assignment -name VERILOG_FILE deser400.v
 set_global_assignment -name VERILOG_FILE deser_400_serpar.v
 set_global_assignment -name VERILOG_FILE deser160_serpar.v
 set_global_assignment -name VERILOG_FILE deser160_sampling.v
@@ -882,4 +886,31 @@ set_global_assignment -name QIP_FILE ip/psi2c/rda_bitcounter.qip
 set_global_assignment -name QIP_FILE xxx_test_counter.qip
 set_global_assignment -name VERILOG_FILE adc_readout.v
 set_global_assignment -name AHDL_FILE edges.tdf
+set_global_assignment -name VERILOG_FILE dtb_system/synthesis/submodules/daq_dma.v
+set_global_assignment -name BDF_FILE Timer_Sampler.bdf
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s20"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s30"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s38"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s10"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s21"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s22"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s23"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s31"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s32"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s33"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s34"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s35"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s36"
+set_location_assignment LAB_X4_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s37"
+set_location_assignment LAB_X6_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s11"
+set_location_assignment LAB_X6_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s24"
+set_location_assignment LAB_X6_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s12"
+set_location_assignment LAB_X6_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s25"
+set_location_assignment LAB_X8_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s13"
+set_location_assignment LAB_X8_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s26"
+set_location_assignment LAB_X8_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s14"
+set_location_assignment LAB_X8_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s27"
+set_location_assignment LAB_X10_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s15"
+set_location_assignment LAB_X10_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s16"
+set_location_assignment LAB_X12_Y2_N0 -to "data_aqu:inst5|dtb_daq:inst2|deser400:channel1_module_400|DESER400_sampling:sampler|Timer_Sampler:inst7|s17"
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
