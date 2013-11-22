@@ -39,7 +39,7 @@ int GetPixel(unsigned int x)
 	}
 	tb.Daq_Stop();
 	vector<uint16_t> data;
-	tb.Daq_Read(data, 10000);
+	tb.Daq_Read(data, 0, 10000);
 	unsigned int pos = 0;
 
 	for (i=0; i<count; i++)

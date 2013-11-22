@@ -79,7 +79,8 @@ module dtb_daq
 	output daq4b_write,
 	output [15:0]daq4b_writedata,
 
-	output [5:0]TP
+	output [5:0]TP,
+	output [9:0]test
 );
 
 	// pattern generator signals
@@ -143,13 +144,14 @@ module dtb_daq
 	deser400 channel1_module_400
 	(
 		.clock(clk_daq),
-		.sclk(sclk[3:0]),
+		.sclk({sclk[1],sclk[0],sclk[3],sclk[2]}),
 		.res(reset),
 		.run(daq1_running),
 		.input_data(sdata1),
-		.write(daq1_write),
+		.write(daq1a_write),
 		.data_a(daq1a_writedata),
 		.data_b(daq1b_writedata),
+		.test(test[9:0])
 	);
 	
 	deser400 channel2_module_400
@@ -159,7 +161,7 @@ module dtb_daq
 		.res(reset),
 		.input_data(sdata2),
 		.run(daq2_running),
-		.write(daq2_write),
+		.write(daq1b_write),
 		.data_a(daq2a_writedata),
 		.data_b(daq2b_writedata),
 	);

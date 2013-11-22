@@ -103,3 +103,13 @@ bool CUSB::Write(const void *buffer, unsigned int size)
 	return true;
 }
 
+bool CUSB::IsOpen(){
+	short status = IORD_16DIRECT(USB_BASE, 0);
+	if((status & 0x8000)){
+		return false;
+	} else{
+		read_buffer = status;
+		return true;
+	}
+}
+

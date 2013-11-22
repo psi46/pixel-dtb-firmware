@@ -539,10 +539,11 @@ bool rpc__Daq_Stop$v(CRpcIo &rpc_io, rpcMessage &msg)
 	return true;
 }
 
-bool rpc__Daq_GetSize$I(CRpcIo &rpc_io, rpcMessage &msg)
+bool rpc__Daq_GetSize$IC(CRpcIo &rpc_io, rpcMessage &msg)
 {
-	if (!msg.CheckSize(0)) return false;
-	uint32_t rpc_par0 = tb.Daq_GetSize();
+	if (!msg.CheckSize(1)) return false;
+	uint8_t rpc_par1 = msg.Get_UINT8();
+	uint32_t rpc_par0 = tb.Daq_GetSize(rpc_par1);
 	msg.Create(58);
 	msg.Put_UINT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
@@ -550,12 +551,13 @@ bool rpc__Daq_GetSize$I(CRpcIo &rpc_io, rpcMessage &msg)
 	return true;
 }
 
-bool rpc__Daq_Read$C2SS(CRpcIo &rpc_io, rpcMessage &msg)
+bool rpc__Daq_Read$C2SCS(CRpcIo &rpc_io, rpcMessage &msg)
 {
-	if (!msg.CheckSize(2)) return false;
-	uint16_t rpc_par2 = msg.Get_UINT16();
+	if (!msg.CheckSize(3)) return false;
+	uint8_t rpc_par2 = msg.Get_UINT8();
+	uint16_t rpc_par3 = msg.Get_UINT16();
 	vectorR<uint16_t> rpc_par1;
-	uint8_t rpc_par0 = tb.Daq_Read(rpc_par1,rpc_par2);
+	uint8_t rpc_par0 = tb.Daq_Read(rpc_par1,rpc_par2,rpc_par3);
 	msg.Create(59);
 	msg.Put_UINT8(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
@@ -574,6 +576,37 @@ bool rpc__Daq_Read$C2SS0I(CRpcIo &rpc_io, rpcMessage &msg)
 	msg.Create(60);
 	msg.Put_UINT8(rpc_par0);
 	msg.Put_UINT32(rpc_par3);
+	if (!msg.Send(rpc_io)) return false;
+	if (!rpc_Send(rpc_io, rpc_par1)) return false;
+	rpc_io.Flush();
+	return true;
+}
+
+bool rpc__Daq_Read$C2SCS0I(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(7)) return false;
+	uint8_t rpc_par2 = msg.Get_UINT8();
+	uint16_t rpc_par3 = msg.Get_UINT16();
+	uint32_t rpc_par4 = msg.Get_UINT32();
+	vectorR<uint16_t> rpc_par1;
+	uint8_t rpc_par0 = tb.Daq_Read(rpc_par1,rpc_par2,rpc_par3,rpc_par4);
+	msg.Create(61);
+	msg.Put_UINT8(rpc_par0);
+	msg.Put_UINT32(rpc_par4);
+	if (!msg.Send(rpc_io)) return false;
+	if (!rpc_Send(rpc_io, rpc_par1)) return false;
+	rpc_io.Flush();
+	return true;
+}
+
+bool rpc__Daq_Read$C2SS(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(2)) return false;
+	uint16_t rpc_par2 = msg.Get_UINT16();
+	vectorR<uint16_t> rpc_par1;
+	uint8_t rpc_par0 = tb.Daq_Read(rpc_par1,rpc_par2);
+	msg.Create(62);
+	msg.Put_UINT8(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	if (!rpc_Send(rpc_io, rpc_par1)) return false;
 	rpc_io.Flush();
@@ -726,7 +759,7 @@ bool rpc__tbm_Get$bC0C(CRpcIo &rpc_io, rpcMessage &msg)
 	uint8_t rpc_par1 = msg.Get_UINT8();
 	uint8_t rpc_par2 = msg.Get_UINT8();
 	bool rpc_par0 = tb.tbm_Get(rpc_par1,rpc_par2);
-	msg.Create(77);
+	msg.Create(79);
 	msg.Put_BOOL(rpc_par0);
 	msg.Put_UINT8(rpc_par2);
 	if (!msg.Send(rpc_io)) return false;
@@ -740,11 +773,41 @@ bool rpc__tbm_GetRaw$bC0I(CRpcIo &rpc_io, rpcMessage &msg)
 	uint8_t rpc_par1 = msg.Get_UINT8();
 	uint32_t rpc_par2 = msg.Get_UINT32();
 	bool rpc_par0 = tb.tbm_GetRaw(rpc_par1,rpc_par2);
-	msg.Create(78);
+	msg.Create(80);
 	msg.Put_BOOL(rpc_par0);
 	msg.Put_UINT32(rpc_par2);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
+	return true;
+}
+
+bool rpc__tbm1_Write$vIIi(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(12)) return false;
+	uint32_t rpc_par1 = msg.Get_UINT32();
+	uint32_t rpc_par2 = msg.Get_UINT32();
+	int32_t rpc_par3 = msg.Get_INT32();
+	tb.tbm1_Write(rpc_par1,rpc_par2,rpc_par3);
+	return true;
+}
+
+bool rpc__tbm2_Write$vIIi(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(12)) return false;
+	uint32_t rpc_par1 = msg.Get_UINT32();
+	uint32_t rpc_par2 = msg.Get_UINT32();
+	int32_t rpc_par3 = msg.Get_INT32();
+	tb.tbm2_Write(rpc_par1,rpc_par2,rpc_par3);
+	return true;
+}
+
+bool rpc__tbm_Write$vIIi(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(12)) return false;
+	uint32_t rpc_par1 = msg.Get_UINT32();
+	uint32_t rpc_par2 = msg.Get_UINT32();
+	int32_t rpc_par3 = msg.Get_INT32();
+	tb.tbm_Write(rpc_par1,rpc_par2,rpc_par3);
 	return true;
 }
 
@@ -755,7 +818,7 @@ bool rpc__testColPixel$bCC2C(CRpcIo &rpc_io, rpcMessage &msg)
 	uint8_t rpc_par2 = msg.Get_UINT8();
 	vectorR<uint8_t> rpc_par3;
 	bool rpc_par0 = tb.testColPixel(rpc_par1,rpc_par2,rpc_par3);
-	msg.Create(79);
+	msg.Create(84);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	if (!rpc_Send(rpc_io, rpc_par3)) return false;
@@ -763,7 +826,7 @@ bool rpc__testColPixel$bCC2C(CRpcIo &rpc_io, rpcMessage &msg)
 	return true;
 }
 
-const uint16_t rpc_cmdListSize = 80;
+const uint16_t rpc_cmdListSize = 85;
 
 const CRpcCall rpc_cmdlist[] =
 {
@@ -825,28 +888,33 @@ const CRpcCall rpc_cmdlist[] =
 	/*    55 */ { rpc__Daq_Close$v, "Daq_Close$v" },
 	/*    56 */ { rpc__Daq_Start$v, "Daq_Start$v" },
 	/*    57 */ { rpc__Daq_Stop$v, "Daq_Stop$v" },
-	/*    58 */ { rpc__Daq_GetSize$I, "Daq_GetSize$I" },
-	/*    59 */ { rpc__Daq_Read$C2SS, "Daq_Read$C2SS" },
+	/*    58 */ { rpc__Daq_GetSize$IC, "Daq_GetSize$IC" },
+	/*    59 */ { rpc__Daq_Read$C2SCS, "Daq_Read$C2SCS" },
 	/*    60 */ { rpc__Daq_Read$C2SS0I, "Daq_Read$C2SS0I" },
-	/*    61 */ { rpc__Daq_Select_ADC$vSCCC, "Daq_Select_ADC$vSCCC" },
-	/*    62 */ { rpc__Daq_Select_Deser160$vC, "Daq_Select_Deser160$vC" },
-	/*    63 */ { rpc__roc_I2cAddr$vC, "roc_I2cAddr$vC" },
-	/*    64 */ { rpc__roc_ClrCal$v, "roc_ClrCal$v" },
-	/*    65 */ { rpc__roc_SetDAC$vCC, "roc_SetDAC$vCC" },
-	/*    66 */ { rpc__roc_Pix$vCCC, "roc_Pix$vCCC" },
-	/*    67 */ { rpc__roc_Pix_Trim$vCCC, "roc_Pix_Trim$vCCC" },
-	/*    68 */ { rpc__roc_Pix_Mask$vCC, "roc_Pix_Mask$vCC" },
-	/*    69 */ { rpc__roc_Pix_Cal$vCCb, "roc_Pix_Cal$vCCb" },
-	/*    70 */ { rpc__roc_Col_Enable$vCb, "roc_Col_Enable$vCb" },
-	/*    71 */ { rpc__roc_Col_Mask$vC, "roc_Col_Mask$vC" },
-	/*    72 */ { rpc__roc_Chip_Mask$v, "roc_Chip_Mask$v" },
-	/*    73 */ { rpc__tbm_Enable$vb, "tbm_Enable$vb" },
-	/*    74 */ { rpc__tbm_Addr$vCC, "tbm_Addr$vCC" },
-	/*    75 */ { rpc__mod_Addr$vC, "mod_Addr$vC" },
-	/*    76 */ { rpc__tbm_Set$vCC, "tbm_Set$vCC" },
-	/*    77 */ { rpc__tbm_Get$bC0C, "tbm_Get$bC0C" },
-	/*    78 */ { rpc__tbm_GetRaw$bC0I, "tbm_GetRaw$bC0I" },
-	/*    79 */ { rpc__testColPixel$bCC2C, "testColPixel$bCC2C" }
+	/*    61 */ { rpc__Daq_Read$C2SCS0I, "Daq_Read$C2SCS0I" },
+	/*    62 */ { rpc__Daq_Read$C2SS, "Daq_Read$C2SS" },
+	/*    63 */ { rpc__Daq_Select_ADC$vSCCC, "Daq_Select_ADC$vSCCC" },
+	/*    64 */ { rpc__Daq_Select_Deser160$vC, "Daq_Select_Deser160$vC" },
+	/*    65 */ { rpc__roc_I2cAddr$vC, "roc_I2cAddr$vC" },
+	/*    66 */ { rpc__roc_ClrCal$v, "roc_ClrCal$v" },
+	/*    67 */ { rpc__roc_SetDAC$vCC, "roc_SetDAC$vCC" },
+	/*    68 */ { rpc__roc_Pix$vCCC, "roc_Pix$vCCC" },
+	/*    69 */ { rpc__roc_Pix_Trim$vCCC, "roc_Pix_Trim$vCCC" },
+	/*    70 */ { rpc__roc_Pix_Mask$vCC, "roc_Pix_Mask$vCC" },
+	/*    71 */ { rpc__roc_Pix_Cal$vCCb, "roc_Pix_Cal$vCCb" },
+	/*    72 */ { rpc__roc_Col_Enable$vCb, "roc_Col_Enable$vCb" },
+	/*    73 */ { rpc__roc_Col_Mask$vC, "roc_Col_Mask$vC" },
+	/*    74 */ { rpc__roc_Chip_Mask$v, "roc_Chip_Mask$v" },
+	/*    75 */ { rpc__tbm_Enable$vb, "tbm_Enable$vb" },
+	/*    76 */ { rpc__tbm_Addr$vCC, "tbm_Addr$vCC" },
+	/*    77 */ { rpc__mod_Addr$vC, "mod_Addr$vC" },
+	/*    78 */ { rpc__tbm_Set$vCC, "tbm_Set$vCC" },
+	/*    79 */ { rpc__tbm_Get$bC0C, "tbm_Get$bC0C" },
+	/*    80 */ { rpc__tbm_GetRaw$bC0I, "tbm_GetRaw$bC0I" },
+	/*    81 */ { rpc__tbm1_Write$vIIi, "tbm1_Write$vIIi" },
+	/*    82 */ { rpc__tbm2_Write$vIIi, "tbm2_Write$vIIi" },
+	/*    83 */ { rpc__tbm_Write$vIIi, "tbm_Write$vIIi" },
+	/*    84 */ { rpc__testColPixel$bCC2C, "testColPixel$bCC2C" }
 };
 
 void rpc_Dispatcher(CRpcIo &rpc_io)
@@ -856,7 +924,7 @@ void rpc_Dispatcher(CRpcIo &rpc_io)
 	{
 		msg.Receive(rpc_io);
 		if (rpc_error.HasError()) continue;
-		if (msg.GetCmd() >= 80) continue;
+		if (msg.GetCmd() >= 85) continue;
 		rpc_cmdlist[msg.GetCmd()].call(rpc_io, msg);
 	}
 }

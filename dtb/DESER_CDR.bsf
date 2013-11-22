@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2012 Altera Corporation
+Copyright (C) 1991-2013 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -54,16 +54,30 @@ applicable agreement for further details.
 	(port
 		(pt 224 32)
 		(output)
-		(text "CDR_data" (rect 0 0 56 14)(font "Arial" (font_size 8)))
-		(text "CDR_data" (rect 147 27 203 41)(font "Arial" (font_size 8)))
+		(text "left" (rect 0 0 17 14)(font "Arial" (font_size 8)))
+		(text "left" (rect 186 27 203 41)(font "Arial" (font_size 8)))
 		(line (pt 224 32)(pt 208 32))
 	)
 	(port
 		(pt 224 48)
 		(output)
-		(text "CDR_error" (rect 0 0 60 14)(font "Arial" (font_size 8)))
-		(text "CDR_error" (rect 143 43 203 57)(font "Arial" (font_size 8)))
+		(text "right" (rect 0 0 24 14)(font "Arial" (font_size 8)))
+		(text "right" (rect 179 43 203 57)(font "Arial" (font_size 8)))
 		(line (pt 224 48)(pt 208 48))
+	)
+	(port
+		(pt 224 64)
+		(output)
+		(text "CDR_data" (rect 0 0 56 14)(font "Arial" (font_size 8)))
+		(text "CDR_data" (rect 147 59 203 73)(font "Arial" (font_size 8)))
+		(line (pt 224 64)(pt 208 64))
+	)
+	(port
+		(pt 224 80)
+		(output)
+		(text "CDR_error" (rect 0 0 60 14)(font "Arial" (font_size 8)))
+		(text "CDR_error" (rect 143 75 203 89)(font "Arial" (font_size 8)))
+		(line (pt 224 80)(pt 208 80))
 	)
 	(drawing
 		(rectangle (rect 16 16 208 112))

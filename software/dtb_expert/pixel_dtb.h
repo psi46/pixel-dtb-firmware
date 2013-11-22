@@ -5,7 +5,9 @@
 #include "dtb_hal.h"
 #include "rpc.h"
 #include "FlashMemory.h"
+#include "ethernet.h"
 
+#define USE_ETHERNET
 
 // size of module
 #define MOD_NUMROCS  16
@@ -54,6 +56,7 @@ class CTestboard
 {
 	CRpcIo *rpc_io;
 	CUSB usb;
+	CEthernet ethernet;
 
 	static const uint16_t flashUpgradeVersion;
 	uint16_t ugRecordCounter;
@@ -67,6 +70,7 @@ class CTestboard
 
 	// --- DAQ variables
 	uint16_t *daq_mem_base; // DAQ buffer base address (0 = no space reserved)
+	uint16_t *daq_mem2_base; // DAQ buffer base address (0 = no space reserved)
 	uint32_t daq_mem_size;  // DAQ buffer size in 16 bit words
 	uint16_t daq_fifo_state;
 	uint32_t daq_dma_base;
@@ -103,7 +107,25 @@ class CTestboard
 
 public:
 	CTestboard() : rpc_io(&usb), flashMem(0), daq_mem_base(0), daq_mem_size(0), daq_dma_base(DAQ_DMA_0_BASE) { Init(); }
-	CRpcIo* GetIo() { return rpc_io; }
+        CRpcIo* GetIo() {
+                printf("Getting the io:\n");
+                while(true){
+                        if(ethernet.IsOpen()){
+                                rpc_io = &ethernet;
+                                SetLed(0x0F);
+                                printf("Set rpc_io to Ethernet\n");
+                                break;
+                        }
+                        if(usb.IsOpen()){
+                                rpc_io = &usb;
+                                SetLed(0x09);
+                                printf("Set rpc_io to USB\n");
+                                break;
+                        }
+                }
+                printf("Finished Getting IO:\n");
+                return rpc_io;
+        }
 
 
 	// === RPC ==============================================================
@@ -270,13 +292,19 @@ public:
 	RPC_EXPORT void Daq_Close();
 	RPC_EXPORT void Daq_Start();
 	RPC_EXPORT void Daq_Stop();
-	RPC_EXPORT uint32_t Daq_GetSize();
+	RPC_EXPORT uint32_t Daq_GetSize(uint8_t channel = 0);
 
 	RPC_EXPORT uint8_t Daq_Read(vectorR<uint16_t> &data,
-			 uint16_t blocksize = 16384);
+			 uint8_t channel, uint16_t blocksize = 16384);
 
 	RPC_EXPORT uint8_t Daq_Read(vectorR<uint16_t> &data,
-			uint16_t blocksize, uint32_t &availsize);
+			 uint16_t blocksize, uint32_t &availsize);
+
+	RPC_EXPORT uint8_t Daq_Read(vectorR<uint16_t> &data,
+			uint8_t channel, uint16_t blocksize, uint32_t &availsize);
+
+    RPC_EXPORT uint8_t Daq_Read(vectorR<uint16_t> &data,
+                    uint16_t blocksize = 16384);
 
 	RPC_EXPORT void Daq_Select_ADC(uint16_t blocksize, uint8_t source,
 			uint8_t start, uint8_t stop = 0);
@@ -330,9 +358,19 @@ public:
 
 	RPC_EXPORT bool tbm_GetRaw(uint8_t reg, uint32_t &value);
 
+	RPC_EXPORT void tbm1_Write(uint32_t hubAddr, uint32_t addr, int32_t value);
+
+	RPC_EXPORT void tbm2_Write(uint32_t hubAddr, uint32_t addr, int32_t value);
+
+	RPC_EXPORT void tbm_Write(uint32_t hubAddr, uint32_t addr, int32_t value);
+
 
 	// Wafer test functions
 	RPC_EXPORT bool testColPixel(uint8_t col, uint8_t trimbit, vectorR<uint8_t> &res);
+
+	// Ethernet test functions
+	RPC_EXPORT void Ethernet_Send(string &message);
+	RPC_EXPORT uint32_t Ethernet_RecvPackets();
 };
 
 extern CTestboard tb;

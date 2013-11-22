@@ -93,6 +93,7 @@ uint16_t CTestboard::GetSWVersion()
 #define DELAY 120
 void CTestboard::Welcome()
 {
+	unsigned int led_data = _GetLED();
 	_SetLED(0x01);	mDelay(DELAY);
 	_SetLED(0x02);	mDelay(DELAY);
 	_SetLED(0x08);	mDelay(DELAY);
@@ -107,7 +108,7 @@ void CTestboard::Welcome()
 	_SetLED(0x03);	mDelay(DELAY);
 	_SetLED(0x0b);	mDelay(DELAY);
 	_SetLED(0x0f);	mDelay(DELAY*3);
-	//_SetLED(0x00);
+	_SetLED(led_data);
 }
 
 void CTestboard::SetLed(uint8_t x)
@@ -779,9 +780,6 @@ void CTestboard::Pg_Loop(unsigned short period)
 
 // == TBM functions =====================================================
 
-const unsigned char CTestboard::MODCONF[16]
-= { 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3 };
-
 // selects if you want to use the TBM
 // Note: MOD_present is used for automatic address assignment. Works with standard BPix modules only
 void CTestboard::tbm_Enable(bool on)
@@ -845,9 +843,33 @@ bool CTestboard::tbm_Get(uint8_t reg, uint8_t &value)
 	return true;
 }
 
+void CTestboard::tbm1_Write(uint32_t hubAddr,uint32_t addr, int32_t value)
+{
+
+
+
+}
+
+void CTestboard::tbm2_Write(uint32_t hubAddr,uint32_t addr, int32_t value)
+{
+
+
+
+}
+void CTestboard::tbm_Write(uint32_t hubAddr,uint32_t addr, int32_t value)
+{
+
+
+
+}
+
+
 // === ROC/Module Communication =========================================
 
 // --- ROC functions ----------------------------------------------------
+
+const unsigned char CTestboard::MODCONF[16]
+= { 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3 };
 
 
 // -- set the i2c address for the following commands
@@ -1010,7 +1032,10 @@ uint32_t CTestboard::Daq_Open(uint32_t buffersize, uint8_t dma)
 
 	// allocate memory
 	daq_mem_base = new uint16_t[buffersize];
-	if (daq_mem_base == 0) return 0;
+	if(dma == 1)
+		daq_mem2_base = new uint16_t[buffersize];
+
+	if (daq_mem_base == 0 || daq_mem2_base == 0) return 0;
 	daq_mem_size = buffersize;
 
 	// select DMA
@@ -1024,6 +1049,11 @@ uint32_t CTestboard::Daq_Open(uint32_t buffersize, uint8_t dma)
 	// set DMA to allocated memory
 	DAQ_WRITE(DAQ_MEM_BASE, (unsigned long)daq_mem_base, daq_dma_base);
 	DAQ_WRITE(DAQ_MEM_SIZE, (unsigned long)daq_mem_size, daq_dma_base);
+	if(dma == 1)
+	{
+		DAQ_WRITE(DAQ_MEM_BASE, (unsigned long)daq_mem2_base, DAQ_DMA_2_BASE);
+		DAQ_WRITE(DAQ_MEM_SIZE, (unsigned long)daq_mem_size, DAQ_DMA_2_BASE);
+	}
 
 	return daq_mem_size;
 }
@@ -1036,7 +1066,10 @@ void CTestboard::Daq_Close()
 		IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, 0); // FIFO reset
 		uDelay(1);
 		delete[] daq_mem_base;
+		if (daq_mem2_base)
+			delete[] daq_mem2_base;
 		daq_mem_base = 0;
+		daq_mem2_base = 0;
 	}
 }
 
@@ -1046,6 +1079,8 @@ void CTestboard::Daq_Start()
 	{
 		// clear buffer and enable daq
 		DAQ_WRITE(DAQ_CONTROL, 1, daq_dma_base);
+		if(daq_dma_base != DAQ_DMA_0_BASE)
+			DAQ_WRITE(DAQ_CONTROL, 1, DAQ_DMA_2_BASE);
 
 		// switch on data sources
 //		IOWR_ALTERA_AVALON_PIO_DATA(ADC_BASE, daq_adc_state);
@@ -1064,18 +1099,31 @@ void CTestboard::Daq_Stop()
 
 		// stop daq
 		DAQ_WRITE(DAQ_CONTROL, 0, daq_dma_base);
+		if(daq_dma_base != DAQ_DMA_0_BASE)
+			DAQ_WRITE(DAQ_CONTROL,0,DAQ_DMA_2_BASE);
 	}
 }
 
 
-uint32_t CTestboard::Daq_GetSize()
+uint32_t CTestboard::Daq_GetSize(uint8_t channel)
 {
 	if (daq_mem_base == 0) return 0;
 
+	uint32_t daq_dma;
+
+	if (channel == 0 || daq_dma_base == DAQ_DMA_0_BASE )
+	{
+		daq_dma = daq_dma_base;
+	}
+	else
+	{
+		daq_dma = DAQ_DMA_2_BASE;
+	}
+
 	// read dma status
-	int32_t status = DAQ_READ(DAQ_CONTROL, daq_dma_base);
-	int32_t rp = DAQ_READ(DAQ_MEM_READ, daq_dma_base);
-	int32_t wp = DAQ_READ(DAQ_MEM_WRITE, daq_dma_base);
+	int32_t status = DAQ_READ(DAQ_CONTROL, daq_dma);
+	int32_t rp = DAQ_READ(DAQ_MEM_READ, daq_dma);
+	int32_t wp = DAQ_READ(DAQ_MEM_WRITE, daq_dma);
 
 	// correct write pointer overrun at memory overflow
 	if (status & DAQ_MEM_OVFL) if (--wp < 0) wp += daq_mem_size;
@@ -1095,14 +1143,37 @@ uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
 		 uint16_t blocksize)
 {
 	uint32_t availsize;
-	return Daq_Read(data, blocksize, availsize);
+	return Daq_Read(data, 0, blocksize, availsize);
+}
+uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
+		 uint8_t channel, uint16_t blocksize)
+{
+	uint32_t availsize;
+	return Daq_Read(data, channel, blocksize, availsize);
 }
 
+uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
+	   uint16_t blocksize, uint32_t &availsize)
+{
+	return Daq_Read(data, 0 ,blocksize, availsize);
+}
 
 uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
-		uint16_t blocksize, uint32_t &availsize)
+		uint8_t channel, uint16_t blocksize, uint32_t &availsize)
 {
 	data.clear();
+
+	uint32_t daq_dma;
+
+	if(daq_dma_base == DAQ_DMA_0_BASE || channel == 0)
+	{
+		daq_dma = daq_dma_base;
+	}
+	else
+	{
+		daq_dma = DAQ_DMA_2_BASE;
+	}
+
 
 	if (daq_mem_base == 0) { availsize = 0; return 0; }
 
@@ -1111,9 +1182,9 @@ uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
 	if (blocksize > daq_mem_size) blocksize = daq_mem_size;
 
 	// read dma status
-	int32_t status = DAQ_READ(DAQ_CONTROL, daq_dma_base);
-	int32_t rp = DAQ_READ(DAQ_MEM_READ, daq_dma_base);
-	int32_t wp = DAQ_READ(DAQ_MEM_WRITE, daq_dma_base);
+	int32_t status = DAQ_READ(DAQ_CONTROL, daq_dma);
+	int32_t rp = DAQ_READ(DAQ_MEM_READ, daq_dma);
+	int32_t wp = DAQ_READ(DAQ_MEM_WRITE, daq_dma);
 
 	// correct write pointer overrun at memory overflow
 	if (status & DAQ_MEM_OVFL) if (--wp < 0) wp += daq_mem_size;
@@ -1137,21 +1208,21 @@ uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
 	if (size1 > blocksize) size1 = blocksize;
 
 	// copy data to vector
-	uint16_t *p = Uncache(daq_mem_base) + rp;
+	uint16_t *p = Uncache(channel?daq_mem2_base:daq_mem_base) + rp;
 	data.insert(data.end(), p, p + size1);
 	blocksize -= size1;
 
 	// --- send 2ns part of the data block
 	if (blocksize > 0)
 	{
-		p = Uncache(daq_mem_base);
+		p = Uncache(channel?daq_mem2_base:daq_mem_base);
 		data.insert(data.end(), p, p + blocksize);
 		rp = blocksize;
 	}
 	else rp += size1;
 
 	// update read pointer
-	DAQ_WRITE(DAQ_MEM_READ, rp, daq_dma_base);
+	DAQ_WRITE(DAQ_MEM_READ, rp, daq_dma);
 
 	return uint8_t(status);
 }
@@ -1210,5 +1281,22 @@ void CTestboard::Daq_Select_Deser160(uint8_t shift)
 	// enable deser160
 	daq_select_deser160 = true;
 	IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, (shift & 0x7) | 0x8);
+}
+
+/* Ethernet Testing */
+
+void CTestboard::Ethernet_Send(string &message){
+	printf("I need to get rid of some packets!\n");
+	ethernet.Write(message.c_str(),message.length());
+	ethernet.Flush();
+}
+uint32_t CTestboard::Ethernet_RecvPackets(){
+	printf("I'm getting a packet, stand by,\n");
+	char buffer[30];
+	while(!ethernet.RxEmpty()){
+		ethernet.Read(buffer,30);
+		printf(buffer);
+	}
+	return 0;
 }
 

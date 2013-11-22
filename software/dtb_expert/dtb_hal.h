@@ -14,6 +14,8 @@
 
 inline void _SetLED(unsigned int value)
 { IOWR_ALTERA_AVALON_PIO_DATA(LED_BASE, value); }
+inline unsigned int _GetLED()
+{ IORD_ALTERA_AVALON_PIO_DATA(LED_BASE); }
 
 
 #define MAINCTRL_CLK_EXT  0x01
@@ -139,6 +141,7 @@ public:
 	bool Write(const void *buffer, unsigned int size);
 	void Flush();
 	bool Read(void *buffer, unsigned int size);
+	bool IsOpen();
 };
 
 

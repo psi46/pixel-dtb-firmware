@@ -16,7 +16,7 @@ module deser400
 	
 	output [15:0]data_a,
 	output [15:0]data_b,
-	output [3:0]test
+	output [9:0]test
 );
 
 	wire ser_data_a;
