@@ -5,7 +5,8 @@
 #include "dtb_hal.h"
 #include "rpc.h"
 #include "FlashMemory.h"
-
+#include <stdlib.h>
+#include <time.h>
 
 // size of module
 #define MOD_NUMROCS  16
@@ -316,21 +317,32 @@ public:
 	RPC_EXPORT void roc_Chip_Mask();
 
 	// --- TBM
+	RPC_EXPORT bool TBM_Present();
 
-//	RPC_EXPORT bool TBMPresent();
+	RPC_EXPORT void tbm_Enable(bool on);
 
-//	RPC_EXPORT void tbm_Enable(bool on);
+	RPC_EXPORT void tbm_Addr(uint8_t hub, uint8_t port);
 
-//	RPC_EXPORT void tbm_Addr(unsigned char hub, unsigned char port);
+	RPC_EXPORT void mod_Addr(uint8_t hub);
 
-//	RPC_EXPORT void mod_Addr(unsigned char hub);
+	RPC_EXPORT void tbm_Set(uint8_t reg, uint8_t value);
 
-//	RPC_EXPORT void tbm_Set(unsigned char reg, unsigned char value);
+	RPC_EXPORT bool tbm_Get(uint8_t reg, uint8_t &value);
 
-//	RPC_EXPORT bool tbm_Get(unsigned char reg, unsigned char &value);
+	RPC_EXPORT bool tbm_GetRaw(uint8_t reg, uint32_t &value);
 
-//	RPC_EXPORT bool tbm_GetRaw(unsigned char reg, long &value);
-
+	int16_t DecodePixel(vector<uint16_t> &data, int16_t &pos, int16_t &n, int16_t &ph, int16_t &col, int16_t &row);
+	RPC_EXPORT int32_t CountReadouts(int32_t nTriggers);
+	RPC_EXPORT int32_t CountReadouts(int32_t nTriggers, int32_t chipId);
+	RPC_EXPORT int32_t CountReadouts(int32_t nTriggers, int32_t dacReg, int32_t dacValue);
+	//RPC_EXPORT uint8_t DacDac_dtb(vectorR<uint16_t> &res, int32_t dac1, int32_t dacRange1, int32_t dac2, int32_t dacRange2, int32_t nTrig);
+	RPC_EXPORT int32_t PH(int32_t col, int32_t row, int32_t trim, int16_t nTriggers);
+	//int32_t ThresholdBinary(int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t dacMin, int32_t dacMax, bool reverseMode);
+	int32_t Threshold(int32_t start, int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg);
+	//bool FindReadout(int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t &dacMin, int32_t &dacMax, bool reverseMode);
+	RPC_EXPORT int32_t PixelThreshold(int32_t col, int32_t row, int32_t start, int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t xtalk, int32_t cals, int32_t trim);
+	RPC_EXPORT bool test_pixel_address(int32_t col, int32_t row);
+	//RPC_EXPORT int32_t ChipEfficiency(int16_t nTriggers, vectorR<uint8_t> &res);
 
 	// Wafer test functions
 	RPC_EXPORT bool testColPixel(uint8_t col, uint8_t trimbit, vectorR<uint8_t> &res);
