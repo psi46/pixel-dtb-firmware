@@ -396,6 +396,8 @@ void CTestboard::Init()
 	ia = uA100_to_DAC(3000); // *100 uA
 	InitDac();
 	Poff();
+
+	roc_pixeladdress_inverted = false;
 }
 
 
@@ -1396,14 +1398,29 @@ int16_t CTestboard::DecodePixel(vector<uint16_t> &data, int16_t &pos, int16_t &n
 	raw >>= 9;
 	int c =    (raw >> 12) & 7;
 	c = c*6 + ((raw >>  9) & 7);
-	int r =    (raw >>  6) & 7;
-	r = r*6 + ((raw >>  3) & 7);
-	r = r*6 + ( raw        & 7);
-	row = 80 - r/2;
 
+	int r2 =   (raw >> 6) & 7;
+	if(roc_pixeladdress_inverted) r2 ^= 0x7;
+
+	int r1 =   (raw >> 3) & 7;
+	if(roc_pixeladdress_inverted) r1 ^= 0x7;
+
+	int r0 =   (raw) & 7;
+	if(roc_pixeladdress_inverted) r0 ^= 0x7;
+
+	int r = r2*36 + r1*6 + r0;
+	row = 80 - r/2;
 	col = 2*c + (r&1);
 
 	return 1;
+}
+
+bool CTestboard::GetPixelAddressInverted() {
+	return roc_pixeladdress_inverted;
+}
+
+void CTestboard::SetPixelAddressInverted(bool status) {
+	roc_pixeladdress_inverted = status;
 }
 
 int32_t CTestboard::CountReadouts(int32_t nTriggers)

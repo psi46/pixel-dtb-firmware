@@ -80,6 +80,8 @@ class CTestboard
 	uint8_t sig_level_tin;
 	uint8_t sig_offset;
 
+	bool roc_pixeladdress_inverted;
+
 	unsigned char ChipId;
 	bool TBM_present;
 	bool MOD_present;
@@ -332,6 +334,11 @@ public:
 	RPC_EXPORT bool tbm_GetRaw(uint8_t reg, uint32_t &value);
 
 	int16_t DecodePixel(vector<uint16_t> &data, int16_t &pos, int16_t &n, int16_t &ph, int16_t &col, int16_t &row);
+
+	RPC_EXPORT bool GetPixelAddressInverted();
+
+	RPC_EXPORT void SetPixelAddressInverted(bool status);
+
 	RPC_EXPORT int32_t CountReadouts(int32_t nTriggers);
 	RPC_EXPORT int32_t CountReadouts(int32_t nTriggers, int32_t chipId);
 	RPC_EXPORT int32_t CountReadouts(int32_t nTriggers, int32_t dacReg, int32_t dacValue);

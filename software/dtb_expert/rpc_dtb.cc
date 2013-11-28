@@ -758,12 +758,31 @@ bool rpc__tbm_GetRaw$bC0I(CRpcIo &rpc_io, rpcMessage &msg)
 	return true;
 }
 
+bool rpc__GetPixelAddressInverted$b(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(0)) return false;
+	bool rpc_par0 = tb.GetPixelAddressInverted();
+	msg.Create(80);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.Send(rpc_io)) return false;
+	rpc_io.Flush();
+	return true;
+}
+
+bool rpc__SetPixelAddressInverted$vb(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(1)) return false;
+	bool rpc_par1 = msg.Get_BOOL();
+	tb.SetPixelAddressInverted(rpc_par1);
+	return true;
+}
+
 bool rpc__CountReadouts$ii(CRpcIo &rpc_io, rpcMessage &msg)
 {
 	if (!msg.CheckSize(4)) return false;
 	int32_t rpc_par1 = msg.Get_INT32();
 	int32_t rpc_par0 = tb.CountReadouts(rpc_par1);
-	msg.Create(80);
+	msg.Create(82);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -776,7 +795,7 @@ bool rpc__CountReadouts$iii(CRpcIo &rpc_io, rpcMessage &msg)
 	int32_t rpc_par1 = msg.Get_INT32();
 	int32_t rpc_par2 = msg.Get_INT32();
 	int32_t rpc_par0 = tb.CountReadouts(rpc_par1,rpc_par2);
-	msg.Create(81);
+	msg.Create(83);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -790,7 +809,7 @@ bool rpc__CountReadouts$iiii(CRpcIo &rpc_io, rpcMessage &msg)
 	int32_t rpc_par2 = msg.Get_INT32();
 	int32_t rpc_par3 = msg.Get_INT32();
 	int32_t rpc_par0 = tb.CountReadouts(rpc_par1,rpc_par2,rpc_par3);
-	msg.Create(82);
+	msg.Create(84);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -805,7 +824,7 @@ bool rpc__PH$iiiis(CRpcIo &rpc_io, rpcMessage &msg)
 	int32_t rpc_par3 = msg.Get_INT32();
 	int16_t rpc_par4 = msg.Get_INT16();
 	int32_t rpc_par0 = tb.PH(rpc_par1,rpc_par2,rpc_par3,rpc_par4);
-	msg.Create(83);
+	msg.Create(85);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -826,7 +845,7 @@ bool rpc__PixelThreshold$iiiiiiiiiii(CRpcIo &rpc_io, rpcMessage &msg)
 	int32_t rpc_par9 = msg.Get_INT32();
 	int32_t rpc_par10 = msg.Get_INT32();
 	int32_t rpc_par0 = tb.PixelThreshold(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9,rpc_par10);
-	msg.Create(84);
+	msg.Create(86);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -839,7 +858,7 @@ bool rpc__test_pixel_address$bii(CRpcIo &rpc_io, rpcMessage &msg)
 	int32_t rpc_par1 = msg.Get_INT32();
 	int32_t rpc_par2 = msg.Get_INT32();
 	bool rpc_par0 = tb.test_pixel_address(rpc_par1,rpc_par2);
-	msg.Create(85);
+	msg.Create(87);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -853,7 +872,7 @@ bool rpc__testColPixel$bCC2C(CRpcIo &rpc_io, rpcMessage &msg)
 	uint8_t rpc_par2 = msg.Get_UINT8();
 	vectorR<uint8_t> rpc_par3;
 	bool rpc_par0 = tb.testColPixel(rpc_par1,rpc_par2,rpc_par3);
-	msg.Create(86);
+	msg.Create(88);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	if (!rpc_Send(rpc_io, rpc_par3)) return false;
@@ -873,14 +892,14 @@ bool rpc__Ethernet_RecvPackets$I(CRpcIo &rpc_io, rpcMessage &msg)
 {
 	if (!msg.CheckSize(0)) return false;
 	uint32_t rpc_par0 = tb.Ethernet_RecvPackets();
-	msg.Create(88);
+	msg.Create(90);
 	msg.Put_UINT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
 	return true;
 }
 
-const uint16_t rpc_cmdListSize = 89;
+const uint16_t rpc_cmdListSize = 91;
 
 const CRpcCall rpc_cmdlist[] =
 {
@@ -964,15 +983,17 @@ const CRpcCall rpc_cmdlist[] =
 	/*    77 */ { rpc__tbm_Set$vCC, "tbm_Set$vCC" },
 	/*    78 */ { rpc__tbm_Get$bC0C, "tbm_Get$bC0C" },
 	/*    79 */ { rpc__tbm_GetRaw$bC0I, "tbm_GetRaw$bC0I" },
-	/*    80 */ { rpc__CountReadouts$ii, "CountReadouts$ii" },
-	/*    81 */ { rpc__CountReadouts$iii, "CountReadouts$iii" },
-	/*    82 */ { rpc__CountReadouts$iiii, "CountReadouts$iiii" },
-	/*    83 */ { rpc__PH$iiiis, "PH$iiiis" },
-	/*    84 */ { rpc__PixelThreshold$iiiiiiiiiii, "PixelThreshold$iiiiiiiiiii" },
-	/*    85 */ { rpc__test_pixel_address$bii, "test_pixel_address$bii" },
-	/*    86 */ { rpc__testColPixel$bCC2C, "testColPixel$bCC2C" },
-	/*    87 */ { rpc__Ethernet_Send$v3c, "Ethernet_Send$v3c" },
-	/*    88 */ { rpc__Ethernet_RecvPackets$I, "Ethernet_RecvPackets$I" }
+	/*    80 */ { rpc__GetPixelAddressInverted$b, "GetPixelAddressInverted$b" },
+	/*    81 */ { rpc__SetPixelAddressInverted$vb, "SetPixelAddressInverted$vb" },
+	/*    82 */ { rpc__CountReadouts$ii, "CountReadouts$ii" },
+	/*    83 */ { rpc__CountReadouts$iii, "CountReadouts$iii" },
+	/*    84 */ { rpc__CountReadouts$iiii, "CountReadouts$iiii" },
+	/*    85 */ { rpc__PH$iiiis, "PH$iiiis" },
+	/*    86 */ { rpc__PixelThreshold$iiiiiiiiiii, "PixelThreshold$iiiiiiiiiii" },
+	/*    87 */ { rpc__test_pixel_address$bii, "test_pixel_address$bii" },
+	/*    88 */ { rpc__testColPixel$bCC2C, "testColPixel$bCC2C" },
+	/*    89 */ { rpc__Ethernet_Send$v3c, "Ethernet_Send$v3c" },
+	/*    90 */ { rpc__Ethernet_RecvPackets$I, "Ethernet_RecvPackets$I" }
 };
 
 void rpc_Dispatcher(CRpcIo &rpc_io)
@@ -982,7 +1003,7 @@ void rpc_Dispatcher(CRpcIo &rpc_io)
 	{
 		msg.Receive(rpc_io);
 		if (rpc_error.HasError()) continue;
-		if (msg.GetCmd() >= 89) continue;
+		if (msg.GetCmd() >= 91) continue;
 		rpc_cmdlist[msg.GetCmd()].call(rpc_io, msg);
 	}
 }
