@@ -117,9 +117,25 @@ applicable agreement for further details.
 )
 (pin
 	(output)
+	(rect 1592 264 1768 280)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "QOUT[7..0]" (rect 90 0 146 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
 	(rect 1592 192 1768 208)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "left" (rect 90 0 106 12)(font "Arial" ))
+	(text "sele" (rect 90 0 110 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -135,7 +151,7 @@ applicable agreement for further details.
 	(output)
 	(rect 1608 224 1784 240)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "right" (rect 90 0 111 12)(font "Arial" ))
+	(text "shifte" (rect 90 0 118 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -982,20 +998,12 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1488 568)
-	(pt 1488 632)
-)
-(connector
 	(pt 1488 632)
 	(pt 1512 632)
 )
 (connector
 	(pt 1184 352)
 	(pt 1184 648)
-)
-(connector
-	(pt 1184 648)
-	(pt 1512 648)
 )
 (connector
 	(pt 1576 640)
@@ -1039,15 +1047,7 @@ applicable agreement for further details.
 	(pt 1552 328)
 )
 (connector
-	(pt 1488 568)
-	(pt 1544 568)
-)
-(connector
 	(pt 1528 344)
-	(pt 1544 344)
-)
-(connector
-	(pt 1544 568)
 	(pt 1544 344)
 )
 (connector
@@ -1061,12 +1061,36 @@ applicable agreement for further details.
 	(pt 1336 360)
 )
 (connector
-	(text "left" (rect 1520 184 1536 196)(font "Arial" ))
+	(text "Q[7..0]" (rect 1520 256 1554 268)(font "Arial" ))
+	(pt 1592 272)
+	(pt 1512 272)
+	(bus)
+)
+(connector
+	(pt 1488 632)
+	(pt 1488 568)
+)
+(connector
+	(pt 1544 344)
+	(pt 1544 568)
+)
+(connector
+	(text "sele" (rect 1510 552 1530 564)(font "Arial" ))
+	(pt 1488 568)
+	(pt 1544 568)
+)
+(connector
+	(text "shifte" (rect 1249 632 1277 644)(font "Arial" ))
+	(pt 1184 648)
+	(pt 1512 648)
+)
+(connector
+	(text "sele" (rect 1520 184 1540 196)(font "Arial" ))
 	(pt 1592 200)
 	(pt 1512 200)
 )
 (connector
-	(text "right" (rect 1520 216 1541 228)(font "Arial" ))
+	(text "shifte" (rect 1520 216 1548 228)(font "Arial" ))
 	(pt 1608 232)
 	(pt 1512 232)
 )

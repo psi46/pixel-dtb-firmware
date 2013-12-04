@@ -14,8 +14,9 @@ module deser400_serpar
 	
 	output reg [15:0] par_a,
 	output reg [15:0] par_b,
-	output reg write,
-	output reg [3:0] test
+	output reg write_a,
+	output reg write_b,
+	output reg [9:0] test
 );
 
 // data shift register
@@ -70,13 +71,18 @@ begin
 	
 always @(posedge clk160 or posedge reset)
 begin
+
+	test[0] <= ser_a;
+	test[1] <= ser_b;
+
 	if (reset)
 		begin
 				par_a <= 0;
 				par_b <= 0;
 		end
 		else
-			if (run && (state == 15))
+			//if (run && (state == 15))
+			if (state == 15)
 			begin
 				par_a <= d_a;
 				par_b <= d_b;
@@ -85,8 +91,16 @@ end
 
 always @(posedge clk160 or posedge reset)
 begin
-   if (reset ) write <= 0;
-   else write <= (state == 0) & run & (par_a != 65535) & (par_b != 65535) ; // Supress IDLE
+   if (reset ) 
+	begin	
+		write_a <= 0;
+		write_b <= 0;
+	end		
+		else 
+		begin
+			write_a <= (state == 0) & run & (par_a != 16'b1111111111111111);
+			write_b <= (state == 0) & run & (par_b != 65535) ; // Supress IDLE
+		end
 end
 
 endmodule

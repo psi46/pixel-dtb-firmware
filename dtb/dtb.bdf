@@ -5108,15 +5108,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt -760 2792)
-	(pt -856 2792)
-	(bus)
-)
-(connector
-	(pt -728 2808)
-	(pt -856 2808)
-)
-(connector
 	(pt -800 2760)
 	(pt -856 2760)
 	(bus)
@@ -5272,16 +5263,8 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt -728 2952)
-	(pt -584 2952)
-)
-(connector
 	(pt -728 2624)
 	(pt -728 2808)
-)
-(connector
-	(pt -728 2808)
-	(pt -728 2952)
 )
 (connector
 	(text "<<__$DEF_ALIAS480>>" (rect -446 3096 -328 3108)(font "Arial" )(invisible))
@@ -5323,11 +5306,6 @@ applicable agreement for further details.
 	(pt -1328 2776)
 )
 (connector
-	(text "trig" (rect -1200 2760 -1185 2772)(font "Arial" ))
-	(pt -1328 2776)
-	(pt -1112 2776)
-)
-(connector
 	(pt -1480 2696)
 	(pt -1272 2696)
 )
@@ -5341,7 +5319,6 @@ applicable agreement for further details.
 	(pt -1616 2696)
 )
 (connector
-	(text "<<__$DEF_ALIAS288>>" (rect -846 3048 -728 3060)(font "Arial" )(invisible))
 	(pt -856 3064)
 	(pt -776 3064)
 	(bus)
@@ -5373,10 +5350,34 @@ applicable agreement for further details.
 	(pt -656 3224)
 )
 (connector
-	(text "sclk[5..0],test[9..0]" (rect -662 3056 -568 3068)(font "Arial" ))
+	(pt -760 2792)
+	(pt -856 2792)
+	(bus)
+)
+(connector
+	(text "daq1b_writedata[13..2],test[1],write1b,test[0],write1a" (rect -662 3056 -405 3068)(font "Arial" ))
 	(pt -416 3072)
 	(pt -688 3072)
 	(bus)
+)
+(connector
+	(text "<<__$DEF_ALIAS1447>>" (rect -1200 2760 -1077 2772)(font "Arial" )(invisible))
+	(pt -1328 2776)
+	(pt -1112 2776)
+)
+(connector
+	(pt -1328 2784)
+	(pt -1528 2784)
+)
+(connector
+	(text "test[0]" (rect -636 2936 -605 2948)(font "Arial" ))
+	(pt -728 2952)
+	(pt -584 2952)
+)
+(connector
+	(text "write1b" (rect -765 2792 -731 2804)(font "Arial" ))
+	(pt -728 2808)
+	(pt -856 2808)
 )
 (junction (pt -1208 744))
 (junction (pt -1200 80))
@@ -5394,5 +5395,4 @@ applicable agreement for further details.
 (junction (pt -624 2672))
 (junction (pt -816 2744))
 (junction (pt -800 2776))
-(junction (pt -728 2808))
 (junction (pt -1272 2696))

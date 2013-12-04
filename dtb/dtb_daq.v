@@ -148,7 +148,8 @@ module dtb_daq
 		.res(reset),
 		.run(daq1_running),
 		.input_data(sdata1),
-		.write(daq1a_write),
+		.write_a(daq1a_write),
+		.write_b(daq1b_write),
 		.data_a(daq1a_writedata),
 		.data_b(daq1b_writedata),
 		.test(test[9:0])
@@ -161,7 +162,8 @@ module dtb_daq
 		.res(reset),
 		.input_data(sdata2),
 		.run(daq2_running),
-		.write(daq1b_write),
+		.write_a(daq2a_write),
+		.write_b(daq2b_write),
 		.data_a(daq2a_writedata),
 		.data_b(daq2b_writedata),
 	);
@@ -173,7 +175,8 @@ module dtb_daq
 		.res(reset),
 		.run(daq3_running),
 		.input_data(sdata3),
-		.write(daq1_write),
+		.write_a(daq3a_write),
+		.write_b(daq3b_write),
 		.data_a(daq3a_writedata),
 		.data_b(daq3b_writedata),
 	);
@@ -185,7 +188,8 @@ module dtb_daq
 		.res(reset),
 		.run(daq4_running),
 		.input_data(sdata4),
-		.write(daq4_write),
+		.write_a(daq4a_write),
+		.write_b(daq4b_write),
 		.data_a(daq4a_writedata),
 		.data_b(daq4b_writedata),
 	);

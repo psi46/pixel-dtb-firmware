@@ -1436,18 +1436,8 @@ applicable agreement for further details.
 	(pt -3376 376)
 )
 (connector
-	(pt -3152 400)
-	(pt -3152 392)
-	(bus)
-)
-(connector
 	(pt -3112 400)
 	(pt -3152 400)
-	(bus)
-)
-(connector
-	(pt -3152 392)
-	(pt -3376 392)
 	(bus)
 )
 (connector
@@ -1947,6 +1937,16 @@ applicable agreement for further details.
 (connector
 	(pt -3328 768)
 	(pt -3304 768)
+	(bus)
+)
+(connector
+	(pt -3152 400)
+	(pt -3152 392)
+	(bus)
+)
+(connector
+	(pt -3376 392)
+	(pt -3152 392)
 	(bus)
 )
 (junction (pt -3080 176))

@@ -12,7 +12,8 @@ module deser400
 	
 	input input_data,
 
-	output write,
+	output write_a,
+	output write_b,
 	
 	output [15:0]data_a,
 	output [15:0]data_b,
@@ -31,8 +32,8 @@ module deser400
 		.input_data(input_data),
 		.data_a(ser_data_a),
 		.data_b(ser_data_b),
-		.clk_160(clk160), //output
-	  .test(test)
+		.clk_160(clk160) //output
+	  //.test(test)
 	);
 
 	deser400_serpar serpar
@@ -47,8 +48,9 @@ module deser400
 	
 		.par_a(data_a),
 		.par_b(data_b),
-		.write(write)
-		//.test(test[3:0])
+		.write_a(write_a),
+		.write_b(write_b),
+		.test(test[9:0])
 	);
 
 endmodule
