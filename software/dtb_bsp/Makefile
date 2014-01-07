@@ -101,7 +101,7 @@ ACDS_VERSION := 12.0sp2
 # BUILD_NUMBER: 263
 
 SETTINGS_FILE := settings.bsp
-SOPC_FILE := ../../dtb/dtb_system.sopcinfo
+SOPC_FILE := X:/source/FPGA/pixel-dtb-firmware/dtb/dtb_system.sopcinfo
 
 #-------------------------------------------------------------------------------
 #                             TOOL & COMMAND DEFINITIONS

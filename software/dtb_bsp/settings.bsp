@@ -2,11 +2,11 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Sep 9, 2013 7:51:14 AM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1378705874112</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>X:\source\FPGA\software\dtb_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>07.01.2014 09:15:51</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1389082551871</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>X:\source\FPGA\pixel-dtb-firmware\software\dtb_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
-        <SopcDesignFile>..\..\dtb\dtb_system.sopcinfo</SopcDesignFile>
+        <SopcDesignFile>X:\source\FPGA\pixel-dtb-firmware\dtb\dtb_system.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>cpu</Cpu>
         <SchemaVersion>1.9</SchemaVersion>
@@ -38,7 +38,7 @@
                 <SettingName>hal.max_file_descriptors</SettingName>
                 <Identifier>ALT_MAX_FD</Identifier>
                 <Type>DecimalNumber</Type>
-                <Value>32</Value>
+                <Value>8</Value>
                 <DefaultValue>32</DefaultValue>
                 <DestinationFile>system_h_define</DestinationFile>
                 <Description>Determines the number of file descriptors statically allocated. This setting defines the value of ALT_MAX_FD in system.h.</Description>
@@ -899,15 +899,45 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>main_control</slaveDescriptor>
-                <addressRange>0x08100000 - 0x0810000F</addressRange>
-                <addressSpan>16</addressSpan>
+                <slaveDescriptor>daq_dma_1</slaveDescriptor>
+                <addressRange>0x08002080 - 0x0800209F</addressRange>
+                <addressSpan>32</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>main_status</slaveDescriptor>
-                <addressRange>0x08100010 - 0x0810001F</addressRange>
-                <addressSpan>16</addressSpan>
+                <slaveDescriptor>daq_dma_2</slaveDescriptor>
+                <addressRange>0x080020C0 - 0x080020DF</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_3</slaveDescriptor>
+                <addressRange>0x08002100 - 0x0800211F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_4</slaveDescriptor>
+                <addressRange>0x08002140 - 0x0800215F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_5</slaveDescriptor>
+                <addressRange>0x08002180 - 0x0800219F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_6</slaveDescriptor>
+                <addressRange>0x080021C0 - 0x080021DF</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_7</slaveDescriptor>
+                <addressRange>0x08002200 - 0x0800221F</addressRange>
+                <addressSpan>32</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
@@ -949,6 +979,18 @@
         <MemoryMap>
                 <slaveDescriptor>SDC_SPI2</slaveDescriptor>
                 <addressRange>0x08100080 - 0x0810008F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>main_control</slaveDescriptor>
+                <addressRange>0x081000A0 - 0x081000AF</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>main_status</slaveDescriptor>
+                <addressRange>0x081000B0 - 0x081000BF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
@@ -1019,6 +1061,12 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>deser400</slaveDescriptor>
+                <addressRange>0x081080A0 - 0x081080AF</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>patterngen_data</slaveDescriptor>
                 <addressRange>0x08108200 - 0x081083FF</addressRange>
                 <addressSpan>512</addressSpan>
@@ -1044,8 +1092,8 @@
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>descriptor_memory</slaveDescriptor>
-                <addressRange>0x08402000 - 0x084023FF</addressRange>
-                <addressSpan>1024</addressSpan>
+                <addressRange>0x08402000 - 0x084020FF</addressRange>
+                <addressSpan>256</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <LinkerSection>

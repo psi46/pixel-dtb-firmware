@@ -45,18 +45,9 @@
 
 #include <stdarg.h>
 
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 int alt_getchar();
 int alt_putchar(int c);
 int alt_putstr(const char* str);
 void alt_printf(const char *fmt, ...);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __ALT_STDIO_H__ */

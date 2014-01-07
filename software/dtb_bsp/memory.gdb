@@ -1,9 +1,9 @@
 # memory.gdb - GDB memory region definitions
 #
 # Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
-# SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
+# SOPC Builder design path: X:/source/FPGA/pixel-dtb-firmware/dtb/dtb_system.sopcinfo
 #
-# Generated: Sat Apr 20 23:53:37 CEST 2013
+# Generated: Tue Jan 07 09:15:52 CET 2014
 
 # DO NOT MODIFY THIS FILE
 #
@@ -53,4 +53,4 @@ memory 0x0 0x8000000 cache
 memory 0x8000000 0x8000800 cache
 
 # descriptor_memory
-memory 0x8402000 0x8402400 cache
+memory 0x8402000 0x8402100 cache

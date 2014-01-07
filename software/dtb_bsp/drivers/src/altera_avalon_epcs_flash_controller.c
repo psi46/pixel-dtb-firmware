@@ -90,10 +90,7 @@ static int alt_epcs_flash_query(alt_flash_epcs_dev* flash)
    * reset the device, or whatever, to ensure that
    * it's in a known working state.
   */
-  
-  /* Disable 4-bytes address mode. */
-  flash->four_bytes_mode = 0;
-  
+
   /* Send the RES command sequence */
   flash->silicon_id =
     epcs_read_electronic_signature(flash->register_base);
@@ -137,47 +134,18 @@ static int alt_epcs_flash_query(alt_flash_epcs_dev* flash)
      */
     flash->silicon_id = epcs_read_device_id(flash->register_base);
     
-    /*
-     * Last byte is the density ID. Note the difference between
-     * EPCS128 and EPCQ128 -- arranged differently, though the 
-     * least significant byte of each is '0x18'.
-     */
-    if((flash->silicon_id & 0xFFFFFF) == 0x20BA18) /* EPCQ128 */
-    {
-      flash->dev.region_info[0].region_size = 128 * 1024 * 1024 / 8;
-      flash->dev.region_info[0].number_of_blocks = 256; /* number of sectors */
-      flash->dev.region_info[0].block_size = 65536;  /* sector size */
-    }
-    else if((flash->silicon_id & 0xFF) == 0x18) /* EPCS128 */
+    if(flash->silicon_id == 0x18) /* EPCS128 */
     {
       flash->dev.region_info[0].region_size = 128 * 1024 * 1024 / 8;
       flash->dev.region_info[0].number_of_blocks = 64;
-      flash->dev.region_info[0].block_size = 262144;
-    }
-    else if((flash->silicon_id & 0xFF ) == 0x19) /* EPCQ256 */
-    {
-      flash->dev.region_info[0].region_size = 256 * 1024 * 1024 / 8;
-      flash->dev.region_info[0].number_of_blocks = 512; /* number of sectors */
-      flash->dev.region_info[0].block_size = 65536;  /* sector size */
-
-      /* Enable 4-bytes address mode if the device density is greater than 256Mbit. 
-       * Last byte of device ID is density ID.
-       *
-       * The whole 4-bytes thing extends commands that send a memory address to
-       * the chip (read, write, erase) from 3 bytes to 4. The 4-byte address mode
-       * must first be programmed into the device, though. To complicate things, 
-       * other Altera IP expects the chip to be in 3 byte address mode when they 
-       * start using it. To be nice, we'll place the device into 4-byte address mode
-       * when we need to, and take it back out when we're done.
-       */
-      flash->four_bytes_mode = 1;
+      flash->dev.region_info[0].block_size = 262144;     
     }
     else 
     {
       ret_code = -ENODEV; /* No known device found! */
     }
   }
-  
+
   flash->size_in_bytes = flash->dev.region_info[0].region_size;
   flash->dev.number_of_regions = 1;
   flash->dev.region_info[0].offset = 0;
@@ -390,10 +358,13 @@ int alt_epcs_flash_erase_block(alt_flash_dev* flash_info, int block_offset)
 
   if (ret_code >= 0)
   {
+    /* Execute a WREN instruction */
+    epcs_write_enable(f->register_base);
+
     /* Send the Sector Erase command, whose 3 address bytes are anywhere
      * within the chosen sector.
      */
-    epcs_sector_erase(f->register_base, block_offset, f->four_bytes_mode);
+    epcs_sector_erase(f->register_base, block_offset);
   }
   return ret_code;
 }
@@ -428,8 +399,7 @@ int alt_epcs_flash_write_block(alt_flash_dev* flash_info, int block_offset,
       int next_page_start = (data_offset + f->page_size) & ~(f->page_size - 1);
       length_of_current_write = MIN(length, next_page_start - data_offset);
 
-      epcs_write_buffer(f->register_base, data_offset, &((const alt_u8*)data)[buffer_offset], length_of_current_write,
-          f->four_bytes_mode);
+      epcs_write_buffer(f->register_base, data_offset, &((const alt_u8*)data)[buffer_offset], length_of_current_write);
 
       length -= length_of_current_write;
       buffer_offset += length_of_current_write;
@@ -455,8 +425,7 @@ int alt_epcs_flash_read(alt_flash_dev* flash_info, int offset,
 
   if (ret_code >= 0)
   {
-    ret_code = epcs_read_buffer(f->register_base, offset, dest_addr, length,
-                                f->four_bytes_mode);
+    ret_code = epcs_read_buffer(f->register_base, offset, dest_addr, length);
 
     /* epcs_read_buffer returns the number of buffers read, but
      * alt_epcs_flash_read returns 0 on success, <0 on failure.

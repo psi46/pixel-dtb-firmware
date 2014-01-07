@@ -16,13 +16,13 @@ inline void _SetLED(unsigned int value)
 { IOWR_ALTERA_AVALON_PIO_DATA(LED_BASE, value); }
 
 
-#define MAINCTRL_CLK_EXT  0x01
-#define MAINCTRL_PWR_ON   0x02
-#define MAINCTRL_HV_ON    0x04
-#define MAINCTRL_DUT_nRES 0x08
-#define MAINCTRL_TERM     0x10
-#define MAINCTRL_ADCENA   0x20
-
+#define MAINCTRL_CLK_EXT   0x01
+#define MAINCTRL_PWR_ON    0x02
+#define MAINCTRL_HV_ON     0x04
+#define MAINCTRL_DUT_nRES  0x08
+#define MAINCTRL_TERM      0x10
+#define MAINCTRL_ADCENA    0x20
+#define MAINCTRL_PLL_RESET 0x40
 
 inline void _MainControl(unsigned int value)
 { IOWR_ALTERA_AVALON_PIO_DATA(MAIN_CONTROL_BASE, value); }
@@ -51,6 +51,17 @@ inline unsigned short ADC_READ(short reg)
 
 // === DAQ ==================================================================
 
+#define DESER400_RESET      0x01
+#define DESER400_REG_RESET  0x02
+#define DESER400_SEL_MOD0   0x04
+
+inline void _Deser400_Control(unsigned int value)
+{ IOWR_ALTERA_AVALON_PIO_DATA(DESER400_BASE, value); }
+
+
+
+extern const unsigned int DAQ_DMA_BASE[8];
+
 // -- daq dma register
 #define DAQ_MEM_BASE   0
 #define DAQ_MEM_SIZE   4
@@ -64,11 +75,11 @@ inline unsigned short ADC_READ(short reg)
 #define DAQ_MEM_OVFL  2
 #define DAQ_FIFO_OVFL 4
 
-inline void DAQ_WRITE(short reg, unsigned long value)
-{IOWR_32DIRECT(DAQ_DMA_0_BASE, reg, value); }
+inline void DAQ_WRITE(unsigned int daq_base, short reg, unsigned long value)
+{IOWR_32DIRECT(daq_base, reg, value); }
 
-inline unsigned long DAQ_READ(short reg)
-{ return IORD_32DIRECT(DAQ_DMA_0_BASE, reg); }
+inline unsigned long DAQ_READ(unsigned int daq_base, short reg)
+{ return IORD_32DIRECT(daq_base, reg); }
 
 
 

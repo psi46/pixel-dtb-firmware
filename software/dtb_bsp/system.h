@@ -2,9 +2,9 @@
  * system.h - SOPC Builder system and BSP software package information
  *
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
- * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
+ * SOPC Builder design path: X:/source/FPGA/pixel-dtb-firmware/dtb/dtb_system.sopcinfo
  *
- * Generated: Thu Jul 11 00:06:20 CEST 2013
+ * Generated: Tue Jan 07 09:15:52 CET 2014
  */
 
 /*
@@ -367,6 +367,104 @@
 
 
 /*
+ * daq_dma_1 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_daq_dma_1 daq_dma
+#define DAQ_DMA_1_BASE 0x8002080
+#define DAQ_DMA_1_IRQ -1
+#define DAQ_DMA_1_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define DAQ_DMA_1_NAME "/dev/daq_dma_1"
+#define DAQ_DMA_1_SPAN 32
+#define DAQ_DMA_1_TYPE "daq_dma"
+
+
+/*
+ * daq_dma_2 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_daq_dma_2 daq_dma
+#define DAQ_DMA_2_BASE 0x80020c0
+#define DAQ_DMA_2_IRQ -1
+#define DAQ_DMA_2_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define DAQ_DMA_2_NAME "/dev/daq_dma_2"
+#define DAQ_DMA_2_SPAN 32
+#define DAQ_DMA_2_TYPE "daq_dma"
+
+
+/*
+ * daq_dma_3 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_daq_dma_3 daq_dma
+#define DAQ_DMA_3_BASE 0x8002100
+#define DAQ_DMA_3_IRQ -1
+#define DAQ_DMA_3_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define DAQ_DMA_3_NAME "/dev/daq_dma_3"
+#define DAQ_DMA_3_SPAN 32
+#define DAQ_DMA_3_TYPE "daq_dma"
+
+
+/*
+ * daq_dma_4 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_daq_dma_4 daq_dma
+#define DAQ_DMA_4_BASE 0x8002140
+#define DAQ_DMA_4_IRQ -1
+#define DAQ_DMA_4_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define DAQ_DMA_4_NAME "/dev/daq_dma_4"
+#define DAQ_DMA_4_SPAN 32
+#define DAQ_DMA_4_TYPE "daq_dma"
+
+
+/*
+ * daq_dma_5 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_daq_dma_5 daq_dma
+#define DAQ_DMA_5_BASE 0x8002180
+#define DAQ_DMA_5_IRQ -1
+#define DAQ_DMA_5_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define DAQ_DMA_5_NAME "/dev/daq_dma_5"
+#define DAQ_DMA_5_SPAN 32
+#define DAQ_DMA_5_TYPE "daq_dma"
+
+
+/*
+ * daq_dma_6 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_daq_dma_6 daq_dma
+#define DAQ_DMA_6_BASE 0x80021c0
+#define DAQ_DMA_6_IRQ -1
+#define DAQ_DMA_6_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define DAQ_DMA_6_NAME "/dev/daq_dma_6"
+#define DAQ_DMA_6_SPAN 32
+#define DAQ_DMA_6_TYPE "daq_dma"
+
+
+/*
+ * daq_dma_7 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_daq_dma_7 daq_dma
+#define DAQ_DMA_7_BASE 0x8002200
+#define DAQ_DMA_7_IRQ -1
+#define DAQ_DMA_7_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define DAQ_DMA_7_NAME "/dev/daq_dma_7"
+#define DAQ_DMA_7_SPAN 32
+#define DAQ_DMA_7_TYPE "daq_dma"
+
+
+/*
  * delay_clk configuration
  *
  */
@@ -445,8 +543,8 @@
 #define DESCRIPTOR_MEMORY_READ_DURING_WRITE_MODE "DONT_CARE"
 #define DESCRIPTOR_MEMORY_SINGLE_CLOCK_OP 0
 #define DESCRIPTOR_MEMORY_SIZE_MULTIPLE 1
-#define DESCRIPTOR_MEMORY_SIZE_VALUE 1024u
-#define DESCRIPTOR_MEMORY_SPAN 1024
+#define DESCRIPTOR_MEMORY_SIZE_VALUE 256u
+#define DESCRIPTOR_MEMORY_SPAN 256
 #define DESCRIPTOR_MEMORY_TYPE "altera_avalon_onchip_memory2"
 #define DESCRIPTOR_MEMORY_WRITABLE 1
 
@@ -476,6 +574,33 @@
 #define DESER160_RESET_VALUE 0x0
 #define DESER160_SPAN 16
 #define DESER160_TYPE "altera_avalon_pio"
+
+
+/*
+ * deser400 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_deser400 altera_avalon_pio
+#define DESER400_BASE 0x81080a0
+#define DESER400_BIT_CLEARING_EDGE_REGISTER 0
+#define DESER400_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define DESER400_CAPTURE 0
+#define DESER400_DATA_WIDTH 3
+#define DESER400_DO_TEST_BENCH_WIRING 0
+#define DESER400_DRIVEN_SIM_VALUE 0x0
+#define DESER400_EDGE_TYPE "NONE"
+#define DESER400_FREQ 40000000u
+#define DESER400_HAS_IN 0
+#define DESER400_HAS_OUT 1
+#define DESER400_HAS_TRI 0
+#define DESER400_IRQ -1
+#define DESER400_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define DESER400_IRQ_TYPE "NONE"
+#define DESER400_NAME "/dev/deser400"
+#define DESER400_RESET_VALUE 0x0
+#define DESER400_SPAN 16
+#define DESER400_TYPE "altera_avalon_pio"
 
 
 /*
@@ -525,7 +650,7 @@
  *
  */
 
-#define ALT_MAX_FD 32
+#define ALT_MAX_FD 8
 #define ALT_SYS_CLK SYS_TIMER
 #define ALT_TIMESTAMP_CLK none
 
@@ -568,11 +693,11 @@
  */
 
 #define ALT_MODULE_CLASS_main_control altera_avalon_pio
-#define MAIN_CONTROL_BASE 0x8100000
+#define MAIN_CONTROL_BASE 0x81000a0
 #define MAIN_CONTROL_BIT_CLEARING_EDGE_REGISTER 0
 #define MAIN_CONTROL_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define MAIN_CONTROL_CAPTURE 0
-#define MAIN_CONTROL_DATA_WIDTH 6
+#define MAIN_CONTROL_DATA_WIDTH 7
 #define MAIN_CONTROL_DO_TEST_BENCH_WIRING 0
 #define MAIN_CONTROL_DRIVEN_SIM_VALUE 0x0
 #define MAIN_CONTROL_EDGE_TYPE "NONE"
@@ -595,7 +720,7 @@
  */
 
 #define ALT_MODULE_CLASS_main_status altera_avalon_pio
-#define MAIN_STATUS_BASE 0x8100010
+#define MAIN_STATUS_BASE 0x81000b0
 #define MAIN_STATUS_BIT_CLEARING_EDGE_REGISTER 0
 #define MAIN_STATUS_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define MAIN_STATUS_CAPTURE 0
@@ -845,7 +970,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1373490686
+#define SYSID_TIMESTAMP 1387294622
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 
@@ -869,11 +994,11 @@
 #define TSE_MAC_PCS 0
 #define TSE_MAC_PCS_ID 0u
 #define TSE_MAC_PCS_SGMII 0
-#define TSE_MAC_RECEIVE_FIFO_DEPTH 2048
+#define TSE_MAC_RECEIVE_FIFO_DEPTH 1024
 #define TSE_MAC_REGISTER_SHARED 0
 #define TSE_MAC_RGMII 1
 #define TSE_MAC_SPAN 1024
-#define TSE_MAC_TRANSMIT_FIFO_DEPTH 2048
+#define TSE_MAC_TRANSMIT_FIFO_DEPTH 1024
 #define TSE_MAC_TYPE "triple_speed_ethernet"
 #define TSE_MAC_UNASSIGNED "unassigned"
 #define TSE_MAC_USE_MDIO 1

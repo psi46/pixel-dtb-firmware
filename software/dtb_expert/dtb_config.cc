@@ -69,7 +69,7 @@ bool DTB_CONFIG::Read(const char *filename)
 		par = strchr(tag,  ']'); if (par == 0) continue;
 		*par = 0; par++;
 
-		// Check if Line is a known parameter (if so convert it to an appropiate value)
+		// Check if Line is a known parameter (if so convert it to an appropriate value)
 		if     (strcmp(tag, "BOARD")       == 0) board = GetInt(par);
 		else if(strcmp(tag, "HW-VERSION")  == 0) hw_version = GetString(par);
 		else if(strcmp(tag, "USB-ID")      == 0) usb_id = GetString(par);

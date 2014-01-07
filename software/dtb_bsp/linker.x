@@ -2,9 +2,9 @@
  * linker.x - Linker script
  *
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
- * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
+ * SOPC Builder design path: X:/source/FPGA/pixel-dtb-firmware/dtb/dtb_system.sopcinfo
  *
- * Generated: Sat Apr 20 23:53:37 CEST 2013
+ * Generated: Tue Jan 07 09:15:52 CET 2014
  */
 
 /*
@@ -54,7 +54,7 @@ MEMORY
     ram_ext : ORIGIN = 0x120, LENGTH = 134217440
     reset : ORIGIN = 0x8000000, LENGTH = 32
     epcs_controller : ORIGIN = 0x8000020, LENGTH = 2016
-    descriptor_memory : ORIGIN = 0x8402000, LENGTH = 1024
+    descriptor_memory : ORIGIN = 0x8402000, LENGTH = 256
 }
 
 /* Define symbols for each memory base-address */

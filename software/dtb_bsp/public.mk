@@ -85,13 +85,9 @@ ACDS_VERSION := 12.0sp2
 # used to generate this makefile. 
 # BUILD_NUMBER: 263
 
-# Quartus Generated JDI File. Required for resolving node instance ID's with 
-# design component names. 
-JDI_FILE := $(ABS_BSP_ROOT_DIR)/../../dtb/dtb.jdi
-
 # Qsys--generated SOPCINFO file. Required for resolving node instance ID's with 
 # design component names. 
-SOPCINFO_FILE := $(ABS_BSP_ROOT_DIR)/../../dtb/dtb_system.sopcinfo
+SOPCINFO_FILE := X:/source/FPGA/pixel-dtb-firmware/dtb/dtb_system.sopcinfo
 
 # Big-Endian operation. 
 # setting BIG_ENDIAN is false
@@ -156,9 +152,9 @@ SOPC_SYSID_FLAG += --sidp=0x8001000
 ELF_PATCH_FLAG  += --sidp 0x8001000
 
 # The SOPC Timestamp 
-# setting SOPC_TIMESTAMP is 1373490686
-SOPC_SYSID_FLAG += --timestamp=1373490686
-ELF_PATCH_FLAG  += --timestamp 1373490686
+# setting SOPC_TIMESTAMP is 1387294622
+SOPC_SYSID_FLAG += --timestamp=1387294622
+ELF_PATCH_FLAG  += --timestamp 1387294622
 
 # Small-footprint (polled mode) driver none 
 # setting altera_avalon_jtag_uart_driver.enable_small_driver is false

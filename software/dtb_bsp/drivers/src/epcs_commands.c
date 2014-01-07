@@ -62,37 +62,19 @@ static ALT_INLINE void epcs_await_wip_released(alt_u32 base)
   }
 }
 
-void epcs_sector_erase(alt_u32 base, alt_u32 offset, alt_u32 four_bytes_mode)
+void epcs_sector_erase(alt_u32 base, alt_u32 offset)
 {
-  alt_u8 se[5];
-  alt_u8 len;
+  alt_u8 se[4];
   
-  if(four_bytes_mode)
-  {
-      se[0] = epcs_se;  /* Note: Use epcs_se for Micron EPCS256 */
-      se[1] = (offset >> 24) & 0xFF;
-      se[2] = (offset >> 16) & 0xFF;
-      se[3] = (offset >> 8) & 0xFF;
-      se[4] = offset & 0xFF;
-      len   = 5;
-      epcs_enter_4_bytes_mode(base);
-  }
-  else
-  {
-      se[0] = epcs_se;
-      se[1] = (offset >> 16) & 0xFF;
-      se[2] = (offset >> 8) & 0xFF;
-      se[3] = offset & 0xFF;
-      len   = 4;
-  }
-
-  /* Execute a WREN instruction */
-  epcs_write_enable(base);
+  se[0] = epcs_se;
+  se[1] = (offset >> 16) & 0xFF;
+  se[2] = (offset >> 8) & 0xFF;
+  se[3] = offset & 0xFF;
 
   alt_avalon_spi_command(
     base,
     0,
-    len,
+    sizeof(se) / sizeof(*se),
     se,
     0,
     (alt_u8*)0,
@@ -100,54 +82,36 @@ void epcs_sector_erase(alt_u32 base, alt_u32 offset, alt_u32 four_bytes_mode)
   );
 
   epcs_await_wip_released(base);
-
-  if(four_bytes_mode)
-  {
-    epcs_exit_4_bytes_mode(base);
-  }
 }
 
-alt_32 epcs_read_buffer(alt_u32 base, int offset, alt_u8 *dest_addr, int length,
-                        alt_u32 four_bytes_mode)
+alt_32 epcs_read_buffer(alt_u32 base, int offset, alt_u8 *dest_addr, int length)
 {
-  alt_u8 read_command[5];
-  alt_u32 cmd_len;
-
-  read_command[0] = epcs_read;
+  alt_u8 read_command[4];
   
-  if(four_bytes_mode)
-  {
-        read_command[1] = (offset >> 24) & 0xFF;
-        read_command[2] = (offset >> 16) & 0xFF;
-        read_command[3] = (offset >> 8) & 0xFF;
-        read_command[4] = offset & 0xFF;
-        cmd_len = 5;
-        epcs_enter_4_bytes_mode(base);
-  }
-  else
-  {
-        read_command[1] = (offset >> 16) & 0xFF;
-        read_command[2] = (offset >> 8) & 0xFF;
-        read_command[3] = offset & 0xFF;
-        cmd_len = 4;
-  }
+  read_command[0] = epcs_read;
+  read_command[1] = (offset >> 16) & 0xFF;
+  read_command[2] = (offset >> 8) & 0xFF;
+  read_command[3] = offset & 0xFF;
 
+#if 0
+  /* If a write is in progress, fail. */
+  if (epcs_test_wip(base))
+    return 0;
+#endif
+  /* I don't know why this is necessary, since I call await-wip after
+   * all writing commands.
+  */
   epcs_await_wip_released(base);
 
   alt_avalon_spi_command(
     base,
     0,
-    cmd_len,
+    sizeof(read_command) / sizeof(*read_command),
     read_command,
     length,
     (alt_u8*)dest_addr,
     0
   );
-
-  if(four_bytes_mode)
-  {
-    epcs_exit_4_bytes_mode(base);
-  }
 
   return length;
 }
@@ -187,30 +151,14 @@ void epcs_write_status_register(alt_u32 base, alt_u8 value)
 }
 
 /* Write a partial or full page, assuming that page has been erased */
-alt_32 epcs_write_buffer(alt_u32 base, int offset, const alt_u8* src_addr, 
-                         int length, alt_u32 four_bytes_mode)
+alt_32 epcs_write_buffer(alt_u32 base, int offset, const alt_u8* src_addr, int length)
 {
-  alt_u8 pp[5];
-  alt_u32 cmd_len;
+  alt_u8 pp[4];
   
   pp[0] = epcs_pp;
-  
-  if(four_bytes_mode)
-  {
-      pp[1] = (offset >> 24) & 0xFF;
-      pp[2] = (offset >> 16) & 0xFF;
-      pp[3] = (offset >> 8) & 0xFF;
-      pp[4] = offset & 0xFF;
-      cmd_len = 5;
-      epcs_enter_4_bytes_mode(base);
-  }
-  else
-  {
-      pp[1] = (offset >> 16) & 0xFF;
-      pp[2] = (offset >> 8) & 0xFF;
-      pp[3] = offset & 0xFF;
-      cmd_len = 4;
-  }
+  pp[1] = (offset >> 16) & 0xFF;
+  pp[2] = (offset >> 8) & 0xFF;
+  pp[3] = offset & 0xFF;
 
   /* First, WREN */
   epcs_write_enable(base);
@@ -219,7 +167,7 @@ alt_32 epcs_write_buffer(alt_u32 base, int offset, const alt_u8* src_addr,
   alt_avalon_spi_command(
     base,
     0,
-    cmd_len,
+    sizeof(pp) / sizeof(*pp),
     pp,
     0,
     (alt_u8*)0,
@@ -245,11 +193,6 @@ alt_32 epcs_write_buffer(alt_u32 base, int offset, const alt_u8* src_addr,
    */
   epcs_await_wip_released(base);
 
-  if(four_bytes_mode)
-  {
-    epcs_exit_4_bytes_mode(base);
-  }
-
   return length;
 }
 
@@ -272,60 +215,20 @@ alt_u8 epcs_read_electronic_signature(alt_u32 base)
   return res;
 }
 
-alt_u32 epcs_read_device_id(alt_u32 base)
+alt_u8 epcs_read_device_id(alt_u32 base)
 {
-  const alt_u8 rd_id_cmd[] = {epcs_rdid};
-  alt_u8 id[3];
+  const alt_u8 rd_id_cmd[] = {epcs_rdid, 0, 0};
+  alt_u8 res;
 
   alt_avalon_spi_command(
     base,
     0,
     sizeof(rd_id_cmd) / sizeof(*rd_id_cmd),
     rd_id_cmd,
-    3,
-    id,
+    1,
+    &res,
     0
   );
 
-  return (alt_u32) ((id[0] << 16) | (id[1] << 8) | id[2]);
-}
-
-void epcs_enter_4_bytes_mode(alt_u32 base)
-{
-  const alt_u8 en4b_cmd = epcs_en4b;
-
-  /* First, WREN */
-  epcs_write_enable(base);
-
-  alt_avalon_spi_command(
-    base,
-    0,
-    sizeof(en4b_cmd),
-    &en4b_cmd,
-    0,
-    (alt_u8*)0,
-    0
-  );
-
-  return;
-}
-
-void epcs_exit_4_bytes_mode(alt_u32 base)
-{
-  const alt_u8 exit4b_cmd = epcs_dis4b;
-
-  /* First, WREN */
-  epcs_write_enable(base);
-
-  alt_avalon_spi_command(
-    base,
-    0,
-    sizeof(exit4b_cmd),
-    &exit4b_cmd,
-    0,
-    (alt_u8*)0,
-    0
-  );
-
-  return;
+  return res;
 }

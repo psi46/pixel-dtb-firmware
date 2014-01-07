@@ -73,7 +73,6 @@ struct alt_flash_epcs_dev
   alt_u32 size_in_bytes;
   alt_u32 silicon_id;
   alt_u32 page_size;
-  alt_u32 four_bytes_mode;
 };
 
 /*
@@ -137,7 +136,6 @@ int alt_epcs_flash_init(alt_flash_epcs_dev* flash);
  * want that functionality.
  */
 
-/* Public API */
 int alt_epcs_flash_write(alt_flash_dev* flash_info, int offset,
                           const void* src_addr, int length);
 

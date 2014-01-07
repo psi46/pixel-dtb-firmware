@@ -2,9 +2,9 @@
  * linker.h - Linker script mapping information
  *
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
- * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
+ * SOPC Builder design path: X:/source/FPGA/pixel-dtb-firmware/dtb/dtb_system.sopcinfo
  *
- * Generated: Sat Apr 20 23:53:37 CEST 2013
+ * Generated: Tue Jan 07 09:15:52 CET 2014
  */
 
 /*
@@ -66,7 +66,7 @@
  */
 
 #define DESCRIPTOR_MEMORY_REGION_BASE 0x8402000
-#define DESCRIPTOR_MEMORY_REGION_SPAN 1024
+#define DESCRIPTOR_MEMORY_REGION_SPAN 256
 #define EPCS_CONTROLLER_REGION_BASE 0x8000020
 #define EPCS_CONTROLLER_REGION_SPAN 2016
 #define RAM_EXT_BEFORE_EXCEPTION_REGION_BASE 0x0

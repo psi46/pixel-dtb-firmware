@@ -8,6 +8,22 @@
 #include "alt_types.h"
 #include "dtb_hal.h"
 
+
+// === DAQ ==================================================================
+
+const unsigned int DAQ_DMA_BASE[8] =
+{
+  DAQ_DMA_0_BASE,
+  DAQ_DMA_1_BASE,
+  DAQ_DMA_2_BASE,
+  DAQ_DMA_3_BASE,
+  DAQ_DMA_4_BASE,
+  DAQ_DMA_5_BASE,
+  DAQ_DMA_6_BASE,
+  DAQ_DMA_7_BASE
+};
+
+
 // === I2C ==================================================================
 
 void I2C_Main_Init()
@@ -21,6 +37,8 @@ void I2C_Main_Init()
 
 void Adv3224Init()
 {
+	usleep(50);
+
 	// all outputs 0V
 	IOWR_8DIRECT(CROSSPOINT_SWITCH_BASE, 0, 16); // ADC+ (x4)
 	IOWR_8DIRECT(CROSSPOINT_SWITCH_BASE, 1, 16); // ADC- (x4)

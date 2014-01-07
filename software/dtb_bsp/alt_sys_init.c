@@ -2,9 +2,9 @@
  * alt_sys_init.c - HAL initialization source
  *
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
- * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
+ * SOPC Builder design path: X:/source/FPGA/pixel-dtb-firmware/dtb/dtb_system.sopcinfo
  *
- * Generated: Sun May 12 15:29:21 CEST 2013
+ * Generated: Tue Jan 07 08:32:59 CET 2014
  */
 
 /*

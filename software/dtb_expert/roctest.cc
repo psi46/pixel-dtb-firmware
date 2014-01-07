@@ -95,7 +95,7 @@ int test_PUC(unsigned char col, unsigned char row, unsigned char trim)
 }
 
 
-bool CTestboard::testColPixel(uint8_t col, uint8_t trimbit, vectorR<uint8_t> &res)
+bool CTestboard::TestColPixel(uint8_t col, uint8_t trimbit, vectorR<uint8_t> &res)
 {
 	unsigned char row;
 	tb.roc_Col_Enable(col, 1);
