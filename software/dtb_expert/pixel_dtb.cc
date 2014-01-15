@@ -1374,7 +1374,7 @@ int16_t CTestboard::DecodePixel(vector<uint16_t> &data, int16_t &pos,
 		return -1; // missing data
 	if ((data[pos] & 0x8ffc) != 0x87f8)
 		return -2; // wrong header
-	//int hdr = data[pos++] & 0xfff;
+	int hdr = data[pos++] & 0xfff;
 
 	if (pos >= int(data.size()) || (data[pos] & 0x8000))
 		return 0; // empty data readout
@@ -1418,7 +1418,7 @@ int16_t CTestboard::DecodeReadout(vector<uint16_t> &data, int16_t &pos, vector<
 		return -1; // missing data
 	if ((data[pos] & 0x8ffc) != 0x87f8)
 		return -2; // wrong header
-	//int hdr = data[pos++] & 0xfff;
+	int hdr = data[pos++] & 0xfff;
 
 	if (pos >= int(data.size()) || (data[pos] & 0x8000))
 		return 0; // empty data readout
@@ -1579,28 +1579,29 @@ int8_t CTestboard::Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vec
     //Single ROC
     else {
 	    while (!(pos >= int(data.size()))) {
-        // check header
-	    if ((data[pos] & 0x8ffc) != 0x87f8)
-		    return -2; // wrong header
-	    //int hdr = data[pos++] & 0xfff;
-	    // read pixels while not data end or trailer
-	    while (!(pos >= int(data.size()) || (data[pos] & 0x8000))) {
-        // store 24 bits in raw
-		raw = (data[pos++] & 0xfff) << 12;
-		if (pos >= int(data.size()) || (data[pos] & 0x8000))
-			return -3; // incomplete data
-		raw += data[pos++] & 0xfff;
-		DecodePixel(raw, n_pix, ph_pix, col, row);
-        n.push_back(n_pix);
-        ph.push_back(ph_pix);
-        address = 0;
-        address = (address << 8) ;
-        address = (address << 8) + col;
-        address = (address << 8) + row;
-        adr.push_back(address);
-	    }
+			// check header
+			if ((data[pos] & 0x8ffc) != 0x87f8)
+				return -2; // wrong header
+			int hdr = data[pos++] & 0xfff;
+			// read pixels while not data end or trailer
+			while (!(pos >= int(data.size()) || (data[pos] & 0x8000))) {
+				// store 24 bits in raw
+				raw = (data[pos++] & 0xfff) << 12;
+				if (pos >= int(data.size()) || (data[pos] & 0x8000))
+					return -3; // incomplete data
+				raw += data[pos++] & 0xfff;
+				DecodePixel(raw, n_pix, ph_pix, col, row);
+				n.push_back(n_pix);
+				ph.push_back(ph_pix);
+				address = 0;
+				address = (address << 8) ;
+				address = (address << 8) + col;
+				address = (address << 8) + row;
+				adr.push_back(address);
+			}
         }
     }
+
 	return 1;
 }
 
