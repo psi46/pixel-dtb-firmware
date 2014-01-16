@@ -1527,7 +1527,7 @@ int8_t CTestboard::Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vec
 	unsigned int raw = 0;
     int16_t n_pix = 0, ph_pix = 0, col = 0, row = 0, evNr = 0, stkCnt = 0, dataId = 0, dataNr = 0;
     int16_t roc_n = -1;
-    int16_t tbm_n = -1;
+    int16_t tbm_n = 1;
     uint32_t address;
     int pos = 0;
     //Module readout
@@ -1563,7 +1563,7 @@ int8_t CTestboard::Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vec
 		case 10: hdr = (hdr<<4) + d; break;
 		case 11: hdr = (hdr<<4) + d;
 			     DecodeTbmHeader(hdr, evNr, stkCnt);
-                 tbm_n++;
+                 tbm_n = tbm_n ^ 1;
                  roc_n = -1;
 			     break;
 
@@ -1851,6 +1851,7 @@ int8_t CTestboard::CalibrateDacDacScan(int16_t nTriggers, int16_t col, int16_t r
 	Daq_Disable2();
 	roc_ClrCal();
 	roc_Col_Enable(col, false);
+
 
 	return 1;
 }
