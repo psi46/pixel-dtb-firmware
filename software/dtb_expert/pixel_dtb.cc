@@ -50,6 +50,23 @@ bool CTestboard::GetRpcCallName(int32_t id, stringR &callName)
 }
 
 
+uint32_t CTestboard::GetRpcCallHash()
+{
+	uint32_t hash = 0;
+	for(int i = 0; i < rpc_cmdListSize; i++)
+	{
+		hash += ((i+1)*GetHashForString(rpc_cmdlist[i].name));
+	}
+	return hash;
+}
+
+uint32_t CTestboard::GetHashForString(const char * s)
+{
+	uint32_t h = 31;
+	while (*s) { h = (h * 54059) ^ (s[0] * 76963); s++; }
+	return h%86969;
+}
+
 #define CLINE(text) text "\n"
 
 void CTestboard::GetInfo(stringR &info)

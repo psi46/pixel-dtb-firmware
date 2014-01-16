@@ -118,6 +118,9 @@ public:
 	RPC_EXPORT int32_t GetRpcCallCount();
 	RPC_EXPORT bool    GetRpcCallName(int32_t id, stringR &callName);
 
+	RPC_EXPORT uint32_t GetRpcCallHash();
+	uint32_t GetHashForString(const char *s);
+
 //	RPC_EXPORT uint16_t GetRpcServerCallCount();
 //	RPC_EXPORT void     GetRpcServerCallName(uint16_t index, stringR &callName);
 
