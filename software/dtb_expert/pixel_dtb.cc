@@ -1816,7 +1816,7 @@ int8_t CTestboard::CalibratePixel(int16_t nTriggers, int16_t col, int16_t row, i
 }
 
 int8_t CTestboard::CalibrateDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1,
-		int16_t dacRange1, vectorR<int16_t> &nReadouts,
+		int16_t dacLower1, int16_t dacUpper1, vectorR<int16_t> &nReadouts,
 		vectorR<int32_t> &PHsum) {
 
 	//nReadouts.clear();
@@ -1828,7 +1828,7 @@ int8_t CTestboard::CalibrateDacScan(int16_t nTriggers, int16_t col, int16_t row,
 	roc_Pix_Cal(col, row, false);
 	uDelay(5);
 	Daq_Enable2(daq_read_size);
-	for (int i = 0; i < dacRange1; i++)
+	for (int i = dacLower1; i < dacUpper1; i++)
 	{
 		roc_SetDAC(dacReg1, i);
 		CalibrateReadouts(nTriggers, n, ph);
@@ -1843,7 +1843,7 @@ int8_t CTestboard::CalibrateDacScan(int16_t nTriggers, int16_t col, int16_t row,
 }
 
 int8_t CTestboard::CalibrateDacDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1,
-		int16_t dacRange1, int16_t dacReg2, int16_t dacRange2,
+		int16_t dacLower1, int16_t dacUpper1, int16_t dacReg2, int16_t dacLower2, int16_t dacUpper2,
 		vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum) {
 
 
@@ -1854,10 +1854,10 @@ int8_t CTestboard::CalibrateDacDacScan(int16_t nTriggers, int16_t col, int16_t r
 	roc_Pix_Cal(col, row, false);
 	uDelay(5);
 	Daq_Enable2(daq_read_size);
-	for (int i = 0; i < dacRange1; i++)
+	for (int i = dacLower1; i < dacUpper1; i++)
 	{
 		roc_SetDAC(dacReg1, i);
-		for (int k = 0; k < dacRange2; k++)
+		for (int k = dacLower1; k < dacUpper2; k++)
 		{
 			roc_SetDAC(dacReg2, k);
 			CalibrateReadouts(nTriggers, n, ph);
