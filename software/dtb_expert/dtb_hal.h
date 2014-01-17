@@ -27,10 +27,23 @@ inline void _SetLED(unsigned int value)
 inline void _MainControl(unsigned int value)
 { IOWR_ALTERA_AVALON_PIO_DATA(MAIN_CONTROL_BASE, value); }
 
+
+#define MAINSTATUS_CLK_PRESENT  0x01
+#define MAINSTATUS_CLK_GOOD     0x02
+#define MAINSTATUS_CRC_ERROR    0x04
+#define MAINSTATUS_SD_CARD_DET  0x08
 inline unsigned char _MainStatus()
 {
 	return IORD_ALTERA_AVALON_PIO_DATA(MAIN_STATUS_BASE);
 }
+
+
+inline void SetClkDiv(unsigned char value)
+{ IOWR_ALTERA_AVALON_PIO_DATA(CLKDIV_BASE, value); }
+
+inline void SetClockStretchReg(unsigned char reg, unsigned short value)
+{ IOWR_16DIRECT(CLK_STRETCH_BASE, reg*2, value); }
+
 
 // === ADC ==================================================================
 

@@ -10,7 +10,7 @@
 const int delayAdjust = 4;
 const int deserAdjust = 4;
 
-// === id ===================================================================
+// === DTB identification ===================================================
 
 uint16_t CTestboard::GetRpcVersion()
 {
@@ -171,7 +171,7 @@ void CTestboard::UpgradeExec(uint16_t recordCount)
 }
 
 
-// === dtb1 =================================================================
+// === DTB initialization ===================================================
 
 CTestboard::CTestboard()
 {
@@ -224,9 +224,14 @@ void CTestboard::Init()
 	MOD_present = false;
 	HUB_address = 0;
 
+	currentClock = MHZ_40;
+	SetClock_(MHZ_1_25);
+	SetClockStretch(0,0,0);
+
 	// --- clear main control register
 	mainCtrl = 0;
 	_MainControl(0);
+
 
 	isPowerOn = false;
 
@@ -274,6 +279,8 @@ void CTestboard::Init()
 }
 
 
+// === timing ===============================================================
+
 void CTestboard::cDelay(uint16_t clocks)
 {
 	uint16_t us = clocks / 40;
@@ -304,6 +311,46 @@ void CTestboard::SetClockSource(uint8_t source)
 	uDelay(10);
 	_MainControl(mainCtrl);
 	uDelay(100);
+}
+
+bool CTestboard::IsClockPresent()
+{
+	return _MainStatus() | MAINSTATUS_CLK_PRESENT;
+}
+
+
+void CTestboard::SetClock_(unsigned char MHz)
+{
+	SetClkDiv(((MHz & 7)<<3) + (MHz & 7));
+}
+
+
+void CTestboard::SetClock(unsigned char MHz)
+{
+	currentClock = MHz;
+	if (isPowerOn) SetClock_(currentClock);
+}
+
+
+RPC_EXPORT void CTestboard::SetClockStretch(uint8_t src,
+	uint16_t delay, uint16_t width)
+{
+	  if (width > 0)
+	  {
+	    SetClockStretchReg(0, src|0x04);
+
+	    if (delay > 1022) delay = 1022;
+	    delay++;
+	    SetClockStretchReg(1, delay);
+
+	    SetClockStretchReg(2, width);
+	  }
+	  else
+	  {
+	    SetClockStretchReg(0,0);
+	    SetClockStretchReg(1,1);
+	    SetClockStretchReg(2,1);
+	  }
 }
 
 
@@ -475,7 +522,7 @@ void CTestboard::Sig_SetLCDS()
 
 void CTestboard::Pon()
 {
-//	SetClock_(currentClock);
+	SetClock_(currentClock);
 	if (isPowerOn) return;
 
 	SetDac(0, 184);	// va = 1V;
@@ -514,7 +561,7 @@ void CTestboard::Poff()
 	Daq_Close(6);
 	Daq_Close(7);
 
-//	SetClock_(MHZ_1_25);
+	SetClock_(MHZ_1_25);
 }
 
 

@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: X:/source/FPGA/pixel-dtb-firmware/dtb/dtb_system.sopcinfo
  *
- * Generated: Tue Jan 07 09:15:52 CET 2014
+ * Generated: Wed Jan 15 12:31:21 CET 2014
  */
 
 /*
@@ -141,6 +141,7 @@
 #define __ALTMEMDDR2
 #define __DAQ_DMA
 #define __DELAY_OUT
+#define __DELAY_TRIGGER
 #define __FT232H
 #define __I2C_MASTER
 #define __LVDS2LCDS
@@ -336,6 +337,47 @@
 #define BUTTON_RESET_VALUE 0x0
 #define BUTTON_SPAN 16
 #define BUTTON_TYPE "altera_avalon_pio"
+
+
+/*
+ * clk_stretch configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_clk_stretch delay_trigger
+#define CLK_STRETCH_BASE 0x81080b0
+#define CLK_STRETCH_IRQ -1
+#define CLK_STRETCH_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define CLK_STRETCH_NAME "/dev/clk_stretch"
+#define CLK_STRETCH_SPAN 8
+#define CLK_STRETCH_TYPE "delay_trigger"
+
+
+/*
+ * clkdiv configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_clkdiv altera_avalon_pio
+#define CLKDIV_BASE 0x81080c0
+#define CLKDIV_BIT_CLEARING_EDGE_REGISTER 0
+#define CLKDIV_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define CLKDIV_CAPTURE 0
+#define CLKDIV_DATA_WIDTH 6
+#define CLKDIV_DO_TEST_BENCH_WIRING 0
+#define CLKDIV_DRIVEN_SIM_VALUE 0x0
+#define CLKDIV_EDGE_TYPE "NONE"
+#define CLKDIV_FREQ 40000000u
+#define CLKDIV_HAS_IN 0
+#define CLKDIV_HAS_OUT 1
+#define CLKDIV_HAS_TRI 0
+#define CLKDIV_IRQ -1
+#define CLKDIV_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define CLKDIV_IRQ_TYPE "NONE"
+#define CLKDIV_NAME "/dev/clkdiv"
+#define CLKDIV_RESET_VALUE 0x0
+#define CLKDIV_SPAN 16
+#define CLKDIV_TYPE "altera_avalon_pio"
 
 
 /*
@@ -970,7 +1012,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1387294622
+#define SYSID_TIMESTAMP 1389781532
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 
