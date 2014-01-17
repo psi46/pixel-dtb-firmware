@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>07.01.2014 09:15:51</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1389082551871</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>15.01.2014 12:31:15</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1389785475493</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>X:\source\FPGA\pixel-dtb-firmware\software\dtb_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>X:\source\FPGA\pixel-dtb-firmware\dtb\dtb_system.sopcinfo</SopcDesignFile>
@@ -1063,6 +1063,18 @@
         <MemoryMap>
                 <slaveDescriptor>deser400</slaveDescriptor>
                 <addressRange>0x081080A0 - 0x081080AF</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>clk_stretch</slaveDescriptor>
+                <addressRange>0x081080B0 - 0x081080B7</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>clkdiv</slaveDescriptor>
+                <addressRange>0x081080C0 - 0x081080CF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>

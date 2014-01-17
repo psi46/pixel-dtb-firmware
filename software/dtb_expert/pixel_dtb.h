@@ -61,6 +61,7 @@ class CTestboard
 
 	uint32_t mainCtrl;
 	bool isPowerOn;
+	int currentClock;
 
 	uint16_t vd, va;
 	uint16_t id, ia;
@@ -162,18 +163,35 @@ public:
 	RPC_EXPORT void uDelay(uint16_t us);
 	void mDelay(uint16_t ms);
 
-	//	RPC_EXPORT unsigned char isClockPresent();
-	//	RPC_EXPORT void SetClock(unsigned char MHz);
-	//	RPC_EXPORT void SetClockStretch(unsigned char src,
-	//		unsigned short delay, unsigned short width);
 
-	// select ROC/Module clock source
+	// --- select ROC/Module clock source
 	#define CLK_SRC_INT  0
 	#define CLK_SRC_EXT  1
 	RPC_EXPORT void SetClockSource(uint8_t source);
 
-//	RPC_EXPORT void PllReset();
+	// --- check if external clock is present
+	RPC_EXPORT bool IsClockPresent();
 
+	// --- set clock clock frequency (clock divider)
+	#define MHZ_1_25   5
+	#define MHZ_2_5    4
+	#define MHZ_5      3
+	#define MHZ_10     2
+	#define MHZ_20     1
+	#define MHZ_40     0  // default
+	RPC_EXPORT void SetClock(uint8_t MHz);
+
+	// --- set clock stretch
+	// width = 0 -> disable stretch
+	#define STRETCH_AFTER_TRG  0
+	#define STRETCH_AFTER_CAL  1
+	#define STRETCH_AFTER_RES  2
+	#define STRETCH_AFTER_SYNC 3
+	RPC_EXPORT void SetClockStretch(uint8_t src,
+		uint16_t delay, uint16_t width);
+
+//	RPC_EXPORT void PllReset();
+	void SetClock_(unsigned char MHz);
 
 	// --- Signal Delay -----------------------------------------------------
 	#define SIG_CLK 0
