@@ -9,6 +9,8 @@
 
 const int delayAdjust = 4;
 const int deserAdjust = 4;
+const int daq_read_size = 32768; // read sizedaq_read_size = 32768;
+
 
 // === DTB identification ===================================================
 
@@ -47,6 +49,23 @@ bool CTestboard::GetRpcCallName(int32_t id, stringR &callName)
 	return true;
 }
 
+
+uint32_t CTestboard::GetRpcCallHash()
+{
+	uint32_t hash = 0;
+	for(int i = 0; i < rpc_cmdListSize; i++)
+	{
+		hash += ((i+1)*GetHashForString(rpc_cmdlist[i].name));
+	}
+	return hash;
+}
+
+uint32_t CTestboard::GetHashForString(const char * s)
+{
+	uint32_t h = 31;
+	while (*s) { h = (h * 54059) ^ (s[0] * 76963); s++; }
+	return h%86969;
+}
 
 #define CLINE(text) text "\n"
 
@@ -1398,394 +1417,881 @@ void CTestboard::Daq_Deser400_Reset(uint8_t reset)
 	}
 }
 
+bool CTestboard::GetPixelAddressInverted() {
+        return roc_pixeladdress_inverted;
+}
+
+void CTestboard::SetPixelAddressInverted(bool status) {
+        roc_pixeladdress_inverted = status;
+}
 
 
-// === high level test functions ============================================
+// ================ ROC TESTING ================
 
-int16_t CTestboard::DecodePixel(vector<uint16_t> &data, int16_t &pos, int16_t &n, int16_t &ph, int16_t &col, int16_t &row)
-{ 
+int16_t CTestboard::DecodePixel(vector<uint16_t> &data, int16_t &pos,
+		int16_t &n, int16_t &ph, int16_t &col, int16_t &row) {
 	unsigned int raw = 0;
 	n = 0;
 
 	// check header
-	if (pos >= int(data.size())) return  -1; // missing data
-	if ((data[pos] & 0x8ffc) != 0x87f8) return -2; // wrong header
-//	int hdr = data[pos++] & 0xfff;
+	if (pos >= int(data.size()))
+		return -1; // missing data
+	if ((data[pos] & 0x8ffc) != 0x87f8)
+		return -2; // wrong header
+	int hdr = data[pos++] & 0xfff;
 
-	if (pos >= int(data.size()) || (data[pos] & 0x8000)) return 0; // empty data readout
+	if (pos >= int(data.size()) || (data[pos] & 0x8000))
+		return 0; // empty data readout
 
 	// read first pixel
 	raw = (data[pos++] & 0xfff) << 12;
 
-	if (pos >= int(data.size()) || (data[pos] & 0x8000)) return -3; // incomplete data
+	if (pos >= int(data.size()) || (data[pos] & 0x8000))
+		return -3; // incomplete data
 	raw += data[pos++] & 0xfff;
 	n++;
 
-
 	// read additional noisy pixel
 	int cnt = 0;
-	while (!(pos >= int(data.size()) || (data[pos] & 0x8000))) { pos++; cnt++; }
+	while (!(pos >= int(data.size()) || (data[pos] & 0x8000))) {
+		pos++;
+		cnt++;
+	}
 	n += cnt / 2;
-
 
 	ph = (raw & 0x0f) + ((raw >> 1) & 0xf0);
 	raw >>= 9;
-	int c =    (raw >> 12) & 7;
-	c = c*6 + ((raw >>  9) & 7);
+	int c = (raw >> 12) & 7;
+	c = c * 6 + ((raw >> 9) & 7);
+	int r = (raw >> 6) & 7;
+	r = r * 6 + ((raw >> 3) & 7);
+	r = r * 6 + (raw & 7);
+	row = 80 - r / 2;
 
-	int r2 =   (raw >> 6) & 7;
-	if(roc_pixeladdress_inverted) r2 ^= 0x7;
-
-	int r1 =   (raw >> 3) & 7;
-	if(roc_pixeladdress_inverted) r1 ^= 0x7;
-
-	int r0 =   (raw) & 7;
-	if(roc_pixeladdress_inverted) r0 ^= 0x7;
-
-	int r = r2*36 + r1*6 + r0;
-	row = 80 - r/2;
-	col = 2*c + (r&1);
+	col = 2 * c + (r & 1);
 
 	return 1;
 }
 
-bool CTestboard::GetPixelAddressInverted() {
-	return roc_pixeladdress_inverted;
+int16_t CTestboard::DecodeReadout(vector<uint16_t> &data, int16_t &pos, vector<
+		uint16_t> &ph, vector<uint16_t> &col, vector<uint16_t> &row) {
+	unsigned int raw = 0;
+
+	// check header
+	if (pos >= int(data.size()))
+		return -1; // missing data
+	if ((data[pos] & 0x8ffc) != 0x87f8)
+		return -2; // wrong header
+	int hdr = data[pos++] & 0xfff;
+
+	if (pos >= int(data.size()) || (data[pos] & 0x8000))
+		return 0; // empty data readout
+
+	// read pixels while not data end or trailer
+	while (!(pos >= int(data.size()) || (data[pos] & 0x8000))) {
+		// store 24 bits in raw
+		raw = (data[pos++] & 0xfff) << 12;
+		if (pos >= int(data.size()) || (data[pos] & 0x8000))
+			return -3; // incomplete data
+		raw += data[pos++] & 0xfff;
+		//decode raw and append to vectors
+		ph.push_back((raw & 0x0f) + ((raw >> 1) & 0xf0));
+		raw >>= 9;
+		int c = (raw >> 12) & 7;
+		c = c * 6 + ((raw >> 9) & 7);
+		int r = (raw >> 6) & 7;
+		r = r * 6 + ((raw >> 3) & 7);
+		r = r * 6 + (raw & 7);
+		row.push_back(80 - r / 2);
+		col.push_back(2 * c + (r & 1));
+	}
+
+	return 1;
 }
 
-void CTestboard::SetPixelAddressInverted(bool status) {
-	roc_pixeladdress_inverted = status;
+// to be renamed after kicking out psi46expert dependency
+void CTestboard::Daq_Enable2(int32_t block) {
+	if (!TBM_Present()){
+		Daq_Select_Deser160(deserAdjust);
+	}
+	//Daq_Select_Deser400();
+
+	Daq_Open(block, 0);
+	Daq_Start(0);
+	if (TBM_Present()){
+		Daq_Open(block, 1);
+		Daq_Start(1);
+	}
+}
+// to be renamed after kicking out psi46expert dependency
+void CTestboard::Daq_Disable2() {
+	Daq_Stop(0);
+	Daq_Close(0);
+	if (TBM_Present()){
+		Daq_Stop(1);
+		Daq_Close(1);
+	}
 }
 
-int32_t CTestboard::CountReadouts(int32_t nTriggers)
-{ 
-    int32_t nHits = 0;
-    Daq_Open(5000);
-    Daq_Select_Deser160(deserAdjust);
-    uDelay(30);
-    Daq_Start();
-    for (int16_t i=0; i < nTriggers; i++)
-    {
-	    Pg_Single();
-	    uDelay(5);
-    }
-    Daq_Stop();
-
-    vector<uint16_t> data;
-    Daq_Read(data,5000);
-    Daq_Close();
-
-    int16_t ok = -1, pos = 0, n = 0, ph = 0, col = 0, row = 0;
-    for (int16_t i=0; i < nTriggers; i++)
-    {
-        ok = DecodePixel(data, pos, n, ph, col, row);
-
-        if (n > 0 and ok) nHits++;
-    }
-    return nHits;
+int8_t CTestboard::Daq_Read2(vector<uint16_t> &data, uint16_t daq_read_size_2, uint32_t &n) {
+	int8_t status;
+	n=0;
+    status = Daq_Read(data, daq_read_size_2, n, 0);
+	if (TBM_Present()){
+		vector<uint16_t> data1;
+		data1.clear();
+		n=0;
+		status += Daq_Read(data1, daq_read_size_2, n, 1);
+		data.insert( data.end(), data1.begin(), data1.end() );
+	}
+	return status;
 }
 
-int32_t CTestboard::CountReadouts(int32_t nTrig, int32_t chipId)
+int16_t CTestboard::TrimChip(vector<int16_t> &trim) {
+	for (int8_t col = 0; col < ROC_NUMCOLS; col++) {
+		for (int8_t row = 0; row < ROC_NUMROWS; row++) {
+			roc_Pix_Trim(col, row, trim[col * ROC_NUMROWS + row]);
+		}
+	}
+	trim.clear();
+	return 1;
+}
+
+void CTestboard::DecodeTbmHeader(unsigned int raw, int16_t &evNr, int16_t &stkCnt)
 {
+	evNr = raw >> 8;
+	stkCnt = raw & 6;
+}
+
+void CTestboard::DecodeTbmTrailer(unsigned int raw, int16_t &dataId, int16_t &data)
+{
+	dataId = (raw >> 6) & 0x3;
+	data   = raw & 0x3f;
+}
+
+void CTestboard::DecodePixel(unsigned int raw, int16_t &n, int16_t &ph, int16_t &col, int16_t &row)
+{
+    n = 1;
+    ph = (raw & 0x0f) + ((raw >> 1) & 0xf0);
+	raw >>= 9;
+	int c =    (raw >> 12) & 7;
+	c = c*6 + ((raw >>  9) & 7);
+	int r =    (raw >>  6) & 7;
+	r = r*6 + ((raw >>  3) & 7);
+	r = r*6 + ( raw        & 7);
+	row = 80 - r/2;
+	col = 2*c + (r&1);
+}
+
+int8_t CTestboard::Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vector<uint16_t> &ph, vector<uint32_t> &adr)
+{
+
+    //uint32_t words_remaining = 0;
+    uint16_t hdr, trl;
+	unsigned int raw = 0;
+    int16_t n_pix = 0, ph_pix = 0, col = 0, row = 0, evNr = 0, stkCnt = 0, dataId = 0, dataNr = 0;
+    int16_t roc_n = -1;
+    int16_t tbm_n = 1;
+    uint32_t address;
+    int pos = 0;
+    //Module readout
+    if (TBM_Present()){
+	for (unsigned int i=0; i<data.size(); i++)
+	{
+		int d = data[i] & 0xf;
+		int q = (data[i]>>4) & 0xf;
+		switch (q)
+		{
+		case  0: break;
+
+		case  1: raw = d; break;
+		case  2: raw = (raw<<4) + d; break;
+		case  3: raw = (raw<<4) + d; break;
+		case  4: raw = (raw<<4) + d; break;
+		case  5: raw = (raw<<4) + d; break;
+		case  6: raw = (raw<<4) + d;
+			     DecodePixel(raw, n_pix, ph_pix, col, row);
+                 n.push_back(n_pix);
+                 ph.push_back(ph_pix);
+                 address = tbm_n;
+                 address = (address << 8) + roc_n;
+                 address = (address << 8) + col;
+                 address = (address << 8) + row;
+                 adr.push_back(address);
+				 break;
+
+		case  7: roc_n++; break;
+
+		case  8: hdr = d; break;
+		case  9: hdr = (hdr<<4) + d; break;
+		case 10: hdr = (hdr<<4) + d; break;
+		case 11: hdr = (hdr<<4) + d;
+			     DecodeTbmHeader(hdr, evNr, stkCnt);
+                 tbm_n = tbm_n ^ 1;
+                 roc_n = -1;
+			     break;
+
+		case 12: trl = d; break;
+		case 13: trl = (trl<<4) + d; break;
+		case 14: trl = (trl<<4) + d; break;
+		case 15: trl = (trl<<4) + d;
+			     DecodeTbmTrailer(trl, dataId, dataNr);
+			     break;
+		}
+	}
+  }
+    //Single ROC
+    else {
+	    while (!(pos >= int(data.size()))) {
+			// check header
+			if ((data[pos] & 0x8ffc) != 0x87f8)
+				return -2; // wrong header
+			int hdr = data[pos++] & 0xfff;
+			// read pixels while not data end or trailer
+			while (!(pos >= int(data.size()) || (data[pos] & 0x8000))) {
+				// store 24 bits in raw
+				raw = (data[pos++] & 0xfff) << 12;
+				if (pos >= int(data.size()) || (data[pos] & 0x8000))
+					return -3; // incomplete data
+				raw += data[pos++] & 0xfff;
+				DecodePixel(raw, n_pix, ph_pix, col, row);
+				n.push_back(n_pix);
+				ph.push_back(ph_pix);
+				address = 0;
+				address = (address << 8) ;
+				address = (address << 8) + col;
+				address = (address << 8) + row;
+				adr.push_back(address);
+			}
+        }
+    }
+
+	return 1;
+}
+
+/*int8_t CTestboard::Decode2(const vector<uint16_t> &data, vector<int16_t> &n, vector<int32_t> &ph, vector<uint32_t> &adr)
+{
+
+    uint32_t words_remaining = 0;
+    uint16_t hdr, trl;
+	unsigned int raw;
+    int16_t n_pix = 0, ph_pix = 0, col = 0, row = 0, evNr = 0, stkCnt = 0, dataId = 0, dataNr = 0;
+    int16_t roc_n = -1;
+    int16_t tbm_n = -1;
+    uint32_t address;
+    int pos = 0;
+    //Module readout
+    if (TBM_Present()){
+	for (int i=0; i<data.size(); i++)
+	{
+		int d = data[i] & 0xf;
+		int q = (data[i]>>4) & 0xf;
+		switch (q)
+		{
+		case  0: break;
+
+		case  1: raw = d; break;
+		case  2: raw = (raw<<4) + d; break;
+		case  3: raw = (raw<<4) + d; break;
+		case  4: raw = (raw<<4) + d; break;
+		case  5: raw = (raw<<4) + d; break;
+		case  6: raw = (raw<<4) + d;
+			     DecodePixel(raw, n_pix, ph_pix, col, row);
+			     if (0 <= col && col < ROC_NUMCOLS && 0 <= row && row < ROC_NUMROWS){
+					 n[col * ROC_NUMROWS + row] += n_pix;
+					 ph[col * ROC_NUMROWS + row] += ph_pix;
+					 address = tbm_n;
+					 address = (address << 8) + roc_n;
+					 address = (address << 8) + col;
+					 address = (address << 8) + row;
+					 adr[col * ROC_NUMROWS + row] = address;
+			     }
+				 break;
+
+		case  7: roc_n++; break;
+
+		case  8: hdr = d; break;
+		case  9: hdr = (hdr<<4) + d; break;
+		case 10: hdr = (hdr<<4) + d; break;
+		case 11: hdr = (hdr<<4) + d;
+			     DecodeTbmHeader(hdr, evNr, stkCnt);
+                 tbm_n++;
+                 roc_n = -1;
+			     break;
+
+		case 12: trl = d; break;
+		case 13: trl = (trl<<4) + d; break;
+		case 14: trl = (trl<<4) + d; break;
+		case 15: trl = (trl<<4) + d;
+			     DecodeTbmTrailer(trl, dataId, dataNr);
+			     break;
+		}
+	}
+  }
+    //Single ROC
+    else {
+	    while (!(pos >= int(data.size()))) {
+			// check header
+			if ((data[pos] & 0x8ffc) != 0x87f8)
+				return -2; // wrong header
+			int hdr = data[pos++] & 0xfff;
+			// read pixels while not data end or trailer
+			while (!(pos >= int(data.size()) || (data[pos] & 0x8000))) {
+				// store 24 bits in raw
+				raw = (data[pos++] & 0xfff) << 12;
+				if (pos >= int(data.size()) || (data[pos] & 0x8000))
+					return -3; // incomplete data
+				raw += data[pos++] & 0xfff;
+				DecodePixel(raw, n_pix, ph_pix, col, row);
+				if (0 <= col && col < ROC_NUMCOLS && 0 <= row && row < ROC_NUMROWS){
+					n[col * ROC_NUMROWS + row] += n_pix;
+					ph[col * ROC_NUMROWS + row] += ph_pix;
+					address = 0;
+					address = (address << 8) ;
+					address = (address << 8) + col;
+					address = (address << 8) + row;
+					adr[col * ROC_NUMROWS + row] = address;
+				}
+			}
+        }
+    }
+	return 1;
+}*/
+int32_t CTestboard::CountReadouts(int32_t nTriggers) {
+	int32_t nHits = 0;
+
+	vector<uint16_t> data, ph, n_hits;
+	vector<uint32_t> adr;
+	int16_t ok = -1;
+	//data.clear();
+	uint32_t avail_size = 0;
+
+	for (int16_t i = 0; i < nTriggers; i++) {
+		Pg_Single();
+		uDelay(4);
+	}
+
+	Daq_Read2(data, daq_read_size, avail_size);
+
+	ok = Decode(data, n_hits, ph, adr);
+
+	for (unsigned int i = 0; i < adr.size(); i++){
+		nHits+=n_hits[i];
+	}
+
+	return nHits;
+}
+
+/*int8_t CTestboard::CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int32_t &PHsum){
+
+	nReadouts = 0;
+	PHsum = 0;
+
+
+	vector<uint16_t> data;
+	uDelay(5);
+
+	for (int16_t i = 0; i < nTriggers; i++)
+	{
+		Pg_Single();
+		uDelay(4);
+	}
+
+	Daq_Read(data, daq_read_size);
+
+	int16_t ok = -1, pos = 0, n = 0, ph = 0, colR = 0, rowR = 0;
+	for (int16_t i = 0; i < nTriggers; i++)
+	{
+		ok = DecodePixel(data, pos, n, ph, colR, rowR);
+		if (n > 0 and ok)
+		{
+			nReadouts++;
+			PHsum+=ph;
+		}
+	}
+
+	return 1;
+}*/
+
+int8_t CTestboard::CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int32_t &PHsum){
+
+	nReadouts = 0;
+	PHsum = 0;
+    //uint16_t daq_read_size = 32768;
+    uint32_t avail_size = 0;
+	int16_t ok = -1;
+
+    vector<uint16_t> nhits, ph;
+    vector<uint32_t> adr;
+	vector<uint16_t> data;
+	uDelay(5);
+
+	for (int16_t i = 0; i < nTriggers; i++)
+	{
+		Pg_Single();
+		uDelay(4);
+	}
+
+	Daq_Read2(data, daq_read_size, avail_size);
+
+    ok = Decode(data, nhits, ph, adr);
+
+	for (unsigned int i = 0; i < adr.size(); i++)
+	{
+		nReadouts+= nhits[i];
+		PHsum+= ph[i];;
+
+	}
+
+	return 1;
+}
+
+int8_t CTestboard::CalibratePixel(int16_t nTriggers, int16_t col, int16_t row, int16_t &nReadouts,
+		int32_t &PHsum) {
+
+	roc_Col_Enable(col, true);
+	roc_Pix_Cal(col, row, false);
+	uDelay(5);
+	Daq_Enable2(daq_read_size);
+	CalibrateReadouts(nTriggers, nReadouts, PHsum);
+	Daq_Disable2();
+	roc_ClrCal();
+	roc_Col_Enable(col, false);
+
+	return 1;
+
+}
+
+int8_t CTestboard::CalibrateDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1,
+		int16_t dacLower1, int16_t dacUpper1, vectorR<int16_t> &nReadouts,
+		vectorR<int32_t> &PHsum) {
+
+	//nReadouts.clear();
+	//PHsum.clear();
+	int16_t n;
+	int32_t ph;
+
+	roc_Col_Enable(col, true);
+	roc_Pix_Cal(col, row, false);
+	uDelay(5);
+	Daq_Enable2(daq_read_size);
+	for (int i = dacLower1; i < dacUpper1; i++)
+	{
+		roc_SetDAC(dacReg1, i);
+		CalibrateReadouts(nTriggers, n, ph);
+		nReadouts.push_back(n);
+		PHsum.push_back(ph);
+	}
+	Daq_Disable2();
+	roc_ClrCal();
+	roc_Col_Enable(col, false);
+
+	return 1;
+}
+
+int8_t CTestboard::CalibrateDacDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1,
+		int16_t dacLower1, int16_t dacUpper1, int16_t dacReg2, int16_t dacLower2, int16_t dacUpper2,
+		vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum) {
+
+
+    int16_t n;
+	int32_t ph;
+
+    roc_Col_Enable(col, true);
+	roc_Pix_Cal(col, row, false);
+	uDelay(5);
+	Daq_Enable2(daq_read_size);
+	for (int i = dacLower1; i < dacUpper1; i++)
+	{
+		roc_SetDAC(dacReg1, i);
+		for (int k = dacLower1; k < dacUpper2; k++)
+		{
+			roc_SetDAC(dacReg2, k);
+			CalibrateReadouts(nTriggers, n, ph);
+			nReadouts.push_back(n);
+			PHsum.push_back(ph);
+		}
+	}
+	Daq_Disable2();
+	roc_ClrCal();
+	roc_Col_Enable(col, false);
+
+
+	return 1;
+}
+
+/*int8_t CTestboard::CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum) {
+
+	//uint8_t col, row;
+	int16_t pos = 0;
+	int16_t ok = -1;
+	int16_t n, ph, colR, rowR;
+
+	Daq_Enable2(daq_read_size);
+	vector<uint16_t> data;
+	nReadouts.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
+	PHsum.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
+
+	for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
+		roc_Col_Enable(col, true);
+		for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
+			//arm
+			roc_Pix_Cal(col, row, false);
+			uDelay(5);
+			for (uint8_t trigger = 0; trigger < nTriggers; trigger++) {
+				//send triggers
+				Pg_Single();
+				uDelay(4);
+			}
+			// clear
+			roc_ClrCal();
+		}
+
+		//read data
+		data.clear();
+		Daq_Read(data, daq_read_size);
+		pos = 0;
+		for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
+			//decode n readouts
+			for (int8_t trigger = 0; trigger < nTriggers; trigger++) {
+				ok = DecodePixel(data, pos, n, ph, colR, rowR);
+				if (n > 0 and ok) {
+					nReadouts[colR * ROC_NUMROWS + rowR]++;
+					PHsum[colR * ROC_NUMROWS + rowR] += ph;
+				}
+			}
+		}
+
+		roc_Col_Enable(col, false);
+	}
+
+	Daq_Disable2();
+	return 1;
+}*/
+
+int16_t CTestboard::CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum, vectorR<uint32_t> &adress)
+{
+	int16_t ok = -1;
+    uint32_t avail_size = 0;
+
+    nReadouts.clear();
+    PHsum.clear();
+    adress.clear();
+
+    nReadouts.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
+    PHsum.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
+    adress.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
+
+    Daq_Enable2(daq_read_size);
+	vector<uint16_t> data;
+	vector<uint16_t> data2;
+
+	vector<uint16_t> n;
+	vector<uint16_t> ph;
+	vector<uint32_t> adr;
+
+
+
+	for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
+		roc_Col_Enable(col, true);
+		for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
+		//for (uint8_t row = 0; row < 20; row++) {
+			//arm
+			roc_Pix_Cal(col, row, false);
+			uDelay(5);
+			for (uint8_t trigger = 0; trigger < nTriggers; trigger++) {
+				//send triggers
+				Pg_Single();
+				uDelay(4);
+			}
+			// clear
+			roc_ClrCal();
+		}
+
+		//read data
+		data.clear();
+		data2.clear();
+		//Daq_Read2(data, daq_read_size, avail_size);
+		Daq_Read(data, daq_read_size, avail_size, 0);
+		if (TBM_Present()){
+			avail_size=0;
+			Daq_Read(data2, daq_read_size, avail_size, 1);
+		}
+		//decode readouts
+		n.clear();
+		ph.clear();
+		adr.clear();
+		ok = Decode(data, n, ph, adr);
+		ok = Decode(data2, n, ph, adr);
+
+		int colR = -1, rowR = -1;
+
+		for (unsigned int i = 0; i<adr.size();i++){
+			rowR = adr[i] & 0xff;
+			colR = (adr[i] >> 8) & 0xff;
+			if (0 <= colR && colR < ROC_NUMCOLS && 0 <= rowR && rowR < ROC_NUMROWS){
+				nReadouts[colR * ROC_NUMROWS + rowR] += n[i];
+				PHsum[colR * ROC_NUMROWS + rowR] += ph[i];
+				adress[colR * ROC_NUMROWS + rowR] = adr[i];
+			 }
+		}
+
+		roc_Col_Enable(col, false);
+	}
+
+	Daq_Disable2();
+
+
+
+    return 1;
+}
+
+// To be removed
+int32_t CTestboard::CountReadouts(int32_t nTrig, int32_t chipId) {
 	roc_I2cAddr(chipId);
 	return CountReadouts(nTrig);
 }
 
-int32_t CTestboard::CountReadouts(int32_t nTrig, int32_t dacReg, int32_t dacValue)
-{
+// To be removed
+int32_t CTestboard::CountReadouts(int32_t nTrig, int32_t dacReg,
+		int32_t dacValue) {
 	roc_SetDAC(dacReg, dacValue);
 	return CountReadouts(nTrig);
 }
 
-/*uint8_t CTestboard::DacDac_dtb(vectorR<uint16_t> &res, int32_t dac1, int32_t dacRange1, int32_t dac2, int32_t dacRange2, int32_t nTrig)
-{
-	res.clear();
-	res.reserve(dacRange1*dacRange2);
-	for (int i = 0; i < dacRange1; i++)
-	{
-		roc_SetDAC(dac1, i);
-		for (int k = 0; k < dacRange2; k++)
-		{
-			roc_SetDAC(dac2, k);
-			//res.insert(res.end(),CountReadouts(nTrig));
-			res.push_back(CountReadouts(nTrig));
-		}
+// To be removed
+int32_t CTestboard::PH(int32_t col, int32_t row, int32_t trim,
+		int16_t nTriggers) {
+	Daq_Open(50000);
+	Daq_Select_Deser160(deserAdjust);
+	uDelay(100);
+	Daq_Start();
+	uDelay(100);
+
+	roc_Col_Enable(col, true);
+	roc_Pix_Trim(col, row, trim);
+	roc_Pix_Cal(col, row, false);
+
+	vector<uint16_t> data;
+
+	//roc_SetDAC(Vcal, vcal);
+	uDelay(100);
+	for (int16_t k = 0; k < nTriggers; k++) {
+		Pg_Single();
+		uDelay(20);
 	}
-	return 1;
-}*/
 
-int32_t CTestboard::PH(int32_t col, int32_t row, int32_t trim, int16_t nTriggers)
-{
-    Daq_Open(50000);
-    Daq_Select_Deser160(deserAdjust);
-    uDelay(100);
-    Daq_Start();
-    uDelay(100);
+	roc_Pix_Mask(col, row);
+	roc_Col_Enable(col, false);
+	roc_ClrCal();
 
-    roc_Col_Enable(col, true);
-    roc_Pix_Trim(col, row, trim);
-    roc_Pix_Cal (col, row, false);
-
-    vector<uint16_t> data;
-
-    //roc_SetDAC(Vcal, vcal);
-    uDelay(100);
-    for (int16_t k=0; k<nTriggers; k++)
-    {
-        Pg_Single();
-        uDelay(20);
-    }
-
-    roc_Pix_Mask(col, row);
-    roc_Col_Enable(col, false);
-    roc_ClrCal();
-
-    Daq_Stop();
-    Daq_Read(data, 4000);
-    Daq_Close();
-    // --- analyze data
+	Daq_Stop();
+	Daq_Read(data, 4000);
+	Daq_Close();
+	// --- analyze data
 
 	int cnt = 0;
 	double yi = 0.0;
 
 	int16_t ok = -1, pos = 0, n = 0, ph = 0, colR = 0, rowR = 0;
 
-	for (int16_t i=0; i < nTriggers; i++)
-	{
+	for (int16_t i = 0; i < nTriggers; i++) {
 		ok = DecodePixel(data, pos, n, ph, colR, rowR);
-		if (n > 0 and ok) {yi += ph; cnt++;}
+		if (n > 0 and ok) {
+			yi += ph;
+			cnt++;
+		}
 	}
 
 	if (cnt > 0)
-		return (int32_t) yi/cnt;
+		return (int32_t) yi / cnt;
 	else
 		return -9999;
 
 }
 
-/*int32_t CTestboard::ChipEfficiency(int16_t nTriggers, vectorR<uint8_t> &res)
-{
-    // --- scan all pixel ------------------------------------------------------
-    uint8_t col, row;
-    uint8_t nHits = 0;
-    Daq_Open(100000);
-    Daq_Select_Deser160(deserAdjust);
-    Daq_Start();
-
-    int16_t ok = -1, n = 0, ph = 0, colR = 0, rowR = 0, pos = 0;
-    for (col=0; col<ROC_NUMCOLS; col++)
-    {
-    	pos = 0;
-        roc_Col_Enable(col, true);
-        for (row=0; row<ROC_NUMROWS; row++)
-        {
-            roc_Pix_Trim(col, row, 15);
-            roc_Pix_Cal(col, row, false);
-			uDelay(5);
-            for (int16_t i=0; i < nTriggers; i++)
-            {
-			    Pg_Single();
-			    uDelay(1);
-            }
-            roc_Pix_Mask(col, row);
-			roc_ClrCal();
-        }
-        roc_Col_Enable(col, false);
-        vector<uint16_t> data;
-        Daq_Read(data,50000);
-        for (row=0; row<ROC_NUMROWS; row++)
-        {
-        		nHits = 0;
-                for (int16_t i=0; i < nTriggers; i++)
-                {
-                	ok = DecodePixel(data, pos, n, ph, colR, rowR);
-                	if (n > 0 && ok && col == colR && row == rowR) {nHits++;}
-                }
-            // for each col, for each row, count number of hits and divide by triggers
-            res.push_back(nHits);
-            //printf("Pix %i,%i: %i\n",col,row,nHits);
-        }
-    }
-    Daq_Close();
-    Daq_Stop();
-    return 1;
-}*/
-
 // == Thresholds ===================================================
 /*
-int32_t CTestboard::ThresholdBinary(int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t dacMin, int32_t dacMax, bool reverseMode)
-{
-    int step_size = 1;
-    if (reverseMode) step_size = 3;
-    // test if threshold is already reached
-    if (dacMax < dacMin && !reverseMode)
-        // return value is dacMin
-        return dacMin;
-    if (dacMin > dacMax && reverseMode)
-        // return value
-        return dacMax;
-     else
-    {
-      // calculate midpoint to cut set in half, non symmetric
-      int32_t dacMid = dacMin + step_size*((dacMax - dacMin) / 4);
-      int32_t thrMid = CountReadouts(nTrig, dacReg, dacMid);
-      //cout << "Threshold finding midPoint : " << dacMid << "  Threshold : " << thrMid  << " thrLevel: " << thrLevel << " dacMin: " << dacMin << " dacMax: " << dacMax << endl;
-      // three-way comparison
-      if ((thrMid > thrLevel && !reverseMode) || (thrMid < thrLevel && reverseMode))
-        // threshold is in lower subset
-        return ThresholdBinary(thrLevel, nTrig, dacReg, dacMin, dacMid-1, reverseMode);
-      else if ((thrMid < thrLevel && !reverseMode) || (thrMid > thrLevel && reverseMode))
-        // threshold is in upper subset
-        return ThresholdBinary(thrLevel, nTrig, dacReg, dacMid+1, dacMax, reverseMode);
-      else
-        // threshold has been found
-        return dacMid;
-    }
-}
-*/
-int32_t CTestboard::Threshold(int32_t start, int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg)
-{
-        int32_t threshold = start, newValue, oldValue, result;
-        int stepAbs;
-        if (step < 0) stepAbs = -step; else stepAbs = step;
+ int32_t CTestboard::ThresholdBinary(int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t dacMin, int32_t dacMax, bool reverseMode)
+ {
+ int step_size = 1;
+ if (reverseMode) step_size = 3;
+ // test if threshold is already reached
+ if (dacMax < dacMin && !reverseMode)
+ // return value is dacMin
+ return dacMin;
+ if (dacMin > dacMax && reverseMode)
+ // return value
+ return dacMax;
+ else
+ {
+ // calculate midpoint to cut set in half, non symmetric
+ int32_t dacMid = dacMin + step_size*((dacMax - dacMin) / 4);
+ int32_t thrMid = CountReadouts(nTrig, dacReg, dacMid);
+ //cout << "Threshold finding midPoint : " << dacMid << "  Threshold : " << thrMid  << " thrLevel: " << thrLevel << " dacMin: " << dacMin << " dacMax: " << dacMax << endl;
+ // three-way comparison
+ if ((thrMid > thrLevel && !reverseMode) || (thrMid < thrLevel && reverseMode))
+ // threshold is in lower subset
+ return ThresholdBinary(thrLevel, nTrig, dacReg, dacMin, dacMid-1, reverseMode);
+ else if ((thrMid < thrLevel && !reverseMode) || (thrMid > thrLevel && reverseMode))
+ // threshold is in upper subset
+ return ThresholdBinary(thrLevel, nTrig, dacReg, dacMid+1, dacMax, reverseMode);
+ else
+ // threshold has been found
+ return dacMid;
+ }
+ }
+ */
+int32_t CTestboard::Threshold(int32_t start, int32_t step, int32_t thrLevel,
+		int32_t nTrig, int32_t dacReg) {
+	int32_t threshold = start, newValue, oldValue, result;
+	int stepAbs;
+	if (step < 0)
+		stepAbs = -step;
+	else
+		stepAbs = step;
 
-        newValue = CountReadouts(nTrig, dacReg, threshold);
-        if (newValue > thrLevel)
-        {
-                do
-                {
-                        threshold-=step;
-                        oldValue = newValue;
-                        newValue = CountReadouts(nTrig, dacReg, threshold);
-                }
-                while ((newValue > thrLevel) && (threshold > (stepAbs - 1)) && (threshold < (256 - stepAbs)));
+	newValue = CountReadouts(nTrig, dacReg, threshold);
+	if (newValue > thrLevel) {
+		do {
+			threshold -= step;
+			oldValue = newValue;
+			newValue = CountReadouts(nTrig, dacReg, threshold);
+		} while ((newValue > thrLevel) && (threshold > (stepAbs - 1))
+				&& (threshold < (256 - stepAbs)));
 
-                if (oldValue - thrLevel > thrLevel - newValue) result = threshold;
-                else result = threshold+step;
-        }
-        else
-        {
-                do
-                {
-                        threshold+=step;
-                        oldValue = newValue;
-                        newValue = CountReadouts(nTrig, dacReg, threshold);
-                }
-                while ((newValue <= thrLevel) && (threshold > (stepAbs - 1)) && (threshold < (256 - stepAbs)));
+		if (oldValue - thrLevel > thrLevel - newValue)
+			result = threshold;
+		else
+			result = threshold + step;
+	} else {
+		do {
+			threshold += step;
+			oldValue = newValue;
+			newValue = CountReadouts(nTrig, dacReg, threshold);
+		} while ((newValue <= thrLevel) && (threshold > (stepAbs - 1))
+				&& (threshold < (256 - stepAbs)));
 
-                if (thrLevel - oldValue > newValue - thrLevel) result = threshold;
-                else result = threshold-step;
-        }
+		if (thrLevel - oldValue > newValue - thrLevel)
+			result = threshold;
+		else
+			result = threshold - step;
+	}
 
-        if (result > 255) result = 255;
-        if (result < 0) result = 0;
+	if (result > 255)
+		result = 255;
+	if (result < 0)
+		result = 0;
 
-        return result;
+	return result;
 }
 
 /*
-bool CTestboard::FindReadout(int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t &dacMin, int32_t &dacMax, bool reverseMode)
-{
-    if (abs(dacMax -dacMin) <= 1) return false;
-    else{
-      // calculate midpoint to cut set in half
-      int32_t dacMid = dacMin + ((dacMax - dacMin) / 2);
-      int32_t thrMid = CountReadouts(nTrig, dacReg, dacMid);
-      //cout << "Find readout midPoint : " << dacMid << "  Threshold : " << thrMid  << " thrLevel: " << thrLevel << " dacMin: " << dacMin << " dacMax: " << dacMax << endl;
-      if (thrMid > thrLevel) return true;
-      else{
-                  if (FindReadout(thrLevel, nTrig, dacReg, dacMin, dacMid, reverseMode)) {
-                dacMax = dacMid;
-                return true;
-            }
-            else if (FindReadout(thrLevel, nTrig, dacReg, dacMid, dacMax, reverseMode)){
-                dacMin = dacMid;
-                return true;
-            }
-      }
-    }
-}
+ bool CTestboard::FindReadout(int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t &dacMin, int32_t &dacMax, bool reverseMode)
+ {
+ if (abs(dacMax -dacMin) <= 1) return false;
+ else{
+ // calculate midpoint to cut set in half
+ int32_t dacMid = dacMin + ((dacMax - dacMin) / 2);
+ int32_t thrMid = CountReadouts(nTrig, dacReg, dacMid);
+ //cout << "Find readout midPoint : " << dacMid << "  Threshold : " << thrMid  << " thrLevel: " << thrLevel << " dacMin: " << dacMin << " dacMax: " << dacMax << endl;
+ if (thrMid > thrLevel) return true;
+ else{
+ if (FindReadout(thrLevel, nTrig, dacReg, dacMin, dacMid, reverseMode)) {
+ dacMax = dacMid;
+ return true;
+ }
+ else if (FindReadout(thrLevel, nTrig, dacReg, dacMid, dacMax, reverseMode)){
+ dacMin = dacMid;
+ return true;
+ }
+ }
+ }
+ }
 
-int32_t CTestboard::PixelThreshold(int32_t col, int32_t row, int32_t start, int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t xtalk, int32_t cals, int32_t trim)
-{
+ int32_t CTestboard::PixelThreshold(int32_t col, int32_t row, int32_t start, int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t xtalk, int32_t cals, int32_t trim)
+ {
+ int calRow = row;
+ roc_Pix_Trim(col, row, trim);
+
+ if (xtalk)
+ {
+ if (row == ROC_NUMROWS - 1) calRow = row - 1;
+ else calRow = row + 1;
+ }
+ if (cals) roc_Pix_Cal(col, calRow, true);
+ else roc_Pix_Cal(col, calRow, false);
+
+ bool reverseMode = false;
+ if (step < 0) reverseMode = true;
+ int32_t res = -1;
+ if (!reverseMode) res = 256;
+
+ int32_t dacMin = 0, dacMax = 256;
+ if (FindReadout(0, 1, dacReg, dacMin, dacMax, reverseMode)) {
+ res = ThresholdBinary(thrLevel, nTrig, dacReg, dacMin, dacMax, reverseMode);
+ //If binary search fails, find simple threshold
+ if ((res > dacMax && !reverseMode) || (res < dacMin && reverseMode)){
+ int roughThr = ThresholdSimple(dacMin, 4*step/abs(step), 0, 1, dacReg);
+ res = ThresholdSimple(roughThr, 1*step/abs(step), thrLevel, nTrig, dacReg);
+ }
+ }
+
+ roc_ClrCal();
+ roc_Pix_Mask(col, row);
+ return res;
+ }
+ */
+
+int32_t CTestboard::PixelThreshold(int32_t col, int32_t row, int32_t start,
+		int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg,
+		int32_t xtalk, int32_t cals, int32_t trim) {
+	Daq_Enable2(daq_read_size);
 	int calRow = row;
+
 	roc_Pix_Trim(col, row, trim);
 
-	if (xtalk)
-	{
-		if (row == ROC_NUMROWS - 1) calRow = row - 1;
-		else calRow = row + 1;
+	if (xtalk) {
+		if (row == ROC_NUMROWS - 1)
+			calRow = row - 1;
+		else
+			calRow = row + 1;
 	}
-	if (cals) roc_Pix_Cal(col, calRow, true);
-	else roc_Pix_Cal(col, calRow, false);
-
-	bool reverseMode = false;
-	if (step < 0) reverseMode = true;
-	int32_t res = -1;
-	if (!reverseMode) res = 256;
-
-	int32_t dacMin = 0, dacMax = 256;
-	if (FindReadout(0, 1, dacReg, dacMin, dacMax, reverseMode)) {
-	    res = ThresholdBinary(thrLevel, nTrig, dacReg, dacMin, dacMax, reverseMode);
-	    //If binary search fails, find simple threshold
-	    if ((res > dacMax && !reverseMode) || (res < dacMin && reverseMode)){
-	        int roughThr = ThresholdSimple(dacMin, 4*step/abs(step), 0, 1, dacReg);
-	        res = ThresholdSimple(roughThr, 1*step/abs(step), thrLevel, nTrig, dacReg);
-	    }
-	}
-
-    roc_ClrCal();
-    roc_Pix_Mask(col, row);
+	roc_Pix_Cal(col, calRow, cals);
+	int32_t res = Threshold(start, step, thrLevel, nTrig, dacReg);
+	roc_ClrCal();
+	//roc_Pix_Mask(col, row);
+	Daq_Disable2();
 	return res;
 }
-*/
-
-int32_t CTestboard::PixelThreshold(int32_t col, int32_t row, int32_t start, int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t xtalk, int32_t cals, int32_t trim)
-{
-        int calRow = row;
-        roc_Pix_Trim(col, row, trim);
-
-        if (xtalk)
-        {
-                if (row == ROC_NUMROWS - 1) calRow = row - 1;
-                else calRow = row + 1;
-        }
-        if (cals) roc_Pix_Cal(col, calRow, true);
-        else roc_Pix_Cal(col, calRow, false);
-
-        int32_t res = Threshold(start, step, thrLevel, nTrig, dacReg);
-    roc_ClrCal();
-    roc_Pix_Mask(col, row);
-        return res;
-}
 
 
-bool CTestboard::test_pixel_address(int32_t col, int32_t row)
-{
-    Daq_Open(5000);
-    Daq_Select_Deser160(deserAdjust);
-    uDelay(100);
-    Daq_Start();
-    uDelay(100);
-    roc_Col_Enable(col, true);
-    uDelay(20);
+// to be replaced
+bool CTestboard::test_pixel_address(int32_t col, int32_t row) {
+	Daq_Open(5000);
+	Daq_Select_Deser160(deserAdjust);
+	uDelay(100);
+	Daq_Start();
+	uDelay(100);
+	roc_Col_Enable(col, true);
+	uDelay(20);
 
-    roc_Pix_Trim(col,row,15);
-    roc_Pix_Cal(col,row,false);
-    uDelay(20);
-    Pg_Single();
-    uDelay(5);
-    roc_ClrCal();
-    roc_Pix_Mask(col,row);
-    uDelay(20);
-    roc_Col_Enable(col, false);
-    uDelay(100);
-    Daq_Stop();
+	roc_Pix_Trim(col, row, 15);
+	roc_Pix_Cal(col, row, false);
+	uDelay(20);
+	Pg_Single();
+	uDelay(5);
+	roc_ClrCal();
+	roc_Pix_Mask(col, row);
+	uDelay(20);
+	roc_Col_Enable(col, false);
+	uDelay(100);
+	Daq_Stop();
 
-    vector<uint16_t> data;
-    Daq_Read(data, 5000);
-    Daq_Close();
-    // --- analyze data
+	vector<uint16_t> data;
+	Daq_Read(data, 5000);
+	Daq_Close();
+	// --- analyze data
 
 	int16_t ok = -1, pos = 0, n = 0, ph = 0, colR = -1, rowR = -1;
 
@@ -1795,5 +2301,49 @@ bool CTestboard::test_pixel_address(int32_t col, int32_t row)
 		return (col == colR && row == rowR);
 	}
 	return false;
+}
 
+void CTestboard::ChipThresholdIntern(int32_t start[], int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg, bool xtalk, bool cals, int32_t res[])
+{
+	int32_t thr, startValue;
+	for (int col = 0; col < ROC_NUMCOLS; col++)
+        {
+        	    roc_Col_Enable(col, 1);
+                for (int row = 0; row < ROC_NUMROWS; row++)
+                {
+                        if (step < 0) startValue = start[col*ROC_NUMROWS + row] + 10;
+                        else startValue = start[col*ROC_NUMROWS + row];
+                        if (startValue < 0) startValue = 0;
+                        else if (startValue > 255) startValue = 255;
+                        thr = PixelThreshold(col, row, startValue, step, thrLevel, nTrig, dacReg, xtalk, cals, 15);
+                        res[col*ROC_NUMROWS + row] = thr;
+                }
+                roc_Col_Enable(col, 0);
+        }
+}
+
+int8_t CTestboard::ThresholdMap(int32_t nTrig, int32_t dacReg, bool rising, bool xtalk, bool cals, vectorR<int16_t> &thrValue)
+{
+	thrValue.clear();
+	int32_t startValue;
+	int32_t step = 1;
+	int32_t thrLevel = nTrig/2;
+	int32_t roughThr[ROC_NUMROWS * ROC_NUMCOLS], res[ROC_NUMROWS * ROC_NUMCOLS], roughStep;
+	if (!rising)
+	{
+		  startValue = 255;
+		  roughStep = -4;
+		  printf("ThresholdMap\n");
+	}
+	else
+	{
+		  startValue = 0;
+		  roughStep = 4;
+	}
+
+	for (int i = 0; i < ROC_NUMROWS * ROC_NUMCOLS; i++) roughThr[i] = startValue;
+	ChipThresholdIntern(roughThr, roughStep, 0, 1, dacReg, xtalk, cals, roughThr);
+	ChipThresholdIntern(roughThr, step, thrLevel, nTrig, dacReg, xtalk, cals, res);
+	for (int i = 0; i < ROC_NUMROWS * ROC_NUMCOLS; i++) thrValue.push_back(res[i]);
+	return 1;
 }
