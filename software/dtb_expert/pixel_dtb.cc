@@ -285,6 +285,7 @@ void CTestboard::Init()
 
 	// --- setup I2C master controller
 	I2C_Main_Init();
+	I2C_External_Init();
 
 	// --- default VD, VA settings
 	vd = mV_to_DAC(2500);    // mV

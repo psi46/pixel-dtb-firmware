@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: X:/source/FPGA/pixel-dtb-firmware/dtb/dtb_system.sopcinfo
  *
- * Generated: Wed Jan 15 12:31:21 CET 2014
+ * Generated: Thu Jan 23 07:55:28 CET 2014
  */
 
 /*
@@ -698,6 +698,20 @@
 
 
 /*
+ * i2c_external configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_i2c_external i2c_master
+#define I2C_EXTERNAL_BASE 0x8100090
+#define I2C_EXTERNAL_IRQ 1
+#define I2C_EXTERNAL_IRQ_INTERRUPT_CONTROLLER_ID 0
+#define I2C_EXTERNAL_NAME "/dev/i2c_external"
+#define I2C_EXTERNAL_SPAN 8
+#define I2C_EXTERNAL_TYPE "i2c_master"
+
+
+/*
  * i2c_main configuration
  *
  */
@@ -1012,7 +1026,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1389781532
+#define SYSID_TIMESTAMP 1390459304
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 

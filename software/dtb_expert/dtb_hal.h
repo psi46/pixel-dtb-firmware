@@ -9,6 +9,8 @@
 #include "altera_avalon_pio_regs.h"
 #include "io.h"
 #include "rpc_io.h"
+#include "cstdint.h"
+
 
 // basic I/O functions
 
@@ -138,9 +140,14 @@ inline unsigned int GetI2cHs(unsigned char reg)
 #define IF       0x01  // Interrupt Flag
 
 void I2C_Main_Init();
-// bool I2C_Master_Write(unsigned char data);
-// bool I2C_Master_Read(unsigned char &data);
+void I2C_External_Init();
 
+uint8_t I2C_EEPROM_Write(uint8_t addr, const uint8_t *data, uint8_t length);
+uint8_t I2C_EEPROM_Read(uint8_t *data, uint8_t length);
+
+// I2C EEPROM return codes
+#define EEPROM_OK           0
+#define EEPROM_NOT_PRESENT  1
 
 
 // === USB ===============================================================

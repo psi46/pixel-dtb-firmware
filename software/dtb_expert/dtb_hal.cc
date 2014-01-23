@@ -35,6 +35,79 @@ void I2C_Main_Init()
 }
 
 
+void I2C_External_Init()
+{
+  IOWR_8DIRECT(I2C_EXTERNAL_BASE, CTR,     0);    // disable i2c controller
+  IOWR_8DIRECT(I2C_EXTERNAL_BASE, PRERlo, 79);    // prescaler = 79 (100kHz)
+  IOWR_8DIRECT(I2C_EXTERNAL_BASE, PRERhi,  0);
+  IOWR_8DIRECT(I2C_EXTERNAL_BASE, CTR,    EN);    // enable i2c controller
+}
+
+uint8_t I2C_EEPROM_Write(uint8_t addr, const uint8_t *data, uint8_t length)
+{
+  uint8_t error = EEPROM_OK;
+  int res, p = 0;
+  // send device id
+  IOWR(I2C_EXTERNAL_BASE, TXR, 0xA0);
+  IOWR(I2C_EXTERNAL_BASE, CR, STA|WR);
+  while ((res = IORD(I2C_EXTERNAL_BASE, SR)) & TIP);
+  if (res & RxACK) error = EEPROM_NOT_PRESENT;
+
+  // send address
+  IOWR(I2C_EXTERNAL_BASE, TXR, addr);
+  if (length > 0)
+  {
+    IOWR(I2C_EXTERNAL_BASE, CR, WR);
+    while ((res = IORD(I2C_EXTERNAL_BASE, SR)) & TIP);
+  }
+  else
+  {
+    IOWR(I2C_EXTERNAL_BASE, CR, WR|STO);
+    while ((res = IORD(I2C_EXTERNAL_BASE, SR)) & TIP);
+    return error;
+  }
+
+  // send data bytes
+  do
+  {
+    length--;
+    IOWR(I2C_EXTERNAL_BASE, TXR, data[p++]);
+    if (length != 0)
+      IOWR(I2C_EXTERNAL_BASE, CR, WR);
+    else
+      IOWR(I2C_EXTERNAL_BASE, CR, WR|STO);
+    while ((res = IORD(I2C_EXTERNAL_BASE, SR)) & TIP);
+  } while (length > 0);
+  return error;
+}
+
+
+uint8_t I2C_EEPROM_Read(uint8_t *data, uint8_t length)
+{
+  uint8_t error = EEPROM_OK;
+  int res, p = 0;
+  // send device id
+  IOWR(I2C_EXTERNAL_BASE, TXR, 0xA1);
+  IOWR(I2C_EXTERNAL_BASE, CR, STA|WR);
+  while ((res = IORD(I2C_EXTERNAL_BASE, SR)) & TIP);
+  if (res & RxACK) error = EEPROM_NOT_PRESENT;
+
+  // read data bytes
+  while (length > 0)
+  {
+    length--;
+    if (length != 0)
+      IOWR(I2C_EXTERNAL_BASE, CR, RD);
+    else
+      IOWR(I2C_EXTERNAL_BASE, CR, RD|STO|ACK);
+    while ((res = IORD(I2C_EXTERNAL_BASE, SR)) & TIP);
+    data[p++] = IORD(I2C_EXTERNAL_BASE, RXR);
+  }
+  return error;
+}
+
+
+
 void Adv3224Init()
 {
 	usleep(50);
