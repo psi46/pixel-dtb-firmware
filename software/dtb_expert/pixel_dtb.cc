@@ -1670,94 +1670,7 @@ int8_t CTestboard::Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vec
 	return 1;
 }
 
-/*int8_t CTestboard::Decode2(const vector<uint16_t> &data, vector<int16_t> &n, vector<int32_t> &ph, vector<uint32_t> &adr)
-{
 
-    uint32_t words_remaining = 0;
-    uint16_t hdr, trl;
-	unsigned int raw;
-    int16_t n_pix = 0, ph_pix = 0, col = 0, row = 0, evNr = 0, stkCnt = 0, dataId = 0, dataNr = 0;
-    int16_t roc_n = -1;
-    int16_t tbm_n = -1;
-    uint32_t address;
-    int pos = 0;
-    //Module readout
-    if (TBM_Present()){
-	for (int i=0; i<data.size(); i++)
-	{
-		int d = data[i] & 0xf;
-		int q = (data[i]>>4) & 0xf;
-		switch (q)
-		{
-		case  0: break;
-
-		case  1: raw = d; break;
-		case  2: raw = (raw<<4) + d; break;
-		case  3: raw = (raw<<4) + d; break;
-		case  4: raw = (raw<<4) + d; break;
-		case  5: raw = (raw<<4) + d; break;
-		case  6: raw = (raw<<4) + d;
-			     DecodePixel(raw, n_pix, ph_pix, col, row);
-			     if (0 <= col && col < ROC_NUMCOLS && 0 <= row && row < ROC_NUMROWS){
-					 n[col * ROC_NUMROWS + row] += n_pix;
-					 ph[col * ROC_NUMROWS + row] += ph_pix;
-					 address = tbm_n;
-					 address = (address << 8) + roc_n;
-					 address = (address << 8) + col;
-					 address = (address << 8) + row;
-					 adr[col * ROC_NUMROWS + row] = address;
-			     }
-				 break;
-
-		case  7: roc_n++; break;
-
-		case  8: hdr = d; break;
-		case  9: hdr = (hdr<<4) + d; break;
-		case 10: hdr = (hdr<<4) + d; break;
-		case 11: hdr = (hdr<<4) + d;
-			     DecodeTbmHeader(hdr, evNr, stkCnt);
-                 tbm_n++;
-                 roc_n = -1;
-			     break;
-
-		case 12: trl = d; break;
-		case 13: trl = (trl<<4) + d; break;
-		case 14: trl = (trl<<4) + d; break;
-		case 15: trl = (trl<<4) + d;
-			     DecodeTbmTrailer(trl, dataId, dataNr);
-			     break;
-		}
-	}
-  }
-    //Single ROC
-    else {
-	    while (!(pos >= int(data.size()))) {
-			// check header
-			if ((data[pos] & 0x8ffc) != 0x87f8)
-				return -2; // wrong header
-			int hdr = data[pos++] & 0xfff;
-			// read pixels while not data end or trailer
-			while (!(pos >= int(data.size()) || (data[pos] & 0x8000))) {
-				// store 24 bits in raw
-				raw = (data[pos++] & 0xfff) << 12;
-				if (pos >= int(data.size()) || (data[pos] & 0x8000))
-					return -3; // incomplete data
-				raw += data[pos++] & 0xfff;
-				DecodePixel(raw, n_pix, ph_pix, col, row);
-				if (0 <= col && col < ROC_NUMCOLS && 0 <= row && row < ROC_NUMROWS){
-					n[col * ROC_NUMROWS + row] += n_pix;
-					ph[col * ROC_NUMROWS + row] += ph_pix;
-					address = 0;
-					address = (address << 8) ;
-					address = (address << 8) + col;
-					address = (address << 8) + row;
-					adr[col * ROC_NUMROWS + row] = address;
-				}
-			}
-        }
-    }
-	return 1;
-}*/
 int32_t CTestboard::CountReadouts(int32_t nTriggers) {
 	int32_t nHits = 0;
 
@@ -1782,37 +1695,6 @@ int32_t CTestboard::CountReadouts(int32_t nTriggers) {
 
 	return nHits;
 }
-
-/*int8_t CTestboard::CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int32_t &PHsum){
-
-	nReadouts = 0;
-	PHsum = 0;
-
-
-	vector<uint16_t> data;
-	uDelay(5);
-
-	for (int16_t i = 0; i < nTriggers; i++)
-	{
-		Pg_Single();
-		uDelay(4);
-	}
-
-	Daq_Read(data, daq_read_size);
-
-	int16_t ok = -1, pos = 0, n = 0, ph = 0, colR = 0, rowR = 0;
-	for (int16_t i = 0; i < nTriggers; i++)
-	{
-		ok = DecodePixel(data, pos, n, ph, colR, rowR);
-		if (n > 0 and ok)
-		{
-			nReadouts++;
-			PHsum+=ph;
-		}
-	}
-
-	return 1;
-}*/
 
 int8_t CTestboard::CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int32_t &PHsum){
 
@@ -1920,55 +1802,6 @@ int8_t CTestboard::CalibrateDacDacScan(int16_t nTriggers, int16_t col, int16_t r
 
 	return 1;
 }
-
-/*int8_t CTestboard::CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum) {
-
-	//uint8_t col, row;
-	int16_t pos = 0;
-	int16_t ok = -1;
-	int16_t n, ph, colR, rowR;
-
-	Daq_Enable2(daq_read_size);
-	vector<uint16_t> data;
-	nReadouts.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
-	PHsum.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
-
-	for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
-		roc_Col_Enable(col, true);
-		for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
-			//arm
-			roc_Pix_Cal(col, row, false);
-			uDelay(5);
-			for (uint8_t trigger = 0; trigger < nTriggers; trigger++) {
-				//send triggers
-				Pg_Single();
-				uDelay(4);
-			}
-			// clear
-			roc_ClrCal();
-		}
-
-		//read data
-		data.clear();
-		Daq_Read(data, daq_read_size);
-		pos = 0;
-		for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
-			//decode n readouts
-			for (int8_t trigger = 0; trigger < nTriggers; trigger++) {
-				ok = DecodePixel(data, pos, n, ph, colR, rowR);
-				if (n > 0 and ok) {
-					nReadouts[colR * ROC_NUMROWS + rowR]++;
-					PHsum[colR * ROC_NUMROWS + rowR] += ph;
-				}
-			}
-		}
-
-		roc_Col_Enable(col, false);
-	}
-
-	Daq_Disable2();
-	return 1;
-}*/
 
 int16_t CTestboard::CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum, vectorR<uint32_t> &adress)
 {
