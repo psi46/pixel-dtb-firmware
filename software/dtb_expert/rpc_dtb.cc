@@ -846,12 +846,20 @@ bool rpc__GetPixelAddressInverted$b(CRpcIo &rpc_io, rpcMessage &msg)
 	return true;
 }
 
+bool rpc__SetPixelAddressInverted$vb(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(1)) return false;
+	bool rpc_par1 = msg.Get_BOOL();
+	tb.SetPixelAddressInverted(rpc_par1);
+	return true;
+}
+
 bool rpc__CountReadouts$ii(CRpcIo &rpc_io, rpcMessage &msg)
 {
 	if (!msg.CheckSize(4)) return false;
 	int32_t rpc_par1 = msg.Get_INT32();
 	int32_t rpc_par0 = tb.CountReadouts(rpc_par1);
-	msg.Create(89);
+	msg.Create(90);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -864,7 +872,7 @@ bool rpc__CountReadouts$iii(CRpcIo &rpc_io, rpcMessage &msg)
 	int32_t rpc_par1 = msg.Get_INT32();
 	int32_t rpc_par2 = msg.Get_INT32();
 	int32_t rpc_par0 = tb.CountReadouts(rpc_par1,rpc_par2);
-	msg.Create(90);
+	msg.Create(91);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -878,7 +886,7 @@ bool rpc__CountReadouts$iiii(CRpcIo &rpc_io, rpcMessage &msg)
 	int32_t rpc_par2 = msg.Get_INT32();
 	int32_t rpc_par3 = msg.Get_INT32();
 	int32_t rpc_par0 = tb.CountReadouts(rpc_par1,rpc_par2,rpc_par3);
-	msg.Create(91);
+	msg.Create(92);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -893,7 +901,7 @@ bool rpc__PH$iiiis(CRpcIo &rpc_io, rpcMessage &msg)
 	int32_t rpc_par3 = msg.Get_INT32();
 	int16_t rpc_par4 = msg.Get_INT16();
 	int32_t rpc_par0 = tb.PH(rpc_par1,rpc_par2,rpc_par3,rpc_par4);
-	msg.Create(92);
+	msg.Create(93);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -913,7 +921,7 @@ bool rpc__PixelThreshold$iiiiiiiibb(CRpcIo &rpc_io, rpcMessage &msg)
 	bool rpc_par8 = msg.Get_BOOL();
 	bool rpc_par9 = msg.Get_BOOL();
 	int32_t rpc_par0 = tb.PixelThreshold(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9);
-	msg.Create(93);
+	msg.Create(94);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -926,7 +934,7 @@ bool rpc__test_pixel_address$bii(CRpcIo &rpc_io, rpcMessage &msg)
 	int32_t rpc_par1 = msg.Get_INT32();
 	int32_t rpc_par2 = msg.Get_INT32();
 	bool rpc_par0 = tb.test_pixel_address(rpc_par1,rpc_par2);
-	msg.Create(94);
+	msg.Create(95);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -942,7 +950,7 @@ bool rpc__CalibratePixel$csss0s0i(CRpcIo &rpc_io, rpcMessage &msg)
 	int16_t rpc_par4 = msg.Get_INT16();
 	int32_t rpc_par5 = msg.Get_INT32();
 	int8_t rpc_par0 = tb.CalibratePixel(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5);
-	msg.Create(95);
+	msg.Create(96);
 	msg.Put_INT8(rpc_par0);
 	msg.Put_INT16(rpc_par4);
 	msg.Put_INT32(rpc_par5);
@@ -963,7 +971,7 @@ bool rpc__CalibrateDacScan$cssssss2s2i(CRpcIo &rpc_io, rpcMessage &msg)
 	vectorR<int16_t> rpc_par7;
 	vectorR<int32_t> rpc_par8;
 	int8_t rpc_par0 = tb.CalibrateDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8);
-	msg.Create(96);
+	msg.Create(97);
 	msg.Put_INT8(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	if (!rpc_Send(rpc_io, rpc_par7)) return false;
@@ -987,7 +995,7 @@ bool rpc__CalibrateDacDacScan$csssssssss2s2i(CRpcIo &rpc_io, rpcMessage &msg)
 	vectorR<int16_t> rpc_par10;
 	vectorR<int32_t> rpc_par11;
 	int8_t rpc_par0 = tb.CalibrateDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9,rpc_par10,rpc_par11);
-	msg.Create(97);
+	msg.Create(98);
 	msg.Put_INT8(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	if (!rpc_Send(rpc_io, rpc_par10)) return false;
@@ -1001,7 +1009,7 @@ bool rpc__TrimChip$s1s(CRpcIo &rpc_io, rpcMessage &msg)
 	if (!msg.CheckSize(0)) return false;
 	vector<int16_t> rpc_par1; if (!rpc_Receive(rpc_io, rpc_par1)) return false;
 	int16_t rpc_par0 = tb.TrimChip(rpc_par1);
-	msg.Create(98);
+	msg.Create(99);
 	msg.Put_INT16(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
@@ -1016,7 +1024,7 @@ bool rpc__CalibrateMap$ss2s2i2I(CRpcIo &rpc_io, rpcMessage &msg)
 	vectorR<int32_t> rpc_par3;
 	vectorR<uint32_t> rpc_par4;
 	int16_t rpc_par0 = tb.CalibrateMap(rpc_par1,rpc_par2,rpc_par3,rpc_par4);
-	msg.Create(99);
+	msg.Create(100);
 	msg.Put_INT16(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	if (!rpc_Send(rpc_io, rpc_par2)) return false;
@@ -1033,7 +1041,7 @@ bool rpc__TestColPixel$bCC2C(CRpcIo &rpc_io, rpcMessage &msg)
 	uint8_t rpc_par2 = msg.Get_UINT8();
 	vectorR<uint8_t> rpc_par3;
 	bool rpc_par0 = tb.TestColPixel(rpc_par1,rpc_par2,rpc_par3);
-	msg.Create(100);
+	msg.Create(101);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	if (!rpc_Send(rpc_io, rpc_par3)) return false;
@@ -1053,14 +1061,14 @@ bool rpc__Ethernet_RecvPackets$I(CRpcIo &rpc_io, rpcMessage &msg)
 {
 	if (!msg.CheckSize(0)) return false;
 	uint32_t rpc_par0 = tb.Ethernet_RecvPackets();
-	msg.Create(102);
+	msg.Create(103);
 	msg.Put_UINT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
 	return true;
 }
 
-const uint16_t rpc_cmdListSize = 103;
+const uint16_t rpc_cmdListSize = 104;
 
 const CRpcCall rpc_cmdlist[] =
 {
@@ -1153,20 +1161,21 @@ const CRpcCall rpc_cmdlist[] =
 	/*    86 */ { rpc__tbm_Get$bC0C, "tbm_Get$bC0C" },
 	/*    87 */ { rpc__tbm_GetRaw$bC0I, "tbm_GetRaw$bC0I" },
 	/*    88 */ { rpc__GetPixelAddressInverted$b, "GetPixelAddressInverted$b" },
-	/*    89 */ { rpc__CountReadouts$ii, "CountReadouts$ii" },
-	/*    90 */ { rpc__CountReadouts$iii, "CountReadouts$iii" },
-	/*    91 */ { rpc__CountReadouts$iiii, "CountReadouts$iiii" },
-	/*    92 */ { rpc__PH$iiiis, "PH$iiiis" },
-	/*    93 */ { rpc__PixelThreshold$iiiiiiiibb, "PixelThreshold$iiiiiiiibb" },
-	/*    94 */ { rpc__test_pixel_address$bii, "test_pixel_address$bii" },
-	/*    95 */ { rpc__CalibratePixel$csss0s0i, "CalibratePixel$csss0s0i" },
-	/*    96 */ { rpc__CalibrateDacScan$cssssss2s2i, "CalibrateDacScan$cssssss2s2i" },
-	/*    97 */ { rpc__CalibrateDacDacScan$csssssssss2s2i, "CalibrateDacDacScan$csssssssss2s2i" },
-	/*    98 */ { rpc__TrimChip$s1s, "TrimChip$s1s" },
-	/*    99 */ { rpc__CalibrateMap$ss2s2i2I, "CalibrateMap$ss2s2i2I" },
-	/*   100 */ { rpc__TestColPixel$bCC2C, "TestColPixel$bCC2C" },
-	/*   101 */ { rpc__Ethernet_Send$v3c, "Ethernet_Send$v3c" },
-	/*   102 */ { rpc__Ethernet_RecvPackets$I, "Ethernet_RecvPackets$I" }
+	/*    89 */ { rpc__SetPixelAddressInverted$vb, "SetPixelAddressInverted$vb" },
+	/*    90 */ { rpc__CountReadouts$ii, "CountReadouts$ii" },
+	/*    91 */ { rpc__CountReadouts$iii, "CountReadouts$iii" },
+	/*    92 */ { rpc__CountReadouts$iiii, "CountReadouts$iiii" },
+	/*    93 */ { rpc__PH$iiiis, "PH$iiiis" },
+	/*    94 */ { rpc__PixelThreshold$iiiiiiiibb, "PixelThreshold$iiiiiiiibb" },
+	/*    95 */ { rpc__test_pixel_address$bii, "test_pixel_address$bii" },
+	/*    96 */ { rpc__CalibratePixel$csss0s0i, "CalibratePixel$csss0s0i" },
+	/*    97 */ { rpc__CalibrateDacScan$cssssss2s2i, "CalibrateDacScan$cssssss2s2i" },
+	/*    98 */ { rpc__CalibrateDacDacScan$csssssssss2s2i, "CalibrateDacDacScan$csssssssss2s2i" },
+	/*    99 */ { rpc__TrimChip$s1s, "TrimChip$s1s" },
+	/*   100 */ { rpc__CalibrateMap$ss2s2i2I, "CalibrateMap$ss2s2i2I" },
+	/*   101 */ { rpc__TestColPixel$bCC2C, "TestColPixel$bCC2C" },
+	/*   102 */ { rpc__Ethernet_Send$v3c, "Ethernet_Send$v3c" },
+	/*   103 */ { rpc__Ethernet_RecvPackets$I, "Ethernet_RecvPackets$I" }
 };
 
 void rpc_Dispatcher(CRpcIo &rpc_io)
@@ -1176,7 +1185,7 @@ void rpc_Dispatcher(CRpcIo &rpc_io)
 	{
 		msg.Receive(rpc_io);
 		if (rpc_error.HasError()) continue;
-		if (msg.GetCmd() >= 103) continue;
+		if (msg.GetCmd() >= 104) continue;
 		rpc_cmdlist[msg.GetCmd()].call(rpc_io, msg);
 	}
 }
