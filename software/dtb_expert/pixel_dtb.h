@@ -377,7 +377,7 @@ public:
 	int16_t DecodePixel(vector<uint16_t> &data, int16_t &pos, int16_t &n, int16_t &ph, int16_t &col, int16_t &row);
 
 	RPC_EXPORT bool GetPixelAddressInverted();
-    void SetPixelAddressInverted(bool status);
+    RPC_EXPORT void SetPixelAddressInverted(bool status);
 
 
 
