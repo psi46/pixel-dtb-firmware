@@ -2246,11 +2246,9 @@ int32_t CTestboard::Threshold(int32_t start, int32_t step, int32_t thrLevel,
 
 int32_t CTestboard::PixelThreshold(int32_t col, int32_t row, int32_t start,
 		int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg,
-		int32_t xtalk, int32_t cals, int32_t trim) {
+		bool xtalk, bool cals) {
 	Daq_Enable2(daq_read_size);
 	int calRow = row;
-
-	roc_Pix_Trim(col, row, trim);
 
 	if (xtalk) {
 		if (row == ROC_NUMROWS - 1)
@@ -2261,7 +2259,7 @@ int32_t CTestboard::PixelThreshold(int32_t col, int32_t row, int32_t start,
 	roc_Pix_Cal(col, calRow, cals);
 	int32_t res = Threshold(start, step, thrLevel, nTrig, dacReg);
 	roc_ClrCal();
-	//roc_Pix_Mask(col, row);
+
 	Daq_Disable2();
 	return res;
 }
@@ -2316,7 +2314,7 @@ void CTestboard::ChipThresholdIntern(int32_t start[], int32_t step, int32_t thrL
                         else startValue = start[col*ROC_NUMROWS + row];
                         if (startValue < 0) startValue = 0;
                         else if (startValue > 255) startValue = 255;
-                        thr = PixelThreshold(col, row, startValue, step, thrLevel, nTrig, dacReg, xtalk, cals, 15);
+                        thr = PixelThreshold(col, row, startValue, step, thrLevel, nTrig, dacReg, xtalk, cals);
                         res[col*ROC_NUMROWS + row] = thr;
                 }
                 roc_Col_Enable(col, 0);
