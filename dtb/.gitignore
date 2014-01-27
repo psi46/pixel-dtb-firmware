@@ -1,0 +1,12 @@
+_temp
+db
+dtb_system
+greybox_tmb
+incremental_db
+simulation
+*.summary
+*.rpt
+*.bak
+*~
+*.sof
+*.cmp
