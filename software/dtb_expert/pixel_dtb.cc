@@ -1439,7 +1439,7 @@ int16_t CTestboard::DecodePixel(vector<uint16_t> &data, int16_t &pos,
 		return -1; // missing data
 	if ((data[pos] & 0x8ffc) != 0x87f8)
 		return -2; // wrong header
-	int hdr = data[pos++] & 0xfff;
+	pos++; //int hdr = data[pos++] & 0xfff;
 
 	if (pos >= int(data.size()) || (data[pos] & 0x8000))
 		return 0; // empty data readout
@@ -1490,7 +1490,7 @@ int16_t CTestboard::DecodeReadout(vector<uint16_t> &data, int16_t &pos, vector<
 		return -1; // missing data
 	if ((data[pos] & 0x8ffc) != 0x87f8)
 		return -2; // wrong header
-	int hdr = data[pos++] & 0xfff;
+	pos++; //int hdr = data[pos++] & 0xfff;
 
 	if (pos >= int(data.size()) || (data[pos] & 0x8000))
 		return 0; // empty data readout
@@ -1539,6 +1539,30 @@ void CTestboard::Daq_Enable2(int32_t block) {
 		Daq_Start(1);
 	}
 }
+
+void CTestboard::Daq_Enable_Max() {
+
+	// Maximal 50M samples:
+	uint32_t max_buffersize = 50000000;
+
+	if (!TBM_Present()) {
+		Daq_Select_Deser160(deserAdjust);
+	}
+	else {
+		max_buffersize /= 2;
+		Daq_Select_Deser400();
+		Daq_Deser400_Reset(3);
+	}
+
+	Daq_Open(max_buffersize, 0);
+	Daq_Start(0);
+
+	if (TBM_Present()){
+		Daq_Open(max_buffersize, 1);
+		Daq_Start(1);
+	}
+}
+
 // to be renamed after kicking out psi46expert dependency
 void CTestboard::Daq_Disable2() {
 	Daq_Stop(0);
@@ -1546,6 +1570,13 @@ void CTestboard::Daq_Disable2() {
 	if (TBM_Present()){
 		Daq_Stop(1);
 		Daq_Close(1);
+	}
+}
+
+void CTestboard::Daq_Stop_All() {
+
+	for(uint8_t channel = 0; channel < 8; channel++) {
+		Daq_Stop(channel);
 	}
 }
 
@@ -1607,14 +1638,14 @@ void CTestboard::DecodePixel(unsigned int raw, int16_t &n, int16_t &ph, int16_t 
 	col = 2 * c + (r & 1);
 }
 
-int8_t CTestboard::Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vector<uint16_t> &ph, vector<uint32_t> &adr)
+int8_t CTestboard::Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vector<uint16_t> &ph, vector<uint32_t> &adr, uint8_t channel)
 {
 
     //uint32_t words_remaining = 0;
     uint16_t hdr, trl;
 	unsigned int raw = 0;
     int16_t n_pix = 0, ph_pix = 0, col = 0, row = 0, evNr = 0, stkCnt = 0, dataId = 0, dataNr = 0;
-    int16_t roc_n = -1;
+    int16_t roc_n = -1 + channel * 8; // Get the right ROC id, channel 0: 0-7, channel 1: 8-15
     int16_t tbm_n = 1;
     uint32_t address;
     int pos = 0;
@@ -1652,7 +1683,7 @@ int8_t CTestboard::Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vec
 		case 11: hdr = (hdr<<4) + d;
 			     DecodeTbmHeader(hdr, evNr, stkCnt);
                  tbm_n = tbm_n ^ 1;
-                 roc_n = -1;
+                 roc_n = -1 + channel * 8;
 			     break;
 
 		case 12: trl = d; break;
@@ -1670,7 +1701,7 @@ int8_t CTestboard::Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vec
 			// check header
 			if ((data[pos] & 0x8ffc) != 0x87f8)
 				return -2; // wrong header
-			int hdr = data[pos++] & 0xfff;
+			pos++; //int hdr = data[pos++] & 0xfff;
 			// read pixels while not data end or trailer
 			while (!(pos >= int(data.size()) || (data[pos] & 0x8000))) {
 				// store 24 bits in raw
@@ -1697,7 +1728,7 @@ int8_t CTestboard::Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vec
 int32_t CTestboard::CountReadouts(int32_t nTriggers) {
 	int32_t nHits = 0;
 
-	vector<uint16_t> data, ph, n_hits;
+	vector<uint16_t> data, data2, ph, n_hits;
 	vector<uint32_t> adr;
 	int16_t ok = -1;
 	//data.clear();
@@ -1708,9 +1739,15 @@ int32_t CTestboard::CountReadouts(int32_t nTriggers) {
 		uDelay(4);
 	}
 
-	Daq_Read2(data, daq_read_size, avail_size);
+	//Daq_Read2(data, daq_read_size, avail_size);
+	Daq_Read(data, daq_read_size, avail_size, 0);
+	if (TBM_Present()) {
+		avail_size=0;
+		Daq_Read(data2, daq_read_size, avail_size, 1);
+	}
 
-	ok = Decode(data, n_hits, ph, adr);
+	ok = Decode(data, n_hits, ph, adr, 0);
+	ok = Decode(data2, n_hits, ph, adr, 1);
 
 	for (unsigned int i = 0; i < adr.size(); i++){
 		nHits+=n_hits[i];
@@ -1729,7 +1766,7 @@ int8_t CTestboard::CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int3
 
     vector<uint16_t> nhits, ph;
     vector<uint32_t> adr;
-	vector<uint16_t> data;
+	vector<uint16_t> data, data2;
 	uDelay(5);
 
 	for (int16_t i = 0; i < nTriggers; i++)
@@ -1739,8 +1776,14 @@ int8_t CTestboard::CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int3
 	}
 
 	Daq_Read2(data, daq_read_size, avail_size);
+	Daq_Read(data, daq_read_size, avail_size, 0);
+	if (TBM_Present()){
+		avail_size=0;
+		Daq_Read(data2, daq_read_size, avail_size, 1);
+	}
 
-    ok = Decode(data, nhits, ph, adr);
+    ok = Decode(data, nhits, ph, adr, 0);
+    ok = Decode(data2, nhits, ph, adr, 1);
 
 	for (unsigned int i = 0; i < adr.size(); i++)
 	{
@@ -1826,37 +1869,17 @@ int8_t CTestboard::CalibrateDacDacScan(int16_t nTriggers, int16_t col, int16_t r
 	return 1;
 }
 
-int16_t CTestboard::CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum, vectorR<uint32_t> &adress)
+int16_t CTestboard::CalibrateMap(uint16_t nTriggers, bool flag_use_cals)
 {
-	int16_t ok = -1;
-    uint32_t avail_size = 0;
-
-    nReadouts.clear();
-    PHsum.clear();
-    adress.clear();
-
-    nReadouts.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
-    PHsum.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
-    adress.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
-
-    Daq_Enable2(daq_read_size);
-	vector<uint16_t> data;
-	vector<uint16_t> data2;
-
-	vector<uint16_t> n;
-	vector<uint16_t> ph;
-	vector<uint32_t> adr;
-
-
+	// Allocate all available memory and start DAQ:
+	Daq_Enable_Max();
 
 	for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
 		roc_Col_Enable(col, true);
 		for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
-		//for (uint8_t row = 0; row < 20; row++) {
-			//arm
-			roc_Pix_Cal(col, row, false);
+			roc_Pix_Cal(col, row, flag_use_cals);
 			uDelay(5);
-			for (uint8_t trigger = 0; trigger < nTriggers; trigger++) {
+			for (uint16_t i = 0; i < nTriggers; i++) {
 				//send triggers
 				Pg_Single();
 				uDelay(4);
@@ -1864,41 +1887,11 @@ int16_t CTestboard::CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts,
 			// clear
 			roc_ClrCal();
 		}
-
-		//read data
-		data.clear();
-		data2.clear();
-		//Daq_Read2(data, daq_read_size, avail_size);
-		Daq_Read(data, daq_read_size, avail_size, 0);
-		if (TBM_Present()){
-			avail_size=0;
-			Daq_Read(data2, daq_read_size, avail_size, 1);
-		}
-		//decode readouts
-		n.clear();
-		ph.clear();
-		adr.clear();
-		ok = Decode(data, n, ph, adr);
-		ok = Decode(data2, n, ph, adr);
-
-		int colR = -1, rowR = -1;
-
-		for (unsigned int i = 0; i<adr.size();i++){
-			rowR = adr[i] & 0xff;
-			colR = (adr[i] >> 8) & 0xff;
-			if (0 <= colR && colR < ROC_NUMCOLS && 0 <= rowR && rowR < ROC_NUMROWS){
-				nReadouts[colR * ROC_NUMROWS + rowR] += n[i];
-				PHsum[colR * ROC_NUMROWS + rowR] += ph[i];
-				adress[colR * ROC_NUMROWS + rowR] = adr[i];
-			 }
-		}
-
 		roc_Col_Enable(col, false);
 	}
 
-	Daq_Disable2();
-
-
+	// Stop the DAQ but leave buffers there (not closing the session)
+	Daq_Stop_All();
 
     return 1;
 }

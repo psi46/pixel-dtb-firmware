@@ -414,14 +414,16 @@ public:
 
     // Module compatible functions
 	void Daq_Enable2(int32_t block);
+	void Daq_Enable_Max();
 	int8_t Daq_Read2(vector<uint16_t> &data, uint16_t daq_read_size, uint32_t &n);
 	void Daq_Disable2();
+	void Daq_Stop_All();
 	void DecodeTbmTrailer(unsigned int raw, int16_t &dataId, int16_t &data);
 	void DecodeTbmHeader(unsigned int raw, int16_t &evNr, int16_t &stkCnt);
 	void DecodePixel(unsigned int raw, int16_t &n, int16_t &ph, int16_t &col, int16_t &row);
-	int8_t Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vector<uint16_t> &ph, vector<uint32_t> &adr);
+	int8_t Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vector<uint16_t> &ph, vector<uint32_t> &adr, uint8_t channel);
 	//int8_t Decode2(const vector<uint16_t> &data, vector<int16_t> &n, vector<int32_t> &ph, vector<uint32_t> &adr);
-	RPC_EXPORT int16_t CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum, vectorR<uint32_t> &addres);
+	RPC_EXPORT int16_t CalibrateMap(uint16_t nTriggers, bool flag_use_cals);
 
 
 	// Wafer test functions

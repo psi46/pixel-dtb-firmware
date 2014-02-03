@@ -1016,20 +1016,15 @@ bool rpc__TrimChip$s1s(CRpcIo &rpc_io, rpcMessage &msg)
 	return true;
 }
 
-bool rpc__CalibrateMap$ss2s2i2I(CRpcIo &rpc_io, rpcMessage &msg)
+bool rpc__CalibrateMap$sSb(CRpcIo &rpc_io, rpcMessage &msg)
 {
-	if (!msg.CheckSize(2)) return false;
-	int16_t rpc_par1 = msg.Get_INT16();
-	vectorR<int16_t> rpc_par2;
-	vectorR<int32_t> rpc_par3;
-	vectorR<uint32_t> rpc_par4;
-	int16_t rpc_par0 = tb.CalibrateMap(rpc_par1,rpc_par2,rpc_par3,rpc_par4);
+	if (!msg.CheckSize(3)) return false;
+	uint16_t rpc_par1 = msg.Get_UINT16();
+	bool rpc_par2 = msg.Get_BOOL();
+	int16_t rpc_par0 = tb.CalibrateMap(rpc_par1,rpc_par2);
 	msg.Create(100);
 	msg.Put_INT16(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
-	if (!rpc_Send(rpc_io, rpc_par2)) return false;
-	if (!rpc_Send(rpc_io, rpc_par3)) return false;
-	if (!rpc_Send(rpc_io, rpc_par4)) return false;
 	rpc_io.Flush();
 	return true;
 }
@@ -1172,7 +1167,7 @@ const CRpcCall rpc_cmdlist[] =
 	/*    97 */ { rpc__CalibrateDacScan$cssssss2s2i, "CalibrateDacScan$cssssss2s2i" },
 	/*    98 */ { rpc__CalibrateDacDacScan$csssssssss2s2i, "CalibrateDacDacScan$csssssssss2s2i" },
 	/*    99 */ { rpc__TrimChip$s1s, "TrimChip$s1s" },
-	/*   100 */ { rpc__CalibrateMap$ss2s2i2I, "CalibrateMap$ss2s2i2I" },
+	/*   100 */ { rpc__CalibrateMap$sSb, "CalibrateMap$sSb" },
 	/*   101 */ { rpc__TestColPixel$bCC2C, "TestColPixel$bCC2C" },
 	/*   102 */ { rpc__Ethernet_Send$v3c, "Ethernet_Send$v3c" },
 	/*   103 */ { rpc__Ethernet_RecvPackets$I, "Ethernet_RecvPackets$I" }
