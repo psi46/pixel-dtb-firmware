@@ -1795,20 +1795,22 @@ int8_t CTestboard::CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int3
 	return 1;
 }
 
-int8_t CTestboard::CalibratePixel(int16_t nTriggers, int16_t col, int16_t row, int16_t &nReadouts,
-		int32_t &PHsum) {
+int8_t CTestboard::CalibratePixel(uint16_t nTriggers, uint8_t col, uint8_t row, bool flag_use_cals) {
 
 	roc_Col_Enable(col, true);
-	roc_Pix_Cal(col, row, false);
+	roc_Pix_Cal(col, row, flag_use_cals);
 	uDelay(5);
-	Daq_Enable2(daq_read_size);
-	CalibrateReadouts(nTriggers, nReadouts, PHsum);
-	Daq_Disable2();
+
+	// Loop over all triggers to be sent:
+	for (int16_t i = 0; i < nTriggers; i++)	{
+		Pg_Single();
+		uDelay(4);
+	}
+
 	roc_ClrCal();
 	roc_Col_Enable(col, false);
 
 	return 1;
-
 }
 
 int8_t CTestboard::CalibrateDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1,
