@@ -1813,27 +1813,25 @@ int8_t CTestboard::CalibratePixel(uint16_t nTriggers, uint8_t col, uint8_t row, 
 	return 1;
 }
 
-int8_t CTestboard::CalibrateDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1,
-		int16_t dacLower1, int16_t dacUpper1, vectorR<int16_t> &nReadouts,
-		vectorR<int32_t> &PHsum) {
-
-	//nReadouts.clear();
-	//PHsum.clear();
-	int16_t n;
-	int32_t ph;
+int8_t CTestboard::CalibrateDacScan(uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1,
+		uint8_t dacLower1, uint8_t dacUpper1, bool flag_use_cals) {
 
 	roc_Col_Enable(col, true);
 	roc_Pix_Cal(col, row, false);
 	uDelay(5);
-	Daq_Enable2(daq_read_size);
-	for (int i = dacLower1; i < dacUpper1; i++)
+
+	// Loop over the DAC range specified:
+	for (int i = dacLower1; i <= dacUpper1; i++)
 	{
 		roc_SetDAC(dacReg1, i);
-		CalibrateReadouts(nTriggers, n, ph);
-		nReadouts.push_back(n);
-		PHsum.push_back(ph);
+
+		// Loop over all triggers to be sent:
+		for (int16_t i = 0; i < nTriggers; i++)	{
+			Pg_Single();
+			uDelay(4);
+		}
 	}
-	Daq_Disable2();
+
 	roc_ClrCal();
 	roc_Col_Enable(col, false);
 
