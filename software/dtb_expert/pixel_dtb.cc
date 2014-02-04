@@ -1838,33 +1838,32 @@ int8_t CTestboard::CalibrateDacScan(uint16_t nTriggers, uint8_t col, uint8_t row
 	return 1;
 }
 
-int8_t CTestboard::CalibrateDacDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1,
-		int16_t dacLower1, int16_t dacUpper1, int16_t dacReg2, int16_t dacLower2, int16_t dacUpper2,
-		vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum) {
-
-
-    int16_t n;
-	int32_t ph;
+int8_t CTestboard::CalibrateDacDacScan(uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1, uint8_t dacLower1, uint8_t dacUpper1, uint8_t dacReg2, uint8_t dacLower2, uint8_t dacUpper2, bool flag_use_cals) {
 
     roc_Col_Enable(col, true);
-	roc_Pix_Cal(col, row, false);
+	roc_Pix_Cal(col, row, flag_use_cals);
 	uDelay(5);
-	Daq_Enable2(daq_read_size);
-	for (int i = dacLower1; i < dacUpper1; i++)
+
+	// Loop over the first DAC range specified:
+	for (int i = dacLower1; i <= dacUpper1; i++)
 	{
 		roc_SetDAC(dacReg1, i);
-		for (int k = dacLower1; k < dacUpper2; k++)
+
+		// Loop over the second DAC range specified:
+		for (int k = dacLower1; k <= dacUpper2; k++)
 		{
 			roc_SetDAC(dacReg2, k);
-			CalibrateReadouts(nTriggers, n, ph);
-			nReadouts.push_back(n);
-			PHsum.push_back(ph);
+
+			// Loop over all triggers to be sent:
+			for (int16_t i = 0; i < nTriggers; i++)	{
+				Pg_Single();
+				uDelay(4);
+			}
 		}
 	}
-	Daq_Disable2();
+
 	roc_ClrCal();
 	roc_Col_Enable(col, false);
-
 
 	return 1;
 }
