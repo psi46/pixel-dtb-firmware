@@ -1888,7 +1888,7 @@ int16_t CTestboard::CalibrateMap(uint16_t nTriggers, bool flag_use_cals)
     return 1;
 }
 
-int16_t CTestboard::CalibrateModule(std::vector<uint8_t> roc_i2c, uint16_t nTriggers, bool flag_use_cals) {
+int16_t CTestboard::CalibrateModule(vector<uint8_t> &roc_i2c, uint16_t nTriggers, bool flag_use_cals) {
 
 	for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
 

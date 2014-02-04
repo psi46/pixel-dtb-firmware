@@ -424,7 +424,7 @@ public:
 	int8_t Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vector<uint16_t> &ph, vector<uint32_t> &adr, uint8_t channel);
 	//int8_t Decode2(const vector<uint16_t> &data, vector<int16_t> &n, vector<int32_t> &ph, vector<uint32_t> &adr);
 	RPC_EXPORT int16_t CalibrateMap(uint16_t nTriggers, bool flag_use_cals);
-	RPC_EXPORT int16_t CalibrateModule(std::vector<uint8_t> roc_i2c, uint16_t nTriggers, bool flag_use_cals);
+	RPC_EXPORT int16_t CalibrateModule(vector<uint8_t> &roc_i2c, uint16_t nTriggers, bool flag_use_cals);
 
 
 	// Wafer test functions
