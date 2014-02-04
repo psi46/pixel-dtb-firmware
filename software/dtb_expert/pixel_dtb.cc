@@ -1870,9 +1870,6 @@ int8_t CTestboard::CalibrateDacDacScan(uint16_t nTriggers, uint8_t col, uint8_t 
 
 int16_t CTestboard::CalibrateMap(uint16_t nTriggers, bool flag_use_cals)
 {
-	// Allocate all available memory and start DAQ:
-	Daq_Enable_Max();
-
 	for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
 		roc_Col_Enable(col, true);
 		for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
@@ -1888,10 +1885,44 @@ int16_t CTestboard::CalibrateMap(uint16_t nTriggers, bool flag_use_cals)
 		}
 		roc_Col_Enable(col, false);
 	}
+    return 1;
+}
 
-	// Stop the DAQ but leave buffers there (not closing the session)
-	Daq_Stop_All();
+int16_t CTestboard::CalibrateModule(std::vector<uint8_t> roc_i2c, uint16_t nTriggers, bool flag_use_cals) {
 
+	for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
+
+		for(size_t i = 0; i < roc_i2c.size(); i++) {
+			roc_I2cAddr(roc_i2c.at(i));
+			roc_Col_Enable(col, true);
+		}
+
+		for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
+
+			for(size_t i = 0; i < roc_i2c.size(); i++) {
+				roc_I2cAddr(roc_i2c.at(i));
+				roc_Pix_Cal(col, row, flag_use_cals);
+			}
+
+			uDelay(5);
+			for (uint16_t i = 0; i < nTriggers; i++) {
+				//send triggers
+				Pg_Single();
+				uDelay(4);
+			}
+			// clear
+			for(size_t i = 0; i < roc_i2c.size(); i++) {
+				roc_I2cAddr(roc_i2c.at(i));
+				roc_ClrCal();
+			}
+		}
+
+		for(size_t i = 0; i < roc_i2c.size(); i++) {
+			roc_I2cAddr(roc_i2c.at(i));
+			roc_Col_Enable(col, false);
+		}
+
+	}
     return 1;
 }
 
