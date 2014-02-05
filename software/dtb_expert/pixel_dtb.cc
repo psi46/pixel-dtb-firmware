@@ -1817,7 +1817,7 @@ int8_t CTestboard::CalibrateDacScan(uint16_t nTriggers, uint8_t col, uint8_t row
 		uint8_t dacLower1, uint8_t dacUpper1, bool flag_use_cals) {
 
 	roc_Col_Enable(col, true);
-	roc_Pix_Cal(col, row, false);
+	roc_Pix_Cal(col, row, flag_use_cals);
 	uDelay(5);
 
 	// Loop over the DAC range specified:
