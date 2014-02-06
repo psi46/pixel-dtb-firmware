@@ -1564,9 +1564,17 @@ int8_t CTestboard::Daq_Read2(vector<uint16_t> &data, uint16_t daq_read_size_2, u
 }
 
 int16_t CTestboard::TrimChip(vector<int16_t> &trim) {
+	// trim pixel to value or mask pixel if value = -1
+	int16_t value;
 	for (int8_t col = 0; col < ROC_NUMCOLS; col++) {
 		for (int8_t row = 0; row < ROC_NUMROWS; row++) {
-			roc_Pix_Trim(col, row, trim[col * ROC_NUMROWS + row]);
+			value = trim[col * ROC_NUMROWS + row];
+			if (value == -1){
+				roc_Pix_Mask(col, row);
+			}
+			else {
+				roc_Pix_Trim(col, row, value);
+			}
 		}
 	}
 	trim.clear();
@@ -1898,9 +1906,42 @@ int16_t CTestboard::CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts,
 
 	Daq_Disable2();
 
-
-
     return 1;
+}
+
+int16_t CTestboard::TriggerRow(int16_t nTriggers, int16_t col, vector<int16_t> &rocs, int16_t delay){
+
+	for (uint16_t i = 0; i < rocs.size(); i++){
+		roc_I2cAddr(rocs[i]);
+		roc_Col_Enable(col, true);
+	}
+
+	for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
+		//arm
+		for (uint16_t i = 0; i < rocs.size(); i++){
+			roc_I2cAddr(rocs[i]);
+			roc_Pix_Cal(col, row, false);
+			// this delay is realy needed
+			uDelay(delay);
+		}
+
+		for (uint8_t trigger = 0; trigger < nTriggers; trigger++) {
+			//send triggers
+			Pg_Single();
+			uDelay(delay);
+		}
+		// clear
+		for (uint16_t i = 0; i < rocs.size(); i++){
+			roc_I2cAddr(rocs[i]);
+			roc_ClrCal();
+		}
+	}
+
+	for (uint16_t i = 0; i < rocs.size(); i++){
+		roc_I2cAddr(rocs[i]);
+		roc_Col_Enable(col, false);
+	}
+	return 1;
 }
 
 // To be removed
@@ -2105,6 +2146,8 @@ int32_t CTestboard::PixelThreshold(int32_t col, int32_t row, int32_t start,
 		bool xtalk, bool cals) {
 	Daq_Enable2(daq_read_size);
 	int calRow = row;
+
+	//roc_Pix_Trim(col, row, trim);
 
 	if (xtalk) {
 		if (row == ROC_NUMROWS - 1)
