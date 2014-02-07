@@ -1824,9 +1824,10 @@ int8_t CTestboard::CalibrateDacScan(uint16_t nTriggers, uint8_t col, uint8_t row
 	for (int i = dacLower1; i <= dacUpper1; i++)
 	{
 		roc_SetDAC(dacReg1, i);
+		uDelay(5);
 
 		// Loop over all triggers to be sent:
-		for (int16_t i = 0; i < nTriggers; i++)	{
+		for (int16_t j = 0; j < nTriggers; j++)	{
 			Pg_Single();
 			uDelay(4);
 		}
@@ -1850,12 +1851,13 @@ int8_t CTestboard::CalibrateDacDacScan(uint16_t nTriggers, uint8_t col, uint8_t 
 		roc_SetDAC(dacReg1, i);
 
 		// Loop over the second DAC range specified:
-		for (int k = dacLower1; k <= dacUpper2; k++)
+		for (int j = dacLower2; j <= dacUpper2; j++)
 		{
-			roc_SetDAC(dacReg2, k);
+			roc_SetDAC(dacReg2, j);
+			uDelay(5);
 
 			// Loop over all triggers to be sent:
-			for (int16_t i = 0; i < nTriggers; i++)	{
+			for (int16_t k = 0; k < nTriggers; k++)	{
 				Pg_Single();
 				uDelay(4);
 			}
