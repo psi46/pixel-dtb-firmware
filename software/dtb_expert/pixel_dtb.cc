@@ -1993,37 +1993,7 @@ int32_t CTestboard::PH(int32_t col, int32_t row, int32_t trim,
 }
 
 // == Thresholds ===================================================
-/*
- int32_t CTestboard::ThresholdBinary(int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t dacMin, int32_t dacMax, bool reverseMode)
- {
- int step_size = 1;
- if (reverseMode) step_size = 3;
- // test if threshold is already reached
- if (dacMax < dacMin && !reverseMode)
- // return value is dacMin
- return dacMin;
- if (dacMin > dacMax && reverseMode)
- // return value
- return dacMax;
- else
- {
- // calculate midpoint to cut set in half, non symmetric
- int32_t dacMid = dacMin + step_size*((dacMax - dacMin) / 4);
- int32_t thrMid = CountReadouts(nTrig, dacReg, dacMid);
- //cout << "Threshold finding midPoint : " << dacMid << "  Threshold : " << thrMid  << " thrLevel: " << thrLevel << " dacMin: " << dacMin << " dacMax: " << dacMax << endl;
- // three-way comparison
- if ((thrMid > thrLevel && !reverseMode) || (thrMid < thrLevel && reverseMode))
- // threshold is in lower subset
- return ThresholdBinary(thrLevel, nTrig, dacReg, dacMin, dacMid-1, reverseMode);
- else if ((thrMid < thrLevel && !reverseMode) || (thrMid > thrLevel && reverseMode))
- // threshold is in upper subset
- return ThresholdBinary(thrLevel, nTrig, dacReg, dacMid+1, dacMax, reverseMode);
- else
- // threshold has been found
- return dacMid;
- }
- }
- */
+
 int32_t CTestboard::Threshold(int32_t start, int32_t step, int32_t thrLevel,
 		int32_t nTrig, int32_t dacReg) {
 	int32_t threshold = start, newValue, oldValue, result;
@@ -2067,63 +2037,6 @@ int32_t CTestboard::Threshold(int32_t start, int32_t step, int32_t thrLevel,
 
 	return result;
 }
-
-/*
- bool CTestboard::FindReadout(int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t &dacMin, int32_t &dacMax, bool reverseMode)
- {
- if (abs(dacMax -dacMin) <= 1) return false;
- else{
- // calculate midpoint to cut set in half
- int32_t dacMid = dacMin + ((dacMax - dacMin) / 2);
- int32_t thrMid = CountReadouts(nTrig, dacReg, dacMid);
- //cout << "Find readout midPoint : " << dacMid << "  Threshold : " << thrMid  << " thrLevel: " << thrLevel << " dacMin: " << dacMin << " dacMax: " << dacMax << endl;
- if (thrMid > thrLevel) return true;
- else{
- if (FindReadout(thrLevel, nTrig, dacReg, dacMin, dacMid, reverseMode)) {
- dacMax = dacMid;
- return true;
- }
- else if (FindReadout(thrLevel, nTrig, dacReg, dacMid, dacMax, reverseMode)){
- dacMin = dacMid;
- return true;
- }
- }
- }
- }
-
- int32_t CTestboard::PixelThreshold(int32_t col, int32_t row, int32_t start, int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t xtalk, int32_t cals, int32_t trim)
- {
- int calRow = row;
- roc_Pix_Trim(col, row, trim);
-
- if (xtalk)
- {
- if (row == ROC_NUMROWS - 1) calRow = row - 1;
- else calRow = row + 1;
- }
- if (cals) roc_Pix_Cal(col, calRow, true);
- else roc_Pix_Cal(col, calRow, false);
-
- bool reverseMode = false;
- if (step < 0) reverseMode = true;
- int32_t res = -1;
- if (!reverseMode) res = 256;
-
- int32_t dacMin = 0, dacMax = 256;
- if (FindReadout(0, 1, dacReg, dacMin, dacMax, reverseMode)) {
- res = ThresholdBinary(thrLevel, nTrig, dacReg, dacMin, dacMax, reverseMode);
- //If binary search fails, find simple threshold
- if ((res > dacMax && !reverseMode) || (res < dacMin && reverseMode)){
- int roughThr = ThresholdSimple(dacMin, 4*step/abs(step), 0, 1, dacReg);
- res = ThresholdSimple(roughThr, 1*step/abs(step), thrLevel, nTrig, dacReg);
- }
- }
-
- roc_ClrCal();
- roc_Pix_Mask(col, row);
- return res;
- }
- */
 
 int32_t CTestboard::PixelThreshold(int32_t col, int32_t row, int32_t start,
 		int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg,
