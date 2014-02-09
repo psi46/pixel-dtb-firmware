@@ -9,7 +9,7 @@ using namespace std;
 #define VERSION(ver,subver) 256*ver+subver
 
 #define fw_version VERSION(1,10)  // Quartus design version
-#define sw_version VERSION(1,17)  // NIOS II software version
+#define sw_version VERSION(1,25)  // NIOS II software version
 
 
 struct DTB_CONFIG
