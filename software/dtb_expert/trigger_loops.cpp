@@ -40,9 +40,8 @@ void CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
 	roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
       }
 
-      uDelay(5);
-
       // Send the triggers:
+      uDelay(5);
       for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	Pg_Single();
 	uDelay(4);
@@ -75,9 +74,8 @@ void CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
   }
 
-  uDelay(5);
-
   // Send the triggers:
+  uDelay(5);
   for (uint16_t trig = 0; trig < nTriggers; trig++) {
     Pg_Single();
     uDelay(4);
@@ -109,9 +107,9 @@ void CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
       // Set the calibrate bits
       // Take into account both Xtalks and Cals flags
       roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
-      uDelay(5);
 
       // Send the triggers:
+      uDelay(5);
       for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	Pg_Single();
 	uDelay(4);
@@ -136,13 +134,177 @@ void CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
   roc_Col_Enable(column, true);
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
-  uDelay(5);
-
   // Send the triggers:
+  uDelay(5);
   for (uint16_t trig = 0; trig < nTriggers; trig++) {
     Pg_Single();
     uDelay(4);
   }
+
+  // Clear the calibrate signal on thr ROC configured
+  // Disable this column on the ROC configured:
+  roc_ClrCal();
+  roc_Col_Enable(column, false);
+}
+
+
+// -------- Trigger Loop Functions for 1D Dac Scans -------------------------------
+
+void CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
+
+  // Loop over all columns:
+  for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
+
+    // Enable this column on every configured ROC:
+    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+      roc_I2cAddr(roc_i2c.at(roc));
+      roc_Col_Enable(col, true);
+    }
+
+    // Loop over all rows:
+    for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
+
+      // Set the calibrate bits on every configured ROC
+      // Take into account both Xtalks and Cals flags
+      for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	roc_I2cAddr(roc_i2c.at(roc));
+	roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
+      }
+
+      // Loop over the DAC range specified:
+      for (int dac = dac1low; dac <= dac1high; dac++) {
+
+	// Update the DAC setting on all configured ROCS:
+	for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	  roc_I2cAddr(roc_i2c.at(roc));
+	  roc_SetDAC(dac1register, dac);
+	}
+
+	// Send the triggers:
+	uDelay(5);
+	for (uint16_t trig = 0; trig < nTriggers; trig++) {
+	  Pg_Single();
+	  uDelay(4);
+	}
+      } // Loop over the DAC range
+
+      // Clear the calibrate signal on every ROC configured
+      for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	roc_I2cAddr(roc_i2c.at(roc));
+	roc_ClrCal();
+      }
+    } // Loop over all rows
+
+    // Disable this column on every ROC configured:
+    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+      roc_I2cAddr(roc_i2c.at(roc));
+      roc_Col_Enable(col, false);
+    }
+
+  } // Loop over all columns
+}
+
+void CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
+
+  // Enable this column on every configured ROC:
+  // Set the calibrate bits on every configured ROC
+  // Take into account both Xtalks and Cals flags
+  for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+    roc_I2cAddr(roc_i2c.at(roc));
+    roc_Col_Enable(column, true);
+    roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
+  }
+
+  // Loop over the DAC range specified:
+  for (int dac = dac1low; dac <= dac1high; dac++) {
+
+    // Update the DAC setting on all configured ROCS:
+    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+      roc_I2cAddr(roc_i2c.at(roc));
+      roc_SetDAC(dac1register, dac);
+    }
+
+    // Send the triggers:
+    uDelay(5);
+    for (uint16_t trig = 0; trig < nTriggers; trig++) {
+      Pg_Single();
+      uDelay(4);
+    }
+  } // Loop over the DAC range
+
+  // Clear the calibrate signal on every ROC configured
+  // Disable this column on every ROC configured:
+  for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+    roc_I2cAddr(roc_i2c.at(roc));
+    roc_ClrCal();
+    roc_Col_Enable(column, false);
+  }
+}
+
+void CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
+
+  // Set the I2C output to the correct ROC:
+  roc_I2cAddr(roc_i2c);
+
+  // Loop over all columns:
+  for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
+
+    // Enable this column on the configured ROC:
+    roc_Col_Enable(col, true);
+
+    // Loop over all rows:
+    for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
+
+      // Set the calibrate bits
+      // Take into account both Xtalks and Cals flags
+      roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
+
+      // Loop over the DAC range specified:
+      for (int dac = dac1low; dac <= dac1high; dac++) {
+
+	// Update the DAC setting on the ROC:
+	roc_SetDAC(dac1register, dac);
+
+	// Send the triggers:
+	uDelay(5);
+	for (uint16_t trig = 0; trig < nTriggers; trig++) {
+	  Pg_Single();
+	  uDelay(4);
+	}
+      } // Loop over the DAC range
+
+      // Clear the calibrate signal
+      roc_ClrCal();
+    } // Loop over all rows
+
+    // Disable this column on every ROC configured:
+    roc_Col_Enable(col, false);
+
+  } // Loop over all columns
+}
+
+void CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
+
+  // Enable this column on the configured ROC:
+  // Set the calibrate bits on every configured ROC
+  // Take into account both Xtalks and Cals flags
+  roc_I2cAddr(roc_i2c);
+  roc_Col_Enable(column, true);
+  roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
+
+  // Loop over the DAC range specified:
+  for (int dac = dac1low; dac <= dac1high; dac++) {
+
+    // Update the DAC setting on the ROC:
+    roc_SetDAC(dac1register, dac);
+
+    // Send the triggers:
+    uDelay(5);
+    for (uint16_t trig = 0; trig < nTriggers; trig++) {
+      Pg_Single();
+      uDelay(4);
+    }
+  } // Loop over the DAC range
 
   // Clear the calibrate signal on thr ROC configured
   // Disable this column on the ROC configured:
