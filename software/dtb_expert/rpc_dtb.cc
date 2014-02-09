@@ -1048,6 +1048,21 @@ bool rpc__CalibrateModule$s1CSS(CRpcIo &rpc_io, rpcMessage &msg)
 	return true;
 }
 
+bool rpc__TriggerRow$sss1ss(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(6)) return false;
+	int16_t rpc_par1 = msg.Get_INT16();
+	int16_t rpc_par2 = msg.Get_INT16();
+	int16_t rpc_par4 = msg.Get_INT16();
+	vector<int16_t> rpc_par3; if (!rpc_Receive(rpc_io, rpc_par3)) return false;
+	int16_t rpc_par0 = tb.TriggerRow(rpc_par1,rpc_par2,rpc_par3,rpc_par4);
+	msg.Create(101);
+	msg.Put_INT16(rpc_par0);
+	if (!msg.Send(rpc_io)) return false;
+	rpc_io.Flush();
+	return true;
+}
+
 bool rpc__TestColPixel$bCC2C(CRpcIo &rpc_io, rpcMessage &msg)
 {
 	if (!msg.CheckSize(2)) return false;
@@ -1055,7 +1070,11 @@ bool rpc__TestColPixel$bCC2C(CRpcIo &rpc_io, rpcMessage &msg)
 	uint8_t rpc_par2 = msg.Get_UINT8();
 	vectorR<uint8_t> rpc_par3;
 	bool rpc_par0 = tb.TestColPixel(rpc_par1,rpc_par2,rpc_par3);
+<<<<<<< HEAD
 	msg.Create(103);
+=======
+	msg.Create(102);
+>>>>>>> master
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	if (!rpc_Send(rpc_io, rpc_par3)) return false;
@@ -1075,14 +1094,22 @@ bool rpc__Ethernet_RecvPackets$I(CRpcIo &rpc_io, rpcMessage &msg)
 {
 	if (!msg.CheckSize(0)) return false;
 	uint32_t rpc_par0 = tb.Ethernet_RecvPackets();
+<<<<<<< HEAD
 	msg.Create(105);
+=======
+	msg.Create(104);
+>>>>>>> master
 	msg.Put_UINT32(rpc_par0);
 	if (!msg.Send(rpc_io)) return false;
 	rpc_io.Flush();
 	return true;
 }
 
+<<<<<<< HEAD
 const uint16_t rpc_cmdListSize = 106;
+=======
+const uint16_t rpc_cmdListSize = 105;
+>>>>>>> master
 
 const CRpcCall rpc_cmdlist[] =
 {
@@ -1182,6 +1209,7 @@ const CRpcCall rpc_cmdlist[] =
 	/*    93 */ { rpc__PH$iiiis, "PH$iiiis" },
 	/*    94 */ { rpc__PixelThreshold$iiiiiiiibb, "PixelThreshold$iiiiiiiibb" },
 	/*    95 */ { rpc__test_pixel_address$bii, "test_pixel_address$bii" },
+<<<<<<< HEAD
 	/*    96 */ { rpc__CalibratePixel$cSCCS, "CalibratePixel$cSCCS" },
 	/*    97 */ { rpc__CalibrateDacScan$cSCCCCCS, "CalibrateDacScan$cSCCCCCS" },
 	/*    98 */ { rpc__CalibrateDacDacScan$vSCCCCCCCCS, "CalibrateDacDacScan$vSCCCCCCCCS" },
@@ -1192,6 +1220,17 @@ const CRpcCall rpc_cmdlist[] =
 	/*   103 */ { rpc__TestColPixel$bCC2C, "TestColPixel$bCC2C" },
 	/*   104 */ { rpc__Ethernet_Send$v3c, "Ethernet_Send$v3c" },
 	/*   105 */ { rpc__Ethernet_RecvPackets$I, "Ethernet_RecvPackets$I" }
+=======
+	/*    96 */ { rpc__CalibratePixel$csss0s0i, "CalibratePixel$csss0s0i" },
+	/*    97 */ { rpc__CalibrateDacScan$cssssss2s2i, "CalibrateDacScan$cssssss2s2i" },
+	/*    98 */ { rpc__CalibrateDacDacScan$csssssssss2s2i, "CalibrateDacDacScan$csssssssss2s2i" },
+	/*    99 */ { rpc__TrimChip$s1s, "TrimChip$s1s" },
+	/*   100 */ { rpc__CalibrateMap$ss2s2i2I, "CalibrateMap$ss2s2i2I" },
+	/*   101 */ { rpc__TriggerRow$sss1ss, "TriggerRow$sss1ss" },
+	/*   102 */ { rpc__TestColPixel$bCC2C, "TestColPixel$bCC2C" },
+	/*   103 */ { rpc__Ethernet_Send$v3c, "Ethernet_Send$v3c" },
+	/*   104 */ { rpc__Ethernet_RecvPackets$I, "Ethernet_RecvPackets$I" }
+>>>>>>> master
 };
 
 void rpc_Dispatcher(CRpcIo &rpc_io)
@@ -1201,7 +1240,11 @@ void rpc_Dispatcher(CRpcIo &rpc_io)
 	{
 		msg.Receive(rpc_io);
 		if (rpc_error.HasError()) continue;
+<<<<<<< HEAD
 		if (msg.GetCmd() >= 106) continue;
+=======
+		if (msg.GetCmd() >= 105) continue;
+>>>>>>> master
 		rpc_cmdlist[msg.GetCmd()].call(rpc_io, msg);
 	}
 }

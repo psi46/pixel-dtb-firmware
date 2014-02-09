@@ -401,10 +401,9 @@ public:
 
 
 	//new functions
-	RPC_EXPORT int8_t CalibratePixel(uint16_t nTriggers, uint8_t col, uint8_t row, uint16_t flags);
-	RPC_EXPORT int8_t CalibrateDacScan(uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1, uint8_t dacLower1, uint8_t dacUpper1, uint16_t flags);
-    RPC_EXPORT void CalibrateDacDacScan(uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1, uint8_t dacLower1, uint8_t dacUpper1, uint8_t dacReg2, uint8_t dacLower2, uint8_t dacUpper2, uint16_t flags);
-    RPC_EXPORT void ParallelCalibrateDacDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1, uint8_t dacLower1, uint8_t dacUpper1, uint8_t dacReg2, uint8_t dacLower2, uint8_t dacUpper2, uint16_t flags);
+	RPC_EXPORT int8_t CalibratePixel(int16_t nTriggers, int16_t col, int16_t row, int16_t &nReadouts, int32_t &PHsum);
+	RPC_EXPORT int8_t CalibrateDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1, int16_t dacLower1, int16_t dacUpper1, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum);
+    RPC_EXPORT int8_t CalibrateDacDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1, int16_t dacLower1, int16_t dacUpper1, int16_t dacReg2, int16_t dacLower2, int16_t dacUpper2, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum);
     //RPC_EXPORT int8_t CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum);
     void ChipThresholdIntern(int32_t start[], int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg, bool xtalk, bool cals, int32_t res[]);
     int8_t ThresholdMap(int32_t nTriggers, int32_t dacReg, bool rising, bool xtalk, bool cals, vectorR<int16_t> &thrValue);
@@ -420,18 +419,15 @@ public:
 
     // Module compatible functions
 	void Daq_Enable2(int32_t block);
-	void Daq_Enable_Max();
 	int8_t Daq_Read2(vector<uint16_t> &data, uint16_t daq_read_size, uint32_t &n);
 	void Daq_Disable2();
-	void Daq_Stop_All();
 	void DecodeTbmTrailer(unsigned int raw, int16_t &dataId, int16_t &data);
 	void DecodeTbmHeader(unsigned int raw, int16_t &evNr, int16_t &stkCnt);
 	void DecodePixel(unsigned int raw, int16_t &n, int16_t &ph, int16_t &col, int16_t &row);
-	int8_t Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vector<uint16_t> &ph, vector<uint32_t> &adr, uint8_t channel);
+	int8_t Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vector<uint16_t> &ph, vector<uint32_t> &adr);
 	//int8_t Decode2(const vector<uint16_t> &data, vector<int16_t> &n, vector<int32_t> &ph, vector<uint32_t> &adr);
-	RPC_EXPORT int16_t CalibrateMap(uint16_t nTriggers, uint16_t flags);
-	RPC_EXPORT int16_t CalibrateModule(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags);
-
+	RPC_EXPORT int16_t CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum, vectorR<uint32_t> &addres);
+	RPC_EXPORT int16_t TriggerRow(int16_t nTriggers, int16_t col, vector<int16_t> &rocs, int16_t delay=4);
 
 	// Wafer test functions
 	RPC_EXPORT bool TestColPixel(uint8_t col, uint8_t trimbit, vectorR<uint8_t> &res);

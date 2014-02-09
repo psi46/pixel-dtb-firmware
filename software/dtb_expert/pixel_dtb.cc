@@ -1539,30 +1539,6 @@ void CTestboard::Daq_Enable2(int32_t block) {
 		Daq_Start(1);
 	}
 }
-
-void CTestboard::Daq_Enable_Max() {
-
-	// Maximal 50M samples:
-	uint32_t max_buffersize = 50000000;
-
-	if (!TBM_Present()) {
-		Daq_Select_Deser160(deserAdjust);
-	}
-	else {
-		max_buffersize /= 2;
-		Daq_Select_Deser400();
-		Daq_Deser400_Reset(3);
-	}
-
-	Daq_Open(max_buffersize, 0);
-	Daq_Start(0);
-
-	if (TBM_Present()){
-		Daq_Open(max_buffersize, 1);
-		Daq_Start(1);
-	}
-}
-
 // to be renamed after kicking out psi46expert dependency
 void CTestboard::Daq_Disable2() {
 	Daq_Stop(0);
@@ -1570,13 +1546,6 @@ void CTestboard::Daq_Disable2() {
 	if (TBM_Present()){
 		Daq_Stop(1);
 		Daq_Close(1);
-	}
-}
-
-void CTestboard::Daq_Stop_All() {
-
-	for(uint8_t channel = 0; channel < 8; channel++) {
-		Daq_Stop(channel);
 	}
 }
 
@@ -1595,9 +1564,17 @@ int8_t CTestboard::Daq_Read2(vector<uint16_t> &data, uint16_t daq_read_size_2, u
 }
 
 int16_t CTestboard::TrimChip(vector<int16_t> &trim) {
+	// trim pixel to value or mask pixel if value = -1
+	int16_t value;
 	for (int8_t col = 0; col < ROC_NUMCOLS; col++) {
 		for (int8_t row = 0; row < ROC_NUMROWS; row++) {
-			roc_Pix_Trim(col, row, trim[col * ROC_NUMROWS + row]);
+			value = trim[col * ROC_NUMROWS + row];
+			if (value == -1){
+				roc_Pix_Mask(col, row);
+			}
+			else {
+				roc_Pix_Trim(col, row, value);
+			}
 		}
 	}
 	trim.clear();
@@ -1795,128 +1772,111 @@ int8_t CTestboard::CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int3
 	return 1;
 }
 
-int8_t CTestboard::CalibratePixel(uint16_t nTriggers, uint8_t col, uint8_t row, uint16_t flags) {
+int8_t CTestboard::CalibratePixel(int16_t nTriggers, int16_t col, int16_t row, int16_t &nReadouts,
+		int32_t &PHsum) {
 
 	roc_Col_Enable(col, true);
-	roc_Pix_Cal(col, row, (flags&FLAG_CALS));
+	roc_Pix_Cal(col, row, false);
 	uDelay(5);
-
-	// Loop over all triggers to be sent:
-	for (int16_t i = 0; i < nTriggers; i++)	{
-		Pg_Single();
-		uDelay(4);
-	}
-
+	Daq_Enable2(daq_read_size);
+	CalibrateReadouts(nTriggers, nReadouts, PHsum);
+	Daq_Disable2();
 	roc_ClrCal();
 	roc_Col_Enable(col, false);
 
 	return 1;
+
 }
 
-int8_t CTestboard::CalibrateDacScan(uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1,
-		uint8_t dacLower1, uint8_t dacUpper1, uint16_t flags) {
+int8_t CTestboard::CalibrateDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1,
+		int16_t dacLower1, int16_t dacUpper1, vectorR<int16_t> &nReadouts,
+		vectorR<int32_t> &PHsum) {
+
+	//nReadouts.clear();
+	//PHsum.clear();
+	int16_t n;
+	int32_t ph;
 
 	roc_Col_Enable(col, true);
-	roc_Pix_Cal(col, row, (flags&FLAG_CALS));
+	roc_Pix_Cal(col, row, false);
 	uDelay(5);
-
-	// Loop over the DAC range specified:
-	for (int i = dacLower1; i <= dacUpper1; i++)
+	Daq_Enable2(daq_read_size);
+	for (int i = dacLower1; i < dacUpper1; i++)
 	{
 		roc_SetDAC(dacReg1, i);
-		uDelay(5);
-
-		// Loop over all triggers to be sent:
-		for (int16_t j = 0; j < nTriggers; j++)	{
-			Pg_Single();
-			uDelay(4);
-		}
+		CalibrateReadouts(nTriggers, n, ph);
+		nReadouts.push_back(n);
+		PHsum.push_back(ph);
 	}
-
+	Daq_Disable2();
 	roc_ClrCal();
 	roc_Col_Enable(col, false);
 
 	return 1;
 }
 
-void CTestboard::ParallelCalibrateDacDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1, uint8_t dacLower1, uint8_t dacUpper1, uint8_t dacReg2, uint8_t dacLower2, uint8_t dacUpper2, uint16_t flags) {
+int8_t CTestboard::CalibrateDacDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1,
+		int16_t dacLower1, int16_t dacUpper1, int16_t dacReg2, int16_t dacLower2, int16_t dacUpper2,
+		vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum) {
 
-	for(size_t r = 0; r < roc_i2c.size(); r++) {
-		roc_I2cAddr(roc_i2c.at(r));
-		roc_Col_Enable(col, true);
-		roc_Pix_Cal(col, row, (flags&FLAG_CALS));
-		uDelay(5);
-	}
 
-	// Loop over the first DAC range specified:
-	for (int i = dacLower1; i <= dacUpper1; i++)
-	{
-		for(size_t r = 0; r < roc_i2c.size(); r++) {
-			roc_I2cAddr(roc_i2c.at(r));
-			roc_SetDAC(dacReg1, i);
-		}
-
-		// Loop over the second DAC range specified:
-		for (int j = dacLower2; j <= dacUpper2; j++)
-		{
-			for(size_t r = 0; r < roc_i2c.size(); r++) {
-				roc_I2cAddr(roc_i2c.at(r));
-				roc_SetDAC(dacReg2, j);
-			}
-			uDelay(5);
-
-			// Loop over all triggers to be sent:
-			for (int16_t k = 0; k < nTriggers; k++)	{
-				Pg_Single();
-				uDelay(4);
-			}
-		}
-	}
-
-	for(size_t r = 0; r < roc_i2c.size(); r++) {
-		roc_I2cAddr(roc_i2c.at(r));
-		roc_ClrCal();
-		roc_Col_Enable(col, false);
-	}
-}
-
-void CTestboard::CalibrateDacDacScan(uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1, uint8_t dacLower1, uint8_t dacUpper1, uint8_t dacReg2, uint8_t dacLower2, uint8_t dacUpper2, uint16_t flags) {
+    int16_t n;
+	int32_t ph;
 
     roc_Col_Enable(col, true);
-	roc_Pix_Cal(col, row, (flags&FLAG_CALS));
+	roc_Pix_Cal(col, row, false);
 	uDelay(5);
-
-	// Loop over the first DAC range specified:
-	for (int i = dacLower1; i <= dacUpper1; i++)
+	Daq_Enable2(daq_read_size);
+	for (int i = dacLower1; i < dacUpper1; i++)
 	{
 		roc_SetDAC(dacReg1, i);
-
-		// Loop over the second DAC range specified:
-		for (int j = dacLower2; j <= dacUpper2; j++)
+		for (int k = dacLower1; k < dacUpper2; k++)
 		{
-			roc_SetDAC(dacReg2, j);
-			uDelay(5);
-
-			// Loop over all triggers to be sent:
-			for (int16_t k = 0; k < nTriggers; k++)	{
-				Pg_Single();
-				uDelay(4);
-			}
+			roc_SetDAC(dacReg2, k);
+			CalibrateReadouts(nTriggers, n, ph);
+			nReadouts.push_back(n);
+			PHsum.push_back(ph);
 		}
 	}
-
+	Daq_Disable2();
 	roc_ClrCal();
 	roc_Col_Enable(col, false);
+
+
+	return 1;
 }
 
-int16_t CTestboard::CalibrateMap(uint16_t nTriggers, uint16_t flags)
+int16_t CTestboard::CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum, vectorR<uint32_t> &adress)
 {
+	int16_t ok = -1;
+    uint32_t avail_size = 0;
+
+    nReadouts.clear();
+    PHsum.clear();
+    adress.clear();
+
+    nReadouts.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
+    PHsum.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
+    adress.resize(ROC_NUMCOLS * ROC_NUMROWS, 0);
+
+    Daq_Enable2(daq_read_size);
+	vector<uint16_t> data;
+	vector<uint16_t> data2;
+
+	vector<uint16_t> n;
+	vector<uint16_t> ph;
+	vector<uint32_t> adr;
+
+
+
 	for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
 		roc_Col_Enable(col, true);
 		for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
-			roc_Pix_Cal(col, row, (flags&FLAG_CALS));
+		//for (uint8_t row = 0; row < 20; row++) {
+			//arm
+			roc_Pix_Cal(col, row, false);
 			uDelay(5);
-			for (uint16_t i = 0; i < nTriggers; i++) {
+			for (uint8_t trigger = 0; trigger < nTriggers; trigger++) {
 				//send triggers
 				Pg_Single();
 				uDelay(4);
@@ -1924,47 +1884,76 @@ int16_t CTestboard::CalibrateMap(uint16_t nTriggers, uint16_t flags)
 			// clear
 			roc_ClrCal();
 		}
+
+		//read data
+		data.clear();
+		data2.clear();
+		//Daq_Read2(data, daq_read_size, avail_size);
+		Daq_Read(data, daq_read_size, avail_size, 0);
+		if (TBM_Present()){
+			avail_size=0;
+			Daq_Read(data2, daq_read_size, avail_size, 1);
+		}
+		//decode readouts
+		n.clear();
+		ph.clear();
+		adr.clear();
+		ok = Decode(data, n, ph, adr);
+		ok = Decode(data2, n, ph, adr);
+
+		int colR = -1, rowR = -1;
+
+		for (unsigned int i = 0; i<adr.size();i++){
+			rowR = adr[i] & 0xff;
+			colR = (adr[i] >> 8) & 0xff;
+			if (0 <= colR && colR < ROC_NUMCOLS && 0 <= rowR && rowR < ROC_NUMROWS){
+				nReadouts[colR * ROC_NUMROWS + rowR] += n[i];
+				PHsum[colR * ROC_NUMROWS + rowR] += ph[i];
+				adress[colR * ROC_NUMROWS + rowR] = adr[i];
+			 }
+		}
+
 		roc_Col_Enable(col, false);
 	}
+
+	Daq_Disable2();
+
     return 1;
 }
 
-int16_t CTestboard::CalibrateModule(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags) {
+int16_t CTestboard::TriggerRow(int16_t nTriggers, int16_t col, vector<int16_t> &rocs, int16_t delay){
 
-	for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
-
-		for(size_t i = 0; i < roc_i2c.size(); i++) {
-			roc_I2cAddr(roc_i2c.at(i));
-			roc_Col_Enable(col, true);
-		}
-
-		for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
-
-			for(size_t i = 0; i < roc_i2c.size(); i++) {
-				roc_I2cAddr(roc_i2c.at(i));
-				roc_Pix_Cal(col, row, (flags&FLAG_CALS));
-			}
-
-			uDelay(5);
-			for (uint16_t i = 0; i < nTriggers; i++) {
-				//send triggers
-				Pg_Single();
-				uDelay(4);
-			}
-			// clear
-			for(size_t i = 0; i < roc_i2c.size(); i++) {
-				roc_I2cAddr(roc_i2c.at(i));
-				roc_ClrCal();
-			}
-		}
-
-		for(size_t i = 0; i < roc_i2c.size(); i++) {
-			roc_I2cAddr(roc_i2c.at(i));
-			roc_Col_Enable(col, false);
-		}
-
+	for (uint16_t i = 0; i < rocs.size(); i++){
+		roc_I2cAddr(rocs[i]);
+		roc_Col_Enable(col, true);
 	}
-    return 1;
+
+	for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
+		//arm
+		for (uint16_t i = 0; i < rocs.size(); i++){
+			roc_I2cAddr(rocs[i]);
+			roc_Pix_Cal(col, row, false);
+			// this delay is realy needed
+			uDelay(delay);
+		}
+
+		for (uint8_t trigger = 0; trigger < nTriggers; trigger++) {
+			//send triggers
+			Pg_Single();
+			uDelay(delay);
+		}
+		// clear
+		for (uint16_t i = 0; i < rocs.size(); i++){
+			roc_I2cAddr(rocs[i]);
+			roc_ClrCal();
+		}
+	}
+
+	for (uint16_t i = 0; i < rocs.size(); i++){
+		roc_I2cAddr(rocs[i]);
+		roc_Col_Enable(col, false);
+	}
+	return 1;
 }
 
 // To be removed
