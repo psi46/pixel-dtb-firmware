@@ -5,9 +5,11 @@
 #include "dtb_config.h"
 #include "rpc.h"
 
+// -------- Helper Functions -------------------------------
+
 // Return the Row to be pulsed with a calibrate signal
 // If "xtalk" is set, move the row by one count up or down
-uint8_t GetXtalkRow(uint8_t row, bool xtalk) {
+uint8_t CTestboard::GetXtalkRow(uint8_t row, bool xtalk) {
   
   if (xtalk) {
     if (row == ROC_NUMROWS - 1) { return (row - 1); }
