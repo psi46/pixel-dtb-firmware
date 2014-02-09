@@ -1795,10 +1795,10 @@ int8_t CTestboard::CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int3
 	return 1;
 }
 
-int8_t CTestboard::CalibratePixel(uint16_t nTriggers, uint8_t col, uint8_t row, bool flag_use_cals) {
+int8_t CTestboard::CalibratePixel(uint16_t nTriggers, uint8_t col, uint8_t row, uint16_t flags) {
 
 	roc_Col_Enable(col, true);
-	roc_Pix_Cal(col, row, flag_use_cals);
+	roc_Pix_Cal(col, row, (flags&FLAG_CALS));
 	uDelay(5);
 
 	// Loop over all triggers to be sent:
@@ -1814,10 +1814,10 @@ int8_t CTestboard::CalibratePixel(uint16_t nTriggers, uint8_t col, uint8_t row, 
 }
 
 int8_t CTestboard::CalibrateDacScan(uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1,
-		uint8_t dacLower1, uint8_t dacUpper1, bool flag_use_cals) {
+		uint8_t dacLower1, uint8_t dacUpper1, uint16_t flags) {
 
 	roc_Col_Enable(col, true);
-	roc_Pix_Cal(col, row, flag_use_cals);
+	roc_Pix_Cal(col, row, (flags&FLAG_CALS));
 	uDelay(5);
 
 	// Loop over the DAC range specified:
@@ -1839,10 +1839,51 @@ int8_t CTestboard::CalibrateDacScan(uint16_t nTriggers, uint8_t col, uint8_t row
 	return 1;
 }
 
-int8_t CTestboard::CalibrateDacDacScan(uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1, uint8_t dacLower1, uint8_t dacUpper1, uint8_t dacReg2, uint8_t dacLower2, uint8_t dacUpper2, bool flag_use_cals) {
+void CTestboard::ParallelCalibrateDacDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1, uint8_t dacLower1, uint8_t dacUpper1, uint8_t dacReg2, uint8_t dacLower2, uint8_t dacUpper2, uint16_t flags) {
+
+	for(size_t r = 0; r < roc_i2c.size(); r++) {
+		roc_I2cAddr(roc_i2c.at(r));
+		roc_Col_Enable(col, true);
+		roc_Pix_Cal(col, row, (flags&FLAG_CALS));
+		uDelay(5);
+	}
+
+	// Loop over the first DAC range specified:
+	for (int i = dacLower1; i <= dacUpper1; i++)
+	{
+		for(size_t r = 0; r < roc_i2c.size(); r++) {
+			roc_I2cAddr(roc_i2c.at(r));
+			roc_SetDAC(dacReg1, i);
+		}
+
+		// Loop over the second DAC range specified:
+		for (int j = dacLower2; j <= dacUpper2; j++)
+		{
+			for(size_t r = 0; r < roc_i2c.size(); r++) {
+				roc_I2cAddr(roc_i2c.at(r));
+				roc_SetDAC(dacReg2, j);
+			}
+			uDelay(5);
+
+			// Loop over all triggers to be sent:
+			for (int16_t k = 0; k < nTriggers; k++)	{
+				Pg_Single();
+				uDelay(4);
+			}
+		}
+	}
+
+	for(size_t r = 0; r < roc_i2c.size(); r++) {
+		roc_I2cAddr(roc_i2c.at(r));
+		roc_ClrCal();
+		roc_Col_Enable(col, false);
+	}
+}
+
+void CTestboard::CalibrateDacDacScan(uint16_t nTriggers, uint8_t col, uint8_t row, uint8_t dacReg1, uint8_t dacLower1, uint8_t dacUpper1, uint8_t dacReg2, uint8_t dacLower2, uint8_t dacUpper2, uint16_t flags) {
 
     roc_Col_Enable(col, true);
-	roc_Pix_Cal(col, row, flag_use_cals);
+	roc_Pix_Cal(col, row, (flags&FLAG_CALS));
 	uDelay(5);
 
 	// Loop over the first DAC range specified:
@@ -1866,16 +1907,14 @@ int8_t CTestboard::CalibrateDacDacScan(uint16_t nTriggers, uint8_t col, uint8_t 
 
 	roc_ClrCal();
 	roc_Col_Enable(col, false);
-
-	return 1;
 }
 
-int16_t CTestboard::CalibrateMap(uint16_t nTriggers, bool flag_use_cals)
+int16_t CTestboard::CalibrateMap(uint16_t nTriggers, uint16_t flags)
 {
 	for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
 		roc_Col_Enable(col, true);
 		for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
-			roc_Pix_Cal(col, row, flag_use_cals);
+			roc_Pix_Cal(col, row, (flags&FLAG_CALS));
 			uDelay(5);
 			for (uint16_t i = 0; i < nTriggers; i++) {
 				//send triggers
@@ -1890,7 +1929,7 @@ int16_t CTestboard::CalibrateMap(uint16_t nTriggers, bool flag_use_cals)
     return 1;
 }
 
-int16_t CTestboard::CalibrateModule(vector<uint8_t> &roc_i2c, uint16_t nTriggers, bool flag_use_cals) {
+int16_t CTestboard::CalibrateModule(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags) {
 
 	for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
 
@@ -1903,7 +1942,7 @@ int16_t CTestboard::CalibrateModule(vector<uint8_t> &roc_i2c, uint16_t nTriggers
 
 			for(size_t i = 0; i < roc_i2c.size(); i++) {
 				roc_I2cAddr(roc_i2c.at(i));
-				roc_Pix_Cal(col, row, flag_use_cals);
+				roc_Pix_Cal(col, row, (flags&FLAG_CALS));
 			}
 
 			uDelay(5);
