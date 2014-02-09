@@ -172,7 +172,7 @@ void CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
       }
 
       // Loop over the DAC range specified:
-      for (int dac1 = dac1low; dac1 <= dac1high; dac1++) {
+      for (uint8_t dac1 = dac1low; dac1 <= dac1high; dac1++) {
 
 	// Update the DAC setting on all configured ROCS:
 	for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
@@ -216,7 +216,7 @@ void CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
   }
 
   // Loop over the DAC range specified:
-  for (int dac1 = dac1low; dac1 <= dac1high; dac1++) {
+  for (uint8_t dac1 = dac1low; dac1 <= dac1high; dac1++) {
 
     // Update the DAC setting on all configured ROCS:
     for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
@@ -260,7 +260,7 @@ void CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
       roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
       // Loop over the DAC range specified:
-      for (int dac1 = dac1low; dac1 <= dac1high; dac1++) {
+      for (uint8_t dac1 = dac1low; dac1 <= dac1high; dac1++) {
 
 	// Update the DAC setting on the ROC:
 	roc_SetDAC(dac1register, dac1);
@@ -293,7 +293,7 @@ void CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Loop over the DAC range specified:
-  for (int dac = dac1low; dac <= dac1high; dac++) {
+  for (uint8_t dac = dac1low; dac <= dac1high; dac++) {
 
     // Update the DAC setting on the ROC:
     roc_SetDAC(dac1register, dac);
@@ -336,7 +336,7 @@ void CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
       }
 
       // Loop over the DAC1 range specified:
-      for (int dac1 = dac1low; dac1 <= dac1high; dac1++) {
+      for (uint8_t dac1 = dac1low; dac1 <= dac1high; dac1++) {
 
 	// Update the DAC1 setting on all configured ROCS:
 	for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
@@ -345,7 +345,7 @@ void CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
 	}
 
 	// Loop over the DAC2 range specified:
-	for (int dac2 = dac2low; dac2 <= dac2high; dac2++) {
+	for (uint8_t dac2 = dac2low; dac2 <= dac2high; dac2++) {
 
 	  // Update the DAC2 setting on all configured ROCS:
 	  for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
@@ -390,7 +390,7 @@ void CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
   }
 
   // Loop over the DAC1 range specified:
-  for (int dac1 = dac1low; dac1 <= dac1high; dac1++) {
+  for (uint8_t dac1 = dac1low; dac1 <= dac1high; dac1++) {
     
     // Update the DAC1 setting on all configured ROCS:
     for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
@@ -399,7 +399,7 @@ void CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
     }
 
     // Loop over the DAC2 range specified:
-    for (int dac2 = dac2low; dac2 <= dac2high; dac2++) {
+    for (uint8_t dac2 = dac2low; dac2 <= dac2high; dac2++) {
 
       // Update the DAC2 setting on all configured ROCS:
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
@@ -444,13 +444,13 @@ void CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
       roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
       // Loop over the DAC1 range specified:
-      for (int dac1 = dac1low; dac1 <= dac1high; dac1++) {
+      for (uint8_t dac1 = dac1low; dac1 <= dac1high; dac1++) {
     
 	// Update the DAC1 setting on the configured ROC:
 	roc_SetDAC(dac1register, dac1);
 
 	// Loop over the DAC2 range specified:
-	for (int dac2 = dac2low; dac2 <= dac2high; dac2++) {
+	for (uint8_t dac2 = dac2low; dac2 <= dac2high; dac2++) {
 
 	  // Update the DAC2 setting on the configured ROC:
 	  roc_SetDAC(dac2register, dac2);
@@ -484,13 +484,13 @@ void CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Loop over the DAC range specified:
-  for (int dac1 = dac1low; dac1 <= dac1high; dac1++) {
+  for (uint8_t dac1 = dac1low; dac1 <= dac1high; dac1++) {
     
     // Update the DAC1 setting on the configured ROC:
     roc_SetDAC(dac1register, dac1);
 
     // Loop over the DAC2 range specified:
-    for (int dac2 = dac2low; dac2 <= dac2high; dac2++) {
+    for (uint8_t dac2 = dac2low; dac2 <= dac2high; dac2++) {
 
       // Update the DAC2 setting on the configured ROC:
       roc_SetDAC(dac2register, dac2);
