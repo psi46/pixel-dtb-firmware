@@ -38,21 +38,22 @@ void CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
       // Set the calibrate bits on every configured ROC
       // Take into account both Xtalks and Cals flags
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
-	roc_I2cAddr(roc_i2c.at(roc));
-	roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
+        roc_I2cAddr(roc_i2c.at(roc));
+	    roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
       }
 
       // Send the triggers:
       uDelay(5);
       for (uint16_t trig = 0; trig < nTriggers; trig++) {
-	Pg_Single();
-	uDelay(4);
+	    Pg_Single();
+	    // Delay the next trigger, depending in the data traffic we expect:
+	    uDelay(4*roc_i2c.size());
       }
 
       // Clear the calibrate signal on every ROC configured
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
-	roc_I2cAddr(roc_i2c.at(roc));
-	roc_ClrCal();
+	    roc_I2cAddr(roc_i2c.at(roc));
+	    roc_ClrCal();
       }
     } // Loop over all rows
 
@@ -80,7 +81,8 @@ void CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t
   uDelay(5);
   for (uint16_t trig = 0; trig < nTriggers; trig++) {
     Pg_Single();
-    uDelay(4);
+    // Delay the next trigger, depending in the data traffic we expect:
+    uDelay(4*roc_i2c.size());
   }
 
   // Clear the calibrate signal on every ROC configured
@@ -113,8 +115,8 @@ void CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
       // Send the triggers:
       uDelay(5);
       for (uint16_t trig = 0; trig < nTriggers; trig++) {
-	Pg_Single();
-	uDelay(4);
+	    Pg_Single();
+	    uDelay(4);
       }
 
       // Clear the calibrate signal
@@ -169,8 +171,8 @@ void CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
       // Set the calibrate bits on every configured ROC
       // Take into account both Xtalks and Cals flags
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
-	roc_I2cAddr(roc_i2c.at(roc));
-	roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
+	    roc_I2cAddr(roc_i2c.at(roc));
+	    roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
       }
 
       // Loop over the DAC range specified:
@@ -186,7 +188,8 @@ void CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
 	uDelay(5);
 	for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	  Pg_Single();
-	  uDelay(4);
+	  // Delay the next trigger, depending in the data traffic we expect:
+	  uDelay(4*roc_i2c.size());
 	}
       } // Loop over the DAC range
 
@@ -230,7 +233,8 @@ void CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
     uDelay(5);
     for (uint16_t trig = 0; trig < nTriggers; trig++) {
       Pg_Single();
-      uDelay(4);
+      // Delay the next trigger, depending in the data traffic we expect:
+      uDelay(4*roc_i2c.size());
     }
   } // Loop over the DAC range
 
@@ -359,7 +363,8 @@ void CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
 	  uDelay(5);
 	  for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	    Pg_Single();
-	    uDelay(4);
+	    // Delay the next trigger, depending in the data traffic we expect:
+	    uDelay(4*roc_i2c.size());
 	  }
 	} // Loop over the DAC2 range
       } // Loop over the DAC1 range
@@ -412,8 +417,9 @@ void CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
       // Send the triggers:
       uDelay(5);
       for (uint16_t trig = 0; trig < nTriggers; trig++) {
-	Pg_Single();
-	uDelay(4);
+	    Pg_Single();
+	    // Delay the next trigger, depending in the data traffic we expect:
+        uDelay(4*roc_i2c.size());
       }
     } // Loop over the DAC2 range
   } // Loop over the DAC1 range
