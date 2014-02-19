@@ -546,3 +546,34 @@ void CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
   roc_ClrCal();
   roc_Col_Enable(column, false);
 }
+
+void CTestboard::LoopCheckerBoard(uint8_t roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high) {
+
+  // Enable this column on the configured ROC:
+  roc_I2cAddr(roc_i2c);
+  roc_Col_Enable(column, true);
+
+  // Loop over the DAC range specified:
+  for (size_t dac1 = dac1low; dac1 <= dac1high; dac1++) {
+
+    // Loop over the DAC2 range specified:
+    for (size_t dac2 = dac2low; dac2 <= dac2high; dac2++) {
+
+      // Only set calibrate every other pixel, checker board patterns:
+      if((dac2%2 + dac1%2) == 1) roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
+      else roc_ClrCal();
+
+      // Send the triggers:
+      uDelay(5);
+      for (uint16_t trig = 0; trig < nTriggers; trig++) {
+	Pg_Single();
+	uDelay(4);
+      }
+    } // Loop over the DAC2 range
+  } // Loop over the DAC1 range
+
+  // Clear the calibrate signal on the ROC configured
+  // Disable this column on the ROC configured:
+  roc_ClrCal();
+  roc_Col_Enable(column, false);
+}

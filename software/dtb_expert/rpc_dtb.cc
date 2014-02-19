@@ -1251,7 +1251,25 @@ bool rpc__LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC(CRpcIo &rpc_io, rpcMessag
 	return true;
 }
 
-const uint16_t rpc_cmdListSize = 117;
+bool rpc__LoopCheckerBoard$vCCCSSCCCCCC(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(13)) return false;
+	uint8_t rpc_par1 = msg.Get_UINT8();
+	uint8_t rpc_par2 = msg.Get_UINT8();
+	uint8_t rpc_par3 = msg.Get_UINT8();
+	uint16_t rpc_par4 = msg.Get_UINT16();
+	uint16_t rpc_par5 = msg.Get_UINT16();
+	uint8_t rpc_par6 = msg.Get_UINT8();
+	uint8_t rpc_par7 = msg.Get_UINT8();
+	uint8_t rpc_par8 = msg.Get_UINT8();
+	uint8_t rpc_par9 = msg.Get_UINT8();
+	uint8_t rpc_par10 = msg.Get_UINT8();
+	uint8_t rpc_par11 = msg.Get_UINT8();
+	tb.LoopCheckerBoard(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9,rpc_par10,rpc_par11);
+	return true;
+}
+
+const uint16_t rpc_cmdListSize = 118;
 
 const CRpcCall rpc_cmdlist[] =
 {
@@ -1371,7 +1389,8 @@ const CRpcCall rpc_cmdlist[] =
 	/*   113 */ { rpc__LoopMultiRocAllPixelsDacDacScan$v1CSSCCCCCC, "LoopMultiRocAllPixelsDacDacScan$v1CSSCCCCCC" },
 	/*   114 */ { rpc__LoopMultiRocOnePixelDacDacScan$v1CCCSSCCCCCC, "LoopMultiRocOnePixelDacDacScan$v1CCCSSCCCCCC" },
 	/*   115 */ { rpc__LoopSingleRocAllPixelsDacDacScan$vCSSCCCCCC, "LoopSingleRocAllPixelsDacDacScan$vCSSCCCCCC" },
-	/*   116 */ { rpc__LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC, "LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC" }
+	/*   116 */ { rpc__LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC, "LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC" },
+	/*   117 */ { rpc__LoopCheckerBoard$vCCCSSCCCCCC, "LoopCheckerBoard$vCCCSSCCCCCC" }
 };
 
 void rpc_Dispatcher(CRpcIo &rpc_io)
@@ -1381,7 +1400,7 @@ void rpc_Dispatcher(CRpcIo &rpc_io)
 	{
 		msg.Receive(rpc_io);
 		if (rpc_error.HasError()) continue;
-		if (msg.GetCmd() >= 117) continue;
+		if (msg.GetCmd() >= 118) continue;
 		rpc_cmdlist[msg.GetCmd()].call(rpc_io, msg);
 	}
 }
