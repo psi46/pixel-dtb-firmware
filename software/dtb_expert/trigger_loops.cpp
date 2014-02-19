@@ -20,11 +20,15 @@ uint8_t CTestboard::GetXtalkRow(uint8_t row, bool xtalk) {
 
 uint8_t CTestboard::GetTrimValue(uint8_t roc_i2c, uint8_t column, uint8_t row) {
 
+	// Lookup the trim bits value of this particular pixel from a huge map stored somewhere in the NIOS
+	// trim[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMCOLS]
 	return 0xf;
 }
 
 bool CTestboard::GetMaskState(unit8_t roc_i2c, uint8_t column, uint8_t row) {
 
+	// Lookup the mask state of this particular pixel from a huge map stored somewhere in the NIOS
+	// mask[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMCOLS]
 	return false;
 }
 
