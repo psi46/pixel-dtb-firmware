@@ -442,6 +442,7 @@ public:
 	// ------- Trigger Loop functions for Host-side DAQ ROC/Module testing ------
 	// Not exported internal helper functions:
 	uint8_t GetXtalkRow(uint8_t row, bool xtalk);
+	uint8_t GetTrimValue(uint8_t roc_i2c, uint8_t column, uint8_t row);
 
 	// Exported RPC-Calls for Maps
 	RPC_EXPORT void LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags);
