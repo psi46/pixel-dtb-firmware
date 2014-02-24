@@ -20,7 +20,7 @@ uint16_t CTestboard::GetRpcVersion()
 }
 
 
-int32_t  CTestboard::GetRpcCallId(stringR &cmdName)
+int32_t  CTestboard::GetRpcCallId(string &cmdName)
 {
 	return rpc_GetRpcCallId(cmdName);
 }
@@ -157,7 +157,7 @@ uint8_t CTestboard::UpgradeStart(uint16_t version)
 }
 
 
-uint8_t CTestboard::UpgradeData(stringR &record)
+uint8_t CTestboard::UpgradeData(string &record)
 {
 	if (!flashMem) THROW_UGR(ERR_MEMASSIGN, flash_error.GetErrorNr());
 	CSRecordReader rec;
