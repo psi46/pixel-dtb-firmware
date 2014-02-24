@@ -21,7 +21,7 @@ uint8_t CTestboard::GetXtalkRow(uint8_t row, bool xtalk) {
 
 // -------- Simple Calibrate Functions for Maps -------------------------------
 
-void CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags) {
+void CTestboard::LoopMultiRocAllPixelsCalibrate(vectorR<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags) {
 
   // Loop over all columns:
   for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
@@ -66,7 +66,7 @@ void CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
   } // Loop over all columns
 }
 
-void CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags) {
+void CTestboard::LoopMultiRocOnePixelCalibrate(vectorR<uint8_t> &roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags) {
 
   // Enable this column on every configured ROC:
   // Set the calibrate bits on every configured ROC
@@ -154,7 +154,7 @@ void CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
 
 // -------- Trigger Loop Functions for 1D Dac Scans -------------------------------
 
-void CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
+void CTestboard::LoopMultiRocAllPixelsDacScan(vectorR<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
 
   // Loop over all columns:
   for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
@@ -209,7 +209,7 @@ void CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
   } // Loop over all columns
 }
 
-void CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
+void CTestboard::LoopMultiRocOnePixelDacScan(vectorR<uint8_t> &roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
 
   // Enable this column on every configured ROC:
   // Set the calibrate bits on every configured ROC
@@ -320,7 +320,7 @@ void CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
 
 // -------- Trigger Loop Functions for 2D DacDac Scans ----------------------------
 
-void CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high) {
+void CTestboard::LoopMultiRocAllPixelsDacDacScan(vectorR<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high) {
 
   // Loop over all columns:
   for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
@@ -385,7 +385,7 @@ void CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
   } // Loop over all columns
 }
 
-void CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high) {
+void CTestboard::LoopMultiRocOnePixelDacDacScan(vectorR<uint8_t> &roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high) {
 
   // Enable this column on every configured ROC:
   // Set the calibrate bits on every configured ROC
