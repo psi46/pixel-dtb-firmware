@@ -94,7 +94,6 @@ class CTestboard
 	unsigned char HUB_address;
 	static const unsigned char MODCONF[16];
 
-
 	void InitDac();
 	void SetDac(int addr, int value);
 	unsigned int ReadADC(unsigned char addr);
@@ -442,7 +441,11 @@ public:
 	// ------- Trigger Loop functions for Host-side DAQ ROC/Module testing ------
 	// Not exported internal helper functions:
 	uint8_t GetXtalkRow(uint8_t row, bool xtalk);
+
+	RPC_EXPORT bool SetI2CAddresses(vector<uint8_t> &roc_i2c);
+	RPC_EXPORT bool SetTrimValues(uint8_t roc_i2c, vector<int8_t> &trimvalues);
 	uint8_t GetTrimValue(uint8_t roc_i2c, uint8_t column, uint8_t row);
+	bool GetMaskState(uint8_t roc_i2c, uint8_t column, uint8_t row);
 
 	// Exported RPC-Calls for Maps
 	RPC_EXPORT void LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags);

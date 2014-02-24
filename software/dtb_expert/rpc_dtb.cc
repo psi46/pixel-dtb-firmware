@@ -1083,6 +1083,31 @@ bool rpc__Ethernet_RecvPackets$I(CRpcIo &rpc_io, rpcMessage &msg)
 	return true;
 }
 
+bool rpc__SetI2CAddresses$b1C(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(0)) return false;
+	vector<uint8_t> rpc_par1; if (!rpc_Receive(rpc_io, rpc_par1)) return false;
+	bool rpc_par0 = tb.SetI2CAddresses(rpc_par1);
+	msg.Create(105);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.Send(rpc_io)) return false;
+	rpc_io.Flush();
+	return true;
+}
+
+bool rpc__SetTrimValues$bC1c(CRpcIo &rpc_io, rpcMessage &msg)
+{
+	if (!msg.CheckSize(1)) return false;
+	uint8_t rpc_par1 = msg.Get_UINT8();
+	vector<int8_t> rpc_par2; if (!rpc_Receive(rpc_io, rpc_par2)) return false;
+	bool rpc_par0 = tb.SetTrimValues(rpc_par1,rpc_par2);
+	msg.Create(106);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.Send(rpc_io)) return false;
+	rpc_io.Flush();
+	return true;
+}
+
 bool rpc__LoopMultiRocAllPixelsCalibrate$v1CSS(CRpcIo &rpc_io, rpcMessage &msg)
 {
 	if (!msg.CheckSize(4)) return false;
@@ -1269,7 +1294,7 @@ bool rpc__LoopCheckerBoard$vCCCSSCCCCCC(CRpcIo &rpc_io, rpcMessage &msg)
 	return true;
 }
 
-const uint16_t rpc_cmdListSize = 118;
+const uint16_t rpc_cmdListSize = 120;
 
 const CRpcCall rpc_cmdlist[] =
 {
@@ -1378,19 +1403,21 @@ const CRpcCall rpc_cmdlist[] =
 	/*   102 */ { rpc__TestColPixel$bCC2C, "TestColPixel$bCC2C" },
 	/*   103 */ { rpc__Ethernet_Send$v3c, "Ethernet_Send$v3c" },
 	/*   104 */ { rpc__Ethernet_RecvPackets$I, "Ethernet_RecvPackets$I" },
-	/*   105 */ { rpc__LoopMultiRocAllPixelsCalibrate$v1CSS, "LoopMultiRocAllPixelsCalibrate$v1CSS" },
-	/*   106 */ { rpc__LoopMultiRocOnePixelCalibrate$v1CCCSS, "LoopMultiRocOnePixelCalibrate$v1CCCSS" },
-	/*   107 */ { rpc__LoopSingleRocAllPixelsCalibrate$vCSS, "LoopSingleRocAllPixelsCalibrate$vCSS" },
-	/*   108 */ { rpc__LoopSingleRocOnePixelCalibrate$vCCCSS, "LoopSingleRocOnePixelCalibrate$vCCCSS" },
-	/*   109 */ { rpc__LoopMultiRocAllPixelsDacScan$v1CSSCCC, "LoopMultiRocAllPixelsDacScan$v1CSSCCC" },
-	/*   110 */ { rpc__LoopMultiRocOnePixelDacScan$v1CCCSSCCC, "LoopMultiRocOnePixelDacScan$v1CCCSSCCC" },
-	/*   111 */ { rpc__LoopSingleRocAllPixelsDacScan$vCSSCCC, "LoopSingleRocAllPixelsDacScan$vCSSCCC" },
-	/*   112 */ { rpc__LoopSingleRocOnePixelDacScan$vCCCSSCCC, "LoopSingleRocOnePixelDacScan$vCCCSSCCC" },
-	/*   113 */ { rpc__LoopMultiRocAllPixelsDacDacScan$v1CSSCCCCCC, "LoopMultiRocAllPixelsDacDacScan$v1CSSCCCCCC" },
-	/*   114 */ { rpc__LoopMultiRocOnePixelDacDacScan$v1CCCSSCCCCCC, "LoopMultiRocOnePixelDacDacScan$v1CCCSSCCCCCC" },
-	/*   115 */ { rpc__LoopSingleRocAllPixelsDacDacScan$vCSSCCCCCC, "LoopSingleRocAllPixelsDacDacScan$vCSSCCCCCC" },
-	/*   116 */ { rpc__LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC, "LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC" },
-	/*   117 */ { rpc__LoopCheckerBoard$vCCCSSCCCCCC, "LoopCheckerBoard$vCCCSSCCCCCC" }
+	/*   105 */ { rpc__SetI2CAddresses$b1C, "SetI2CAddresses$b1C" },
+	/*   106 */ { rpc__SetTrimValues$bC1c, "SetTrimValues$bC1c" },
+	/*   107 */ { rpc__LoopMultiRocAllPixelsCalibrate$v1CSS, "LoopMultiRocAllPixelsCalibrate$v1CSS" },
+	/*   108 */ { rpc__LoopMultiRocOnePixelCalibrate$v1CCCSS, "LoopMultiRocOnePixelCalibrate$v1CCCSS" },
+	/*   109 */ { rpc__LoopSingleRocAllPixelsCalibrate$vCSS, "LoopSingleRocAllPixelsCalibrate$vCSS" },
+	/*   110 */ { rpc__LoopSingleRocOnePixelCalibrate$vCCCSS, "LoopSingleRocOnePixelCalibrate$vCCCSS" },
+	/*   111 */ { rpc__LoopMultiRocAllPixelsDacScan$v1CSSCCC, "LoopMultiRocAllPixelsDacScan$v1CSSCCC" },
+	/*   112 */ { rpc__LoopMultiRocOnePixelDacScan$v1CCCSSCCC, "LoopMultiRocOnePixelDacScan$v1CCCSSCCC" },
+	/*   113 */ { rpc__LoopSingleRocAllPixelsDacScan$vCSSCCC, "LoopSingleRocAllPixelsDacScan$vCSSCCC" },
+	/*   114 */ { rpc__LoopSingleRocOnePixelDacScan$vCCCSSCCC, "LoopSingleRocOnePixelDacScan$vCCCSSCCC" },
+	/*   115 */ { rpc__LoopMultiRocAllPixelsDacDacScan$v1CSSCCCCCC, "LoopMultiRocAllPixelsDacDacScan$v1CSSCCCCCC" },
+	/*   116 */ { rpc__LoopMultiRocOnePixelDacDacScan$v1CCCSSCCCCCC, "LoopMultiRocOnePixelDacDacScan$v1CCCSSCCCCCC" },
+	/*   117 */ { rpc__LoopSingleRocAllPixelsDacDacScan$vCSSCCCCCC, "LoopSingleRocAllPixelsDacDacScan$vCSSCCCCCC" },
+	/*   118 */ { rpc__LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC, "LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC" },
+	/*   119 */ { rpc__LoopCheckerBoard$vCCCSSCCCCCC, "LoopCheckerBoard$vCCCSSCCCCCC" }
 };
 
 void rpc_Dispatcher(CRpcIo &rpc_io)
@@ -1400,7 +1427,7 @@ void rpc_Dispatcher(CRpcIo &rpc_io)
 	{
 		msg.Receive(rpc_io);
 		if (rpc_error.HasError()) continue;
-		if (msg.GetCmd() >= 118) continue;
+		if (msg.GetCmd() >= 120) continue;
 		rpc_cmdlist[msg.GetCmd()].call(rpc_io, msg);
 	}
 }

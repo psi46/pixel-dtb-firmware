@@ -7,6 +7,10 @@
 
 // -------- Helper Functions -------------------------------
 
+
+char ROC_TRIM_BITS[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMROWS];
+char ROC_I2C_ADDRESSES[MOD_NUMROCS];
+
 // Return the Row to be pulsed with a calibrate signal
 // If "xtalk" is set, move the row by one count up or down
 uint8_t CTestboard::GetXtalkRow(uint8_t row, bool xtalk) {
@@ -18,14 +22,52 @@ uint8_t CTestboard::GetXtalkRow(uint8_t row, bool xtalk) {
   else { return row; }
 }
 
-uint8_t CTestboard::GetTrimValue(uint8_t roc_i2c, uint8_t column, uint8_t row) {
+// Setup of data storage structures in the NIOS stack. Stores all
+// ROC I2C addresses to be accessed later by functions which retrieve
+// trim values for a specific ROC:
+bool CTestboard::SetI2CAddresses(vector<uint8_t> &roc_i2c) {
 
-	// Lookup the trim bits value of this particular pixel from a huge map stored somewhere in the NIOS
-	// trim[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMCOLS]
-	return 0xf;
+	if(roc_i2c.size() > MOD_NUMROCS) { return false; }
+	for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+		ROC_I2C_ADDRESSES[roc] = roc_i2c.at(roc);
+	}
+	return true;
 }
 
-bool CTestboard::GetMaskState(unit8_t roc_i2c, uint8_t column, uint8_t row) {
+// Upload all trimvalues of one ROC to the NIOS core to store them for looping
+// over multiple pixels:
+bool CTestboard::SetTrimValues(uint8_t roc_i2c, vector<int8_t> &trimvalues) {
+
+	// Get the array index of the requested ROC via its I2C address:
+	size_t index = 0;
+	for(index = 0; index < MOD_NUMROCS; index++) {
+		if(ROC_I2C_ADDRESSES[index] == roc_i2c) { break; }
+	}
+
+	// Write the trim values into the corresponding array section:
+	for(size_t val = 0; val < trimvalues.size(); val++) {
+		ROC_TRIM_BITS[index*ROC_NUMROWS*ROC_NUMCOLS + val] = trimvalues.at(val);
+	}
+	return true;
+}
+
+// Read back the trim value of one specific pixel on a given ROC:
+uint8_t CTestboard::GetTrimValue(uint8_t roc_i2c, uint8_t column, uint8_t row) {
+
+	// Lookup the index of this particular ROC:
+	size_t index = 0;
+	for(index = 0; index < MOD_NUMROCS; index++) {
+		if(ROC_I2C_ADDRESSES[index] == roc_i2c) { break; }
+	}
+
+	// Lookup the trim bits value of this particular pixel:
+	int8_t value = ROC_TRIM_BITS[index*ROC_NUMROWS*ROC_NUMCOLS + column*ROC_NUMROWS + row];
+
+	if(value < 0) return 0xf;
+	else return value;
+}
+
+bool CTestboard::GetMaskState(uint8_t roc_i2c, uint8_t column, uint8_t row) {
 
 	// Lookup the mask state of this particular pixel from a huge map stored somewhere in the NIOS
 	// mask[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMCOLS]
@@ -36,6 +78,13 @@ bool CTestboard::GetMaskState(unit8_t roc_i2c, uint8_t column, uint8_t row) {
 // -------- Simple Calibrate Functions for Maps -------------------------------
 
 void CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags) {
+
+
+  // Mask all ROCs:
+  for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	roc_I2cAddr(roc_i2c.at(roc));
+	roc_Chip_Mask();
+  }
 
   // Loop over all columns:
   for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
@@ -89,6 +138,10 @@ void CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t
   // Take into account both Xtalks and Cals flags
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
+
+    // Mask the whole chip:
+    roc_Chip_Mask();
+
     roc_Col_Enable(column, true);
     if(!GetMaskState(roc_i2c.at(roc),column,row)) roc_Pix_Trim(column, row, GetTrimValue(roc_i2c.at(roc),column,row));
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
@@ -116,6 +169,9 @@ void CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
 
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
+
+  // Mask the whole chip:
+  roc_Chip_Mask();
 
   // Loop over all columns:
   for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
@@ -154,6 +210,8 @@ void CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
   // Set the calibrate bits on every configured ROC
   // Take into account both Xtalks and Cals flags
   roc_I2cAddr(roc_i2c);
+  roc_Chip_Mask();
+
   roc_Col_Enable(column, true);
   if(!GetMaskState(roc_i2c,column,row)) roc_Pix_Trim(column, row, GetTrimValue(roc_i2c,column,row));
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
@@ -176,6 +234,12 @@ void CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
 // -------- Trigger Loop Functions for 1D Dac Scans -------------------------------
 
 void CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
+
+  // Mask all ROCs:
+  for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	roc_I2cAddr(roc_i2c.at(roc));
+	roc_Chip_Mask();
+  }
 
   // Loop over all columns:
   for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
@@ -239,6 +303,8 @@ void CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
   // Take into account both Xtalks and Cals flags
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
+    roc_Chip_Mask();
+
     roc_Col_Enable(column, true);
     if(!GetMaskState(roc_i2c.at(roc),column,row)) roc_Pix_Trim(column, row, GetTrimValue(roc_i2c.at(roc),column,row));
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
@@ -276,6 +342,9 @@ void CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
 
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
+
+  // Mask thew whole ROC:
+  roc_Chip_Mask();
 
   // Loop over all columns:
   for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
@@ -322,6 +391,8 @@ void CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
   // Set the calibrate bits on every configured ROC
   // Take into account both Xtalks and Cals flags
   roc_I2cAddr(roc_i2c);
+  roc_Chip_Mask();
+
   roc_Col_Enable(column, true);
   if(!GetMaskState(roc_i2c,column,row)) roc_Pix_Trim(column, row, GetTrimValue(roc_i2c,column,row));
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
@@ -350,6 +421,12 @@ void CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
 // -------- Trigger Loop Functions for 2D DacDac Scans ----------------------------
 
 void CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high) {
+
+  // Mask all ROCs:
+  for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	roc_I2cAddr(roc_i2c.at(roc));
+	roc_Chip_Mask();
+  }
 
   // Loop over all columns:
   for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
@@ -423,6 +500,7 @@ void CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
   // Take into account both Xtalks and Cals flags
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
+    roc_Chip_Mask();
     roc_Col_Enable(column, true);
     if(!GetMaskState(roc_i2c.at(roc),column,row)) roc_Pix_Trim(column, row, GetTrimValue(roc_i2c.at(roc),column,row));
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
@@ -470,6 +548,7 @@ void CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
 
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
+  roc_Chip_Mask();
 
   // Loop over all columns:
   for (uint8_t col = 0; col < ROC_NUMCOLS; col++) {
@@ -523,6 +602,7 @@ void CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
   // Set the calibrate bits on the configured ROC
   // Take into account both Xtalks and Cals flags
   roc_I2cAddr(roc_i2c);
+  roc_Chip_Mask();
   roc_Col_Enable(column, true);
   if(!GetMaskState(roc_i2c,column,row)) roc_Pix_Trim(column, row, GetTrimValue(roc_i2c,column,row));
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
@@ -560,6 +640,7 @@ void CTestboard::LoopCheckerBoard(uint8_t roc_i2c, uint8_t column, uint8_t row, 
 
   // Enable this column on the configured ROC:
   roc_I2cAddr(roc_i2c);
+  roc_Chip_Mask();
   roc_Col_Enable(column, true);
 
   // Loop over the DAC range specified:
@@ -569,7 +650,10 @@ void CTestboard::LoopCheckerBoard(uint8_t roc_i2c, uint8_t column, uint8_t row, 
     for (size_t dac2 = dac2low; dac2 <= dac2high; dac2++) {
 
       // Only set calibrate every other pixel, checker board patterns:
-      if((dac2%2 + dac1%2) == 1) roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
+      if((dac2%2 + dac1%2) == 1) {
+    	roc_Pix_Trim(column,row,15);
+        roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
+      }
       else roc_ClrCal();
 
       // Send the triggers:
