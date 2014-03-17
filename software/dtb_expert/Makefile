@@ -129,12 +129,12 @@ BUILD_CONFIGS := default
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 12.0sp2
-ACDS_VERSION := 12.0sp2
+# ACDS_VERSION: 13.1
+ACDS_VERSION := 13.1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 263
+# BUILD_NUMBER: 162
 
 # Define path to the application ELF. 
 # It may be used by the makefile fragments so is defined before including them. 
@@ -145,18 +145,20 @@ ELF := dtb_expert.elf
 C_SRCS += libfatfs/core/ff.c
 C_SRCS += libfatfs/src/fatfs.c
 C_SRCS += libfatfs/src/fatfs_diskio.c
-CXX_SRCS += dtb_main.cc
-CXX_SRCS += dtb_hal.cc
-CXX_SRCS += pixel_dtb.cc
-CXX_SRCS += rpc.cc
-CXX_SRCS += rpc_dtb.cc
-CXX_SRCS += ethernet.cc
-CXX_SRCS += debug.cc
-CXX_SRCS += dtb_config.cc
 CXX_SRCS += FlashMemory.cc
 CXX_SRCS += SRecordReader.cc
-CXX_SRCS += ugerror.cc
+CXX_SRCS += debug.cc
+CXX_SRCS += dtb_config.cc
+CXX_SRCS += dtb_hal.cc
+CXX_SRCS += dtb_main.cc
+CXX_SRCS += ethernet.cc
+CXX_SRCS += pixel_dtb.cc
 CXX_SRCS += roctest.cc
+CXX_SRCS += rpc.cc
+CXX_SRCS += rpc_dtb.cc
+CXX_SRCS += ugerror.cc
+CXX_SRCS += trigger_loops.cpp
+CXX_SRCS += sgdma.cc
 ASM_SRCS :=
 
 
@@ -165,7 +167,7 @@ OBJ_ROOT_DIR := obj
 
 # Options to control objdump.
 CREATE_OBJDUMP := 1
-OBJDUMP_INCLUDE_SOURCE := 1
+OBJDUMP_INCLUDE_SOURCE := 0
 OBJDUMP_FULL_CONTENTS := 0
 
 # Options to enable/disable optional files.
@@ -190,11 +192,11 @@ CRT0 :=
 SYS_LIB :=
 
 # Define path to the root of the BSP.
-BSP_ROOT_DIR := ../dtb_bsp
+BSP_ROOT_DIR := ../dtb_bsp/
 
 # List of application specific include directories, library directories and library names
-APP_INCLUDE_DIRS += libfatfs/core
 APP_INCLUDE_DIRS += libfatfs/inc
+APP_INCLUDE_DIRS += libfatfs/core
 APP_INCLUDE_DIRS += libfatfs/src
 APP_LIBRARY_DIRS :=
 APP_LIBRARY_NAMES :=
@@ -203,7 +205,6 @@ APP_LIBRARY_NAMES :=
 BUILD_PRE_PROCESS :=
 BUILD_POST_PROCESS :=
 
-QUARTUS_PROJECT_DIR := X:/source/FPGA/dtb/
 
 
 #END GENERATED
@@ -633,7 +634,7 @@ ifeq ($(DEFAULT_CROSS_COMPILE),)
 DEFAULT_CROSS_COMPILE := nios2-elf-
 endif
 
-ifeq ($(DEFAULT_STACK_REPORT),)
+ifeq ($(DEFAULT_STACKREPORT),)
 DEFAULT_STACKREPORT := nios2-stackreport
 endif
 
@@ -690,15 +691,15 @@ ifeq ($(origin LD),default)
 LD := $(CROSS_COMPILE)g++
 endif
 
-ifeq ($(origin NM),default)
-NM := $(CROSS_COMPILE)nm
-endif
-
 ifeq ($(origin RM),default)
 RM := $(DEFAULT_RM)
 endif
 
-ifeq ($(origin CP),default)
+ifeq ($(NM),)
+NM := $(CROSS_COMPILE)nm
+endif
+
+ifeq ($(CP),)
 CP := $(DEFAULT_CP)
 endif
 
@@ -711,11 +712,9 @@ OBJCOPY := $(CROSS_COMPILE)objcopy
 endif
 
 ifeq ($(STACKREPORT),)
-ifeq ($(CROSS_COMPILE),nios2-elf-)
-STACKREPORT := $(DEFAULT_STACKREPORT)
+STACKREPORT := $(DEFAULT_STACKREPORT) --prefix $(CROSS_COMPILE)
 else
 DISABLE_STACKREPORT := 1
-endif
 endif
 
 ifeq ($(DOWNLOAD),)
@@ -1027,7 +1026,7 @@ ifeq ($(QSYS),1)
 IP_MAKE_SIMSCRIPT := ip-make-simscript
 
 ifeq ($(VSIM),)
-VSIM_EXE := $(if $(VSIM_DIR),$(VSIM_DIR)/,)vsim
+VSIM_EXE := "$(if $(VSIM_DIR),$(VSIM_DIR)/,)vsim"
 ifeq ($(ENABLE_VSIM_GUI),1)
 VSIM := $(VSIM_EXE) -gui
 else
@@ -1086,7 +1085,7 @@ ifneq ($(DISABLE_ELFPATCH),1)
 	$(ELFPATCH) $@ $(ELF_PATCH_FLAG)
 endif
 ifneq ($(DISABLE_STACKREPORT),1)
-	@$(STACKREPORT) $@
+	@bash -c "$(STACKREPORT) $@"
 endif
 
 $(OBJDUMP_NAME) : $(ELF)

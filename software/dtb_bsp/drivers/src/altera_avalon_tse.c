@@ -677,7 +677,7 @@ alt_32 getPHYSpeed(np_tse_mac *pmac) {
 
 	alt_u8 speed = ALTERA_TSE_MAC_SPEED_DEFAULT;
 	alt_u8 duplex = ALTERA_TSE_DUPLEX_MODE_DEFAULT;     /* 1 = full ; 0 = half*/
-	alt_u8 result = ALT_TSE_SPEED_DUPLEX(speed, duplex);
+	alt_32 result = ALT_TSE_SPEED_DUPLEX(speed, duplex);
     
     alt_tse_phy_info *pphy = 0;
     alt_tse_mac_info *pmac_info = 0;

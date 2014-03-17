@@ -53,6 +53,8 @@
 #define	WBC         0xFE
 #define	CtrlReg     0xFD
 
+template <class T> class HWvector;
+
 
 
 class CTestboard
@@ -314,12 +316,19 @@ public:
 	RPC_EXPORT void Daq_Stop(uint8_t channel = 0);
 	RPC_EXPORT uint32_t Daq_GetSize(uint8_t channel = 0);
 
-	RPC_EXPORT uint8_t Daq_Read(vectorR<uint16_t> &data,
-			 uint16_t blocksize = 16384, uint8_t channel = 0);
+	uint8_t Daq_Read(vectorR<uint16_t> &data,
+			 uint32_t blocksize = 65536, uint8_t channel = 0);
 
-	RPC_EXPORT uint8_t Daq_Read(vectorR<uint16_t> &data,
-			uint16_t blocksize, uint32_t &availsize, uint8_t channel = 0);
+	uint8_t Daq_Read(vectorR<uint16_t> &data,
+			uint32_t blocksize, uint32_t &availsize, uint8_t channel = 0);
 
+	RPC_EXPORT uint8_t Daq_Read(HWvectorR<uint16_t> &data,
+			uint32_t blocksize = 65536, uint8_t channel = 0);
+
+	RPC_EXPORT uint8_t Daq_Read(HWvectorR<uint16_t> &data,
+			uint32_t blocksize, uint32_t &availsize, uint8_t channel = 0);
+
+	void Daq_Read_DeleteData(uint32_t daq_base, int32_t rp);
 
 	RPC_EXPORT void Daq_Select_ADC(uint16_t blocksize, uint8_t source,
 			uint8_t start, uint8_t stop = 0);
@@ -461,6 +470,35 @@ public:
 	RPC_EXPORT void LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high);
 	RPC_EXPORT void LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high);
 
+	RPC_EXPORT void VectorTest(vector<uint16_t> &in, vectorR<uint16_t> &out);
 };
 
+
 extern CTestboard tb;
+
+template <class T>
+class HWvector
+{
+	uint16_t *p1;
+	uint32_t s1;
+	uint16_t *p2;
+	uint32_t s2;
+
+	uint32_t base;
+	uint32_t rp;
+public:
+	HWvector() {}
+	~HWvector() { tb.Daq_Read_DeleteData(base, rp); }
+	void Write(rpcMessage &msg, uint32_t &hdr);
+	friend class CTestboard;
+};
+
+template <class T>
+void HWvector<T>::Write(rpcMessage &msg, uint32_t &hdr)
+{
+	uint32_t size = (s1 + s2)*sizeof(uint16_t);
+	hdr = (size << 8) + RPC_TYPE_DTB_DATA;
+	msg.GetIo().Write(&hdr, sizeof(uint32_t));
+	if (s1) msg.GetIo().Write(p1, s1*sizeof(uint16_t));
+	if (s2)	msg.GetIo().Write(p2, s2*sizeof(uint16_t));
+}

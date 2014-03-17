@@ -31,7 +31,7 @@
 #ifndef __ALTERA_AVALON_TSE_H__
 #define __ALTERA_AVALON_TSE_H__
 
-#include "triple_speed_ethernet_regs.h"
+#include "altera_eth_tse_regs.h"
 #include "system.h"     /* check if SGDMA is used */
 
 #ifdef __cplusplus

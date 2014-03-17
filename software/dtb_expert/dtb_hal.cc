@@ -11,16 +11,17 @@
 
 // === DAQ ==================================================================
 
-const unsigned int DAQ_DMA_BASE[8] =
+// *3SDATA
+const unsigned int DAQ_DMA_BASE[6] =
 {
   DAQ_DMA_0_BASE,
   DAQ_DMA_1_BASE,
   DAQ_DMA_2_BASE,
   DAQ_DMA_3_BASE,
   DAQ_DMA_4_BASE,
-  DAQ_DMA_5_BASE,
-  DAQ_DMA_6_BASE,
-  DAQ_DMA_7_BASE
+  DAQ_DMA_5_BASE
+//  DAQ_DMA_6_BASE,
+//  DAQ_DMA_7_BASE
 };
 
 
@@ -127,50 +128,15 @@ void Adv3224Init()
 
 // === USB ==================================================================
 
-void CUSB::WriteByte(unsigned char value)
-{
-	if(IsTxFull()) IOWR_16DIRECT(USB_BASE, 0, write_buffer);
-	write_buffer = value;
-}
-
-
-void CUSB::Flush()
-{
-	IOWR_16DIRECT(USB_BASE, 0, (0x8000|write_buffer));
-	write_buffer = 0x8000;
-}
-
-
-bool CUSB::RxFull()
-{
-	if(!IsRxFull())
-	{
-		read_buffer = IORD_16DIRECT(USB_BASE, 0);
-		return IsRxFull();
-	}
-	return true;
-}
-
 
 bool CUSB::ReadByte(unsigned char &value)
 {
-	if (IsRxFull())
+	unsigned int timeout = 500000;
+	while (!RxFull() && timeout) { timeout--; usleep(1); }
+	if (RxFull())
 	{
-		value = (unsigned char)read_buffer;
-		read_buffer = IORD_16DIRECT(USB_BASE, 0);
+		value = IORD_8DIRECT(USB2_BASE, 0);
 		return true;
-	}
-
-	for (int count = 500000; count > 0; count--)
-	{
-		read_buffer = IORD_16DIRECT(USB_BASE, 0);
-		if (IsRxFull())
-		{
-			value = (unsigned char)read_buffer;
-			read_buffer = IORD_16DIRECT(USB_BASE, 0);
-			return true;
-		}
-		usleep(1);
 	}
 	value = 0;
 	return false;
@@ -186,11 +152,22 @@ bool CUSB::Read(void *buffer, unsigned int size)
 }
 
 
-bool CUSB::Write(const void *buffer, unsigned int size)
+void CUSB::Reset()
 {
-	unsigned int i;
-	const unsigned char *p = (const unsigned char*)buffer;
-	for (i=0; i<size; i++) WriteByte(*(p++));
+	dma.DeleteAllDescriptors();
+}
+
+
+bool CUSB::Write(const void *buffer, uint32_t size)
+{
+	dma.Add(buffer, size);
 	return true;
+}
+
+
+void CUSB::Flush()
+{
+	dma.Send();
+	IOWR_8DIRECT(USB2_BASE, 1, 1); // FT232 send immediate
 }
 

@@ -16,7 +16,7 @@ int main()
 {
 	tb.Welcome();
 
-	check_epcs();
+//	check_epcs();
 
 	dtbConfig.Init();
 	dtbConfig.Read("0:DTB.INI");
