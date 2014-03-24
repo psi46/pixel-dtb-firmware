@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
  *
- * Generated: Thu Mar 13 14:54:54 CET 2014
+ * Generated: Mon Mar 24 12:17:32 CET 2014
  */
 
 /*
@@ -143,6 +143,7 @@
 #define __DAQ_DMA
 #define __DELAY_OUT
 #define __DELAY_TRIGGER
+#define __EVENTSIM
 #define __I2C_MASTER
 #define __LVDS2LCDS
 #define __PATTERNGENERATOR
@@ -633,6 +634,20 @@
 
 
 /*
+ * eventgen configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_eventgen eventsim
+#define EVENTGEN_BASE 0x81080d0
+#define EVENTGEN_IRQ -1
+#define EVENTGEN_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define EVENTGEN_NAME "/dev/eventgen"
+#define EVENTGEN_SPAN 8
+#define EVENTGEN_TYPE "eventsim"
+
+
+/*
  * fifo configuration
  *
  */
@@ -1011,7 +1026,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1394718474
+#define SYSID_TIMESTAMP 1395657150
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 

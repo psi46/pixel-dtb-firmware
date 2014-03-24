@@ -81,6 +81,7 @@ class CTestboard
 	bool daq_select_adc;
 	bool daq_select_deser160;
 	bool daq_select_deser400;
+	bool daq_select_datasim;
 
 	uint8_t sig_level_clk;
 	uint8_t sig_level_ctr;
@@ -337,6 +338,8 @@ public:
 
 	RPC_EXPORT void Daq_Select_Deser400();
 	RPC_EXPORT void Daq_Deser400_Reset(uint8_t reset = 3);
+
+	RPC_EXPORT void Daq_Select_Datagenerator(uint16_t startvalue);
 
 	RPC_EXPORT void Daq_DeselectAll();
 

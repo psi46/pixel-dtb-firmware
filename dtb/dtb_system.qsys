@@ -16,31 +16,16 @@
    {
       datum _sortIndex
       {
-         value = "28";
+         value = "25";
          type = "int";
-      }
-      datum sopceditor_expanded
-      {
-         value = "0";
-         type = "boolean";
       }
    }
    element LED
    {
       datum _sortIndex
       {
-         value = "26";
+         value = "23";
          type = "int";
-      }
-      datum megawizard_uipreferences
-      {
-         value = "{}";
-         type = "String";
-      }
-      datum sopceditor_expanded
-      {
-         value = "1";
-         type = "boolean";
       }
    }
    element PSI2C
@@ -84,7 +69,7 @@
    {
       datum _sortIndex
       {
-         value = "11";
+         value = "14";
          type = "int";
       }
       datum sopceditor_expanded
@@ -118,18 +103,8 @@
    {
       datum _sortIndex
       {
-         value = "27";
+         value = "24";
          type = "int";
-      }
-      datum megawizard_uipreferences
-      {
-         value = "{}";
-         type = "String";
-      }
-      datum sopceditor_expanded
-      {
-         value = "0";
-         type = "boolean";
       }
    }
    element main_status.clk
@@ -144,7 +119,7 @@
    {
       datum _sortIndex
       {
-         value = "0";
+         value = "3";
          type = "int";
       }
       datum sopceditor_expanded
@@ -170,7 +145,7 @@
    {
       datum _sortIndex
       {
-         value = "1";
+         value = "4";
          type = "int";
       }
       datum sopceditor_expanded
@@ -244,7 +219,7 @@
    {
       datum _sortIndex
       {
-         value = "4";
+         value = "7";
          type = "int";
       }
       datum sopceditor_expanded
@@ -257,21 +232,8 @@
    {
       datum _sortIndex
       {
-         value = "29";
+         value = "26";
          type = "int";
-      }
-      datum sopceditor_expanded
-      {
-         value = "0";
-         type = "boolean";
-      }
-   }
-   element sgdma_rx.csr
-   {
-      datum baseAddress
-      {
-         value = "138413056";
-         type = "long";
       }
    }
    element usb_tx_dma.csr
@@ -279,6 +241,14 @@
       datum baseAddress
       {
          value = "134221888";
+         type = "long";
+      }
+   }
+   element sgdma_rx.csr
+   {
+      datum baseAddress
+      {
+         value = "138413056";
          type = "long";
       }
    }
@@ -290,19 +260,35 @@
          type = "long";
       }
    }
+   element delay_ctr.ctrl
+   {
+      datum baseAddress
+      {
+         value = "48";
+         type = "long";
+      }
+   }
+   element adc_0.ctrl
+   {
+      datum baseAddress
+      {
+         value = "144";
+         type = "long";
+      }
+   }
+   element patterngen.ctrl
+   {
+      datum baseAddress
+      {
+         value = "64";
+         type = "long";
+      }
+   }
    element probe_d2.ctrl
    {
       datum baseAddress
       {
          value = "96";
-         type = "long";
-      }
-   }
-   element daq_dma_0.ctrl
-   {
-      datum baseAddress
-      {
-         value = "134225984";
          type = "long";
       }
    }
@@ -314,28 +300,20 @@
          type = "long";
       }
    }
-   element daq_dma_2.ctrl
+   element delay_tin.ctrl
    {
       datum baseAddress
       {
-         value = "134226112";
+         value = "56";
          type = "long";
       }
    }
-   element daq_dma_7.ctrl
+   element eventgen.ctrl
    {
       datum baseAddress
       {
-         value = "134226432";
-         type = "long";
-      }
-   }
-   element daq_dma_3.ctrl
-   {
-      datum baseAddress
-      {
-         value = "134226176";
-         type = "long";
+         value = "208";
+         type = "String";
       }
    }
    element delay_clk.ctrl
@@ -351,35 +329,19 @@
          type = "long";
       }
    }
-   element patterngen.ctrl
+   element probe_d1.ctrl
    {
       datum baseAddress
       {
-         value = "64";
+         value = "80";
          type = "long";
       }
    }
-   element adc_0.ctrl
+   element daq_dma_0.ctrl
    {
       datum baseAddress
       {
-         value = "144";
-         type = "long";
-      }
-   }
-   element delay_sda.ctrl
-   {
-      datum baseAddress
-      {
-         value = "40";
-         type = "long";
-      }
-   }
-   element daq_dma_6.ctrl
-   {
-      datum baseAddress
-      {
-         value = "134226368";
+         value = "134225984";
          type = "long";
       }
    }
@@ -391,43 +353,11 @@
          type = "long";
       }
    }
-   element delay_tin.ctrl
+   element delay_sda.ctrl
    {
       datum baseAddress
       {
-         value = "56";
-         type = "long";
-      }
-   }
-   element daq_dma_5.ctrl
-   {
-      datum baseAddress
-      {
-         value = "134226304";
-         type = "long";
-      }
-   }
-   element delay_ctr.ctrl
-   {
-      datum baseAddress
-      {
-         value = "48";
-         type = "long";
-      }
-   }
-   element daq_dma_4.ctrl
-   {
-      datum baseAddress
-      {
-         value = "134226240";
-         type = "long";
-      }
-   }
-   element probe_d1.ctrl
-   {
-      datum baseAddress
-      {
-         value = "80";
+         value = "40";
          type = "long";
       }
    }
@@ -435,7 +365,7 @@
    {
       datum _sortIndex
       {
-         value = "15";
+         value = "18";
          type = "int";
       }
    }
@@ -443,7 +373,7 @@
    {
       datum _sortIndex
       {
-         value = "16";
+         value = "19";
          type = "int";
       }
    }
@@ -451,7 +381,7 @@
    {
       datum _sortIndex
       {
-         value = "17";
+         value = "20";
          type = "int";
       }
    }
@@ -459,7 +389,7 @@
    {
       datum _sortIndex
       {
-         value = "18";
+         value = "0";
          type = "int";
       }
    }
@@ -467,7 +397,7 @@
    {
       datum _sortIndex
       {
-         value = "19";
+         value = "1";
          type = "int";
       }
    }
@@ -475,7 +405,7 @@
    {
       datum _sortIndex
       {
-         value = "20";
+         value = "2";
          type = "int";
       }
    }
@@ -496,7 +426,7 @@
    {
       datum _sortIndex
       {
-         value = "22";
+         value = "29";
          type = "int";
       }
       datum sopceditor_expanded
@@ -511,22 +441,6 @@
       {
          value = "512";
          type = "long";
-      }
-   }
-   element daq_dma_0.data
-   {
-      datum _tags
-      {
-         value = "";
-         type = "String";
-      }
-   }
-   element cpu.data_master
-   {
-      datum _tags
-      {
-         value = "";
-         type = "String";
       }
    }
    element delay_clk
@@ -580,7 +494,7 @@
    {
       datum _sortIndex
       {
-         value = "8";
+         value = "11";
          type = "int";
       }
       datum megawizard_uipreferences
@@ -627,7 +541,7 @@
    {
       datum _sortIndex
       {
-         value = "3";
+         value = "6";
          type = "int";
       }
       datum megawizard_uipreferences
@@ -639,6 +553,14 @@
       {
          value = "1";
          type = "boolean";
+      }
+   }
+   element eventgen
+   {
+      datum _sortIndex
+      {
+         value = "50";
+         type = "int";
       }
    }
    element fifo
@@ -682,7 +604,7 @@
    {
       datum _sortIndex
       {
-         value = "14";
+         value = "17";
          type = "int";
       }
       datum megawizard_uipreferences
@@ -700,26 +622,16 @@
    {
       datum _sortIndex
       {
-         value = "24";
+         value = "27";
          type = "int";
-      }
-      datum sopceditor_expanded
-      {
-         value = "1";
-         type = "boolean";
       }
    }
    element main_status
    {
       datum _sortIndex
       {
-         value = "25";
+         value = "28";
          type = "int";
-      }
-      datum sopceditor_expanded
-      {
-         value = "1";
-         type = "boolean";
       }
    }
    element patterngen
@@ -739,7 +651,7 @@
    {
       datum _sortIndex
       {
-         value = "12";
+         value = "15";
          type = "int";
       }
       datum megawizard_uipreferences
@@ -757,13 +669,8 @@
    {
       datum _sortIndex
       {
-         value = "23";
+         value = "22";
          type = "int";
-      }
-      datum sopceditor_expanded
-      {
-         value = "1";
-         type = "boolean";
       }
    }
    element probe_d1
@@ -786,7 +693,7 @@
    {
       datum _sortIndex
       {
-         value = "2";
+         value = "5";
          type = "int";
       }
       datum megawizard_uipreferences
@@ -800,14 +707,6 @@
          type = "boolean";
       }
    }
-   element peripheral_bridge.s0
-   {
-      datum baseAddress
-      {
-         value = "135266304";
-         type = "long";
-      }
-   }
    element clock_crossing_bridge.s0
    {
       datum baseAddress
@@ -816,43 +715,11 @@
          type = "long";
       }
    }
-   element ROC_addr.s1
-   {
-      datum baseAddress
-      {
-         value = "112";
-         type = "long";
-      }
-   }
    element clkdiv.s1
    {
       datum baseAddress
       {
          value = "192";
-         type = "long";
-      }
-   }
-   element fifo.s1
-   {
-      datum baseAddress
-      {
-         value = "128";
-         type = "long";
-      }
-   }
-   element deser400.s1
-   {
-      datum baseAddress
-      {
-         value = "160";
-         type = "long";
-      }
-   }
-   element deser160.s1
-   {
-      datum baseAddress
-      {
-         value = "112";
          type = "long";
       }
    }
@@ -869,19 +736,43 @@
          type = "long";
       }
    }
-   element button.s1
+   element SDC_SPI2.s1
    {
       datum baseAddress
       {
-         value = "48";
+         value = "128";
          type = "long";
       }
    }
-   element main_status.s1
+   element deser160.s1
    {
       datum baseAddress
       {
-         value = "176";
+         value = "112";
+         type = "long";
+      }
+   }
+   element deser400.s1
+   {
+      datum baseAddress
+      {
+         value = "160";
+         type = "long";
+      }
+   }
+   element descriptor_memory.s1
+   {
+      datum baseAddress
+      {
+         value = "138420224";
+         type = "long";
+      }
+   }
+   element ROC_addr.s1
+   {
+      datum baseAddress
+      {
+         value = "112";
          type = "long";
       }
    }
@@ -898,36 +789,7 @@
          type = "long";
       }
    }
-   element main_control.s1
-   {
-      datum _tags
-      {
-         value = "";
-         type = "String";
-      }
-      datum baseAddress
-      {
-         value = "160";
-         type = "long";
-      }
-   }
-   element descriptor_memory.s1
-   {
-      datum baseAddress
-      {
-         value = "138420224";
-         type = "long";
-      }
-   }
-   element LED.s1
-   {
-      datum baseAddress
-      {
-         value = "32";
-         type = "long";
-      }
-   }
-   element SDC_SPI2.s1
+   element fifo.s1
    {
       datum baseAddress
       {
@@ -939,7 +801,7 @@
    {
       datum _sortIndex
       {
-         value = "6";
+         value = "9";
          type = "int";
       }
       datum megawizard_uipreferences
@@ -957,7 +819,7 @@
    {
       datum _sortIndex
       {
-         value = "7";
+         value = "10";
          type = "int";
       }
       datum megawizard_uipreferences
@@ -976,22 +838,6 @@
       datum baseAddress
       {
          value = "144";
-         type = "long";
-      }
-   }
-   element crosspoint_switch.slave
-   {
-      datum baseAddress
-      {
-         value = "80";
-         type = "long";
-      }
-   }
-   element LCDS_io.slave
-   {
-      datum baseAddress
-      {
-         value = "64";
          type = "long";
       }
    }
@@ -1015,7 +861,7 @@
    {
       datum _sortIndex
       {
-         value = "13";
+         value = "16";
          type = "int";
       }
       datum megawizard_uipreferences
@@ -1033,7 +879,7 @@
    {
       datum _sortIndex
       {
-         value = "9";
+         value = "12";
          type = "int";
       }
       datum sopceditor_expanded
@@ -1046,7 +892,7 @@
    {
       datum _sortIndex
       {
-         value = "5";
+         value = "8";
          type = "int";
       }
    }
@@ -1054,7 +900,7 @@
    {
       datum _sortIndex
       {
-         value = "10";
+         value = "13";
          type = "int";
       }
       datum sopceditor_expanded
@@ -1246,6 +1092,7 @@
    type="conduit"
    dir="end" />
  <interface name="usb2_ft232h" internal="USB2.ft232h" type="conduit" dir="end" />
+ <interface name="eventgen" internal="eventgen.eventgen" type="conduit" dir="end" />
  <module kind="clock_source" version="13.1" enabled="1" name="clk_sys">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -1702,7 +1549,7 @@
   <parameter name="tightlyCoupledInstructionMaster2AddrWidth" value="1" />
   <parameter name="tightlyCoupledInstructionMaster3AddrWidth" value="1" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='ram_ext.s1' start='0x0' end='0x8000000' /><slave name='epcs_controller.epcs_control_port' start='0x8000000' end='0x8000800' /><slave name='cpu.jtag_debug_module' start='0x8000800' end='0x8001000' /></address-map>]]></parameter>
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='ram_ext.s1' start='0x0' end='0x8000000' /><slave name='epcs_controller.epcs_control_port' start='0x8000000' end='0x8000800' /><slave name='cpu.jtag_debug_module' start='0x8000800' end='0x8001000' /><slave name='sysid.control_slave' start='0x8001000' end='0x8001008' /><slave name='usb_tx_dma.csr' start='0x8001040' end='0x8001080' /><slave name='USB2.ctrl' start='0x8001110' end='0x8001112' /><slave name='performance_counter.control_slave' start='0x8001800' end='0x8001840' /><slave name='sys_timer.s1' start='0x8002000' end='0x8002020' /><slave name='jtag_uart.avalon_jtag_slave' start='0x8002020' end='0x8002028' /><slave name='daq_dma_0.ctrl' start='0x8002040' end='0x8002060' /><slave name='daq_dma_1.ctrl' start='0x8002080' end='0x80020A0' /><slave name='daq_dma_2.ctrl' start='0x80020C0' end='0x80020E0' /><slave name='daq_dma_3.ctrl' start='0x8002100' end='0x8002120' /><slave name='daq_dma_4.ctrl' start='0x8002140' end='0x8002160' /><slave name='daq_dma_5.ctrl' start='0x8002180' end='0x80021A0' /><slave name='LED.s1' start='0x8100020' end='0x8100030' /><slave name='button.s1' start='0x8100030' end='0x8100040' /><slave name='LCDS_io.slave' start='0x8100040' end='0x8100041' /><slave name='crosspoint_switch.slave' start='0x8100050' end='0x8100058' /><slave name='i2c_main.slave' start='0x8100060' end='0x8100068' /><slave name='ROC_addr.s1' start='0x8100070' end='0x8100080' /><slave name='SDC_SPI2.s1' start='0x8100080' end='0x8100090' /><slave name='i2c_external.slave' start='0x8100090' end='0x8100098' /><slave name='main_control.s1' start='0x81000A0' end='0x81000B0' /><slave name='main_status.s1' start='0x81000B0' end='0x81000C0' /><slave name='PSI2C.ctrl' start='0x8108000' end='0x8108020' /><slave name='delay_clk.ctrl' start='0x8108020' end='0x8108028' /><slave name='delay_sda.ctrl' start='0x8108028' end='0x8108030' /><slave name='delay_ctr.ctrl' start='0x8108030' end='0x8108038' /><slave name='delay_tin.ctrl' start='0x8108038' end='0x8108040' /><slave name='patterngen.ctrl' start='0x8108040' end='0x8108048' /><slave name='probe_d1.ctrl' start='0x8108050' end='0x8108051' /><slave name='probe_d2.ctrl' start='0x8108060' end='0x8108061' /><slave name='deser160.s1' start='0x8108070' end='0x8108080' /><slave name='fifo.s1' start='0x8108080' end='0x8108090' /><slave name='adc_0.ctrl' start='0x8108090' end='0x8108098' /><slave name='deser400.s1' start='0x81080A0' end='0x81080B0' /><slave name='clk_stretch.ctrl' start='0x81080B0' end='0x81080B8' /><slave name='clkdiv.s1' start='0x81080C0' end='0x81080D0' /><slave name='patterngen.data' start='0x8108200' end='0x8108400' /><slave name='tse_mac.control_port' start='0x8400000' end='0x8400400' /><slave name='sgdma_rx.csr' start='0x8400400' end='0x8400440' /><slave name='sgdma_tx.csr' start='0x8400440' end='0x8400480' /><slave name='descriptor_memory.s1' start='0x8402000' end='0x8402100' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='ram_ext.s1' start='0x0' end='0x8000000' /><slave name='epcs_controller.epcs_control_port' start='0x8000000' end='0x8000800' /><slave name='cpu.jtag_debug_module' start='0x8000800' end='0x8001000' /><slave name='sysid.control_slave' start='0x8001000' end='0x8001008' /><slave name='usb_tx_dma.csr' start='0x8001040' end='0x8001080' /><slave name='USB2.ctrl' start='0x8001110' end='0x8001112' /><slave name='performance_counter.control_slave' start='0x8001800' end='0x8001840' /><slave name='sys_timer.s1' start='0x8002000' end='0x8002020' /><slave name='jtag_uart.avalon_jtag_slave' start='0x8002020' end='0x8002028' /><slave name='daq_dma_0.ctrl' start='0x8002040' end='0x8002060' /><slave name='daq_dma_1.ctrl' start='0x8002080' end='0x80020A0' /><slave name='daq_dma_2.ctrl' start='0x80020C0' end='0x80020E0' /><slave name='daq_dma_3.ctrl' start='0x8002100' end='0x8002120' /><slave name='daq_dma_4.ctrl' start='0x8002140' end='0x8002160' /><slave name='daq_dma_5.ctrl' start='0x8002180' end='0x80021A0' /><slave name='LED.s1' start='0x8100020' end='0x8100030' /><slave name='button.s1' start='0x8100030' end='0x8100040' /><slave name='LCDS_io.slave' start='0x8100040' end='0x8100041' /><slave name='crosspoint_switch.slave' start='0x8100050' end='0x8100058' /><slave name='i2c_main.slave' start='0x8100060' end='0x8100068' /><slave name='ROC_addr.s1' start='0x8100070' end='0x8100080' /><slave name='SDC_SPI2.s1' start='0x8100080' end='0x8100090' /><slave name='i2c_external.slave' start='0x8100090' end='0x8100098' /><slave name='main_control.s1' start='0x81000A0' end='0x81000B0' /><slave name='main_status.s1' start='0x81000B0' end='0x81000C0' /><slave name='PSI2C.ctrl' start='0x8108000' end='0x8108020' /><slave name='delay_clk.ctrl' start='0x8108020' end='0x8108028' /><slave name='delay_sda.ctrl' start='0x8108028' end='0x8108030' /><slave name='delay_ctr.ctrl' start='0x8108030' end='0x8108038' /><slave name='delay_tin.ctrl' start='0x8108038' end='0x8108040' /><slave name='patterngen.ctrl' start='0x8108040' end='0x8108048' /><slave name='probe_d1.ctrl' start='0x8108050' end='0x8108051' /><slave name='probe_d2.ctrl' start='0x8108060' end='0x8108061' /><slave name='deser160.s1' start='0x8108070' end='0x8108080' /><slave name='fifo.s1' start='0x8108080' end='0x8108090' /><slave name='adc_0.ctrl' start='0x8108090' end='0x8108098' /><slave name='deser400.s1' start='0x81080A0' end='0x81080B0' /><slave name='clk_stretch.ctrl' start='0x81080B0' end='0x81080B8' /><slave name='clkdiv.s1' start='0x81080C0' end='0x81080D0' /><slave name='eventgen.ctrl' start='0x81080D0' end='0x81080D8' /><slave name='patterngen.data' start='0x8108200' end='0x8108400' /><slave name='tse_mac.control_port' start='0x8400000' end='0x8400400' /><slave name='sgdma_rx.csr' start='0x8400400' end='0x8400440' /><slave name='sgdma_tx.csr' start='0x8400440' end='0x8400480' /><slave name='descriptor_memory.s1' start='0x8402000' end='0x8402100' /></address-map>]]></parameter>
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="deviceFamilyName" value="Cyclone III" />
   <parameter name="internalIrqMaskSystemInfo" value="2044" />
@@ -1826,16 +1673,16 @@
   <parameter name="width" value="4" />
   <parameter name="clockRate" value="50000000" />
  </module>
- <module kind="delay_out" version="1.1" enabled="1" name="delay_clk">
+ <module kind="delay_out" version="1.2" enabled="1" name="delay_clk">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="40000000" />
  </module>
- <module kind="delay_out" version="1.1" enabled="1" name="delay_sda">
+ <module kind="delay_out" version="1.2" enabled="1" name="delay_sda">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="40000000" />
  </module>
- <module kind="delay_out" version="1.1" enabled="1" name="delay_ctr">
+ <module kind="delay_out" version="1.2" enabled="1" name="delay_ctr">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="40000000" />
  </module>
- <module kind="delay_out" version="1.1" enabled="1" name="delay_tin">
+ <module kind="delay_out" version="1.2" enabled="1" name="delay_tin">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="40000000" />
  </module>
  <module kind="psi2c" version="1.0" enabled="1" name="PSI2C">
@@ -1894,31 +1741,31 @@
   <parameter name="width" value="1" />
   <parameter name="clockRate" value="40000000" />
  </module>
- <module kind="daq_dma" version="1.0" enabled="1" name="daq_dma_0">
+ <module kind="daq_dma" version="1.1" enabled="1" name="daq_dma_0">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
  <module kind="adc" version="1.0" enabled="1" name="adc_0">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="40000000" />
  </module>
- <module kind="daq_dma" version="1.0" enabled="1" name="daq_dma_1">
+ <module kind="daq_dma" version="1.1" enabled="1" name="daq_dma_1">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
- <module kind="daq_dma" version="1.0" enabled="1" name="daq_dma_2">
+ <module kind="daq_dma" version="1.1" enabled="1" name="daq_dma_2">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
- <module kind="daq_dma" version="1.0" enabled="1" name="daq_dma_3">
+ <module kind="daq_dma" version="1.1" enabled="1" name="daq_dma_3">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
- <module kind="daq_dma" version="1.0" enabled="1" name="daq_dma_4">
+ <module kind="daq_dma" version="1.1" enabled="1" name="daq_dma_4">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
- <module kind="daq_dma" version="1.0" enabled="1" name="daq_dma_5">
+ <module kind="daq_dma" version="1.1" enabled="1" name="daq_dma_5">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
- <module kind="daq_dma" version="1.0" enabled="0" name="daq_dma_6">
+ <module kind="daq_dma" version="1.1" enabled="0" name="daq_dma_6">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
- <module kind="daq_dma" version="1.0" enabled="0" name="daq_dma_7">
+ <module kind="daq_dma" version="1.1" enabled="0" name="daq_dma_7">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
  <module kind="altera_avalon_pio" version="13.1" enabled="1" name="deser400">
@@ -2015,6 +1862,9 @@
   <parameter name="enable_ptp_1step" value="false" />
   <parameter name="tstamp_fp_width" value="4" />
   <parameter name="AUTO_DEVICE" value="EP3C40F484C6" />
+ </module>
+ <module kind="eventsim" version="1.0" enabled="1" name="eventgen">
+  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="40000000" />
  </module>
  <connection
    kind="avalon"
@@ -3060,6 +2910,21 @@
    version="13.1"
    start="tse_mac.receive"
    end="sgdma_rx.in" />
+ <connection kind="clock" version="13.1" start="clk_daq.clk" end="eventgen.clock" />
+ <connection
+   kind="reset"
+   version="13.1"
+   start="clk_daq.clk_reset"
+   end="eventgen.reset" />
+ <connection
+   kind="avalon"
+   version="13.1"
+   start="clock_crossing_bridge.m0"
+   end="eventgen.ctrl">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00d0" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="0" />
 </system>

@@ -40,7 +40,8 @@ alt_sgdma_descriptor* CDma::CreateDescriptor()
 	descr->write_burst       = 0;
 	descr->control           = 0; // OWNED_BY_HW=0
 
-	alt_remap_uncached(descr, sizeof(alt_sgdma_descriptor));
+//	alt_remap_uncached(descr, sizeof(alt_sgdma_descriptor));
+	alt_dcache_flush(descr, sizeof(alt_sgdma_descriptor));
 	return descr;
 }
 
@@ -54,7 +55,9 @@ void CDma::DeleteAllDescriptors()
 
 bool CDma::Add(const void *buffer, uint32_t byte_size)
 {
-	alt_remap_uncached((void*)buffer, byte_size);
+//	alt_remap_uncached((void*)buffer, byte_size);
+	alt_dcache_flush((void*)buffer, byte_size);
+
 	while (byte_size)
 	{
 		uint16_t size = (byte_size > 0xffff) ? 0xffff : byte_size;
@@ -76,7 +79,8 @@ bool CDma::Add(const void *buffer, uint32_t byte_size)
 			ALTERA_AVALON_SGDMA_DESCRIPTOR_CONTROL_WRITE_FIXED_ADDRESS_MSK | // SOP
 			ALTERA_AVALON_SGDMA_DESCRIPTOR_CONTROL_GENERATE_EOP_MSK;
 
-		alt_remap_uncached(last, sizeof(alt_sgdma_descriptor));
+//		alt_remap_uncached(last, sizeof(alt_sgdma_descriptor));
+		alt_dcache_flush(last, sizeof(alt_sgdma_descriptor));
 		last = endDescr;
 	}
 	return true;

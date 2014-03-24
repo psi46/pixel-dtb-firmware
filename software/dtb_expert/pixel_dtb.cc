@@ -5,6 +5,7 @@
 #include "dtb_config.h"
 #include "rpc.h"
 #include "SRecordReader.h"
+#include "sys/alt_cache.h"
 
 
 const int delayAdjust = 4;
@@ -1168,6 +1169,8 @@ uint32_t CTestboard::Daq_Open(uint32_t buffersize, uint8_t channel)
 	DAQ_WRITE(daq_base, DAQ_MEM_BASE, (unsigned long)(daq_mem_base[channel]));
 	DAQ_WRITE(daq_base, DAQ_MEM_SIZE, daq_mem_size[channel]);
 
+	alt_dcache_flush(daq_mem_base[channel], buffersize*2);
+
 	return daq_mem_size[channel];
 }
 
@@ -1455,6 +1458,10 @@ void CTestboard::Daq_DeselectAll()
 	mainCtrl &= ~MAINCTRL_ADCENA;
 	_MainControl(mainCtrl);
 	ADC_WRITE(ADC_CTRL, 1);
+
+	// disable data simulator
+	daq_select_datasim = false;
+	IOWR_32DIRECT(EVENTGEN_BASE, 0, 0);
 }
 
 void CTestboard::Daq_Select_Deser160(uint8_t shift)
@@ -1468,6 +1475,10 @@ void CTestboard::Daq_Select_Deser160(uint8_t shift)
 	mainCtrl &= ~MAINCTRL_ADCENA;
 	_MainControl(mainCtrl);
 	ADC_WRITE(ADC_CTRL, 1);
+
+	// disable data simulator
+	daq_select_datasim = false;
+	IOWR_32DIRECT(EVENTGEN_BASE, 0, 0);
 
 	// enable deser160
 	daq_select_deser160 = true;
@@ -1486,10 +1497,12 @@ void CTestboard::Daq_Select_Deser400()
 	daq_select_deser160 = false;
 	IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, 0);
 
+	// disable data simulator
+	daq_select_datasim = false;
+	IOWR_32DIRECT(EVENTGEN_BASE, 0, 0);
+
 	// enable deser400
 	daq_select_deser400 = true;
-
-	// reset deser400
 	Daq_Deser400_Reset();
 }
 
@@ -1502,6 +1515,31 @@ void CTestboard::Daq_Deser400_Reset(uint8_t reset)
 		_Deser400_Control(DESER400_SEL_MOD0);
 	}
 }
+
+void CTestboard::Daq_Select_Datagenerator(uint16_t startvalue)
+{
+	// disable adc
+	daq_select_adc = false;
+	mainCtrl &= ~MAINCTRL_ADCENA;
+	_MainControl(mainCtrl);
+	ADC_WRITE(ADC_CTRL, 1);
+
+	// disable deser160
+	daq_select_deser160 = false;
+	IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, 0);
+
+	// disable deser400
+	daq_select_deser400 = false;
+	_Deser400_Control(DESER400_RESET|DESER400_REG_RESET);
+
+	// enable data generator
+	daq_select_datasim = true;
+	IOWR_32DIRECT(EVENTGEN_BASE, 0, 0);
+	IOWR_32DIRECT(EVENTGEN_BASE, 1, startvalue);
+	IOWR_32DIRECT(EVENTGEN_BASE, 0, 1);
+}
+
+
 
 bool CTestboard::GetPixelAddressInverted() {
         return roc_pixeladdress_inverted;
