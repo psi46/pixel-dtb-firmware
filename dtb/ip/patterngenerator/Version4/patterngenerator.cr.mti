@@ -1,0 +1,29 @@
+X:/source/FPGA/dtb/ip/patterngenerator/Version4/patterngenerator.v {1 {vlog -work work -nocovercells X:/source/FPGA/dtb/ip/patterngenerator/Version4/patterngenerator.v
+Model Technology ModelSim ALTERA vlog 10.0d Compiler 2012.01 Jan 18 2012
+-- Compiling module patterngenerator
+
+Top level modules:
+	patterngenerator
+
+} {} {}} X:/source/FPGA/dtb/ip/patterngenerator/Version4/pg_sequencer.v {1 {vlog -work work -nocovercells {X:\source\FPGA\dtb\ip\patterngenerator\Version4\pg_sequencer.v}
+Model Technology ModelSim ALTERA vlog 10.0d Compiler 2012.01 Jan 18 2012
+-- Compiling module pg_sequencer
+
+Top level modules:
+	pg_sequencer
+
+} {} {}} X:/source/FPGA/dtb/ip/patterngenerator/Version4/pg_ram.v {1 {vlog -work work -nocovercells X:/source/FPGA/dtb/ip/patterngenerator/Version4/pg_ram.v
+Model Technology ModelSim ALTERA vlog 10.0d Compiler 2012.01 Jan 18 2012
+-- Compiling module pg_ram
+
+Top level modules:
+	pg_ram
+
+} {} {}} X:/source/FPGA/dtb/ip/patterngenerator/Version4/test_pg.v {1 {vlog -work work -nocovercells X:/source/FPGA/dtb/ip/patterngenerator/Version4/test_pg.v
+Model Technology ModelSim ALTERA vlog 10.0d Compiler 2012.01 Jan 18 2012
+-- Compiling module test_pg
+
+Top level modules:
+	test_pg
+
+} {} {}}

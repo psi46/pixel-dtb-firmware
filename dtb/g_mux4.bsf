@@ -1,0 +1,83 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 0 0 88 128)
+	(text "g_mux4" (rect 17 2 71 18)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 112 25 124)(font "Arial" ))
+	(port
+		(pt 0 40)
+		(input)
+		(text "data3" (rect 0 0 31 14)(font "Arial" (font_size 8)))
+		(text "data3" (rect 4 27 31 40)(font "Arial" (font_size 8)))
+		(line (pt 0 40)(pt 32 40)(line_width 1))
+	)
+	(port
+		(pt 0 56)
+		(input)
+		(text "data2" (rect 0 0 31 14)(font "Arial" (font_size 8)))
+		(text "data2" (rect 4 43 31 56)(font "Arial" (font_size 8)))
+		(line (pt 0 56)(pt 32 56)(line_width 1))
+	)
+	(port
+		(pt 0 72)
+		(input)
+		(text "data1" (rect 0 0 31 14)(font "Arial" (font_size 8)))
+		(text "data1" (rect 4 59 31 72)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 32 72)(line_width 1))
+	)
+	(port
+		(pt 0 88)
+		(input)
+		(text "data0" (rect 0 0 31 14)(font "Arial" (font_size 8)))
+		(text "data0" (rect 4 75 31 88)(font "Arial" (font_size 8)))
+		(line (pt 0 88)(pt 32 88)(line_width 1))
+	)
+	(port
+		(pt 0 104)
+		(input)
+		(text "clock" (rect 0 0 29 14)(font "Arial" (font_size 8)))
+		(text "clock" (rect 4 91 27 104)(font "Arial" (font_size 8)))
+		(line (pt 0 104)(pt 32 104)(line_width 1))
+	)
+	(port
+		(pt 40 128)
+		(input)
+		(text "sel[1..0]" (rect 0 0 44 14)(font "Arial" (font_size 8)))
+		(text "sel[1..0]" (rect 44 115 81 128)(font "Arial" (font_size 8)))
+		(line (pt 40 128)(pt 40 116)(line_width 3))
+	)
+	(port
+		(pt 88 72)
+		(output)
+		(text "result" (rect 0 0 31 14)(font "Arial" (font_size 8)))
+		(text "result" (rect 58 59 83 72)(font "Arial" (font_size 8)))
+		(line (pt 88 72)(pt 48 72)(line_width 1))
+	)
+	(drawing
+		(line (pt 32 24)(pt 32 120)(line_width 1))
+		(line (pt 48 32)(pt 48 112)(line_width 1))
+		(line (pt 32 24)(pt 48 32)(line_width 1))
+		(line (pt 32 120)(pt 48 112)(line_width 1))
+		(line (pt 32 98)(pt 38 104)(line_width 1))
+		(line (pt 38 104)(pt 32 110)(line_width 1))
+	)
+)

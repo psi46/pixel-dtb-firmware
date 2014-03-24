@@ -1,0 +1,68 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2005 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic       
+functions, and any output files any of the foregoing           
+(including device programming or simulation files), and any    
+associated documentation or information are expressly subject  
+to the terms and conditions of the Altera Program License      
+Subscription Agreement, Altera MegaCore Function License       
+Agreement, or other applicable license agreement, including,   
+without limitation, that your use is for the sole purpose of   
+programming logic devices manufactured by Altera and sold by   
+Altera or its authorized distributors.  Please refer to the    
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 64 64 160 112)
+	(text "PosFl" (rect 72 32 102 46)(font "Arial" (font_size 8)))
+	(text "inst" (rect 64 0 81 12)(font "Arial" ))
+	(port
+		(pt 0 40)
+		(input)
+		(text "CK" (rect 0 -24 16 -10)(font "Arial" (font_size 8)))
+		(text "CK" (rect 8 32 24 46)(font "Arial" (font_size 8))(invisible))
+		(line (pt 0 40)(pt 16 40)(line_width 1))
+	)
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN" (rect 0 -24 10 -10)(font "Arial" (font_size 8)))
+		(text "IN" (rect 0 16 10 30)(font "Arial" (font_size 8))(invisible))
+		(line (pt 0 16)(pt 16 16)(line_width 1))
+	)
+	(port
+		(pt 96 24)
+		(output)
+		(text "OUT" (rect 0 -24 24 -10)(font "Arial" (font_size 8)))
+		(text "OUT" (rect 72 8 96 22)(font "Arial" (font_size 8))(invisible))
+		(line (pt 96 24)(pt 80 24)(line_width 1))
+	)
+	(drawing
+		(text "o" (rect 48 8 57 24)(font "Courier New" (color 0 0 0)(font_size 10)))
+		(text "DFF" (rect 32 8 50 18)(font "Arial" (font_size 6)))
+		(line (pt 8 16)(pt 24 16)(line_width 1))
+		(line (pt 40 48)(pt 48 48)(line_width 1))
+		(line (pt 56 16)(pt 64 16)(line_width 1))
+		(line (pt 8 40)(pt 24 40)(line_width 1))
+		(line (pt 48 8)(pt 24 8)(line_width 1))
+		(line (pt 40 48)(pt 24 48)(line_width 1))
+		(line (pt 24 32)(pt 32 40)(line_width 1))
+		(line (pt 32 40)(pt 24 48)(line_width 1))
+		(line (pt 16 24)(pt 16 32)(line_width 1))
+		(line (pt 16 32)(pt 64 32)(line_width 1))
+		(line (pt 16 24)(pt 16 16)(line_width 1))
+		(line (pt 48 8)(pt 48 48)(line_width 1))
+		(line (pt 24 8)(pt 24 48)(line_width 1))
+		(line (pt 64 8)(pt 64 40)(line_width 1))
+		(arc (pt 80 24)(pt 64 8)(rect 48 8 80 40))
+		(arc (pt 64 40)(pt 80 24)(rect 48 8 80 40))
+		(arc (pt 80 24)(pt 64 8)(rect 48 8 80 40))
+	)
+)

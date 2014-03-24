@@ -1,0 +1,25 @@
+LVDS2LCDS-IP Register-Definition
+================================
+
+WRITE
+-----
+Reg 0 (8 Bit): Configure LVDS2LCDS via serial-interface
+	Bit 0: D0
+	Bit 1: D1
+	Bit 2: D2
+	Bit 3: D3
+	Bit 4: A0
+	Bit 5: A1
+	Bit 6: A2
+	Bit 7: ignorred
+
+
+READ
+----
+Reg 0 (8 Bit): LSB remains high while IP is busy with programming LVDS2LCDS. Always check bevor writing into Reg 0.
+
+
+Parameters
+==========
+
+divider: clk-divider from nios-clk to config-clk
