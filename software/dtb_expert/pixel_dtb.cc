@@ -1271,7 +1271,7 @@ uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
 
 	// read dma status
 	unsigned int daq_base = DAQ_DMA_BASE[channel];
-	int32_t status = DAQ_READ(daq_base, DAQ_CONTROL);
+	int32_t status = DAQ_READ(daq_base, DAQ_CONTROL) ^ 1;
 	int32_t rp = DAQ_READ(daq_base, DAQ_MEM_READ);
 	int32_t wp = DAQ_READ(daq_base, DAQ_MEM_WRITE);
 
@@ -1347,7 +1347,7 @@ uint8_t CTestboard::Daq_Read(HWvectorR<uint16_t> &data,
 
 	// read dma status
 	data.base = DAQ_DMA_BASE[channel];
-	int32_t status = DAQ_READ(data.base, DAQ_CONTROL);
+	int32_t status = DAQ_READ(data.base, DAQ_CONTROL) ^ 1;
 	data.rp = DAQ_READ(data.base, DAQ_MEM_READ);
 	int32_t wp = DAQ_READ(data.base, DAQ_MEM_WRITE);
 
