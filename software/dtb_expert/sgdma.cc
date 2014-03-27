@@ -60,7 +60,7 @@ bool CDma::Add(const void *buffer, uint32_t byte_size)
 
 	while (byte_size)
 	{
-		uint16_t size = (byte_size > 0xffff) ? 0xffff : byte_size;
+		uint16_t size = (byte_size > 0xfff8) ? 0xfff8 : byte_size;
 		byte_size -= size;
 
 		// create new end descriptor
@@ -82,6 +82,7 @@ bool CDma::Add(const void *buffer, uint32_t byte_size)
 //		alt_remap_uncached(last, sizeof(alt_sgdma_descriptor));
 		alt_dcache_flush(last, sizeof(alt_sgdma_descriptor));
 		last = endDescr;
+		buffer = ((alt_u8*)buffer) + size;
 	}
 	return true;
 }
