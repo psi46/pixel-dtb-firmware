@@ -1180,6 +1180,7 @@ void CTestboard::Daq_Close(uint8_t channel)
 
 	if (daq_mem_base[channel])
 	{
+		Daq_DeselectAll();
 		Daq_Stop(channel);
 		IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, 0); // FIFO reset
 		uDelay(1);
