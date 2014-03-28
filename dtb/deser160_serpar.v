@@ -86,10 +86,18 @@ module deser160_serpar
     end
     else
     begin
-      if (tin_del) mark_start <= 1;
-      else if (write) mark_start <= 0;
-      if (tout_del) mark_end <= 1;
-      else if (write) mark_end <= 0;
+    	if (enable && run)
+    	begin
+      	if (tin_del) mark_start <= 1;
+      	else if (write) mark_start <= 0;
+      	if (tout_del) mark_end <= 1;
+      	else if (write) mark_end <= 0;
+      end
+      else
+      begin
+      	mark_start <= 0;
+      	mark_end   <= 0;
+      end
     end
   end
 
