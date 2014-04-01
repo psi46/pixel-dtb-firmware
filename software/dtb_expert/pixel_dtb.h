@@ -16,9 +16,10 @@
 #define ROC_NUMDCOLS 26  // # double columns (= columns/2)
 
 // execution flags
-#define FLAG_CALS          0x0002
-#define FLAG_XTALK         0x0004
-#define FLAG_FORCE_MASKED  0x0010
+#define FLAG_CALS           0x0002
+#define FLAG_XTALK          0x0004
+#define FLAG_FORCE_MASKED   0x0010
+#define FLAG_DISABLE_DACCAL 0x0020
 
 #define PIXMASK  0x80
 
@@ -454,6 +455,7 @@ public:
 	// ------- Trigger Loop functions for Host-side DAQ ROC/Module testing ------
 	// Not exported internal helper functions:
 	uint8_t GetXtalkRow(uint8_t row, bool xtalk);
+	size_t CalibratedDAC(size_t value);
 
 	// Exported RPC-Calls for Maps
 	RPC_EXPORT void LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags);
