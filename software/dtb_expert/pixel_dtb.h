@@ -18,7 +18,7 @@
 // execution flags
 #define FLAG_CALS          0x0002
 #define FLAG_XTALK         0x0004
-
+#define FLAG_FORCE_MASKED  0x0010
 
 #define PIXMASK  0x80
 
