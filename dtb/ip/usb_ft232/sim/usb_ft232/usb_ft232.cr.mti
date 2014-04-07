@@ -1,0 +1,71 @@
+X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/test_usb32.v {1 {vlog -work work X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/test_usb32.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module test_usb32
+
+Top level modules:
+	test_usb32
+
+} {} {}} X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb_rx_fifo.v {1 {vlog -work work X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb_rx_fifo.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module usb_rx_fifo
+
+Top level modules:
+	usb_rx_fifo
+
+} {} {}} X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb_ft232.v {1 {vlog -work work X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb_ft232.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module usb_ft232
+
+Top level modules:
+	usb_ft232
+
+} {} {}} X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb32.v {1 {vlog -work work X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb32.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module usb32
+
+Top level modules:
+	usb32
+
+} {} {}} X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb_avalon32.v {1 {vlog -work work X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb_avalon32.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module usb_avalon_32bit
+
+Top level modules:
+	usb_avalon_32bit
+
+} {} {}} X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/test_usb16.v {1 {vlog -work work X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/test_usb16.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module test_usb16
+
+Top level modules:
+	test_usb16
+
+} {} {}} X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb_tx_fifo.v {1 {vlog -work work X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb_tx_fifo.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module usb_tx_fifo
+
+Top level modules:
+	usb_tx_fifo
+
+} {} {}} X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb_avalon16.v {1 {vlog -work work X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb_avalon16.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module usb_avalon_16bit
+
+Top level modules:
+	usb_avalon_16bit
+
+} {} {}} X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb16.v {1 {vlog -work work X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/usb16.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module usb16
+
+Top level modules:
+	usb16
+
+} {} {}} X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/test_usb_ft232.v {1 {vlog -work work X:/source/FPGA/pixel-dtb-firmware/dtb/ip/usb_ft232/sim/usb_ft232/verilog/test_usb_ft232.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module test_usb_ft232
+
+Top level modules:
+	test_usb_ft232
+
+} {} {}}

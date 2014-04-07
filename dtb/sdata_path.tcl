@@ -1,0 +1,1 @@
+report_path -from [get_ports {LVDS2LCDS_sdata_I}] -to [get_keepers {data_aqu:inst5|dtb_daq:inst2|deser160:channel1_roc|deser160_sampling:cdr|sin0 data_aqu:inst5|dtb_daq:inst2|deser160:channel1_roc|deser160_sampling:cdr|sin*}] -npaths 4 -panel_name {Report Path}

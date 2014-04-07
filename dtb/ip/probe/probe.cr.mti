@@ -1,0 +1,16 @@
+X:/source/FPGA/dtb/ip/probe/test_probe.v {1 {vlog -work work -nocovercells {X:\source\FPGA\dtb\ip\probe\test_probe.v}
+Model Technology ModelSim ALTERA vlog 10.0d Compiler 2012.01 Jan 18 2012
+-- Compiling module test_probe
+
+Top level modules:
+	test_probe
+
+} {} {}} X:/source/FPGA/dtb/ip/probe/probe.v {1 {vlog -work work -nocovercells X:/source/FPGA/dtb/ip/probe/probe.v
+Model Technology ModelSim ALTERA vlog 10.0d Compiler 2012.01 Jan 18 2012
+-- Compiling module probe_mux4
+-- Compiling module probe
+
+Top level modules:
+	probe
+
+} {} {}}

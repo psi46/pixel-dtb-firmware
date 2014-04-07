@@ -1,0 +1,101 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2012 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 320 232)
+	(text "HeRhTr" (rect 96 32 133 44)(font "Arial" ))
+	(text "inst" (rect 88 128 105 140)(font "Arial" ))
+	(port
+		(pt 0 120)
+		(input)
+		(text "reset" (rect 0 0 24 12)(font "Arial" ))
+		(text "reset" (rect 21 115 45 127)(font "Arial" ))
+		(line (pt 0 120)(pt 16 120))
+	)
+	(port
+		(pt 0 24)
+		(input)
+		(text "sd_in" (rect 0 0 25 12)(font "Arial" ))
+		(text "sd_in" (rect 21 19 46 31)(font "Arial" ))
+		(line (pt 0 24)(pt 16 24))
+	)
+	(port
+		(pt 0 136)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 131 35 143)(font "Arial" )(invisible))
+		(line (pt 0 136)(pt 16 136))
+	)
+	(port
+		(pt 256 24)
+		(output)
+		(text "sd_out" (rect 120 0 153 12)(font "Arial" ))
+		(text "sd_out" (rect 208 19 241 31)(font "Arial" ))
+		(line (pt 256 24)(pt 240 24))
+	)
+	(port
+		(pt 256 40)
+		(output)
+		(text "TbmHeader" (rect 120 0 176 12)(font "Arial" ))
+		(text "TbmHeader" (rect 188 35 244 47)(font "Arial" ))
+		(line (pt 256 40)(pt 240 40))
+	)
+	(port
+		(pt 256 56)
+		(output)
+		(text "RocHeader" (rect 120 0 175 12)(font "Arial" ))
+		(text "RocHeader" (rect 189 51 244 63)(font "Arial" ))
+		(line (pt 256 56)(pt 240 56))
+	)
+	(port
+		(pt 256 72)
+		(output)
+		(text "TbmTrailer" (rect 120 0 170 12)(font "Arial" ))
+		(text "TbmTrailer" (rect 193 67 243 79)(font "Arial" ))
+		(line (pt 256 72)(pt 240 72))
+	)
+	(port
+		(pt 256 104)
+		(output)
+		(text "TP" (rect 120 0 132 12)(font "Arial" ))
+		(text "TP" (rect 225 99 237 111)(font "Arial" ))
+		(line (pt 256 104)(pt 240 104))
+	)
+	(port
+		(pt 256 120)
+		(output)
+		(text "TPP" (rect 120 0 140 12)(font "Arial" ))
+		(text "TPP" (rect 219 115 239 127)(font "Arial" ))
+		(line (pt 256 120)(pt 240 120))
+	)
+	(port
+		(pt 256 136)
+		(output)
+		(text "allowRocH" (rect 120 0 171 12)(font "Arial" ))
+		(text "allowRocH" (rect 192 131 243 143)(font "Arial" ))
+		(line (pt 256 136)(pt 240 136))
+	)
+	(drawing
+		(line (pt 16 128)(pt 24 136))
+		(line (pt 24 136)(pt 16 144))
+		(rectangle (rect 16 16 240 144))
+	)
+)

@@ -1,4 +1,5 @@
 #!/bin/sh
+export QUARTUS_BINDIR=${QUARTUS_ROOTDIR}/bin
 echo "Fetching SW version..."
 version=$(grep "sw_version" ../software/dtb_expert/dtb_config.h | tr -dc '[:digit:]' | sed 's/^\(.\{1\}\)/\1./')
 if [ -e "dtb_v${version}.flash" ]

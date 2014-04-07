@@ -5,6 +5,7 @@
 #include "dtb_config.h"
 #include "rpc.h"
 #include "SRecordReader.h"
+#include "sys/alt_cache.h"
 
 
 const int delayAdjust = 4;
@@ -210,8 +211,10 @@ CTestboard::CTestboard()
 	DAQ_WRITE(DAQ_DMA_3_BASE, DAQ_CONTROL, 0);
 	DAQ_WRITE(DAQ_DMA_4_BASE, DAQ_CONTROL, 0);
 	DAQ_WRITE(DAQ_DMA_5_BASE, DAQ_CONTROL, 0);
-	DAQ_WRITE(DAQ_DMA_6_BASE, DAQ_CONTROL, 0);
-	DAQ_WRITE(DAQ_DMA_7_BASE, DAQ_CONTROL, 0);
+
+	// *3SDATA
+//	DAQ_WRITE(DAQ_DMA_6_BASE, DAQ_CONTROL, 0);
+//	DAQ_WRITE(DAQ_DMA_7_BASE, DAQ_CONTROL, 0);
 
 	Init();
 }
@@ -233,8 +236,9 @@ void CTestboard::Init()
 	Daq_Close(3);
 	Daq_Close(4);
 	Daq_Close(5);
-	Daq_Close(6);
-	Daq_Close(7);
+// *SDATA
+//	Daq_Close(6);
+//	Daq_Close(7);
 	Daq_DeselectAll();
 
 
@@ -578,8 +582,9 @@ void CTestboard::Poff()
 	Daq_Close(3);
 	Daq_Close(4);
 	Daq_Close(5);
-	Daq_Close(6);
-	Daq_Close(7);
+// *3SDATA
+//	Daq_Close(6);
+//	Daq_Close(7);
 
 	SetClock_(MHZ_1_25);
 }
@@ -1140,10 +1145,12 @@ bool CTestboard::tbm_Get(uint8_t reg, uint8_t &value)
 
 // --- Data aquisition ------------------------------------------------------
 
+// *3SDATA
+#define DAQ_CHANNELS 8
 
 uint32_t CTestboard::Daq_Open(uint32_t buffersize, uint8_t channel)
 {
-	if (channel >= 8) return 0;
+	if (channel >= DAQ_CHANNELS) return 0;
 
 	// close last DAQ session if still active
 	Daq_Close(channel);
@@ -1162,15 +1169,18 @@ uint32_t CTestboard::Daq_Open(uint32_t buffersize, uint8_t channel)
 	DAQ_WRITE(daq_base, DAQ_MEM_BASE, (unsigned long)(daq_mem_base[channel]));
 	DAQ_WRITE(daq_base, DAQ_MEM_SIZE, daq_mem_size[channel]);
 
+	alt_dcache_flush(daq_mem_base[channel], buffersize*2);
+
 	return daq_mem_size[channel];
 }
 
 void CTestboard::Daq_Close(uint8_t channel)
 {
-	if (channel >= 8) return;
+	if (channel >= DAQ_CHANNELS) return;
 
 	if (daq_mem_base[channel])
 	{
+		Daq_DeselectAll();
 		Daq_Stop(channel);
 		IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, 0); // FIFO reset
 		uDelay(1);
@@ -1181,7 +1191,7 @@ void CTestboard::Daq_Close(uint8_t channel)
 
 void CTestboard::Daq_Start(uint8_t channel)
 {
-	if (channel >= 8) return;
+	if (channel >= DAQ_CHANNELS) return;
 
 	if (daq_mem_base[channel])
 	{
@@ -1198,7 +1208,7 @@ void CTestboard::Daq_Start(uint8_t channel)
 
 void CTestboard::Daq_Stop(uint8_t channel)
 {
-	if (channel >= 8) return;
+	if (channel >= DAQ_CHANNELS) return;
 
 	if (daq_mem_base[channel])
 	{
@@ -1215,7 +1225,7 @@ void CTestboard::Daq_Stop(uint8_t channel)
 
 uint32_t CTestboard::Daq_GetSize(uint8_t channel)
 {
-	if (channel >= 8) return 0;
+	if (channel >= DAQ_CHANNELS) return 0;
 
 	if (daq_mem_base[channel] == 0) return 0;
 
@@ -1240,7 +1250,7 @@ template <class T>
 inline T* Uncache(T *x) { return (T*)(((unsigned long)x) | 0x80000000); }
 
 uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
-		 uint16_t blocksize, uint8_t channel)
+		 uint32_t blocksize, uint8_t channel)
 {
 	uint32_t availsize;
 	return Daq_Read(data, blocksize, availsize, channel);
@@ -1248,21 +1258,21 @@ uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
 
 
 uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
-		uint16_t blocksize, uint32_t &availsize, uint8_t channel)
+		uint32_t blocksize, uint32_t &availsize, uint8_t channel)
 {
 	data.clear();
 
-	if (channel >= 8) return 0;
+	if (channel >= DAQ_CHANNELS) { availsize = 0; return 0; }
 
 	if (daq_mem_base[channel] == 0) { availsize = 0; return 0; }
 
 	// limit maximal block size
-	if (blocksize > 32768) blocksize = 32768;
+	if (blocksize > 0x800000) blocksize = 0x800000;
 	if (blocksize > daq_mem_size[channel]) blocksize = daq_mem_size[channel];
 
 	// read dma status
 	unsigned int daq_base = DAQ_DMA_BASE[channel];
-	int32_t status = DAQ_READ(daq_base, DAQ_CONTROL);
+	int32_t status = DAQ_READ(daq_base, DAQ_CONTROL) ^ 1;
 	int32_t rp = DAQ_READ(daq_base, DAQ_MEM_READ);
 	int32_t wp = DAQ_READ(daq_base, DAQ_MEM_WRITE);
 
@@ -1274,7 +1284,7 @@ uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
 	if (fifosize < 0) fifosize += daq_mem_size[channel];
 
 	// calculate transfer block size (-> blocksize)
-	if (blocksize > fifosize) blocksize = fifosize;
+	if (int32_t(blocksize) > fifosize) blocksize = fifosize;
 
 	// return remaining data size
 	availsize = fifosize - blocksize;
@@ -1285,7 +1295,7 @@ uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
 
 	// --- send 1st part of the data block
 	int32_t size1 = daq_mem_size[channel] - rp;
-	if (size1 > blocksize) size1 = blocksize;
+	if (size1 > int32_t(blocksize)) size1 = blocksize;
 
 	// copy data to vector
 	uint16_t *p = Uncache(daq_mem_base[channel]) + rp;
@@ -1304,7 +1314,86 @@ uint8_t CTestboard::Daq_Read(vectorR<uint16_t> &data,
 	// update read pointer
 	DAQ_WRITE(daq_base, DAQ_MEM_READ, rp);
 
+	// dump data
+//	printf("Daq_Read = %02X\n", int(status));
+//	for (unsigned int i=0; i<data.size(); i++) printf(" %04X", int(data[i]));
+//	printf(" }\n");
+
 	return uint8_t(status);
+}
+
+
+uint8_t CTestboard::Daq_Read(HWvectorR<uint16_t> &data,
+		uint32_t blocksize, uint8_t channel)
+{
+	uint32_t availsize;
+	return Daq_Read(data, blocksize, availsize, channel);
+}
+
+
+uint8_t CTestboard::Daq_Read(HWvectorR<uint16_t> &data,
+		uint32_t blocksize, uint32_t &availsize, uint8_t channel)
+{
+	data.base = 0;
+	data.s1 = 0;
+	data.s2 = 0;
+
+	if (channel >= DAQ_CHANNELS) { availsize = 0; return 0; }
+
+	if (daq_mem_base[channel] == 0) { availsize = 0; return 0; }
+
+	// limit maximal block size
+	if (blocksize > 0x800000) blocksize = 0x800000;
+	if (blocksize > daq_mem_size[channel]) blocksize = daq_mem_size[channel];
+
+	// read dma status
+	data.base = DAQ_DMA_BASE[channel];
+	int32_t status = DAQ_READ(data.base, DAQ_CONTROL) ^ 1;
+	data.rp = DAQ_READ(data.base, DAQ_MEM_READ);
+	int32_t wp = DAQ_READ(data.base, DAQ_MEM_WRITE);
+
+	// correct write pointer overrun at memory overflow
+	if (status & DAQ_MEM_OVFL) if (--wp < 0) wp += daq_mem_size[channel];
+
+	// calculate available words in memory (-> fifosize)
+	int32_t fifosize = wp - data.rp;
+	if (fifosize < 0) fifosize += daq_mem_size[channel];
+
+	// calculate transfer block size (-> blocksize)
+	if (int32_t(blocksize) > fifosize) blocksize = fifosize;
+
+	// return remaining data size
+	availsize = fifosize - blocksize;
+
+	// allocate space in vector or return empty data
+	if (blocksize == 0) return uint8_t(status);
+
+	// --- send 1st part of the data block
+	int32_t size1 = daq_mem_size[channel] - data.rp;
+	if (size1 > int32_t(blocksize)) size1 = blocksize;
+
+	// data block 1
+	data.p1 = daq_mem_base[channel] + data.rp;
+	data.s1 = size1;
+	blocksize -= size1;
+
+	// --- data block 2
+	if (blocksize > 0)
+	{
+		data.p2 = daq_mem_base[channel];
+		data.s2 = blocksize;
+		data.rp = blocksize;
+	}
+	else data.rp += size1;
+
+	return uint8_t(status);
+}
+
+
+void CTestboard::Daq_Read_DeleteData(uint32_t daq_base, int32_t rp)
+{
+	// update read pointer
+	DAQ_WRITE(daq_base, DAQ_MEM_READ, rp);
 }
 
 
@@ -1370,6 +1459,10 @@ void CTestboard::Daq_DeselectAll()
 	mainCtrl &= ~MAINCTRL_ADCENA;
 	_MainControl(mainCtrl);
 	ADC_WRITE(ADC_CTRL, 1);
+
+	// disable data simulator
+	daq_select_datasim = false;
+	IOWR_32DIRECT(EVENTGEN_BASE, 0, 0);
 }
 
 void CTestboard::Daq_Select_Deser160(uint8_t shift)
@@ -1383,6 +1476,10 @@ void CTestboard::Daq_Select_Deser160(uint8_t shift)
 	mainCtrl &= ~MAINCTRL_ADCENA;
 	_MainControl(mainCtrl);
 	ADC_WRITE(ADC_CTRL, 1);
+
+	// disable data simulator
+	daq_select_datasim = false;
+	IOWR_32DIRECT(EVENTGEN_BASE, 0, 0);
 
 	// enable deser160
 	daq_select_deser160 = true;
@@ -1401,10 +1498,12 @@ void CTestboard::Daq_Select_Deser400()
 	daq_select_deser160 = false;
 	IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, 0);
 
+	// disable data simulator
+	daq_select_datasim = false;
+	IOWR_32DIRECT(EVENTGEN_BASE, 0, 0);
+
 	// enable deser400
 	daq_select_deser400 = true;
-
-	// reset deser400
 	Daq_Deser400_Reset();
 }
 
@@ -1417,6 +1516,31 @@ void CTestboard::Daq_Deser400_Reset(uint8_t reset)
 		_Deser400_Control(DESER400_SEL_MOD0);
 	}
 }
+
+void CTestboard::Daq_Select_Datagenerator(uint16_t startvalue)
+{
+	// disable adc
+	daq_select_adc = false;
+	mainCtrl &= ~MAINCTRL_ADCENA;
+	_MainControl(mainCtrl);
+	ADC_WRITE(ADC_CTRL, 1);
+
+	// disable deser160
+	daq_select_deser160 = false;
+	IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, 0);
+
+	// disable deser400
+	daq_select_deser400 = false;
+	_Deser400_Control(DESER400_RESET|DESER400_REG_RESET);
+
+	// enable data generator
+	daq_select_datasim = true;
+	IOWR_32DIRECT(EVENTGEN_BASE, 0, 0);
+	IOWR_32DIRECT(EVENTGEN_BASE, 1, startvalue);
+	IOWR_32DIRECT(EVENTGEN_BASE, 0, 1);
+}
+
+
 
 bool CTestboard::GetPixelAddressInverted() {
         return roc_pixeladdress_inverted;
@@ -1707,7 +1831,6 @@ int32_t CTestboard::CountReadouts(int32_t nTriggers) {
 
 	vector<uint16_t> data, data2, ph, n_hits;
 	vector<uint32_t> adr;
-	int16_t ok = -1;
 	//data.clear();
 	uint32_t avail_size = 0;
 
@@ -1723,8 +1846,8 @@ int32_t CTestboard::CountReadouts(int32_t nTriggers) {
 		Daq_Read(data2, daq_read_size, avail_size, 1);
 	}
 
-	ok = Decode(data, n_hits, ph, adr, 0);
-	ok = Decode(data2, n_hits, ph, adr, 1);
+	Decode(data, n_hits, ph, adr, 0);
+	Decode(data2, n_hits, ph, adr, 1);
 
 	for (unsigned int i = 0; i < adr.size(); i++){
 		nHits+=n_hits[i];
@@ -1739,7 +1862,6 @@ int8_t CTestboard::CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int3
 	PHsum = 0;
     //uint16_t daq_read_size = 32768;
     uint32_t avail_size = 0;
-	int16_t ok = -1;
 
     vector<uint16_t> nhits, ph;
     vector<uint32_t> adr;
@@ -1759,8 +1881,8 @@ int8_t CTestboard::CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int3
 		Daq_Read(data2, daq_read_size, avail_size, 1);
 	}
 
-    ok = Decode(data, nhits, ph, adr, 0);
-    ok = Decode(data2, nhits, ph, adr, 1);
+    Decode(data, nhits, ph, adr, 0);
+    Decode(data2, nhits, ph, adr, 1);
 
 	for (unsigned int i = 0; i < adr.size(); i++)
 	{
@@ -1848,7 +1970,6 @@ int8_t CTestboard::CalibrateDacDacScan(int16_t nTriggers, int16_t col, int16_t r
 
 int16_t CTestboard::CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum, vectorR<uint32_t> &adress)
 {
-	int16_t ok = -1;
     uint32_t avail_size = 0;
 
     nReadouts.clear();
@@ -1898,8 +2019,8 @@ int16_t CTestboard::CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts,
 		n.clear();
 		ph.clear();
 		adr.clear();
-		ok = Decode(data, n, ph, adr);
-		ok = Decode(data2, n, ph, adr);
+		Decode(data, n, ph, adr);
+		Decode(data2, n, ph, adr);
 
 		int colR = -1, rowR = -1;
 
@@ -2168,3 +2289,11 @@ int8_t CTestboard::ThresholdMap(int32_t nTrig, int32_t dacReg, bool rising, bool
 	for (int i = 0; i < ROC_NUMROWS * ROC_NUMCOLS; i++) thrValue.push_back(res[i]);
 	return 1;
 }
+
+
+void CTestboard::VectorTest(vector<uint16_t> &in, vectorR<uint16_t> &out)
+{
+	out = in;
+	for (unsigned int i=0; i<out.size(); i++) out[i] += 1000;
+}
+

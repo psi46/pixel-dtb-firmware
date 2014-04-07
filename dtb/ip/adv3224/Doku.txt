@@ -1,0 +1,25 @@
+ADV3224-IP Register-Definition
+==============================
+
+WRITE
+-----
+Reg 0-7 (8 Bit): Set Output <Reg-Number>
+	- values 0-15: choose input <value> for according output (value will be saved in IP)
+	- value  16:   deactivate output (default after reset)
+	- value  255:  update all outputs to new values (write saved values into adv3224)
+
+READ
+----
+Reg 0 (8 Bit): LSB remains high while IP is busy with programming ADV3224. Always check bevor writing 255 into a reg
+
+
+Parameters
+==========
+
+divider: clk-divider from nios-clk to shift-clk
+
+
+Idea
+====
+
+Set every output to the according input (write value in accoring reg). Then write 0xFF into a random reg (doesn't affect content) and wait until Reg 0 LSB goes low again.

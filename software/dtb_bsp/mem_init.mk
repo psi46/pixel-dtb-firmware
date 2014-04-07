@@ -144,12 +144,12 @@ flash2dat_extra_args = $(mem_pad_flag) $(mem_reloc_input_flag)
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 12.0sp2
-ACDS_VERSION := 12.0sp2
+# ACDS_VERSION: 13.1
+ACDS_VERSION := 13.1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 263
+# BUILD_NUMBER: 162
 
 # Optimize for simulation
 SIM_OPTIMIZE ?= 0
@@ -182,7 +182,7 @@ $(MEM_0)_CREATE_LANES := 0
 descriptor_memory: check_elf_exists $(MEM_INIT_DIR)/$(MEM_0).hex $(HDL_SIM_DIR)/$(MEM_0).dat $(HDL_SIM_DIR)/$(MEM_0).sym
 
 # Memory: epcs_controller
-MEM_1 := epcs_controller_boot_rom
+MEM_1 := dtb_system_epcs_controller_boot_rom
 $(MEM_1)_NAME := epcs_controller
 $(MEM_1)_MEM_INIT_FILE_PARAM_NAME := INIT_FILE
 HEX_FILES += $(HDL_SIM_DIR)/$(MEM_1).hex
@@ -204,9 +204,9 @@ $(MEM_1)_NO_ZERO_FILL_FLAG := --no-zero-fill
 $(HDL_SIM_DIR)/$(MEM_1).dat: $(MEM_1).flash
 	$(post-process-info)
 	$(MKDIR) -p $(@D)
-	$(FLASH2DAT) --infile=$< --outfile=$@ \
+	bash -c '$(FLASH2DAT) --infile=$< --outfile=$@ \
 		--base=$(mem_start_address) --end=$(mem_end_address) --width=$(mem_width) \
-		--create-lanes=$(mem_create_lanes) $(flash2dat_extra_args)
+		--create-lanes=$(mem_create_lanes) $(flash2dat_extra_args)'
 
 
 FLASH_DAT_FILES += $(HDL_SIM_DIR)/$(MEM_1).dat
@@ -307,29 +307,29 @@ endif
 $(filter-out $(FLASH_DAT_FILES),$(DAT_FILES)): %.dat: $(ELF)
 	$(post-process-info)
 	@$(MKDIR) $(@D)
-	$(ELF2DAT) --infile=$< --outfile=$@ \
+	bash -c '$(ELF2DAT) --infile=$< --outfile=$@ \
 		--base=$(mem_start_address) --end=$(mem_end_address) --width=$(mem_width) \
-		$(mem_endianness) --create-lanes=$(mem_create_lanes) $(elf2dat_extra_args)
+		$(mem_endianness) --create-lanes=$(mem_create_lanes) $(elf2dat_extra_args)'
 
 $(foreach i,0 1 2 3 4 5 6 7,%_lane$(i).dat): %.dat
 	@true
 
 $(HEX_FILES): %.hex: $(ELF)
 	$(post-process-info)
-	@$(MKDIR) $(@D)	
-	$(ELF2HEX) $< $(mem_start_address) $(mem_end_address) --width=$(mem_width) \
-		$(mem_endianness) --create-lanes=$(mem_create_lanes) $(elf2hex_extra_args) $@
+	@$(MKDIR) $(@D)
+	bash -c '$(ELF2HEX) $< $(mem_start_address) $(mem_end_address) --width=$(mem_width) \
+		$(mem_endianness) --create-lanes=$(mem_create_lanes) $(elf2hex_extra_args) $@'
 
 $(SYM_FILES): %.sym: $(ELF)
 	$(post-process-info)
-	@$(MKDIR) $(@D)	
+	@$(MKDIR) $(@D)
 	$(NM) -n $< > $@
 
 $(FLASH_FILES): %.flash: $(ELF)
 	$(post-process-info)
-	@$(MKDIR) $(@D)	
-	$(ELF2FLASH) --input=$< --outfile=$@ --sim_optimize=$(SIM_OPTIMIZE) $(mem_endianness) \
-		$(elf2flash_extra_args)
+	@$(MKDIR) $(@D)
+	bash -c '$(ELF2FLASH) --input=$< --outfile=$@ --sim_optimize=$(SIM_OPTIMIZE) $(mem_endianness) \
+		$(elf2flash_extra_args)'
 
 #
 # Function generate_spd_entry
@@ -359,7 +359,7 @@ $(MEM_INIT_DESCRIPTOR_FILE): %.spd: $(MEM_INIT_FILE)
 	@$(ECHO) "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > $@
 	@$(ECHO) "<simPackage>" >> $@
 	@$(foreach dat_file,$($@.DAT_FILESET),$(call gen_spd_entry,$(dat_file),DAT,$@) &&)true
-	@$(foreach hex_file,$($@.HEX_FILESET),$(call gen_spd_entry,$(hex_file),HEX,$@) &&)true	
+	@$(foreach hex_file,$($@.HEX_FILESET),$(call gen_spd_entry,$(hex_file),HEX,$@) &&)true
 	@$(ECHO) "</simPackage>" >> $@
 
 .DELETE_ON_ERROR: $(MEM_INIT_DESCRIPTOR_FILE)

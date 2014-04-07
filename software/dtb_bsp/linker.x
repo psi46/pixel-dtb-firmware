@@ -2,9 +2,9 @@
  * linker.x - Linker script
  *
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
- * SOPC Builder design path: X:/source/FPGA/pixel-dtb-firmware/dtb/dtb_system.sopcinfo
+ * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
  *
- * Generated: Tue Jan 07 09:15:52 CET 2014
+ * Generated: Mon Mar 31 22:53:53 CEST 2014
  */
 
 /*
@@ -93,6 +93,7 @@ SECTIONS
         KEEP (*(.irq));
         KEEP (*(.exceptions.entry.label));
         KEEP (*(.exceptions.entry.user));
+        KEEP (*(.exceptions.entry.ecc_fatal));
         KEEP (*(.exceptions.entry));
         KEEP (*(.exceptions.irqtest.user));
         KEEP (*(.exceptions.irqtest));
@@ -196,7 +197,7 @@ SECTIONS
         PROVIDE (__fini_array_end = ABSOLUTE(.));
         SORT(CONSTRUCTORS)
         KEEP (*(.eh_frame))
-        *(.gcc_except_table)
+        *(.gcc_except_table .gcc_except_table.*)
         *(.dynamic)
         PROVIDE (__CTOR_LIST__ = ABSOLUTE(.));
         KEEP (*(.ctors))
@@ -208,7 +209,7 @@ SECTIONS
         PROVIDE (__DTOR_END__ = ABSOLUTE(.));
         KEEP (*(.jcr))
         . = ALIGN(4);
-    } > ram_ext = 0x3a880100 /* Nios II NOP instruction */
+    } > ram_ext = 0x3a880100 /* NOP instruction (always in big-endian byte ordering) */
 
     .rodata :
     {
@@ -281,7 +282,7 @@ SECTIONS
     .ram_ext :
     {
         PROVIDE (_alt_partition_ram_ext_start = ABSOLUTE(.));
-        *(.ram_ext. ram_ext.*)
+        *(.ram_ext .ram_ext. ram_ext.*)
         . = ALIGN(4);
         PROVIDE (_alt_partition_ram_ext_end = ABSOLUTE(.));
         _end = ABSOLUTE(.);
@@ -294,7 +295,7 @@ SECTIONS
     .epcs_controller :
     {
         PROVIDE (_alt_partition_epcs_controller_start = ABSOLUTE(.));
-        *(.epcs_controller. epcs_controller.*)
+        *(.epcs_controller .epcs_controller. epcs_controller.*)
         . = ALIGN(4);
         PROVIDE (_alt_partition_epcs_controller_end = ABSOLUTE(.));
     } > epcs_controller
@@ -304,7 +305,7 @@ SECTIONS
     .descriptor_memory :
     {
         PROVIDE (_alt_partition_descriptor_memory_start = ABSOLUTE(.));
-        *(.descriptor_memory. descriptor_memory.*)
+        *(.descriptor_memory .descriptor_memory. descriptor_memory.*)
         . = ALIGN(4);
         PROVIDE (_alt_partition_descriptor_memory_end = ABSOLUTE(.));
     } > descriptor_memory

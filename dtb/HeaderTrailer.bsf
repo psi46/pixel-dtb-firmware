@@ -1,0 +1,100 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 64 64 224 160)
+	(text "HeaderTrailer" (rect 32 0 108 14)(font "Arial" (font_size 8)))
+	(text "inst" (rect 72 80 89 92)(font "Arial" ))
+	(port
+		(pt 0 24)
+		(input)
+		(text "Sdat" (rect 0 8 25 22)(font "Arial" (font_size 8)))
+		(text "Sdat" (rect 21 19 46 33)(font "Arial" (font_size 8)))
+		(line (pt 0 24)(pt 16 24)(line_width 1))
+	)
+	(port
+		(pt 0 72)
+		(input)
+		(text "CLK" (rect 0 8 23 22)(font "Arial" (font_size 8)))
+		(text "CLK" (rect 21 67 44 81)(font "Arial" (font_size 8))(invisible))
+		(line (pt 0 72)(pt 16 72)(line_width 1))
+	)
+	(port
+		(pt 160 40)
+		(output)
+		(text "TBM_HEADER" (rect 0 8 80 22)(font "Arial" (font_size 8)))
+		(text "TBM_HEADER" (rect 67 35 147 49)(font "Arial" (font_size 8)))
+		(line (pt 160 40)(pt 144 40)(line_width 1))
+	)
+	(port
+		(pt 160 56)
+		(output)
+		(text "ROC_HEADER" (rect 0 8 81 22)(font "Arial" (font_size 8)))
+		(text "ROC_HEADER" (rect 66 51 147 65)(font "Arial" (font_size 8)))
+		(line (pt 160 56)(pt 144 56)(line_width 1))
+	)
+	(port
+		(pt 160 72)
+		(output)
+		(text "TBM_TRAILER" (rect 0 8 81 22)(font "Arial" (font_size 8)))
+		(text "TBM_TRAILER" (rect 66 67 147 81)(font "Arial" (font_size 8)))
+		(line (pt 160 72)(pt 144 72)(line_width 1))
+	)
+	(port
+		(pt 160 24)
+		(output)
+		(text "sdo" (rect 110 16 131 30)(font "Arial" (font_size 8)))
+		(text "sdo" (rect 110 16 131 30)(font "Arial" (font_size 8)))
+		(line (pt 160 24)(pt 144 24)(line_width 1))
+	)
+	(port
+		(pt 48 96)
+		(output)
+		(text "allowROC_H" (rect 40 46 54 117)(font "Arial" (font_size 8))(vertical))
+		(text "allowROC_H" (rect 40 6 54 77)(font "Arial" (color 255 0 0)(font_size 8))(vertical))
+		(line (pt 48 96)(pt 48 80)(line_width 1))
+	)
+	(port
+		(pt 0 48)
+		(output)
+		(text "TP" (rect 24 32 38 46)(font "Arial" (font_size 8)))
+		(text "TP" (rect 24 40 38 54)(font "Arial" (font_size 8)))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
+	)
+	(port
+		(pt 0 56)
+		(output)
+		(text "TPP" (rect 24 40 45 54)(font "Arial" (font_size 8)))
+		(text "TPP" (rect 24 48 45 62)(font "Arial" (font_size 8)))
+		(line (pt 0 56)(pt 16 56)(line_width 1))
+	)
+	(drawing
+		(line (pt 16 64)(pt 24 72)(line_width 1))
+		(line (pt 24 72)(pt 16 80)(line_width 1))
+		(line (pt 64 16)(pt 72 24)(line_width 1))
+		(line (pt 72 24)(pt 64 32)(line_width 1))
+		(line (pt 72 16)(pt 80 24)(line_width 1))
+		(line (pt 80 24)(pt 72 32)(line_width 1))
+		(line (pt 80 16)(pt 88 24)(line_width 1))
+		(line (pt 88 24)(pt 80 32)(line_width 1))
+		(rectangle (rect 16 16 144 80)(line_width 1))
+	)
+)

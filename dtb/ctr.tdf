@@ -1,0 +1,84 @@
+TITLE "ctr";
+%=======================================================================%
+%	Cal-Trig-Res decoder												%
+%=======================================================================%
+
+SUBDESIGN ctr
+(
+--	/reset : INPUT;
+	clk  : INPUT;
+	sync : INPUT;
+	cal  : INPUT;
+	trg  : INPUT;
+	res_roc  : INPUT;
+	res_tbm  : INPUT;
+	res_req  : INPUT;
+	nmr_req  : INPUT;
+	trg_veto : INPUT;
+	res_veto : INPUT;
+
+	running : OUTPUT;
+	ctr_out : OUTPUT;
+	trg_out : OUTPUT;
+	res_out : OUTPUT;
+)
+
+VARIABLE
+	reset, rtbm, trigger : NODE;
+	res_req_ff : SRFF;
+	nmr_req_ff : SRFF;
+	ctrgen : MACHINE OF BITS(ctr_out,trg_out,res_out,running)
+		WITH STATES
+		(
+			idle=b"0000",
+			cal1=b"1001", cal2=b"0001", cal3=b"0001",  -- calibrate sequence
+			trg1=b"1101", trg2=b"1001", trg3=b"0001",  -- trigger sequence
+			res1=b"1011", res2=b"1001", res3=b"1001",  -- reset roc sequence
+			tbm1=b"1011", tbm2=b"0001", tbm3=b"1001"   -- reset tbm sequence
+		);
+
+BEGIN
+	res_req_ff.clk = clk;
+	res_req_ff.s = res_req;
+	res_req_ff.r = res_out;
+
+	nmr_req_ff.clk = clk;
+	nmr_req_ff.s = nmr_req;
+	nmr_req_ff.r = res_out;
+
+	reset   = nmr_req_ff # ((res_roc # res_req_ff) & !res_veto);
+	rtbm    = res_tbm & !res_veto;
+	trigger = trg & !trg_veto;
+
+	ctrgen.clk = clk;
+	ctrgen.ena = sync;
+	TABLE
+		ctrgen, reset, rtbm, trigger,  cal => ctrgen; 
+		-- goto reset roc
+		idle,     1,   x,    x,      x  => res1;
+		-- goto reset tbm
+		idle,     0,   1,    x,      x  => tbm1;
+		-- goto trigger
+		idle,     0,   0,    1,      x  => trg1;
+		-- goto calibrate
+		idle,     0,   0,    0,      1  => cal1;
+		-- step through calibrate states
+		cal1,     x,   x,    x,      x  => cal2;
+		cal2,     x,   x,    x,      x  => cal3;
+		cal3,     x,   x,    x,      x  => idle;
+		-- step through trigger states
+		trg1,     x,   x,    x,      x  => trg2;
+		trg2,     x,   x,    x,      x  => trg3;
+		trg3,     x,   x,    x,      x  => idle;
+		-- step through reset roc states
+		res1,     x,   x,    x,      x  => res2;
+		res2,     x,   x,    x,      x  => res3;
+		res3,     x,   x,    x,      x  => idle;
+		-- step through reset tbm states
+		tbm1,     x,   x,    x,      x  => tbm2;
+		tbm2,     x,   x,    x,      x  => tbm3;
+		tbm3,     x,   x,    x,      x  => idle;
+
+	END TABLE;
+END;
+

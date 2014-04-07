@@ -1,0 +1,108 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2012 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 360 328)
+	(text "clocks_no_ethernet" (rect 16 1 128 15)(font "Arial" (font_size 8)))
+	(text "inst" (rect 16 248 33 260)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clock_int" (rect 0 40 49 54)(font "Arial" (font_size 8)))
+		(text "clock_int" (rect 32 24 81 38)(font "Arial" (font_size 8)))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "clock_ext_select" (rect 0 40 95 54)(font "Arial" (font_size 8)))
+		(text "clock_ext_select" (rect 21 107 116 121)(font "Arial" (font_size 8)))
+		(line (pt 0 112)(pt 16 112))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "clock_ext" (rect 0 40 54 54)(font "Arial" (font_size 8)))
+		(text "clock_ext" (rect 32 56 86 70)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 296 32)
+		(output)
+		(text "sysclk" (rect 40 40 76 54)(font "Arial" (font_size 8)))
+		(text "sysclk" (rect 239 27 275 41)(font "Arial" (font_size 8)))
+		(line (pt 296 32)(pt 280 32))
+	)
+	(port
+		(pt 296 80)
+		(output)
+		(text "reset_n" (rect 40 40 83 54)(font "Arial" (font_size 8)))
+		(text "reset_n" (rect 232 75 275 89)(font "Arial" (font_size 8)))
+		(line (pt 296 80)(pt 280 80))
+	)
+	(port
+		(pt 296 112)
+		(output)
+		(text "clk" (rect 40 40 55 54)(font "Arial" (font_size 8)))
+		(text "clk" (rect 260 107 275 121)(font "Arial" (font_size 8)))
+		(line (pt 296 112)(pt 280 112))
+	)
+	(port
+		(pt 296 160)
+		(output)
+		(text "clock_ext_present" (rect 40 40 145 54)(font "Arial" (font_size 8)))
+		(text "clock_ext_present" (rect 184 152 289 166)(font "Arial" (font_size 8)))
+		(line (pt 296 160)(pt 280 160))
+	)
+	(port
+		(pt 296 176)
+		(output)
+		(text "clk_good" (rect 40 40 90 54)(font "Arial" (font_size 8)))
+		(text "clk_good" (rect 225 171 275 185)(font "Arial" (font_size 8)))
+		(line (pt 296 176)(pt 280 176))
+	)
+	(port
+		(pt 296 128)
+		(output)
+		(text "sclk[7..0]" (rect 40 40 90 54)(font "Arial" (font_size 8)))
+		(text "sclk[7..0]" (rect 225 123 275 137)(font "Arial" (font_size 8)))
+		(line (pt 296 128)(pt 280 128)(line_width 3))
+	)
+	(port
+		(pt 296 64)
+		(output)
+		(text "reset" (rect 245 56 274 70)(font "Arial" (font_size 8)))
+		(text "reset" (rect 245 56 274 70)(font "Arial" (font_size 8)))
+		(line (pt 296 64)(pt 280 64))
+	)
+	(drawing
+		(text "CPU" (rect 136 24 167 40)(font "Arial" (font_size 10)))
+		(text "DAQ" (rect 136 104 169 120)(font "Arial" (font_size 10)))
+		(line (pt 128 96)(pt 128 16))
+		(line (pt 16 96)(pt 280 96))
+		(line (pt 280 200)(pt 16 200))
+		(line (pt 16 24)(pt 24 32))
+		(line (pt 24 32)(pt 16 40))
+		(line (pt 16 56)(pt 24 64))
+		(line (pt 24 64)(pt 16 72))
+		(rectangle (rect 16 16 280 248))
+	)
+)
