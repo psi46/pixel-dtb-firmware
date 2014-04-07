@@ -459,8 +459,7 @@ public:
 
 	RPC_EXPORT bool SetI2CAddresses(vector<uint8_t> &roc_i2c);
 	RPC_EXPORT bool SetTrimValues(uint8_t roc_i2c, vector<int8_t> &trimvalues);
-	uint8_t GetTrimValue(uint8_t roc_i2c, uint8_t column, uint8_t row);
-	bool GetMaskState(uint8_t roc_i2c, uint8_t column, uint8_t row);
+	void LoopPixTrim(uint8_t roc_i2c, uint8_t column, uint8_t row);
 
 	// Exported RPC-Calls for Maps
 	RPC_EXPORT void LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags);

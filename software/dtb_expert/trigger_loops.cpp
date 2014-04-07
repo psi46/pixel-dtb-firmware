@@ -37,51 +37,48 @@ size_t CTestboard::CalibratedDAC(size_t value) {
 // trim values for a specific ROC:
 bool CTestboard::SetI2CAddresses(vector<uint8_t> &roc_i2c) {
 
-	if(roc_i2c.size() > MOD_NUMROCS) { return false; }
-	for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
-		ROC_I2C_ADDRESSES[roc] = roc_i2c.at(roc);
-	}
-	return true;
+  if(roc_i2c.size() > MOD_NUMROCS) { return false; }
+  printf("What I got (I2C):\n");
+  for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+    ROC_I2C_ADDRESSES[roc] = roc_i2c.at(roc);
+    printf("%i: %i",roc,ROC_I2C_ADDRESSES[roc]);
+  }
+
+  return true;
 }
 
 // Upload all trimvalues of one ROC to the NIOS core to store them for looping
 // over multiple pixels:
 bool CTestboard::SetTrimValues(uint8_t roc_i2c, vector<int8_t> &trimvalues) {
 
-	// Get the array index of the requested ROC via its I2C address:
-	size_t index = 0;
-	for(index = 0; index < MOD_NUMROCS; index++) {
-		if(ROC_I2C_ADDRESSES[index] == roc_i2c) { break; }
-	}
+  // Get the array index of the requested ROC via its I2C address:
+  size_t index = 0;
+  for(index = 0; index < MOD_NUMROCS; index++) {
+    if(ROC_I2C_ADDRESSES[index] == roc_i2c) { break; }
+  }
 
-	// Write the trim values into the corresponding array section:
-	for(size_t val = 0; val < trimvalues.size(); val++) {
-		ROC_TRIM_BITS[index*ROC_NUMROWS*ROC_NUMCOLS + val] = trimvalues.at(val);
-	}
-	return true;
+  // Write the trim values into the corresponding array section:
+  for(size_t val = 0; val < trimvalues.size(); val++) {
+    ROC_TRIM_BITS[index*ROC_NUMROWS*ROC_NUMCOLS + val] = trimvalues.at(val);
+  }
+  return true;
 }
 
-// Read back the trim value of one specific pixel on a given ROC:
-uint8_t CTestboard::GetTrimValue(uint8_t roc_i2c, uint8_t column, uint8_t row) {
+// Read the trim value of one specific pixel on a given ROC and trim the pixelk if necessary:
+void CTestboard::LoopPixTrim(uint8_t roc_i2c, uint8_t column, uint8_t row) {
 
-	// Lookup the index of this particular ROC:
-	size_t index = 0;
-	for(index = 0; index < MOD_NUMROCS; index++) {
-		if(ROC_I2C_ADDRESSES[index] == roc_i2c) { break; }
-	}
+  // Lookup the index of this particular ROC:
+  size_t index = 0;
+  for(index = 0; index < MOD_NUMROCS; index++) {
+    if(ROC_I2C_ADDRESSES[index] == roc_i2c) { break; }
+  }
 
-	// Lookup the trim bits value of this particular pixel:
-	int8_t value = ROC_TRIM_BITS[index*ROC_NUMROWS*ROC_NUMCOLS + column*ROC_NUMROWS + row];
+  // Lookup the trim bits value of this particular pixel:
+  int8_t value = ROC_TRIM_BITS[index*ROC_NUMROWS*ROC_NUMCOLS + column*ROC_NUMROWS + row];
 
-	if(value < 0) return 0xf;
-	else return value;
-}
-
-bool CTestboard::GetMaskState(uint8_t roc_i2c, uint8_t column, uint8_t row) {
-
-	// Lookup the mask state of this particular pixel from a huge map stored somewhere in the NIOS
-	// mask[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMCOLS]
-	return false;
+  // If the trim value is positive, enable the pixel and trim it accordingly:
+  if(value > 0) roc_Pix_Trim(column, row, value);
+  // If not, do nothing - it's masked and should stay.
 }
 
 
@@ -114,7 +111,7 @@ void CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
         roc_I2cAddr(roc_i2c.at(roc));
 	// If masked, enable the pixel:
-	if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(col, row, 15);
+	if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),col, row);
 	roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
       }
 
@@ -153,7 +150,7 @@ void CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t
     if(flags&FLAG_FORCE_MASKED) roc_Chip_Mask();
     roc_Col_Enable(column, true);
     // If masked, enable the pixel:
-    if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(column, row, 15);
+    if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),column, row);
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
   }
 
@@ -192,7 +189,7 @@ void CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
     for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
 
       // If masked, enable the pixel:
-      if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(col, row, 15);
+      if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,col, row);
 
       // Set the calibrate bits
       // Take into account both Xtalks and Cals flags
@@ -227,7 +224,7 @@ void CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
 
   roc_Col_Enable(column, true);
   // If masked, enable the pixel:
-  if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(column, row, 15);
+  if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,column, row);
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Send the triggers:
@@ -274,7 +271,7 @@ void CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
 	roc_I2cAddr(roc_i2c.at(roc));
 	// If masked, enable the pixel:
-	if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(col, row, 15);
+	if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),col, row);
 	roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
       }
 
@@ -326,7 +323,7 @@ void CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
     roc_Col_Enable(column, true);
 
     // If masked, enable the pixel:
-    if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(column, row, 15);
+    if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),column, row);
 
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
   }
@@ -378,7 +375,7 @@ void CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
     for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
 
       // If masked, enable the pixel:
-      if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(col, row, 15);
+      if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,col, row);
 
       // Set the calibrate bits
       // Take into account both Xtalks and Cals flags
@@ -422,7 +419,7 @@ void CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
 
   roc_Col_Enable(column, true);
   // If masked, enable the pixel:
-  if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(column, row, 15);
+  if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,column, row);
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Loop over the DAC range specified:
@@ -477,7 +474,7 @@ void CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
 	roc_I2cAddr(roc_i2c.at(roc));
 	// If masked, enable the pixel:
-	if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(col, row, 15);
+	if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),col, row);
 	roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
       }
 
@@ -540,7 +537,7 @@ void CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
     if(flags&FLAG_FORCE_MASKED) roc_Chip_Mask();
     roc_Col_Enable(column, true);
     // If masked, enable the pixel:
-    if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(column, row, 15);
+    if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),column, row);
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
   }
 
@@ -603,7 +600,7 @@ void CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
     for (uint8_t row = 0; row < ROC_NUMROWS; row++) {
 
       // If masked, enable the pixel:
-      if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(col, row, 15);
+      if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,col, row);
 
       // Set the calibrate bits
       // Take into account both Xtalks and Cals flags
@@ -656,7 +653,7 @@ void CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
 
   roc_Col_Enable(column, true);
   // If masked, enable the pixel:
-  if(flags&FLAG_FORCE_MASKED) roc_Pix_Trim(column, row, 15);
+  if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,column, row);
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Loop over the DAC range specified:
