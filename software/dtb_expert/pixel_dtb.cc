@@ -300,6 +300,9 @@ void CTestboard::Init()
 	Poff();
 
 	roc_pixeladdress_inverted = false;
+
+	// -- default Test Loop parameter settings
+	LoopTriggerDelay = 4; // 4 usec between triggers
 }
 
 

@@ -90,6 +90,9 @@ class CTestboard
 	uint8_t sig_level_tin;
 	uint8_t sig_offset;
 
+	// --- Test Loop parameters
+	uint16_t LoopTriggerDelay;
+
 	bool roc_pixeladdress_inverted;
 
 	unsigned char ChipId;
@@ -457,6 +460,7 @@ public:
 	uint8_t GetXtalkRow(uint8_t row, bool xtalk);
 	size_t CalibratedDAC(size_t value);
 
+	RPC_EXPORT void SetLoopTriggerDelay(uint16_t delay);
 	RPC_EXPORT bool SetI2CAddresses(vector<uint8_t> &roc_i2c);
 	RPC_EXPORT bool SetTrimValues(uint8_t roc_i2c, vector<int8_t> &trimvalues);
 	void LoopPixTrim(uint8_t roc_i2c, uint8_t column, uint8_t row);
