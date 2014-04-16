@@ -7,6 +7,9 @@
 
 // -------- Helper Functions -------------------------------
 
+// Use a maximum of 90% of allocated DAQ buffer before reading out:
+#define LOOP_MAX_FILLLEVEL 90
+
 char ROC_TRIM_BITS[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMROWS];
 char ROC_I2C_ADDRESSES[MOD_NUMROCS];
 
