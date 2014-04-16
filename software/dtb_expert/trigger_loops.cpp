@@ -10,6 +10,44 @@
 char ROC_TRIM_BITS[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMROWS];
 char ROC_I2C_ADDRESSES[MOD_NUMROCS];
 
+// Loop parameter storage for interrupts:
+bool LoopInterrupt;
+uint8_t LoopInterruptColumn;
+uint8_t LoopInterruptRow;
+size_t LoopInterruptDac1;
+size_t LoopInterruptDac2;
+
+// Reset the Loop Interrupt, so next Loop call starts from scratch:
+void CTestboard::LoopInterruptReset() {
+  // Reset the interrupted Loop flag:
+  LoopInterrupt = false;
+}
+
+// Load the Loop Interrupt values to resume at interrupt position:
+void CTestboard::LoopInterruptResume(uint8_t &column, uint8_t &row, size_t &dac1, size_t &dac2) {
+
+  // No Loop has been interrupted, just start from beginning:
+  if(!LoopInterrupt) return;
+
+  // Recall the previous Loop's parameters and increemnt them by one:
+  column = LoopInterruptColumn;
+  row = LoopInterruptRow;
+  dac1 = LoopInterruptDac1;
+  dac2 = LoopInterruptDac2;
+}
+
+// Store the loop interrupt parameter to be recalled when rerunning the command:
+void CTestboard::LoopInterruptStore(uint8_t column, uint8_t row, size_t dac1, size_t dac2) {
+
+  // Set the Loop Interrupt flag:
+  LoopInterrupt = true;
+
+  LoopInterruptColumn = column;
+  LoopInterruptRow = row;
+  LoopInterruptDac1 = dac1;
+  LoopInterruptDac2 = dac2;
+}
+
 // Return the Row to be pulsed with a calibrate signal
 // If "xtalk" is set, move the row by one count up or down
 uint8_t CTestboard::GetXtalkRow(uint8_t row, bool xtalk) {
