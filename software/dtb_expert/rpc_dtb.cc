@@ -607,6 +607,29 @@ bool rpc__Daq_GetSize$IC(rpcMessage &msg)
 	return true;
 }
 
+bool rpc__Daq_FillLevel$CC(rpcMessage &msg)
+{
+	if (!msg.CheckCmdSize(1)) return false;
+	uint8_t rpc_par1 = msg.Get_UINT8();
+	uint8_t rpc_par0 = tb.Daq_FillLevel(rpc_par1);
+	msg.CreateCmd(64);
+	msg.Put_UINT8(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
+	return true;
+}
+
+bool rpc__Daq_FillLevel$C(rpcMessage &msg)
+{
+	if (!msg.CheckCmdSize(0)) return false;
+	uint8_t rpc_par0 = tb.Daq_FillLevel();
+	msg.CreateCmd(65);
+	msg.Put_UINT8(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
+	return true;
+}
+
 bool rpc__Daq_Read$C5SIC(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(5)) return false;
@@ -615,7 +638,7 @@ bool rpc__Daq_Read$C5SIC(rpcMessage &msg)
 	uint32_t rpc_par1_hdr;
 	HWvectorR<uint16_t> rpc_par1;
 	uint8_t rpc_par0 = tb.Daq_Read(rpc_par1,rpc_par2,rpc_par3);
-	msg.CreateCmd(64);
+	msg.CreateCmd(66);
 	msg.Put_UINT8(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	rpc_par1.Write(msg, rpc_par1_hdr);
@@ -632,7 +655,7 @@ bool rpc__Daq_Read$C5SI0IC(rpcMessage &msg)
 	uint32_t rpc_par1_hdr;
 	HWvectorR<uint16_t> rpc_par1;
 	uint8_t rpc_par0 = tb.Daq_Read(rpc_par1,rpc_par2,rpc_par3,rpc_par4);
-	msg.CreateCmd(65);
+	msg.CreateCmd(67);
 	msg.Put_UINT8(rpc_par0);
 	msg.Put_UINT32(rpc_par3);
 	if (!msg.SendCmd()) return false;
@@ -781,7 +804,7 @@ bool rpc__TBM_Present$b(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(0)) return false;
 	bool rpc_par0 = tb.TBM_Present();
-	msg.CreateCmd(82);
+	msg.CreateCmd(84);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -828,7 +851,7 @@ bool rpc__tbm_Get$bC0C(rpcMessage &msg)
 	uint8_t rpc_par1 = msg.Get_UINT8();
 	uint8_t rpc_par2 = msg.Get_UINT8();
 	bool rpc_par0 = tb.tbm_Get(rpc_par1,rpc_par2);
-	msg.CreateCmd(87);
+	msg.CreateCmd(89);
 	msg.Put_BOOL(rpc_par0);
 	msg.Put_UINT8(rpc_par2);
 	if (!msg.SendCmd()) return false;
@@ -842,7 +865,7 @@ bool rpc__tbm_GetRaw$bC0I(rpcMessage &msg)
 	uint8_t rpc_par1 = msg.Get_UINT8();
 	uint32_t rpc_par2 = msg.Get_UINT32();
 	bool rpc_par0 = tb.tbm_GetRaw(rpc_par1,rpc_par2);
-	msg.CreateCmd(88);
+	msg.CreateCmd(90);
 	msg.Put_BOOL(rpc_par0);
 	msg.Put_UINT32(rpc_par2);
 	if (!msg.SendCmd()) return false;
@@ -854,7 +877,7 @@ bool rpc__GetPixelAddressInverted$b(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(0)) return false;
 	bool rpc_par0 = tb.GetPixelAddressInverted();
-	msg.CreateCmd(89);
+	msg.CreateCmd(91);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -874,7 +897,7 @@ bool rpc__CountReadouts$ii(rpcMessage &msg)
 	if (!msg.CheckCmdSize(4)) return false;
 	int32_t rpc_par1 = msg.Get_INT32();
 	int32_t rpc_par0 = tb.CountReadouts(rpc_par1);
-	msg.CreateCmd(91);
+	msg.CreateCmd(93);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -887,7 +910,7 @@ bool rpc__CountReadouts$iii(rpcMessage &msg)
 	int32_t rpc_par1 = msg.Get_INT32();
 	int32_t rpc_par2 = msg.Get_INT32();
 	int32_t rpc_par0 = tb.CountReadouts(rpc_par1,rpc_par2);
-	msg.CreateCmd(92);
+	msg.CreateCmd(94);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -901,7 +924,7 @@ bool rpc__CountReadouts$iiii(rpcMessage &msg)
 	int32_t rpc_par2 = msg.Get_INT32();
 	int32_t rpc_par3 = msg.Get_INT32();
 	int32_t rpc_par0 = tb.CountReadouts(rpc_par1,rpc_par2,rpc_par3);
-	msg.CreateCmd(93);
+	msg.CreateCmd(95);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -916,7 +939,7 @@ bool rpc__PH$iiiis(rpcMessage &msg)
 	int32_t rpc_par3 = msg.Get_INT32();
 	int16_t rpc_par4 = msg.Get_INT16();
 	int32_t rpc_par0 = tb.PH(rpc_par1,rpc_par2,rpc_par3,rpc_par4);
-	msg.CreateCmd(94);
+	msg.CreateCmd(96);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -936,7 +959,7 @@ bool rpc__PixelThreshold$iiiiiiiibb(rpcMessage &msg)
 	bool rpc_par8 = msg.Get_BOOL();
 	bool rpc_par9 = msg.Get_BOOL();
 	int32_t rpc_par0 = tb.PixelThreshold(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9);
-	msg.CreateCmd(95);
+	msg.CreateCmd(97);
 	msg.Put_INT32(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -949,7 +972,7 @@ bool rpc__test_pixel_address$bii(rpcMessage &msg)
 	int32_t rpc_par1 = msg.Get_INT32();
 	int32_t rpc_par2 = msg.Get_INT32();
 	bool rpc_par0 = tb.test_pixel_address(rpc_par1,rpc_par2);
-	msg.CreateCmd(96);
+	msg.CreateCmd(98);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -965,7 +988,7 @@ bool rpc__CalibratePixel$csss0s0i(rpcMessage &msg)
 	int16_t rpc_par4 = msg.Get_INT16();
 	int32_t rpc_par5 = msg.Get_INT32();
 	int8_t rpc_par0 = tb.CalibratePixel(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5);
-	msg.CreateCmd(97);
+	msg.CreateCmd(99);
 	msg.Put_INT8(rpc_par0);
 	msg.Put_INT16(rpc_par4);
 	msg.Put_INT32(rpc_par5);
@@ -988,7 +1011,7 @@ bool rpc__CalibrateDacScan$cssssss2s2i(rpcMessage &msg)
 	uint32_t rpc_par8_hdr;
 	vectorR<int32_t> rpc_par8;
 	int8_t rpc_par0 = tb.CalibrateDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8);
-	msg.CreateCmd(98);
+	msg.CreateCmd(100);
 	msg.Put_INT8(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	if (!rpc_SendVector(msg, rpc_par7_hdr, rpc_par7)) return false;
@@ -1014,7 +1037,7 @@ bool rpc__CalibrateDacDacScan$csssssssss2s2i(rpcMessage &msg)
 	uint32_t rpc_par11_hdr;
 	vectorR<int32_t> rpc_par11;
 	int8_t rpc_par0 = tb.CalibrateDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9,rpc_par10,rpc_par11);
-	msg.CreateCmd(99);
+	msg.CreateCmd(101);
 	msg.Put_INT8(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	if (!rpc_SendVector(msg, rpc_par10_hdr, rpc_par10)) return false;
@@ -1028,7 +1051,7 @@ bool rpc__TrimChip$s1s(rpcMessage &msg)
 	if (!msg.CheckCmdSize(0)) return false;
 	vector<int16_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
 	int16_t rpc_par0 = tb.TrimChip(rpc_par1);
-	msg.CreateCmd(100);
+	msg.CreateCmd(102);
 	msg.Put_INT16(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -1046,7 +1069,7 @@ bool rpc__CalibrateMap$ss2s2i2I(rpcMessage &msg)
 	uint32_t rpc_par4_hdr;
 	vectorR<uint32_t> rpc_par4;
 	int16_t rpc_par0 = tb.CalibrateMap(rpc_par1,rpc_par2,rpc_par3,rpc_par4);
-	msg.CreateCmd(101);
+	msg.CreateCmd(103);
 	msg.Put_INT16(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	if (!rpc_SendVector(msg, rpc_par2_hdr, rpc_par2)) return false;
@@ -1064,7 +1087,7 @@ bool rpc__TriggerRow$sss1ss(rpcMessage &msg)
 	int16_t rpc_par4 = msg.Get_INT16();
 	vector<int16_t> rpc_par3; if (!rpc_RecvVector(msg, rpc_par3)) return false;
 	int16_t rpc_par0 = tb.TriggerRow(rpc_par1,rpc_par2,rpc_par3,rpc_par4);
-	msg.CreateCmd(102);
+	msg.CreateCmd(104);
 	msg.Put_INT16(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -1079,7 +1102,7 @@ bool rpc__TestColPixel$bCC2C(rpcMessage &msg)
 	uint32_t rpc_par3_hdr;
 	vectorR<uint8_t> rpc_par3;
 	bool rpc_par0 = tb.TestColPixel(rpc_par1,rpc_par2,rpc_par3);
-	msg.CreateCmd(103);
+	msg.CreateCmd(105);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	if (!rpc_SendVector(msg, rpc_par3_hdr, rpc_par3)) return false;
@@ -1099,10 +1122,17 @@ bool rpc__Ethernet_RecvPackets$I(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(0)) return false;
 	uint32_t rpc_par0 = tb.Ethernet_RecvPackets();
-	msg.CreateCmd(105);
+	msg.CreateCmd(107);
 	msg.Put_UINT32(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
+	return true;
+}
+
+bool rpc__LoopInterruptReset$v(rpcMessage &msg)
+{
+	if (!msg.CheckCmdSize(0)) return false;
+	tb.LoopInterruptReset();
 	return true;
 }
 
@@ -1119,7 +1149,7 @@ bool rpc__SetI2CAddresses$b1C(rpcMessage &msg)
 	if (!msg.CheckCmdSize(0)) return false;
 	vector<uint8_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
 	bool rpc_par0 = tb.SetI2CAddresses(rpc_par1);
-	msg.CreateCmd(107);
+	msg.CreateCmd(110);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -1132,24 +1162,28 @@ bool rpc__SetTrimValues$bC1c(rpcMessage &msg)
 	uint8_t rpc_par1 = msg.Get_UINT8();
 	vector<int8_t> rpc_par2; if (!rpc_RecvVector(msg, rpc_par2)) return false;
 	bool rpc_par0 = tb.SetTrimValues(rpc_par1,rpc_par2);
-	msg.CreateCmd(108);
+	msg.CreateCmd(111);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopMultiRocAllPixelsCalibrate$v1CSS(rpcMessage &msg)
+bool rpc__LoopMultiRocAllPixelsCalibrate$b1CSS(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(4)) return false;
 	uint16_t rpc_par2 = msg.Get_UINT16();
 	uint16_t rpc_par3 = msg.Get_UINT16();
 	vector<uint8_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
-	tb.LoopMultiRocAllPixelsCalibrate(rpc_par1,rpc_par2,rpc_par3);
+	bool rpc_par0 = tb.LoopMultiRocAllPixelsCalibrate(rpc_par1,rpc_par2,rpc_par3);
+	msg.CreateCmd(112);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopMultiRocOnePixelCalibrate$v1CCCSS(rpcMessage &msg)
+bool rpc__LoopMultiRocOnePixelCalibrate$b1CCCSS(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(6)) return false;
 	uint8_t rpc_par2 = msg.Get_UINT8();
@@ -1157,21 +1191,29 @@ bool rpc__LoopMultiRocOnePixelCalibrate$v1CCCSS(rpcMessage &msg)
 	uint16_t rpc_par4 = msg.Get_UINT16();
 	uint16_t rpc_par5 = msg.Get_UINT16();
 	vector<uint8_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
-	tb.LoopMultiRocOnePixelCalibrate(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5);
+	bool rpc_par0 = tb.LoopMultiRocOnePixelCalibrate(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5);
+	msg.CreateCmd(113);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopSingleRocAllPixelsCalibrate$vCSS(rpcMessage &msg)
+bool rpc__LoopSingleRocAllPixelsCalibrate$bCSS(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(5)) return false;
 	uint8_t rpc_par1 = msg.Get_UINT8();
 	uint16_t rpc_par2 = msg.Get_UINT16();
 	uint16_t rpc_par3 = msg.Get_UINT16();
-	tb.LoopSingleRocAllPixelsCalibrate(rpc_par1,rpc_par2,rpc_par3);
+	bool rpc_par0 = tb.LoopSingleRocAllPixelsCalibrate(rpc_par1,rpc_par2,rpc_par3);
+	msg.CreateCmd(114);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopSingleRocOnePixelCalibrate$vCCCSS(rpcMessage &msg)
+bool rpc__LoopSingleRocOnePixelCalibrate$bCCCSS(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(7)) return false;
 	uint8_t rpc_par1 = msg.Get_UINT8();
@@ -1179,11 +1221,15 @@ bool rpc__LoopSingleRocOnePixelCalibrate$vCCCSS(rpcMessage &msg)
 	uint8_t rpc_par3 = msg.Get_UINT8();
 	uint16_t rpc_par4 = msg.Get_UINT16();
 	uint16_t rpc_par5 = msg.Get_UINT16();
-	tb.LoopSingleRocOnePixelCalibrate(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5);
+	bool rpc_par0 = tb.LoopSingleRocOnePixelCalibrate(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5);
+	msg.CreateCmd(115);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopMultiRocAllPixelsDacScan$v1CSSCCC(rpcMessage &msg)
+bool rpc__LoopMultiRocAllPixelsDacScan$b1CSSCCC(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(7)) return false;
 	uint16_t rpc_par2 = msg.Get_UINT16();
@@ -1192,11 +1238,15 @@ bool rpc__LoopMultiRocAllPixelsDacScan$v1CSSCCC(rpcMessage &msg)
 	uint8_t rpc_par5 = msg.Get_UINT8();
 	uint8_t rpc_par6 = msg.Get_UINT8();
 	vector<uint8_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
-	tb.LoopMultiRocAllPixelsDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6);
+	bool rpc_par0 = tb.LoopMultiRocAllPixelsDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6);
+	msg.CreateCmd(116);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopMultiRocOnePixelDacScan$v1CCCSSCCC(rpcMessage &msg)
+bool rpc__LoopMultiRocOnePixelDacScan$b1CCCSSCCC(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(9)) return false;
 	uint8_t rpc_par2 = msg.Get_UINT8();
@@ -1207,11 +1257,15 @@ bool rpc__LoopMultiRocOnePixelDacScan$v1CCCSSCCC(rpcMessage &msg)
 	uint8_t rpc_par7 = msg.Get_UINT8();
 	uint8_t rpc_par8 = msg.Get_UINT8();
 	vector<uint8_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
-	tb.LoopMultiRocOnePixelDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8);
+	bool rpc_par0 = tb.LoopMultiRocOnePixelDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8);
+	msg.CreateCmd(117);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopSingleRocAllPixelsDacScan$vCSSCCC(rpcMessage &msg)
+bool rpc__LoopSingleRocAllPixelsDacScan$bCSSCCC(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(8)) return false;
 	uint8_t rpc_par1 = msg.Get_UINT8();
@@ -1220,11 +1274,15 @@ bool rpc__LoopSingleRocAllPixelsDacScan$vCSSCCC(rpcMessage &msg)
 	uint8_t rpc_par4 = msg.Get_UINT8();
 	uint8_t rpc_par5 = msg.Get_UINT8();
 	uint8_t rpc_par6 = msg.Get_UINT8();
-	tb.LoopSingleRocAllPixelsDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6);
+	bool rpc_par0 = tb.LoopSingleRocAllPixelsDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6);
+	msg.CreateCmd(118);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopSingleRocOnePixelDacScan$vCCCSSCCC(rpcMessage &msg)
+bool rpc__LoopSingleRocOnePixelDacScan$bCCCSSCCC(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(10)) return false;
 	uint8_t rpc_par1 = msg.Get_UINT8();
@@ -1235,11 +1293,15 @@ bool rpc__LoopSingleRocOnePixelDacScan$vCCCSSCCC(rpcMessage &msg)
 	uint8_t rpc_par6 = msg.Get_UINT8();
 	uint8_t rpc_par7 = msg.Get_UINT8();
 	uint8_t rpc_par8 = msg.Get_UINT8();
-	tb.LoopSingleRocOnePixelDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8);
+	bool rpc_par0 = tb.LoopSingleRocOnePixelDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8);
+	msg.CreateCmd(119);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopMultiRocAllPixelsDacDacScan$v1CSSCCCCCC(rpcMessage &msg)
+bool rpc__LoopMultiRocAllPixelsDacDacScan$b1CSSCCCCCC(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(10)) return false;
 	uint16_t rpc_par2 = msg.Get_UINT16();
@@ -1251,11 +1313,15 @@ bool rpc__LoopMultiRocAllPixelsDacDacScan$v1CSSCCCCCC(rpcMessage &msg)
 	uint8_t rpc_par8 = msg.Get_UINT8();
 	uint8_t rpc_par9 = msg.Get_UINT8();
 	vector<uint8_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
-	tb.LoopMultiRocAllPixelsDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9);
+	bool rpc_par0 = tb.LoopMultiRocAllPixelsDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9);
+	msg.CreateCmd(120);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopMultiRocOnePixelDacDacScan$v1CCCSSCCCCCC(rpcMessage &msg)
+bool rpc__LoopMultiRocOnePixelDacDacScan$b1CCCSSCCCCCC(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(12)) return false;
 	uint8_t rpc_par2 = msg.Get_UINT8();
@@ -1269,11 +1335,15 @@ bool rpc__LoopMultiRocOnePixelDacDacScan$v1CCCSSCCCCCC(rpcMessage &msg)
 	uint8_t rpc_par10 = msg.Get_UINT8();
 	uint8_t rpc_par11 = msg.Get_UINT8();
 	vector<uint8_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
-	tb.LoopMultiRocOnePixelDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9,rpc_par10,rpc_par11);
+	bool rpc_par0 = tb.LoopMultiRocOnePixelDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9,rpc_par10,rpc_par11);
+	msg.CreateCmd(121);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopSingleRocAllPixelsDacDacScan$vCSSCCCCCC(rpcMessage &msg)
+bool rpc__LoopSingleRocAllPixelsDacDacScan$bCSSCCCCCC(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(11)) return false;
 	uint8_t rpc_par1 = msg.Get_UINT8();
@@ -1285,11 +1355,15 @@ bool rpc__LoopSingleRocAllPixelsDacDacScan$vCSSCCCCCC(rpcMessage &msg)
 	uint8_t rpc_par7 = msg.Get_UINT8();
 	uint8_t rpc_par8 = msg.Get_UINT8();
 	uint8_t rpc_par9 = msg.Get_UINT8();
-	tb.LoopSingleRocAllPixelsDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9);
+	bool rpc_par0 = tb.LoopSingleRocAllPixelsDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9);
+	msg.CreateCmd(122);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
-bool rpc__LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC(rpcMessage &msg)
+bool rpc__LoopSingleRocOnePixelDacDacScan$bCCCSSCCCCCC(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(13)) return false;
 	uint8_t rpc_par1 = msg.Get_UINT8();
@@ -1303,7 +1377,11 @@ bool rpc__LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC(rpcMessage &msg)
 	uint8_t rpc_par9 = msg.Get_UINT8();
 	uint8_t rpc_par10 = msg.Get_UINT8();
 	uint8_t rpc_par11 = msg.Get_UINT8();
-	tb.LoopSingleRocOnePixelDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9,rpc_par10,rpc_par11);
+	bool rpc_par0 = tb.LoopSingleRocOnePixelDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9,rpc_par10,rpc_par11);
+	msg.CreateCmd(123);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
 	return true;
 }
 
@@ -1314,14 +1392,14 @@ bool rpc__VectorTest$v1S2S(rpcMessage &msg)
 	uint32_t rpc_par2_hdr;
 	vectorR<uint16_t> rpc_par2;
 	tb.VectorTest(rpc_par1,rpc_par2);
-	msg.CreateCmd(121);
+	msg.CreateCmd(124);
 	if (!msg.SendCmd()) return false;
 	if (!rpc_SendVector(msg, rpc_par2_hdr, rpc_par2)) return false;
 	msg.Flush();
 	return true;
 }
 
-const uint16_t rpc_cmdListSize = 122;
+const uint16_t rpc_cmdListSize = 125;
 
 const CRpcCall rpc_cmdlist[] =
 {
@@ -1389,64 +1467,67 @@ const CRpcCall rpc_cmdlist[] =
 	/*    61 */ { rpc__Daq_Start$vC, "Daq_Start$vC" },
 	/*    62 */ { rpc__Daq_Stop$vC, "Daq_Stop$vC" },
 	/*    63 */ { rpc__Daq_GetSize$IC, "Daq_GetSize$IC" },
-	/*    64 */ { rpc__Daq_Read$C5SIC, "Daq_Read$C5SIC" },
-	/*    65 */ { rpc__Daq_Read$C5SI0IC, "Daq_Read$C5SI0IC" },
-	/*    66 */ { rpc__Daq_Select_ADC$vSCCC, "Daq_Select_ADC$vSCCC" },
-	/*    67 */ { rpc__Daq_Select_Deser160$vC, "Daq_Select_Deser160$vC" },
-	/*    68 */ { rpc__Daq_Select_Deser400$v, "Daq_Select_Deser400$v" },
-	/*    69 */ { rpc__Daq_Deser400_Reset$vC, "Daq_Deser400_Reset$vC" },
-	/*    70 */ { rpc__Daq_Select_Datagenerator$vS, "Daq_Select_Datagenerator$vS" },
-	/*    71 */ { rpc__Daq_DeselectAll$v, "Daq_DeselectAll$v" },
-	/*    72 */ { rpc__roc_I2cAddr$vC, "roc_I2cAddr$vC" },
-	/*    73 */ { rpc__roc_ClrCal$v, "roc_ClrCal$v" },
-	/*    74 */ { rpc__roc_SetDAC$vCC, "roc_SetDAC$vCC" },
-	/*    75 */ { rpc__roc_Pix$vCCC, "roc_Pix$vCCC" },
-	/*    76 */ { rpc__roc_Pix_Trim$vCCC, "roc_Pix_Trim$vCCC" },
-	/*    77 */ { rpc__roc_Pix_Mask$vCC, "roc_Pix_Mask$vCC" },
-	/*    78 */ { rpc__roc_Pix_Cal$vCCb, "roc_Pix_Cal$vCCb" },
-	/*    79 */ { rpc__roc_Col_Enable$vCb, "roc_Col_Enable$vCb" },
-	/*    80 */ { rpc__roc_Col_Mask$vC, "roc_Col_Mask$vC" },
-	/*    81 */ { rpc__roc_Chip_Mask$v, "roc_Chip_Mask$v" },
-	/*    82 */ { rpc__TBM_Present$b, "TBM_Present$b" },
-	/*    83 */ { rpc__tbm_Enable$vb, "tbm_Enable$vb" },
-	/*    84 */ { rpc__tbm_Addr$vCC, "tbm_Addr$vCC" },
-	/*    85 */ { rpc__mod_Addr$vC, "mod_Addr$vC" },
-	/*    86 */ { rpc__tbm_Set$vCC, "tbm_Set$vCC" },
-	/*    87 */ { rpc__tbm_Get$bC0C, "tbm_Get$bC0C" },
-	/*    88 */ { rpc__tbm_GetRaw$bC0I, "tbm_GetRaw$bC0I" },
-	/*    89 */ { rpc__GetPixelAddressInverted$b, "GetPixelAddressInverted$b" },
-	/*    90 */ { rpc__SetPixelAddressInverted$vb, "SetPixelAddressInverted$vb" },
-	/*    91 */ { rpc__CountReadouts$ii, "CountReadouts$ii" },
-	/*    92 */ { rpc__CountReadouts$iii, "CountReadouts$iii" },
-	/*    93 */ { rpc__CountReadouts$iiii, "CountReadouts$iiii" },
-	/*    94 */ { rpc__PH$iiiis, "PH$iiiis" },
-	/*    95 */ { rpc__PixelThreshold$iiiiiiiibb, "PixelThreshold$iiiiiiiibb" },
-	/*    96 */ { rpc__test_pixel_address$bii, "test_pixel_address$bii" },
-	/*    97 */ { rpc__CalibratePixel$csss0s0i, "CalibratePixel$csss0s0i" },
-	/*    98 */ { rpc__CalibrateDacScan$cssssss2s2i, "CalibrateDacScan$cssssss2s2i" },
-	/*    99 */ { rpc__CalibrateDacDacScan$csssssssss2s2i, "CalibrateDacDacScan$csssssssss2s2i" },
-	/*   100 */ { rpc__TrimChip$s1s, "TrimChip$s1s" },
-	/*   101 */ { rpc__CalibrateMap$ss2s2i2I, "CalibrateMap$ss2s2i2I" },
-	/*   102 */ { rpc__TriggerRow$sss1ss, "TriggerRow$sss1ss" },
-	/*   103 */ { rpc__TestColPixel$bCC2C, "TestColPixel$bCC2C" },
-	/*   104 */ { rpc__Ethernet_Send$v3c, "Ethernet_Send$v3c" },
-	/*   105 */ { rpc__Ethernet_RecvPackets$I, "Ethernet_RecvPackets$I" },
-	/*   106 */ { rpc__SetLoopTriggerDelay$vS, "SetLoopTriggerDelay$vS" },
-	/*   107 */ { rpc__SetI2CAddresses$b1C, "SetI2CAddresses$b1C" },
-	/*   108 */ { rpc__SetTrimValues$bC1c, "SetTrimValues$bC1c" },
-	/*   109 */ { rpc__LoopMultiRocAllPixelsCalibrate$v1CSS, "LoopMultiRocAllPixelsCalibrate$v1CSS" },
-	/*   110 */ { rpc__LoopMultiRocOnePixelCalibrate$v1CCCSS, "LoopMultiRocOnePixelCalibrate$v1CCCSS" },
-	/*   111 */ { rpc__LoopSingleRocAllPixelsCalibrate$vCSS, "LoopSingleRocAllPixelsCalibrate$vCSS" },
-	/*   112 */ { rpc__LoopSingleRocOnePixelCalibrate$vCCCSS, "LoopSingleRocOnePixelCalibrate$vCCCSS" },
-	/*   113 */ { rpc__LoopMultiRocAllPixelsDacScan$v1CSSCCC, "LoopMultiRocAllPixelsDacScan$v1CSSCCC" },
-	/*   114 */ { rpc__LoopMultiRocOnePixelDacScan$v1CCCSSCCC, "LoopMultiRocOnePixelDacScan$v1CCCSSCCC" },
-	/*   115 */ { rpc__LoopSingleRocAllPixelsDacScan$vCSSCCC, "LoopSingleRocAllPixelsDacScan$vCSSCCC" },
-	/*   116 */ { rpc__LoopSingleRocOnePixelDacScan$vCCCSSCCC, "LoopSingleRocOnePixelDacScan$vCCCSSCCC" },
-	/*   117 */ { rpc__LoopMultiRocAllPixelsDacDacScan$v1CSSCCCCCC, "LoopMultiRocAllPixelsDacDacScan$v1CSSCCCCCC" },
-	/*   118 */ { rpc__LoopMultiRocOnePixelDacDacScan$v1CCCSSCCCCCC, "LoopMultiRocOnePixelDacDacScan$v1CCCSSCCCCCC" },
-	/*   119 */ { rpc__LoopSingleRocAllPixelsDacDacScan$vCSSCCCCCC, "LoopSingleRocAllPixelsDacDacScan$vCSSCCCCCC" },
-	/*   120 */ { rpc__LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC, "LoopSingleRocOnePixelDacDacScan$vCCCSSCCCCCC" },
-	/*   121 */ { rpc__VectorTest$v1S2S, "VectorTest$v1S2S" }
+	/*    64 */ { rpc__Daq_FillLevel$CC, "Daq_FillLevel$CC" },
+	/*    65 */ { rpc__Daq_FillLevel$C, "Daq_FillLevel$C" },
+	/*    66 */ { rpc__Daq_Read$C5SIC, "Daq_Read$C5SIC" },
+	/*    67 */ { rpc__Daq_Read$C5SI0IC, "Daq_Read$C5SI0IC" },
+	/*    68 */ { rpc__Daq_Select_ADC$vSCCC, "Daq_Select_ADC$vSCCC" },
+	/*    69 */ { rpc__Daq_Select_Deser160$vC, "Daq_Select_Deser160$vC" },
+	/*    70 */ { rpc__Daq_Select_Deser400$v, "Daq_Select_Deser400$v" },
+	/*    71 */ { rpc__Daq_Deser400_Reset$vC, "Daq_Deser400_Reset$vC" },
+	/*    72 */ { rpc__Daq_Select_Datagenerator$vS, "Daq_Select_Datagenerator$vS" },
+	/*    73 */ { rpc__Daq_DeselectAll$v, "Daq_DeselectAll$v" },
+	/*    74 */ { rpc__roc_I2cAddr$vC, "roc_I2cAddr$vC" },
+	/*    75 */ { rpc__roc_ClrCal$v, "roc_ClrCal$v" },
+	/*    76 */ { rpc__roc_SetDAC$vCC, "roc_SetDAC$vCC" },
+	/*    77 */ { rpc__roc_Pix$vCCC, "roc_Pix$vCCC" },
+	/*    78 */ { rpc__roc_Pix_Trim$vCCC, "roc_Pix_Trim$vCCC" },
+	/*    79 */ { rpc__roc_Pix_Mask$vCC, "roc_Pix_Mask$vCC" },
+	/*    80 */ { rpc__roc_Pix_Cal$vCCb, "roc_Pix_Cal$vCCb" },
+	/*    81 */ { rpc__roc_Col_Enable$vCb, "roc_Col_Enable$vCb" },
+	/*    82 */ { rpc__roc_Col_Mask$vC, "roc_Col_Mask$vC" },
+	/*    83 */ { rpc__roc_Chip_Mask$v, "roc_Chip_Mask$v" },
+	/*    84 */ { rpc__TBM_Present$b, "TBM_Present$b" },
+	/*    85 */ { rpc__tbm_Enable$vb, "tbm_Enable$vb" },
+	/*    86 */ { rpc__tbm_Addr$vCC, "tbm_Addr$vCC" },
+	/*    87 */ { rpc__mod_Addr$vC, "mod_Addr$vC" },
+	/*    88 */ { rpc__tbm_Set$vCC, "tbm_Set$vCC" },
+	/*    89 */ { rpc__tbm_Get$bC0C, "tbm_Get$bC0C" },
+	/*    90 */ { rpc__tbm_GetRaw$bC0I, "tbm_GetRaw$bC0I" },
+	/*    91 */ { rpc__GetPixelAddressInverted$b, "GetPixelAddressInverted$b" },
+	/*    92 */ { rpc__SetPixelAddressInverted$vb, "SetPixelAddressInverted$vb" },
+	/*    93 */ { rpc__CountReadouts$ii, "CountReadouts$ii" },
+	/*    94 */ { rpc__CountReadouts$iii, "CountReadouts$iii" },
+	/*    95 */ { rpc__CountReadouts$iiii, "CountReadouts$iiii" },
+	/*    96 */ { rpc__PH$iiiis, "PH$iiiis" },
+	/*    97 */ { rpc__PixelThreshold$iiiiiiiibb, "PixelThreshold$iiiiiiiibb" },
+	/*    98 */ { rpc__test_pixel_address$bii, "test_pixel_address$bii" },
+	/*    99 */ { rpc__CalibratePixel$csss0s0i, "CalibratePixel$csss0s0i" },
+	/*   100 */ { rpc__CalibrateDacScan$cssssss2s2i, "CalibrateDacScan$cssssss2s2i" },
+	/*   101 */ { rpc__CalibrateDacDacScan$csssssssss2s2i, "CalibrateDacDacScan$csssssssss2s2i" },
+	/*   102 */ { rpc__TrimChip$s1s, "TrimChip$s1s" },
+	/*   103 */ { rpc__CalibrateMap$ss2s2i2I, "CalibrateMap$ss2s2i2I" },
+	/*   104 */ { rpc__TriggerRow$sss1ss, "TriggerRow$sss1ss" },
+	/*   105 */ { rpc__TestColPixel$bCC2C, "TestColPixel$bCC2C" },
+	/*   106 */ { rpc__Ethernet_Send$v3c, "Ethernet_Send$v3c" },
+	/*   107 */ { rpc__Ethernet_RecvPackets$I, "Ethernet_RecvPackets$I" },
+	/*   108 */ { rpc__LoopInterruptReset$v, "LoopInterruptReset$v" },
+	/*   109 */ { rpc__SetLoopTriggerDelay$vS, "SetLoopTriggerDelay$vS" },
+	/*   110 */ { rpc__SetI2CAddresses$b1C, "SetI2CAddresses$b1C" },
+	/*   111 */ { rpc__SetTrimValues$bC1c, "SetTrimValues$bC1c" },
+	/*   112 */ { rpc__LoopMultiRocAllPixelsCalibrate$b1CSS, "LoopMultiRocAllPixelsCalibrate$b1CSS" },
+	/*   113 */ { rpc__LoopMultiRocOnePixelCalibrate$b1CCCSS, "LoopMultiRocOnePixelCalibrate$b1CCCSS" },
+	/*   114 */ { rpc__LoopSingleRocAllPixelsCalibrate$bCSS, "LoopSingleRocAllPixelsCalibrate$bCSS" },
+	/*   115 */ { rpc__LoopSingleRocOnePixelCalibrate$bCCCSS, "LoopSingleRocOnePixelCalibrate$bCCCSS" },
+	/*   116 */ { rpc__LoopMultiRocAllPixelsDacScan$b1CSSCCC, "LoopMultiRocAllPixelsDacScan$b1CSSCCC" },
+	/*   117 */ { rpc__LoopMultiRocOnePixelDacScan$b1CCCSSCCC, "LoopMultiRocOnePixelDacScan$b1CCCSSCCC" },
+	/*   118 */ { rpc__LoopSingleRocAllPixelsDacScan$bCSSCCC, "LoopSingleRocAllPixelsDacScan$bCSSCCC" },
+	/*   119 */ { rpc__LoopSingleRocOnePixelDacScan$bCCCSSCCC, "LoopSingleRocOnePixelDacScan$bCCCSSCCC" },
+	/*   120 */ { rpc__LoopMultiRocAllPixelsDacDacScan$b1CSSCCCCCC, "LoopMultiRocAllPixelsDacDacScan$b1CSSCCCCCC" },
+	/*   121 */ { rpc__LoopMultiRocOnePixelDacDacScan$b1CCCSSCCCCCC, "LoopMultiRocOnePixelDacDacScan$b1CCCSSCCCCCC" },
+	/*   122 */ { rpc__LoopSingleRocAllPixelsDacDacScan$bCSSCCCCCC, "LoopSingleRocAllPixelsDacDacScan$bCSSCCCCCC" },
+	/*   123 */ { rpc__LoopSingleRocOnePixelDacDacScan$bCCCSSCCCCCC, "LoopSingleRocOnePixelDacDacScan$bCCCSSCCCCCC" },
+	/*   124 */ { rpc__VectorTest$v1S2S, "VectorTest$v1S2S" }
 };
 
 void rpc_Dispatcher(CRpcIo &rpc_io)
@@ -1459,7 +1540,7 @@ void rpc_Dispatcher(CRpcIo &rpc_io)
 		{
 			uint16_t cmd = msg.GetCmd();
 			if (rpc_error.HasError()) continue;
-			if (cmd >= 122) continue;
+			if (cmd >= 125) continue;
 			if (!rpc_cmdlist[cmd].call(msg)) msg.GetIo().Reset();
 		}
 	}
