@@ -303,6 +303,7 @@ void CTestboard::Init()
 
 	// -- default Test Loop parameter settings
 	LoopTriggerDelay = 4; // 4 usec between triggers
+	LoopInterruptReset(); // Reset loop interrupt to none.
 }
 
 
