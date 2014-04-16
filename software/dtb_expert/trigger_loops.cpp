@@ -394,7 +394,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
       } // Loop over the DAC range
 
       // Reset the dac1start:
-      dac1start = 0;
+      dac1start = dac1low;
 
       // Clear the calibrate signal on every ROC configured
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
@@ -534,7 +534,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
       } // Loop over the DAC range
 
       // Reset the dac1start:
-      dac1start = 0;
+      dac1start = dac1low;
 
       // Clear the calibrate signal
       if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(col, row);
