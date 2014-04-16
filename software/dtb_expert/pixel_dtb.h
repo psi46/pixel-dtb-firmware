@@ -320,6 +320,8 @@ public:
 	RPC_EXPORT void Daq_Start(uint8_t channel = 0);
 	RPC_EXPORT void Daq_Stop(uint8_t channel = 0);
 	RPC_EXPORT uint32_t Daq_GetSize(uint8_t channel = 0);
+	RPC_EXPORT uint8_t Daq_FillLevel(uint8_t channel);
+	RPC_EXPORT uint8_t Daq_FillLevel();
 
 	uint8_t Daq_Read(vectorR<uint16_t> &data,
 			 uint32_t blocksize = 65536, uint8_t channel = 0);

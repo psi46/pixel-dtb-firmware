@@ -1151,6 +1151,29 @@ bool CTestboard::tbm_Get(uint8_t reg, uint8_t &value)
 // *3SDATA
 #define DAQ_CHANNELS 8
 
+uint8_t CTestboard::Daq_FillLevel(uint8_t channel) {
+
+  if (channel >= DAQ_CHANNELS) return 0;
+
+  if (daq_mem_base[channel] == 0) return 0;
+
+  return (uint8_t)((double)Daq_GetSize(channel)/daq_mem_size[channel]*100);
+}
+
+uint8_t CTestboard::Daq_FillLevel() {
+
+  uint8_t maxlevel = 0;
+
+  for (uint8_t channel = 0; channel < DAQ_CHANNELS; channel++) {
+    if (daq_mem_base[channel] == 0) continue;
+
+    uint8_t level = (uint8_t)((double)Daq_GetSize(channel)/daq_mem_size[channel]*100);
+    if(level > maxlevel) maxlevel = level;
+  }
+
+  return maxlevel;
+}
+
 uint32_t CTestboard::Daq_Open(uint32_t buffersize, uint8_t channel)
 {
 	if (channel >= DAQ_CHANNELS) return 0;
