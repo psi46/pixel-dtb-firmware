@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>31.03.2014 22:53:51</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1396299231376</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>15.04.2014 10:56:41</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1397552201694</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>X:\source\FPGA\pixel-dtb-firmware\software\dtb_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\dtb\dtb_system.sopcinfo</SopcDesignFile>
