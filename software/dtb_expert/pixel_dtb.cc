@@ -1214,6 +1214,9 @@ void CTestboard::Daq_Close(uint8_t channel)
 		delete[] daq_mem_base[channel];
 		daq_mem_base[channel] = 0;
 	}
+
+	// Reset possible leftover Loop interrupt:
+	LoopInterruptReset();
 }
 
 void CTestboard::Daq_Start(uint8_t channel)

@@ -463,8 +463,8 @@ public:
 	size_t CalibratedDAC(size_t value);
 
 	RPC_EXPORT void LoopInterruptReset();
-	void LoopInterruptResume(uint8_t &column, uint8_t &row, size_t &dac1, size_t &dac2);
-	void LoopInterruptStore(uint8_t column, uint8_t row, size_t dac1, size_t dac2);
+	void LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, size_t &dac2);
+	void LoopInterruptStore(uint16_t id, uint8_t column, uint8_t row, size_t dac1, size_t dac2);
 
 	RPC_EXPORT void SetLoopTriggerDelay(uint16_t delay);
 	RPC_EXPORT bool SetI2CAddresses(vector<uint8_t> &roc_i2c);
