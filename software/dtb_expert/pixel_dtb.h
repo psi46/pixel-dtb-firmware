@@ -74,6 +74,8 @@ class CTestboard
 	uint16_t vd, va;
 	uint16_t id, ia;
 
+	uint8_t ledstatus;
+
 	// --- DAQ variables
 	uint16_t *daq_mem_base[8]; // DAQ buffer base address (0 = no space reserved)
 	uint32_t daq_mem_size[8];  // DAQ buffer size in 16 bit words
@@ -89,9 +91,6 @@ class CTestboard
 	uint8_t sig_level_sda;
 	uint8_t sig_level_tin;
 	uint8_t sig_offset;
-
-	// --- Test Loop parameters
-	uint16_t LoopTriggerDelay;
 
 	bool roc_pixeladdress_inverted;
 
@@ -167,6 +166,7 @@ public:
 
 	RPC_EXPORT void Welcome();
 	RPC_EXPORT void SetLed(uint8_t x);
+	void ToggleLed(uint8_t x, bool on = true);
 
 
 	// === Clock, Timing ====================================================
@@ -458,6 +458,23 @@ public:
 
 
 	// ------- Trigger Loop functions for Host-side DAQ ROC/Module testing ------
+
+	char ROC_TRIM_BITS[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMROWS];
+	char ROC_I2C_ADDRESSES[MOD_NUMROCS];
+
+	// Test Loop parameters
+	uint16_t LoopTriggerDelay;
+
+	// Loop parameter storage for interrupts:
+	bool LoopInterrupt;
+	uint16_t LoopInterruptId;
+	uint16_t LoopInterruptCounter;
+
+	uint8_t LoopInterruptColumn;
+	uint8_t LoopInterruptRow;
+	size_t LoopInterruptDac1;
+	size_t LoopInterruptDac2;
+
 	// Not exported internal helper functions:
 	uint8_t GetXtalkRow(uint8_t row, bool xtalk);
 	size_t CalibratedDAC(size_t value);

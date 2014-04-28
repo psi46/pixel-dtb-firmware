@@ -8,21 +8,8 @@
 // -------- Helper Functions -------------------------------
 
 // Use a maximum of 80% of allocated DAQ buffer before reading out:
-#define LOOP_MAX_FILLLEVEL  80
+#define LOOP_MAX_FILLLEVEL  85
 #define LOOP_MAX_INTERRUPTS 20
-
-char ROC_TRIM_BITS[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMROWS];
-char ROC_I2C_ADDRESSES[MOD_NUMROCS];
-
-// Loop parameter storage for interrupts:
-bool LoopInterrupt;
-uint16_t LoopInterruptId;
-uint16_t LoopInterruptCounter;
-
-uint8_t LoopInterruptColumn;
-uint8_t LoopInterruptRow;
-size_t LoopInterruptDac1;
-size_t LoopInterruptDac2;
 
 // Reset the Loop Interrupt, so next Loop call starts from scratch:
 void CTestboard::LoopInterruptReset() {
@@ -32,10 +19,16 @@ void CTestboard::LoopInterruptReset() {
   LoopInterruptDac1 = LoopInterruptDac2 = 0;
   LoopInterruptId = 0;
   LoopInterruptCounter = 0;
+
+  // LoopInterrupt is reset: turn off interrupt LED:
+  ToggleLed(4,false);
 }
 
 // Load the Loop Interrupt values to resume at interrupt position:
 void CTestboard::LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, size_t &dac2) {
+
+  // Loop is resumed: turn interrupt LED off (0):
+  ToggleLed(4,true);
 
   // No Loop has been interrupted, just start from beginning:
   if(!LoopInterrupt) return;
@@ -66,6 +59,9 @@ void CTestboard::LoopInterruptStore(uint16_t id, uint8_t column, uint8_t row, si
 
   // Increment the number of interrupts:
   LoopInterruptCounter++;
+
+  // Loop is interrupted: turn interrupt LED on:
+  ToggleLed(4,false);
 }
 
 // Return the Row to be pulsed with a calibrate signal
@@ -89,8 +85,9 @@ size_t CTestboard::CalibratedDAC(size_t value) {
 }
 
 // Set the delay for the Test Loop Trigger.
-// Loop trigger delay in usec (uses uDelay() for sleeping)
+// Loop trigger delay in clk cycles (40MHz) (uses cDelay() for sleeping)
 void CTestboard::SetLoopTriggerDelay(uint16_t delay) {
+  // FIXME maybe add some safety margin of 36clk (one roc+pixel readout)?
   LoopTriggerDelay = delay;
 }
 
@@ -196,11 +193,10 @@ bool CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
       }
 
       // Send the triggers:
-      uDelay(5);
       for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	Pg_Single();
 	// Delay the next trigger, depending in the data traffic we expect:
-	uDelay(LoopTriggerDelay*roc_i2c.size());
+	cDelay(LoopTriggerDelay);
       }
 
       // Clear the calibrate signal on every ROC configured
@@ -244,11 +240,10 @@ bool CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t
   }
 
   // Send the triggers:
-  uDelay(5);
   for (uint16_t trig = 0; trig < nTriggers; trig++) {
     Pg_Single();
     // Delay the next trigger, depending in the data traffic we expect:
-    uDelay(LoopTriggerDelay*roc_i2c.size());
+    cDelay(LoopTriggerDelay);
   }
 
   // Clear the calibrate signal on every ROC configured
@@ -307,10 +302,9 @@ bool CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
       roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
       // Send the triggers:
-      uDelay(5);
       for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	Pg_Single();
-	uDelay(LoopTriggerDelay);
+	cDelay(LoopTriggerDelay);
       }
 
       // Clear the calibrate signal
@@ -348,10 +342,9 @@ bool CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Send the triggers:
-  uDelay(5);
   for (uint16_t trig = 0; trig < nTriggers; trig++) {
     Pg_Single();
-    uDelay(LoopTriggerDelay);
+    cDelay(LoopTriggerDelay);
   }
 
   // Clear the calibrate signal on thr ROC configured
@@ -430,11 +423,10 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
 	}
 
 	// Send the triggers:
-	uDelay(5);
 	for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	  Pg_Single();
 	  // Delay the next trigger, depending in the data traffic we expect:
-	  uDelay(LoopTriggerDelay*roc_i2c.size());
+	  cDelay(LoopTriggerDelay);
 	}
       } // Loop over the DAC range
 
@@ -511,11 +503,10 @@ bool CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
     }
 
     // Send the triggers:
-    uDelay(5);
     for (uint16_t trig = 0; trig < nTriggers; trig++) {
       Pg_Single();
       // Delay the next trigger, depending in the data traffic we expect:
-      uDelay(LoopTriggerDelay*roc_i2c.size());
+      cDelay(LoopTriggerDelay);
     }
   } // Loop over the DAC range
 
@@ -584,10 +575,9 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
 	else roc_SetDAC(dac1register, CalibratedDAC(dac1));
 
 	// Send the triggers:
-	uDelay(5);
 	for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	  Pg_Single();
-	  uDelay(LoopTriggerDelay);
+	  cDelay(LoopTriggerDelay);
 	}
       } // Loop over the DAC range
 
@@ -653,10 +643,9 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
     else roc_SetDAC(dac1register, CalibratedDAC(dac1));
 
     // Send the triggers:
-    uDelay(5);
     for (uint16_t trig = 0; trig < nTriggers; trig++) {
       Pg_Single();
-      uDelay(LoopTriggerDelay);
+      cDelay(LoopTriggerDelay);
     }
   } // Loop over the DAC range
 
@@ -748,11 +737,10 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
 	  if(dac2 == dac2low) { uDelay(40); }
 
 	  // Send the triggers:
-	  uDelay(5);
 	  for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	    Pg_Single();
 	    // Delay the next trigger, depending in the data traffic we expect:
-	    uDelay(LoopTriggerDelay*roc_i2c.size());
+	    cDelay(LoopTriggerDelay);
 	  }
 	} // Loop over the DAC2 range
 
@@ -846,11 +834,10 @@ bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
       if(dac2 == dac2low) { uDelay(40); }
 
       // Send the triggers:
-      uDelay(5);
       for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	Pg_Single();
 	// Delay the next trigger, depending in the data traffic we expect:
-        uDelay(LoopTriggerDelay*roc_i2c.size());
+        cDelay(LoopTriggerDelay);
       }
     } // Loop over the DAC2 range
 
@@ -934,10 +921,9 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
 	  if(dac2 == dac2low) { uDelay(40); }
 
 	  // Send the triggers:
-	  uDelay(5);
 	  for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	    Pg_Single();
-	    uDelay(LoopTriggerDelay);
+	    cDelay(LoopTriggerDelay);
 	  }
 	} // Loop over the DAC2 range
 
@@ -1019,10 +1005,9 @@ bool CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
       if(dac2 == dac2low) { uDelay(40); }
 
       // Send the triggers:
-      uDelay(5);
       for (uint16_t trig = 0; trig < nTriggers; trig++) {
 	Pg_Single();
-	uDelay(LoopTriggerDelay);
+	cDelay(LoopTriggerDelay);
       }
     } // Loop over the DAC2 range
 

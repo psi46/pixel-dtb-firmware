@@ -137,6 +137,12 @@ void CTestboard::SetLed(uint8_t x)
 	_SetLED(x);
 }
 
+// Turn on/off specific LED, negative is off, positive is on
+void CTestboard::ToggleLed(uint8_t x, bool on) {
+  if(on) { ledstatus |= x; }
+  else { ledstatus &= ~x; }
+  _SetLED(ledstatus);
+}
 
 const uint16_t CTestboard::flashUpgradeVersion = 0x0100;
 
@@ -302,7 +308,7 @@ void CTestboard::Init()
 	roc_pixeladdress_inverted = false;
 
 	// -- default Test Loop parameter settings
-	LoopTriggerDelay = 4; // 4 usec between triggers
+	SetLoopTriggerDelay(150); // 150 clk between triggers (to match WBC)
 	LoopInterruptReset(); // Reset loop interrupt to none.
 }
 
@@ -1233,6 +1239,9 @@ void CTestboard::Daq_Start(uint8_t channel)
 //		IOWR_ALTERA_AVALON_PIO_DATA(ADC_BASE, daq_adc_state);
 //		IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, daq_deser160_state);
 	}
+
+	// Show DAQ status on LEDs, turn on DAQ LED:
+	ToggleLed(1,true);
 }
 
 
@@ -1250,6 +1259,9 @@ void CTestboard::Daq_Stop(uint8_t channel)
 		unsigned int daq_base = DAQ_DMA_BASE[channel];
 		DAQ_WRITE(daq_base, DAQ_CONTROL, 0);
 	}
+
+	// Show DAQ status on LEDs, turn on DAQ LED:
+	ToggleLed(1,false);
 }
 
 
