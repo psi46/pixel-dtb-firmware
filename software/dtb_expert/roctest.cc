@@ -84,10 +84,12 @@ int FindLevel()
 }
 
 
+bool sensorCal = false;
+
 int test_PUC(unsigned char col, unsigned char row, unsigned char trim)
 {
 	tb.roc_Pix_Trim(col, row, trim);
-	tb.roc_Pix_Cal (col, row, 0);
+	tb.roc_Pix_Cal (col, row, sensorCal);
 	int res = FindLevel();
 	tb.roc_ClrCal();
 	tb.roc_Pix_Mask(col,row);
@@ -95,9 +97,10 @@ int test_PUC(unsigned char col, unsigned char row, unsigned char trim)
 }
 
 
-bool CTestboard::TestColPixel(uint8_t col, uint8_t trimbit, vectorR<uint8_t> &res)
+bool CTestboard::TestColPixel(uint8_t col, uint8_t trimbit, bool sensor_cal, vectorR<uint8_t> &res)
 {
 	unsigned char row;
+	sensorCal = sensor_cal;
 	tb.roc_Col_Enable(col, 1);
 	res.clear();
 	res.reserve(ROC_NUMROWS);

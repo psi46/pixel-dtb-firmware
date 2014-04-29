@@ -1094,18 +1094,19 @@ bool rpc__TriggerRow$sss1ss(rpcMessage &msg)
 	return true;
 }
 
-bool rpc__TestColPixel$bCC2C(rpcMessage &msg)
+bool rpc__TestColPixel$bCCb2C(rpcMessage &msg)
 {
-	if (!msg.CheckCmdSize(2)) return false;
+	if (!msg.CheckCmdSize(3)) return false;
 	uint8_t rpc_par1 = msg.Get_UINT8();
 	uint8_t rpc_par2 = msg.Get_UINT8();
-	uint32_t rpc_par3_hdr;
-	vectorR<uint8_t> rpc_par3;
-	bool rpc_par0 = tb.TestColPixel(rpc_par1,rpc_par2,rpc_par3);
+	bool rpc_par3 = msg.Get_BOOL();
+	uint32_t rpc_par4_hdr;
+	vectorR<uint8_t> rpc_par4;
+	bool rpc_par0 = tb.TestColPixel(rpc_par1,rpc_par2,rpc_par3,rpc_par4);
 	msg.CreateCmd(105);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
-	if (!rpc_SendVector(msg, rpc_par3_hdr, rpc_par3)) return false;
+	if (!rpc_SendVector(msg, rpc_par4_hdr, rpc_par4)) return false;
 	msg.Flush();
 	return true;
 }
@@ -1508,7 +1509,7 @@ const CRpcCall rpc_cmdlist[] =
 	/*   102 */ { rpc__TrimChip$s1s, "TrimChip$s1s" },
 	/*   103 */ { rpc__CalibrateMap$ss2s2i2I, "CalibrateMap$ss2s2i2I" },
 	/*   104 */ { rpc__TriggerRow$sss1ss, "TriggerRow$sss1ss" },
-	/*   105 */ { rpc__TestColPixel$bCC2C, "TestColPixel$bCC2C" },
+	/*   105 */ { rpc__TestColPixel$bCCb2C, "TestColPixel$bCCb2C" },
 	/*   106 */ { rpc__Ethernet_Send$v3c, "Ethernet_Send$v3c" },
 	/*   107 */ { rpc__Ethernet_RecvPackets$I, "Ethernet_RecvPackets$I" },
 	/*   108 */ { rpc__LoopInterruptReset$v, "LoopInterruptReset$v" },
