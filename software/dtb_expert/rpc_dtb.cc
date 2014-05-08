@@ -1157,11 +1157,11 @@ bool rpc__SetI2CAddresses$b1C(rpcMessage &msg)
 	return true;
 }
 
-bool rpc__SetTrimValues$bC1c(rpcMessage &msg)
+bool rpc__SetTrimValues$bC1C(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(1)) return false;
 	uint8_t rpc_par1 = msg.Get_UINT8();
-	vector<int8_t> rpc_par2; if (!rpc_RecvVector(msg, rpc_par2)) return false;
+	vector<uint8_t> rpc_par2; if (!rpc_RecvVector(msg, rpc_par2)) return false;
 	bool rpc_par0 = tb.SetTrimValues(rpc_par1,rpc_par2);
 	msg.CreateCmd(111);
 	msg.Put_BOOL(rpc_par0);
@@ -1515,7 +1515,7 @@ const CRpcCall rpc_cmdlist[] =
 	/*   108 */ { rpc__LoopInterruptReset$v, "LoopInterruptReset$v" },
 	/*   109 */ { rpc__SetLoopTriggerDelay$vS, "SetLoopTriggerDelay$vS" },
 	/*   110 */ { rpc__SetI2CAddresses$b1C, "SetI2CAddresses$b1C" },
-	/*   111 */ { rpc__SetTrimValues$bC1c, "SetTrimValues$bC1c" },
+	/*   111 */ { rpc__SetTrimValues$bC1C, "SetTrimValues$bC1C" },
 	/*   112 */ { rpc__LoopMultiRocAllPixelsCalibrate$b1CSS, "LoopMultiRocAllPixelsCalibrate$b1CSS" },
 	/*   113 */ { rpc__LoopMultiRocOnePixelCalibrate$b1CCCSS, "LoopMultiRocOnePixelCalibrate$b1CCCSS" },
 	/*   114 */ { rpc__LoopSingleRocAllPixelsCalibrate$bCSS, "LoopSingleRocAllPixelsCalibrate$bCSS" },

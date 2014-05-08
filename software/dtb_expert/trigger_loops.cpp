@@ -107,8 +107,8 @@ bool CTestboard::SetI2CAddresses(vector<uint8_t> &roc_i2c) {
 }
 
 // Upload all trimvalues of one ROC to the NIOS core to store them for looping
-// over multiple pixels:
-bool CTestboard::SetTrimValues(uint8_t roc_i2c, vector<int8_t> &trimvalues) {
+// over multiple pixels. Trim values > 15 are interpreted as "masked"
+bool CTestboard::SetTrimValues(uint8_t roc_i2c, vector<uint8_t> &trimvalues) {
 
   // Get the array index of the requested ROC via its I2C address:
   size_t index = 0;
@@ -133,10 +133,10 @@ void CTestboard::LoopPixTrim(uint8_t roc_i2c, uint8_t column, uint8_t row) {
   }
 
   // Lookup the trim bits value of this particular pixel:
-  int8_t value = ROC_TRIM_BITS[index*ROC_NUMROWS*ROC_NUMCOLS + column*ROC_NUMROWS + row];
+  uint8_t value = ROC_TRIM_BITS[index*ROC_NUMROWS*ROC_NUMCOLS + column*ROC_NUMROWS + row];
 
   // If the trim value is positive, enable the pixel and trim it accordingly:
-  if(value > 0) roc_Pix_Trim(column, row, value);
+  if(value < 16) roc_Pix_Trim(column, row, value);
   // If not, do nothing - it's masked and should stay.
 }
 
