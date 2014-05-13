@@ -29,6 +29,16 @@ void CTestboard::LoopInterruptReset() {
   ToggleLed(4,false);
 }
 
+// Function to check (as fast as possible) if max fill level is reached:
+bool CTestboard::LoopInterruptStatus() {
+
+  for(uint8_t channel = 0; channel < DAQ_CHANNELS; channel++) {
+    if(daq_mem_base[channel] == 0) continue;
+    if(Daq_GetSize(channel)*100 > LOOP_MAX_FILLLEVEL*daq_mem_size[channel]) return false;
+  }
+  return true;
+}
+
 // Load the Loop Interrupt values to resume at interrupt position:
 void CTestboard::LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, size_t &dac2) {
 
@@ -183,7 +193,7 @@ bool CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
 	return true;
       }
       // Interrupt the loop in case of high buffer fill level:
-      else if(Daq_FillLevel() > LOOP_MAX_FILLLEVEL) {
+      else if(!LoopInterruptStatus()) {
 	LoopInterruptStore(LoopId,col,row,0,0);
 	return false;
       }
@@ -294,7 +304,7 @@ bool CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
 	return true;
       }
       // Interrupt the loop in case of high buffer fill level:
-      else if(Daq_FillLevel() > LOOP_MAX_FILLLEVEL) {
+      else if(!LoopInterruptStatus()) {
 	LoopInterruptStore(LoopId,col,row,0,0);
 	return false;
       }
@@ -414,7 +424,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
 	  return true;
 	}
 	// Interrupt the loop in case of high buffer fill level:
-	else if(Daq_FillLevel() > LOOP_MAX_FILLLEVEL) {
+	else if(!LoopInterruptStatus()) {
 	  LoopInterruptStore(LoopId,col,row,dac1,0);
 	  return false;
 	}
@@ -499,7 +509,7 @@ bool CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
       return true;
     }
     // Interrupt the loop in case of high buffer fill level:
-    else if(Daq_FillLevel() > LOOP_MAX_FILLLEVEL) {
+    else if(!LoopInterruptStatus()) {
       LoopInterruptStore(LoopId,0,0,dac1,0);
       return false;
     }
@@ -579,7 +589,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
 	  return true;
 	}
 	// Interrupt the loop in case of high buffer fill level:
-	else if(Daq_FillLevel() > LOOP_MAX_FILLLEVEL) {
+	else if(!LoopInterruptStatus()) {
 	  LoopInterruptStore(LoopId,col,row,dac1,0);
 	  return false;
 	}
@@ -652,7 +662,7 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
       return true;
     }
     // Interrupt the loop in case of high buffer fill level:
-    else if(Daq_FillLevel() > LOOP_MAX_FILLLEVEL) {
+    else if(!LoopInterruptStatus()) {
       LoopInterruptStore(LoopId,0,0,dac1,0);
       return false;
     }
@@ -744,7 +754,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
 	    return true;
 	  }
 	  // Interrupt the loop in case of high buffer fill level:
-	  else if(Daq_FillLevel() > LOOP_MAX_FILLLEVEL) {
+	  else if(!LoopInterruptStatus()) {
 	    LoopInterruptStore(LoopId,col,row,dac1,dac2);
 	    return false;
 	  }
@@ -842,7 +852,7 @@ bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
 	return true;
       }
       // Interrupt the loop in case of high buffer fill level:
-      else if(Daq_FillLevel() > LOOP_MAX_FILLLEVEL) {
+      else if(!LoopInterruptStatus()) {
 	LoopInterruptStore(LoopId,0,0,dac1,dac2);
 	return false;
       }
@@ -933,7 +943,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
 	    return true;
 	  }
 	  // Interrupt the loop in case of high buffer fill level:
-	  else if(Daq_FillLevel() > LOOP_MAX_FILLLEVEL) {
+	  else if(!LoopInterruptStatus()) {
 	    LoopInterruptStore(LoopId,col,row,dac1,dac2);
 	    return false;
 	  }
@@ -1018,7 +1028,7 @@ bool CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
 	return true;
       }
       // Interrupt the loop in case of high buffer fill level:
-      else if(Daq_FillLevel() > LOOP_MAX_FILLLEVEL) {
+      else if(!LoopInterruptStatus()) {
 	LoopInterruptStore(LoopId,0,0,dac1,dac2);
 	return false;
       }
