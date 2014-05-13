@@ -7,13 +7,14 @@
 
 // -------- Helper Functions -------------------------------
 
-// Use a maximum of 80% of allocated DAQ buffer before reading out:
+// Use a maximum of 85% of allocated DAQ buffer before reading out:
 #define LOOP_MAX_FILLLEVEL  85
 #define LOOP_MAX_INTERRUPTS 20
 
 // Wait this long when setting DACs to lowest value
 // they need time to settle after large jumps. Time given in usec.
-#define LOOP_SETDAC_DELAY 50
+#define LOOP_SETDAC_DELAY_LONG uDelay(70)
+#define LOOP_SETDAC_DELAY_SHORT uDelay(0)
 
 // Reset the Loop Interrupt, so next Loop call starts from scratch:
 void CTestboard::LoopInterruptReset() {
@@ -426,8 +427,10 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
 	  else roc_SetDAC(dac1register, CalibratedDAC(dac1));
 	}
 
-	// Give the DAC time so settle from dac1high to dac1low
-	if(dac1 == dac1low) { uDelay(LOOP_SETDAC_DELAY); }
+	// Give the DAC time so settle:
+	if(dac1 == dac1low) LOOP_SETDAC_DELAY_LONG;
+	else { LOOP_SETDAC_DELAY_SHORT; }
+
 
 	// Send the triggers:
 	for (uint16_t trig = 0; trig < nTriggers; trig++) {
@@ -509,8 +512,10 @@ bool CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
       else roc_SetDAC(dac1register, CalibratedDAC(dac1));
     }
 
-    // Give the DAC time so settle from dac1high to dac1low
-    if(dac1 == dac1low) { uDelay(LOOP_SETDAC_DELAY); }
+    // Give the DAC time so settle:
+    if(dac1 == dac1low) LOOP_SETDAC_DELAY_LONG;
+    else { LOOP_SETDAC_DELAY_SHORT; }
+
 
     // Send the triggers:
     for (uint16_t trig = 0; trig < nTriggers; trig++) {
@@ -585,7 +590,9 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
 	else roc_SetDAC(dac1register, CalibratedDAC(dac1));
 
 	// Give the DAC time so settle from dac1high to dac1low
-	if(dac1 == dac1low) { uDelay(LOOP_SETDAC_DELAY); }
+	if(dac1 == dac1low) LOOP_SETDAC_DELAY_LONG;
+	else { LOOP_SETDAC_DELAY_SHORT; }
+
 
 	// Send the triggers:
 	for (uint16_t trig = 0; trig < nTriggers; trig++) {
@@ -655,8 +662,9 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
     if(flags&FLAG_DISABLE_DACCAL) roc_SetDAC(dac1register, dac1);
     else roc_SetDAC(dac1register, CalibratedDAC(dac1));
 
-    // Give the DAC time so settle from dac1high to dac1low
-    if(dac1 == dac1low) { uDelay(LOOP_SETDAC_DELAY); }
+    // Give the DAC time so settle:
+    if(dac1 == dac1low) LOOP_SETDAC_DELAY_LONG;
+    else { LOOP_SETDAC_DELAY_SHORT; }
 
     // Send the triggers:
     for (uint16_t trig = 0; trig < nTriggers; trig++) {
@@ -727,9 +735,6 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
 	  else roc_SetDAC(dac1register, CalibratedDAC(dac1));
 	}
 
-	// Give the DAC time so settle from dac1high to dac1low
-	if(dac1 == dac1low) { uDelay(LOOP_SETDAC_DELAY); }
-
 	// Loop over the DAC2 range specified:
 	for (size_t dac2 = dac2start; dac2 <= dac2high; dac2++) {
 
@@ -752,8 +757,9 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
 	    else roc_SetDAC(dac2register, CalibratedDAC(dac2));
 	  }
 
-	  // Give the DAC time so settle from dac2high to dac2low
-	  if(dac2 == dac2low) { uDelay(LOOP_SETDAC_DELAY); }
+	  // Give the DAC time so settle:
+	  if(dac2 == dac2low) LOOP_SETDAC_DELAY_LONG;
+	  else { LOOP_SETDAC_DELAY_SHORT; }
 
 	  // Send the triggers:
 	  for (uint16_t trig = 0; trig < nTriggers; trig++) {
@@ -827,9 +833,6 @@ bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
       else roc_SetDAC(dac1register, CalibratedDAC(dac1));
     }
 
-    // Give the DAC time so settle from dac1high to dac1low
-    if(dac1 == dac1low) { uDelay(LOOP_SETDAC_DELAY); }
-
     // Loop over the DAC2 range specified:
     for (size_t dac2 = dac2start; dac2 <= dac2high; dac2++) {
 
@@ -852,8 +855,9 @@ bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
 	else roc_SetDAC(dac2register, CalibratedDAC(dac2));
       }
 
-      // Give the DAC time so settle from dac2high to dac2low
-      if(dac2 == dac2low) { uDelay(LOOP_SETDAC_DELAY); }
+      // Give the DAC time so settle:
+      if(dac2 == dac2low) LOOP_SETDAC_DELAY_LONG;
+      else { LOOP_SETDAC_DELAY_SHORT; }
 
       // Send the triggers:
       for (uint16_t trig = 0; trig < nTriggers; trig++) {
@@ -920,9 +924,6 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
 	if(flags&FLAG_DISABLE_DACCAL) roc_SetDAC(dac1register, dac1);
 	else roc_SetDAC(dac1register, CalibratedDAC(dac1));
 
-	// Give the DAC time so settle from dac1high to dac1low
-	if(dac1 == dac1low) { uDelay(LOOP_SETDAC_DELAY); }
-
 	// Loop over the DAC2 range specified:
 	for (size_t dac2 = dac2start; dac2 <= dac2high; dac2++) {
 
@@ -942,8 +943,9 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
 	  if(flags&FLAG_DISABLE_DACCAL) roc_SetDAC(dac2register, dac2);
 	  else roc_SetDAC(dac2register, CalibratedDAC(dac2));
 
-	  // Give the DAC time so settle from dac2high to dac2low
-	  if(dac2 == dac2low) { uDelay(LOOP_SETDAC_DELAY); }
+	  // Give the DAC time so settle:
+	  if(dac2 == dac2low) LOOP_SETDAC_DELAY_LONG;
+	  else { LOOP_SETDAC_DELAY_SHORT; }
 
 	  // Send the triggers:
 	  for (uint16_t trig = 0; trig < nTriggers; trig++) {
@@ -1007,9 +1009,6 @@ bool CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
     if(flags&FLAG_DISABLE_DACCAL) roc_SetDAC(dac1register, dac1);
     else roc_SetDAC(dac1register, CalibratedDAC(dac1));
 
-    // Give the DAC time so settle from dac1high to dac1low
-    if(dac1 == dac1low) { uDelay(LOOP_SETDAC_DELAY); }
-
     // Loop over the DAC2 range specified:
     for (size_t dac2 = dac2start; dac2 <= dac2high; dac2++) {
 
@@ -1029,8 +1028,9 @@ bool CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
       if(flags&FLAG_DISABLE_DACCAL) roc_SetDAC(dac2register, dac2);
       else roc_SetDAC(dac2register, CalibratedDAC(dac2));
 
-      // Give the DAC time so settle from dac2high to dac2low
-      if(dac2 == dac2low) { uDelay(LOOP_SETDAC_DELAY); }
+      // Give the DAC time so settle after setting:
+      if(dac2 == dac2low) LOOP_SETDAC_DELAY_LONG;
+      else { LOOP_SETDAC_DELAY_SHORT; }
 
       // Send the triggers:
       for (uint16_t trig = 0; trig < nTriggers; trig++) {
