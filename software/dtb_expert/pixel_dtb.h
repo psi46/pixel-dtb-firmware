@@ -310,7 +310,7 @@ public:
 	#define PG_SYNC  0x2000
 
 	RPC_EXPORT void Pg_SetCmd(uint16_t addr, uint16_t cmd);
-//	RPC_EXPORT void pg_SetCmdAll(vector<uint16_t> &cmd);
+	RPC_EXPORT void Pg_SetCmdAll(vector<uint16_t> &cmd);
 	RPC_EXPORT void Pg_Stop();
 	RPC_EXPORT void Pg_Single();
 	RPC_EXPORT void Pg_Trigger();

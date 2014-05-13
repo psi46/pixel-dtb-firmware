@@ -900,14 +900,13 @@ void CTestboard::Pg_SetCmd(unsigned short addr, unsigned short cmd)
 	if (addr < 256)	IOWR_16DIRECT(PATTERNGEN_DATA_BASE, 2*addr, cmd);
 }
 
-/*
-void CTestboard::pg_SetCmdAll(vector<uint16_t> &cmd)
+
+void CTestboard::Pg_SetCmdAll(vector<uint16_t> &cmd)
 {
+        uint16_t count = cmd.size();
 	if (count > 255) return;
-	unsigned short i;
-	for (i=0; i<count; i++) IOWR_16DIRECT(PATTERNGEN_DATA_BASE, 2*i, cmd[i]);
+	for (unsigned short i=0; i<count; i++) { IOWR_16DIRECT(PATTERNGEN_DATA_BASE, 2*i, cmd[i]); }
 }
-*/
 
 void CTestboard::Pg_Stop()
 {
