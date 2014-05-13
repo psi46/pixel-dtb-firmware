@@ -1156,7 +1156,6 @@ bool CTestboard::tbm_Get(uint8_t reg, uint8_t &value)
 // --- Data aquisition ------------------------------------------------------
 
 // *3SDATA
-#define DAQ_CHANNELS 8
 
 uint8_t CTestboard::Daq_FillLevel(uint8_t channel) {
 
