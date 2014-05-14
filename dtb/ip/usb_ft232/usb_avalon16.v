@@ -40,9 +40,9 @@ module usb_avalon_16bit
 
 	wire [7:0]readdata_fifo;
 	wire [7:0]status = { 7'b0000000, !rx_empty };
-	wire send;
+	wire si_request; // request for send immediate
 
-	assign send	= avs_ctrl_write && avs_ctrl_address && avs_ctrl_writedata[0];
+	assign si_request = avs_ctrl_write && avs_ctrl_address && avs_ctrl_writedata[0];
 	assign avs_ctrl_readdata = avs_ctrl_read ?
 		(avs_ctrl_address ? status : readdata_fifo) : 0;
 
@@ -61,15 +61,21 @@ module usb_avalon_16bit
 
 	// === asi_uplink =========================================================
 
-	wire tx_ena = valid & ready;
+	assign ready  = !tx_full;
 	wire tx_empty = endofpacket && empty;
+	wire tx_write_dat = valid && ready;
 
-	assign ready = !tx_full;
-
-	wire tx_write_dat = tx_ena && !tx_full;
+	reg si; // send immediate request received
+	wire si_send = si && ready && !valid;
+	always @(posedge clk or posedge reset)
+	begin
+		if (reset) si <= 0;
+		else if (si_send)    si <= 0;
+		else if (si_request) si <= 1;
+	end
 
 	assign tx_data = {data[7:0], data[15:8]};
-	assign tx_mask = send ? 2'b00 : {!tx_empty, 1'b1};
-	assign tx_write = send || tx_write_dat;
+	assign tx_mask = si_send ? 2'b00 : {!tx_empty, 1'b1};
+	assign tx_write = si_send || tx_write_dat;
 
 endmodule

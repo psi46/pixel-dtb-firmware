@@ -19,7 +19,7 @@
 ## PROGRAM "Quartus II"
 ## VERSION "Version 13.1.0 Build 162 10/23/2013 SJ Full Version"
 
-## DATE    "Fri Mar 28 10:58:02 2014"
+## DATE    "Wed May 14 12:48:54 2014"
 
 ##
 ## DEVICE  "EP3C40F484C6"
@@ -56,14 +56,14 @@ create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|
 create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[1]} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 10 -phase 45.000 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[1]}] 
 create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[2]} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 10 -phase 90.000 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[2]}] 
 create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[3]} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 10 -phase 135.000 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[3]}] 
+create_generated_clock -name {inst14|inst23|altpll_component|auto_generated|pll1|clk[0]} -source [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 1 -master_clock {clk50} [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|clk[0]}] 
+create_generated_clock -name {inst14|inst23|altpll_component|auto_generated|pll1|clk[1]} -source [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 5 -divide_by 2 -master_clock {clk50} [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|clk[1]}] 
+create_generated_clock -name {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} -source [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 4 -divide_by 5 -master_clock {clk50} [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]}] 
 create_generated_clock -name {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[0]} -source [get_pins {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 3 -divide_by 2 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[0]} [get_pins {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[0]}] 
 create_generated_clock -name {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[1]} -source [get_pins {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 3 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[0]} [get_pins {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[1]}] 
 create_generated_clock -name {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[2]} -source [get_pins {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 3 -phase -90.000 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[0]} [get_pins {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[2]}] 
 create_generated_clock -name {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[3]} -source [get_pins {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 3 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[0]} [get_pins {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[3]}] 
 create_generated_clock -name {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[4]} -source [get_pins {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 3 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[0]} [get_pins {inst|ram_ext|dtb_system_ram_ext_controller_phy_inst|dtb_system_ram_ext_phy_inst|dtb_system_ram_ext_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[4]}] 
-create_generated_clock -name {inst14|inst23|altpll_component|auto_generated|pll1|clk[0]} -source [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 1 -master_clock {clk50} [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|clk[0]}] 
-create_generated_clock -name {inst14|inst23|altpll_component|auto_generated|pll1|clk[1]} -source [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 5 -divide_by 2 -master_clock {clk50} [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|clk[1]}] 
-create_generated_clock -name {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} -source [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 4 -divide_by 5 -master_clock {clk50} [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]}] 
 
 
 #**************************************************************
@@ -82,12 +82,47 @@ create_generated_clock -name {inst14|inst23|altpll_component|auto_generated|pll1
 # Set Input Delay
 #**************************************************************
 
+set_input_delay -add_delay -max -clock [get_clocks {usb_clk}]  9.670 [get_ports {USB_data[0]}]
+set_input_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[0]}]
+set_input_delay -add_delay -max -clock [get_clocks {usb_clk}]  9.670 [get_ports {USB_data[1]}]
+set_input_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[1]}]
+set_input_delay -add_delay -max -clock [get_clocks {usb_clk}]  9.670 [get_ports {USB_data[2]}]
+set_input_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[2]}]
+set_input_delay -add_delay -max -clock [get_clocks {usb_clk}]  9.670 [get_ports {USB_data[3]}]
+set_input_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[3]}]
+set_input_delay -add_delay -max -clock [get_clocks {usb_clk}]  9.670 [get_ports {USB_data[4]}]
+set_input_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[4]}]
+set_input_delay -add_delay -max -clock [get_clocks {usb_clk}]  9.670 [get_ports {USB_data[5]}]
+set_input_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[5]}]
+set_input_delay -add_delay -max -clock [get_clocks {usb_clk}]  9.670 [get_ports {USB_data[6]}]
+set_input_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[6]}]
+set_input_delay -add_delay -max -clock [get_clocks {usb_clk}]  9.670 [get_ports {USB_data[7]}]
+set_input_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[7]}]
 
 
 #**************************************************************
 # Set Output Delay
 #**************************************************************
 
+set_output_delay -add_delay -max -clock [get_clocks {usb_clk}]  7.500 [get_ports {USB_data[0]}]
+set_output_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[0]}]
+set_output_delay -add_delay -max -clock [get_clocks {usb_clk}]  7.500 [get_ports {USB_data[1]}]
+set_output_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[1]}]
+set_output_delay -add_delay -max -clock [get_clocks {usb_clk}]  7.500 [get_ports {USB_data[2]}]
+set_output_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[2]}]
+set_output_delay -add_delay -max -clock [get_clocks {usb_clk}]  7.500 [get_ports {USB_data[3]}]
+set_output_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[3]}]
+set_output_delay -add_delay -max -clock [get_clocks {usb_clk}]  7.500 [get_ports {USB_data[4]}]
+set_output_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[4]}]
+set_output_delay -add_delay -max -clock [get_clocks {usb_clk}]  7.500 [get_ports {USB_data[5]}]
+set_output_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[5]}]
+set_output_delay -add_delay -max -clock [get_clocks {usb_clk}]  7.500 [get_ports {USB_data[6]}]
+set_output_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[6]}]
+set_output_delay -add_delay -max -clock [get_clocks {usb_clk}]  7.500 [get_ports {USB_data[7]}]
+set_output_delay -add_delay -min -clock [get_clocks {usb_clk}]  0.000 [get_ports {USB_data[7]}]
+set_output_delay -add_delay -max -clock [get_clocks {usb_clk}]  7.500 [get_ports {USB_oe_n}]
+set_output_delay -add_delay -max -clock [get_clocks {usb_clk}]  7.500 [get_ports {USB_rd_n}]
+set_output_delay -add_delay -max -clock [get_clocks {usb_clk}]  7.500 [get_ports {USB_wr_n}]
 
 
 #**************************************************************

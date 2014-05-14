@@ -24,7 +24,7 @@
 #define PIXMASK  0x80
 
 // Define number of DAQ channels
-#define DAQ_CHANNELS 8
+#define DAQ_CHANNELS 6
 
 // PUC register addresses for roc_SetDAC
 #define	Vdig        0x01

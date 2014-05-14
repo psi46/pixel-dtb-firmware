@@ -58,8 +58,17 @@ derive_pll_clocks -create_base_clocks
 derive_clock_uncertainty
 
 # tsu/th constraints
+set_input_delay -clock "usb_clk" -max 9.67ns [get_ports {USB_data[*]}]
+set_input_delay -clock "usb_clk" -min 0.000ns [get_ports {USB_data[*]}]
 
 # tco constraints
+set_output_delay -clock "usb_clk" -max 7.5ns [get_ports {USB_data[*]}]
+set_output_delay -clock "usb_clk" -min -0.000ns [get_ports {USB_data[*]}]
+
+set_output_delay -clock "usb_clk" -max 7.5ns [get_ports {USB_oe_n}]
+set_output_delay -clock "usb_clk" -max 7.5ns [get_ports {USB_rd_n}]
+set_output_delay -clock "usb_clk" -max 7.5ns [get_ports {USB_wr_n}]
+
 
 # tpd constraints
 

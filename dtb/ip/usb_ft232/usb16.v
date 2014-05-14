@@ -31,7 +31,13 @@ module usb16
 	inout  [7:0]data,
 	input  txe_n,
 	input  rxf_n,
-	output siwu_n
+	output siwu_n,
+	
+	// debug wires
+	output db_tx_full,
+	output db_tx_empty,
+	output db_tx_write,
+	output db_tx_read
 );
 
 wire tx_write;
@@ -54,6 +60,10 @@ wire rx_mask;
 wire full;
 wire rx_ready = !full;
 
+assign db_tx_full  = tx_full;
+assign db_tx_empty = empty;
+assign db_tx_write = tx_write;
+assign db_tx_read  = tx_read;
 
 usb_avalon_16bit port
 (

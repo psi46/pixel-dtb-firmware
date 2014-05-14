@@ -199,9 +199,15 @@ set_location_assignment PIN_E15 -to UI_IOs[3]
 set_location_assignment PIN_B15 -to UI_IOs[4]
 set_location_assignment PIN_A15 -to UI_IOs[5]
 set_location_assignment PIN_E14 -to UI_IOs[6]
-set_location_assignment PIN_C13 -to UI_IOs[7]
-set_location_assignment PIN_E12 -to UI_IOs[8]
-set_location_assignment PIN_D13 -to UI_IOs[9]
+set_location_assignment PIN_B14 -to UI_IOs[7]
+set_location_assignment PIN_A14 -to UI_IOs[8]
+set_location_assignment PIN_C13 -to UI_IOs[9]
+set_location_assignment PIN_B13 -to UI_IOs[10]
+set_location_assignment PIN_A13 -to UI_IOs[11]
+set_location_assignment PIN_E12 -to UI_IOs[12]
+set_location_assignment PIN_D13 -to UI_IOs[13]
+set_location_assignment PIN_F11 -to UI_IOs[14]
+set_location_assignment PIN_E11 -to UI_IOs[15]
 
 set_location_assignment PIN_F11 -to twTP1
 set_location_assignment PIN_E11 -to "twTP1(n)"

@@ -199,19 +199,19 @@
          type = "String";
       }
    }
-   element sysid.control_slave
-   {
-      datum baseAddress
-      {
-         value = "134221824";
-         type = "long";
-      }
-   }
    element performance_counter.control_slave
    {
       datum baseAddress
       {
          value = "134223872";
+         type = "long";
+      }
+   }
+   element sysid.control_slave
+   {
+      datum baseAddress
+      {
+         value = "134221824";
          type = "long";
       }
    }
@@ -260,27 +260,11 @@
          type = "long";
       }
    }
-   element delay_ctr.ctrl
+   element delay_sda.ctrl
    {
       datum baseAddress
       {
-         value = "48";
-         type = "long";
-      }
-   }
-   element adc_0.ctrl
-   {
-      datum baseAddress
-      {
-         value = "144";
-         type = "long";
-      }
-   }
-   element patterngen.ctrl
-   {
-      datum baseAddress
-      {
-         value = "64";
+         value = "40";
          type = "long";
       }
    }
@@ -300,20 +284,28 @@
          type = "long";
       }
    }
-   element delay_tin.ctrl
+   element adc_0.ctrl
    {
       datum baseAddress
       {
-         value = "56";
+         value = "144";
          type = "long";
       }
    }
-   element eventgen.ctrl
+   element delay_ctr.ctrl
    {
       datum baseAddress
       {
-         value = "208";
-         type = "String";
+         value = "48";
+         type = "long";
+      }
+   }
+   element daq_dma_0.ctrl
+   {
+      datum baseAddress
+      {
+         value = "134225984";
+         type = "long";
       }
    }
    element delay_clk.ctrl
@@ -329,19 +321,11 @@
          type = "long";
       }
    }
-   element probe_d1.ctrl
+   element patterngen.ctrl
    {
       datum baseAddress
       {
-         value = "80";
-         type = "long";
-      }
-   }
-   element daq_dma_0.ctrl
-   {
-      datum baseAddress
-      {
-         value = "134225984";
+         value = "64";
          type = "long";
       }
    }
@@ -353,11 +337,27 @@
          type = "long";
       }
    }
-   element delay_sda.ctrl
+   element eventgen.ctrl
    {
       datum baseAddress
       {
-         value = "40";
+         value = "208";
+         type = "String";
+      }
+   }
+   element delay_tin.ctrl
+   {
+      datum baseAddress
+      {
+         value = "56";
+         type = "long";
+      }
+   }
+   element probe_d1.ctrl
+   {
+      datum baseAddress
+      {
+         value = "80";
          type = "long";
       }
    }
@@ -715,11 +715,43 @@
          type = "long";
       }
    }
+   element descriptor_memory.s1
+   {
+      datum baseAddress
+      {
+         value = "138420224";
+         type = "long";
+      }
+   }
+   element fifo.s1
+   {
+      datum baseAddress
+      {
+         value = "128";
+         type = "long";
+      }
+   }
+   element deser400.s1
+   {
+      datum baseAddress
+      {
+         value = "160";
+         type = "long";
+      }
+   }
    element clkdiv.s1
    {
       datum baseAddress
       {
          value = "192";
+         type = "long";
+      }
+   }
+   element SDC_SPI2.s1
+   {
+      datum baseAddress
+      {
+         value = "128";
          type = "long";
       }
    }
@@ -736,15 +768,7 @@
          type = "long";
       }
    }
-   element SDC_SPI2.s1
-   {
-      datum baseAddress
-      {
-         value = "128";
-         type = "long";
-      }
-   }
-   element deser160.s1
+   element ROC_addr.s1
    {
       datum baseAddress
       {
@@ -752,23 +776,7 @@
          type = "long";
       }
    }
-   element deser400.s1
-   {
-      datum baseAddress
-      {
-         value = "160";
-         type = "long";
-      }
-   }
-   element descriptor_memory.s1
-   {
-      datum baseAddress
-      {
-         value = "138420224";
-         type = "long";
-      }
-   }
-   element ROC_addr.s1
+   element deser160.s1
    {
       datum baseAddress
       {
@@ -786,14 +794,6 @@
       datum baseAddress
       {
          value = "0";
-         type = "long";
-      }
-   }
-   element fifo.s1
-   {
-      datum baseAddress
-      {
-         value = "128";
          type = "long";
       }
    }

@@ -205,6 +205,11 @@ module test_usb16;
 	initial
 	begin
 		waitclk(10);
+//		asi_burst(8'h00, 1120);
+//		waitclk(7);
+//		avsWrite(1, 1);
+//		waitclk(20);
+
 		forever @(posedge clk)
 		begin
 			asi_burst(8'h20, 1);

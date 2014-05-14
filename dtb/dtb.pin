@@ -80,8 +80,8 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : A9        :        :                   :      
 RESERVED_INPUT_WITH_WEAK_PULLUP : A10       :        :                   :         : 8         :                
 GND+                         : A11       :        :                   :         : 8         :                
 clk50                        : A12       : input  : 2.5 V             :         : 7         : Y              
-twTP2(n)                     : A13       : output : LVDS_E_3R         :         : 7         : Y              
-twTP3(n)                     : A14       : output : LVDS_E_3R         :         : 7         : Y              
+UI_IOs[11]                   : A13       : output : 2.5 V             :         : 7         : Y              
+UI_IOs[8]                    : A14       : output : 2.5 V             :         : 7         : Y              
 UI_IOs[5]                    : A15       : output : 2.5 V             :         : 7         : Y              
 UI_IOs[2]                    : A16       : output : 2.5 V             :         : 7         : Y              
 UIO_trg                      : A17       : input  : 2.5 V             :         : 7         : Y              
@@ -146,8 +146,8 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : B9        :        :                   :      
 RESERVED_INPUT_WITH_WEAK_PULLUP : B10       :        :                   :         : 8         :                
 GND+                         : B11       :        :                   :         : 8         :                
 GND+                         : B12       :        :                   :         : 7         :                
-twTP2                        : B13       : output : LVDS_E_3R         :         : 7         : Y              
-twTP3                        : B14       : output : LVDS_E_3R         :         : 7         : Y              
+UI_IOs[10]                   : B13       : output : 2.5 V             :         : 7         : Y              
+UI_IOs[7]                    : B14       : output : 2.5 V             :         : 7         : Y              
 UI_IOs[4]                    : B15       : output : 2.5 V             :         : 7         : Y              
 UI_IOs[1]                    : B16       : output : 2.5 V             :         : 7         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : B17       :        :                   :         : 7         :                
@@ -168,7 +168,7 @@ GND                          : C9        : gnd    :                   :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : C10       :        :                   :         : 8         :                
 GND                          : C11       : gnd    :                   :         :           :                
 GND                          : C12       : gnd    :                   :         :           :                
-UI_IOs[7]                    : C13       : output : 2.5 V             :         : 7         : Y              
+UI_IOs[9]                    : C13       : output : 2.5 V             :         : 7         : Y              
 GND                          : C14       : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : C15       :        :                   :         : 7         :                
 GND                          : C16       : gnd    :                   :         :           :                
@@ -190,7 +190,7 @@ VCCIO8                       : D9        : power  :                   : 2.5V    
 RESERVED_INPUT_WITH_WEAK_PULLUP : D10       :        :                   :         : 8         :                
 VCCIO8                       : D11       : power  :                   : 2.5V    : 8         :                
 VCCIO7                       : D12       : power  :                   : 2.5V    : 7         :                
-UI_IOs[9]                    : D13       : output : 2.5 V             :         : 7         : Y              
+UI_IOs[13]                   : D13       : output : 2.5 V             :         : 7         : Y              
 VCCIO7                       : D14       : power  :                   : 2.5V    : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : D15       :        :                   :         : 7         :                
 VCCIO7                       : D16       : power  :                   : 2.5V    : 7         :                
@@ -210,8 +210,8 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : E7        :        :                   :      
 VCCIO8                       : E8        : power  :                   : 2.5V    : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : E9        :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : E10       :        :                   :         : 8         :                
-twTP1(n)                     : E11       : output : LVDS_E_3R         :         : 7         : Y              
-UI_IOs[8]                    : E12       : output : 2.5 V             :         : 7         : Y              
+UI_IOs[15]                   : E11       : output : 2.5 V             :         : 7         : Y              
+UI_IOs[12]                   : E12       : output : 2.5 V             :         : 7         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : E13       :        :                   :         : 7         :                
 UI_IOs[6]                    : E14       : output : 2.5 V             :         : 7         : Y              
 UI_IOs[3]                    : E15       : output : 2.5 V             :         : 7         : Y              
@@ -232,7 +232,7 @@ Plug_IOs[3]                  : F7        : output : 2.5 V             :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : F8        :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : F9        :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : F10       :        :                   :         : 8         :                
-twTP1                        : F11       : output : LVDS_E_3R         :         : 7         : Y              
+UI_IOs[14]                   : F11       : output : 2.5 V             :         : 7         : Y              
 GND                          : F12       : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : F13       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : F14       :        :                   :         : 7         :                
