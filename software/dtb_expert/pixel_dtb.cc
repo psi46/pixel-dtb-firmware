@@ -233,6 +233,7 @@ void CTestboard::Init()
 	// stop pattern generator
 	Pg_Stop();
 	Pg_SetCmd(0, 0);
+	pg_delaysum = 0;
 
 	// --- shutdown DAQ ---------------------------------
 	// close all open DAQ channels
@@ -308,7 +309,7 @@ void CTestboard::Init()
 	roc_pixeladdress_inverted = false;
 
 	// -- default Test Loop parameter settings
-	SetLoopTriggerDelay(150); // 150 clk between triggers (to match WBC)
+	SetLoopTriggerDelay(0);
 	LoopInterruptReset(); // Reset loop interrupt to none.
 }
 
@@ -906,6 +907,11 @@ void CTestboard::Pg_SetCmdAll(vector<uint16_t> &cmd)
         uint16_t count = cmd.size();
 	if (count > 255) return;
 	for (unsigned short i=0; i<count; i++) { IOWR_16DIRECT(PATTERNGEN_DATA_BASE, 2*i, cmd[i]); }
+}
+
+void CTestboard::Pg_SetSum(uint16_t delays)
+{
+  pg_delaysum = delays;
 }
 
 void CTestboard::Pg_Stop()

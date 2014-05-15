@@ -79,6 +79,8 @@ class CTestboard
 
 	uint8_t ledstatus;
 
+	uint16_t pg_delaysum;
+
 	// --- DAQ variables
 	uint16_t *daq_mem_base[8]; // DAQ buffer base address (0 = no space reserved)
 	uint32_t daq_mem_size[8];  // DAQ buffer size in 16 bit words
@@ -311,6 +313,7 @@ public:
 
 	RPC_EXPORT void Pg_SetCmd(uint16_t addr, uint16_t cmd);
 	RPC_EXPORT void Pg_SetCmdAll(vector<uint16_t> &cmd);
+	RPC_EXPORT void Pg_SetSum(uint16_t delays);
 	RPC_EXPORT void Pg_Stop();
 	RPC_EXPORT void Pg_Single();
 	RPC_EXPORT void Pg_Trigger();
@@ -488,6 +491,7 @@ public:
 	bool LoopInterruptStatus();
 
 	RPC_EXPORT void SetLoopTriggerDelay(uint16_t delay);
+	uint16_t GetLoopTriggerDelay();
 	RPC_EXPORT bool SetI2CAddresses(vector<uint8_t> &roc_i2c);
 	RPC_EXPORT bool SetTrimValues(uint8_t roc_i2c, vector<uint8_t> &trimvalues);
 	void LoopPixTrim(uint8_t roc_i2c, uint8_t column, uint8_t row);
