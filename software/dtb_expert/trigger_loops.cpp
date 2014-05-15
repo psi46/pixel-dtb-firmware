@@ -42,7 +42,7 @@ bool CTestboard::LoopInterruptStatus() {
 // Load the Loop Interrupt values to resume at interrupt position:
 void CTestboard::LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, size_t &dac2) {
 
-  // Loop is resumed: turn interrupt LED off (0):
+  // Loop is resumed: turn test loop LED on:
   ToggleLed(4,true);
 
   // No Loop has been interrupted, just start from beginning:
@@ -75,7 +75,7 @@ void CTestboard::LoopInterruptStore(uint16_t id, uint8_t column, uint8_t row, si
   // Increment the number of interrupts:
   LoopInterruptCounter++;
 
-  // Loop is interrupted: turn interrupt LED on:
+  // Loop is interrupted: turn test loop LED off:
   ToggleLed(4,false);
 }
 
@@ -167,8 +167,8 @@ bool CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
   size_t dummy;
   LoopInterruptResume(LoopId,colstart,rowstart,dummy,dummy);
 
-  // If FLAG_FORCE_MASKED is set, mask the chip:
-  if(flags&FLAG_FORCE_MASKED) {
+  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+  if(!(flags&FLAG_FORCE_UNMASKED)) {
     for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
       roc_I2cAddr(roc_i2c.at(roc));
       roc_Chip_Mask();
@@ -203,7 +203,7 @@ bool CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
         roc_I2cAddr(roc_i2c.at(roc));
 	// If masked, enable the pixel:
-	if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),col, row);
+	if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c.at(roc),col, row);
 	roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
       }
 
@@ -217,7 +217,7 @@ bool CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
       // Clear the calibrate signal on every ROC configured
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
 	roc_I2cAddr(roc_i2c.at(roc));
-	if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(col, row);
+	if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(col, row);
 	roc_ClrCal();
       }
     } // Loop over all rows
@@ -247,10 +247,10 @@ bool CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t
   // Take into account both Xtalks and Cals flags
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(flags&FLAG_FORCE_MASKED) roc_Chip_Mask();
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
     roc_Col_Enable(column, true);
     // If masked, enable the pixel:
-    if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c.at(roc),column, row);
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
   }
 
@@ -265,7 +265,7 @@ bool CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t
   // Disable this column on every ROC configured:
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
     roc_ClrCal();
     roc_Col_Enable(column, false);
   }
@@ -286,8 +286,8 @@ bool CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
   
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
-  // If FLAG_FORCE_MASKED is set, mask the chip:
-  if(flags&FLAG_FORCE_MASKED) roc_Chip_Mask();
+  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
 
   // Loop over all columns:
   for (uint8_t col = colstart; col < ROC_NUMCOLS; col++) {
@@ -310,7 +310,7 @@ bool CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
       }
 
       // If masked, enable the pixel:
-      if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,col, row);
+      if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c,col, row);
 
       // Set the calibrate bits
       // Take into account both Xtalks and Cals flags
@@ -323,7 +323,7 @@ bool CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
       }
 
       // Clear the calibrate signal
-      if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(col, row);
+      if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(col, row);
       roc_ClrCal();
     } // Loop over all rows
 
@@ -348,12 +348,12 @@ bool CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
   // Set the calibrate bits on every configured ROC
   // Take into account both Xtalks and Cals flags
   roc_I2cAddr(roc_i2c);
-  // If FLAG_FORCE_MASKED is set, mask the chip:
-  if(flags&FLAG_FORCE_MASKED) roc_Chip_Mask();
+  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
 
   roc_Col_Enable(column, true);
   // If masked, enable the pixel:
-  if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,column, row);
+  if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c,column, row);
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Send the triggers:
@@ -364,7 +364,7 @@ bool CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
 
   // Clear the calibrate signal on thr ROC configured
   // Disable this column on the ROC configured:
-  if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(column, row);
+  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
   roc_ClrCal();
   roc_Col_Enable(column, false);
 
@@ -386,8 +386,8 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
   size_t dummy;
   LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dummy);
 
-  // If FLAG_FORCE_MASKED is set, mask the chip:
-  if(flags&FLAG_FORCE_MASKED) {
+  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+  if(!(flags&FLAG_FORCE_UNMASKED)) {
     for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
       roc_I2cAddr(roc_i2c.at(roc));
       roc_Chip_Mask();
@@ -411,7 +411,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
 	roc_I2cAddr(roc_i2c.at(roc));
 	// If masked, enable the pixel:
-	if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),col, row);
+	if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c.at(roc),col, row);
 	roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
       }
 
@@ -456,7 +456,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
       // Clear the calibrate signal on every ROC configured
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
 	roc_I2cAddr(roc_i2c.at(roc));
-	if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(col, row);
+	if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(col, row);
 	roc_ClrCal();
       }
     } // Loop over all rows
@@ -491,11 +491,11 @@ bool CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
   // Take into account both Xtalks and Cals flags
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(flags&FLAG_FORCE_MASKED) roc_Chip_Mask();
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
     roc_Col_Enable(column, true);
 
     // If masked, enable the pixel:
-    if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c.at(roc),column, row);
 
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
   }
@@ -539,7 +539,7 @@ bool CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
   // Disable this column on every ROC configured:
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
     roc_ClrCal();
     roc_Col_Enable(column, false);
   }
@@ -561,8 +561,8 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
 
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
-  // If FLAG_FORCE_MASKED is set, mask the chip:
-  if(flags&FLAG_FORCE_MASKED) roc_Chip_Mask();
+  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
 
   // Loop over all columns:
   for (uint8_t col = colstart; col < ROC_NUMCOLS; col++) {
@@ -574,7 +574,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
     for (uint8_t row = rowstart; row < ROC_NUMROWS; row++) {
 
       // If masked, enable the pixel:
-      if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,col, row);
+      if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c,col, row);
 
       // Set the calibrate bits
       // Take into account both Xtalks and Cals flags
@@ -615,7 +615,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
       dac1start = dac1low;
 
       // Clear the calibrate signal
-      if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(col, row);
+      if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(col, row);
       roc_ClrCal();
     } // Loop over all rows
 
@@ -645,12 +645,12 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
   // Set the calibrate bits on every configured ROC
   // Take into account both Xtalks and Cals flags
   roc_I2cAddr(roc_i2c);
-  // If FLAG_FORCE_MASKED is set, mask the chip:
-  if(flags&FLAG_FORCE_MASKED) roc_Chip_Mask();
+  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
 
   roc_Col_Enable(column, true);
   // If masked, enable the pixel:
-  if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,column, row);
+  if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c,column, row);
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Loop over the DAC range specified:
@@ -685,7 +685,7 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
 
   // Clear the calibrate signal on thr ROC configured
   // Disable this column on the ROC configured:
-  if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(column, row);
+  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
   roc_ClrCal();
   roc_Col_Enable(column, false);
 
@@ -705,8 +705,8 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
   size_t dac1start = dac1low, dac2start = dac2low;
   LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dac2start);
 
-  // If FLAG_FORCE_MASKED is set, mask the chip:
-  if(flags&FLAG_FORCE_MASKED) {
+  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+  if(!(flags&FLAG_FORCE_UNMASKED)) {
     for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
       roc_I2cAddr(roc_i2c.at(roc));
       roc_Chip_Mask();
@@ -730,7 +730,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
 	roc_I2cAddr(roc_i2c.at(roc));
 	// If masked, enable the pixel:
-	if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),col, row);
+	if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c.at(roc),col, row);
 	roc_Pix_Cal(col, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
       }
 
@@ -790,7 +790,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
       // Clear the calibrate signal on every ROC configured
       for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
 	roc_I2cAddr(roc_i2c.at(roc));
-	if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(col, row);
+	if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(col, row);
 	roc_ClrCal();
       }
     } // Loop over all rows
@@ -825,10 +825,10 @@ bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
   // Take into account both Xtalks and Cals flags
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(flags&FLAG_FORCE_MASKED) roc_Chip_Mask();
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
     roc_Col_Enable(column, true);
     // If masked, enable the pixel:
-    if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c.at(roc),column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c.at(roc),column, row);
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
   }
 
@@ -886,7 +886,7 @@ bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
   // Disable this column on every ROC configured:
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
     roc_ClrCal();
     roc_Col_Enable(column, false);
   }
@@ -907,8 +907,8 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
 
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
-  // If FLAG_FORCE_MASKED is set, mask the chip:
-  if(flags&FLAG_FORCE_MASKED) roc_Chip_Mask();
+  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
 
   // Loop over all columns:
   for (uint8_t col = colstart; col < ROC_NUMCOLS; col++) {
@@ -920,7 +920,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
     for (uint8_t row = rowstart; row < ROC_NUMROWS; row++) {
 
       // If masked, enable the pixel:
-      if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,col, row);
+      if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c,col, row);
 
       // Set the calibrate bits
       // Take into account both Xtalks and Cals flags
@@ -973,7 +973,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
       dac1start = dac1low;
 
       // Clear the calibrate signal
-      if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(col, row);
+      if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(col, row);
       roc_ClrCal();
     } // Loop over all rows
 
@@ -1003,12 +1003,12 @@ bool CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
   // Set the calibrate bits on every configured ROC
   // Take into account both Xtalks and Cals flags
   roc_I2cAddr(roc_i2c);
-  // If FLAG_FORCE_MASKED is set, mask the chip:
-  if(flags&FLAG_FORCE_MASKED) roc_Chip_Mask();
+  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
 
   roc_Col_Enable(column, true);
   // If masked, enable the pixel:
-  if(flags&FLAG_FORCE_MASKED) LoopPixTrim(roc_i2c,column, row);
+  if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c,column, row);
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Loop over the DAC range specified:
@@ -1056,7 +1056,7 @@ bool CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
 
   // Clear the calibrate signal on the ROC configured
   // Disable this column on the ROC configured:
-  if(flags&FLAG_FORCE_MASKED) roc_Pix_Mask(column, row);
+  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
   roc_ClrCal();
   roc_Col_Enable(column, false);
 

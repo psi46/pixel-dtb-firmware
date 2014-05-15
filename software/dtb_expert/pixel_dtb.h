@@ -18,8 +18,8 @@
 // execution flags
 #define FLAG_CALS           0x0002
 #define FLAG_XTALK          0x0004
-#define FLAG_FORCE_MASKED   0x0010
 #define FLAG_DISABLE_DACCAL 0x0020
+#define FLAG_FORCE_UNMASKED 0x0100
 
 #define PIXMASK  0x80
 
