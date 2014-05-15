@@ -491,7 +491,7 @@ public:
 	bool LoopInterruptStatus();
 
 	RPC_EXPORT void SetLoopTriggerDelay(uint16_t delay);
-	uint16_t GetLoopTriggerDelay();
+	uint16_t GetLoopTriggerDelay(uint16_t nTriggers);
 	RPC_EXPORT bool SetI2CAddresses(vector<uint8_t> &roc_i2c);
 	RPC_EXPORT bool SetTrimValues(uint8_t roc_i2c, vector<uint8_t> &trimvalues);
 	void LoopPixTrim(uint8_t roc_i2c, uint8_t column, uint8_t row);

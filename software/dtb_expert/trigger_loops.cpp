@@ -106,10 +106,20 @@ void CTestboard::SetLoopTriggerDelay(uint16_t delay) {
   LoopTriggerDelay = delay;
 }
 
-uint16_t CTestboard::GetLoopTriggerDelay() {
-  // FIXME maybe add some safety margin of 36clk (one roc+pixel readout)?
-  // ROC Header 12clk, Pxiel 24clk
+uint16_t CTestboard::GetLoopTriggerDelay(uint16_t nTriggers) {
+  
+  // ROC Header 12clk, Pixel 24clk = 36clk
   uint16_t readout_time = 36;
+
+  // Check if we have a TBM. This usually implies a module with two data streams a 8 ROCs:    
+  if(daq_select_deser400) {
+    // Two streams a 8 ROCs, in addition: TBM Header + trailer 32clk: 320clk
+    // Adding safety margin of some 80 clk:
+    if(nTriggers > 15) { readout_time = 400; }
+    else { readout_time = 120; } // Trigger stacking!
+  }
+
+  // Now select the larger delay and add the user-defined additional delay:
   return (readout_time > pg_delaysum ? readout_time : pg_delaysum) + LoopTriggerDelay;
 }
 
@@ -168,7 +178,7 @@ void CTestboard::LoopPixTrim(uint8_t roc_i2c, uint8_t column, uint8_t row) {
 bool CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags) {
 
   const uint16_t LoopId = 0x356a;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
   uint8_t colstart = 0, rowstart = 0;
@@ -249,7 +259,7 @@ bool CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
 bool CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags) {
 
   //const uint16_t LoopId = 0xda4b;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Enable this column on every configured ROC:
   // Set the calibrate bits on every configured ROC
@@ -287,7 +297,7 @@ bool CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t
 bool CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTriggers, uint16_t flags) {
 
   const uint16_t LoopId = 0x77de;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
   uint8_t colstart = 0, rowstart = 0;
@@ -353,7 +363,7 @@ bool CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
 bool CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags) {
 
   //const uint16_t LoopId = 0x1b64;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Enable this column on the configured ROC:
   // Set the calibrate bits on every configured ROC
@@ -390,7 +400,7 @@ bool CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
 bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
 
   const uint16_t LoopId = 0xac34;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
   uint8_t colstart = 0, rowstart = 0;
@@ -492,7 +502,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
 bool CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
 
   const uint16_t LoopId = 0xc1df;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
   uint8_t dummy; size_t dummy2;
@@ -565,7 +575,7 @@ bool CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
 bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
 
   const uint16_t LoopId = 0x902b;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
   uint8_t colstart = 0, rowstart = 0;
@@ -649,7 +659,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
 bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
 
   const uint16_t LoopId = 0xfe5d;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
   uint8_t dummy; size_t dummy2;
@@ -714,7 +724,7 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
 bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high) {
 
   const uint16_t LoopId = 0x0ade;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
   uint8_t colstart = 0, rowstart = 0;
@@ -830,7 +840,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
 bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high) {
 
   const uint16_t LoopId = 0xb1d5;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
   uint8_t dummy;
@@ -916,7 +926,7 @@ bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
 bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high) {
 
   const uint16_t LoopId = 0x17ba;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
   uint8_t colstart = 0, rowstart = 0;
@@ -1011,7 +1021,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
 bool CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high) {
 
   const uint16_t LoopId = 0x7b52;
-  const uint16_t TriggerDelay = GetLoopTriggerDelay();
+  const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
   uint8_t dummy;
