@@ -462,8 +462,8 @@ public:
 
 	// ------- Trigger Loop functions for Host-side DAQ ROC/Module testing ------
 
-	char ROC_TRIM_BITS[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMROWS];
-	char ROC_I2C_ADDRESSES[MOD_NUMROCS];
+	uint8_t ROC_TRIM_BITS[MOD_NUMROCS*ROC_NUMCOLS*ROC_NUMROWS];
+	uint8_t ROC_I2C_ADDRESSES[MOD_NUMROCS];
 
 	// Test Loop parameters
 	uint16_t LoopTriggerDelay;
