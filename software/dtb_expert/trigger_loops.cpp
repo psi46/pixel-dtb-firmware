@@ -115,8 +115,10 @@ uint16_t CTestboard::GetLoopTriggerDelay(uint16_t nTriggers) {
   if(daq_select_deser400) {
     // Two streams a 8 ROCs, in addition: TBM Header + trailer 32clk: 320clk
     // Adding safety margin of some 80 clk:
-    if(nTriggers > 15) { readout_time = 400; }
-    else { readout_time = 120; } // Trigger stacking!
+    //if(nTriggers > 15) { 
+    readout_time = 600; // FIXME: nothing shorter is stable w/ current DESER400!
+    //}
+    //else { readout_time = 230; } // Trigger stacking possible!
   }
 
   // Now select the larger delay and add the user-defined additional delay:
