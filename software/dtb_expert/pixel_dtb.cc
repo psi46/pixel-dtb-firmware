@@ -933,6 +933,13 @@ void CTestboard::Pg_Trigger()
 	IOWR_32DIRECT(PATTERNGEN_CTRL_BASE, 0, 0x82);
 }
 
+void CTestboard::Pg_Triggers(uint32_t triggers, uint16_t period)
+{
+  for (uint32_t k = 0; k < triggers; k++) {
+    Pg_Single();
+    cDelay(period);
+  }
+}
 
 void CTestboard::Pg_Loop(unsigned short period)
 {
@@ -940,7 +947,6 @@ void CTestboard::Pg_Loop(unsigned short period)
 	IOWR_32DIRECT(PATTERNGEN_CTRL_BASE, 4, period);
 	IOWR_32DIRECT(PATTERNGEN_CTRL_BASE, 0, 0x84);
 }
-
 
 
 // === ROC/Module Communication =========================================
