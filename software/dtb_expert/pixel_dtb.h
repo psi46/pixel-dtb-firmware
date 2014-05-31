@@ -516,6 +516,9 @@ public:
 	RPC_EXPORT bool LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high, uint8_t dac2register, uint8_t dac2low, uint8_t dac2high);
 
 	RPC_EXPORT void VectorTest(vector<uint16_t> &in, vectorR<uint16_t> &out);
+
+	// --- Read Arbitrary adc     ------------------------------------------
+	RPC_EXPORT uint16_t GetADC(uint8_t addr);
 };
 
 
