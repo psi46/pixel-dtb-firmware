@@ -14,8 +14,8 @@ Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_1_id_router.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_1_addr_router.sv(48): object "DEFAULT_WR_CHANNEL" differs only in case from object "default_wr_channel" in the same scope
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_1_addr_router.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope
-Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_id_router_017.sv(48): object "DEFAULT_WR_CHANNEL" differs only in case from object "default_wr_channel" in the same scope
-Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_id_router_017.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope
+Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_id_router_016.sv(48): object "DEFAULT_WR_CHANNEL" differs only in case from object "default_wr_channel" in the same scope
+Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_id_router_016.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_id_router_004.sv(48): object "DEFAULT_WR_CHANNEL" differs only in case from object "default_wr_channel" in the same scope
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_id_router_004.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_id_router_003.sv(48): object "DEFAULT_WR_CHANNEL" differs only in case from object "default_wr_channel" in the same scope
@@ -24,8 +24,8 @@ Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_id_router_001.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_id_router.sv(48): object "DEFAULT_WR_CHANNEL" differs only in case from object "default_wr_channel" in the same scope
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_id_router.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope
-Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_addr_router_010.sv(48): object "DEFAULT_WR_CHANNEL" differs only in case from object "default_wr_channel" in the same scope
-Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_addr_router_010.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope
+Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_addr_router_015.sv(48): object "DEFAULT_WR_CHANNEL" differs only in case from object "default_wr_channel" in the same scope
+Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_addr_router_015.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_addr_router_008.sv(48): object "DEFAULT_WR_CHANNEL" differs only in case from object "default_wr_channel" in the same scope
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_addr_router_008.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_addr_router_002.sv(48): object "DEFAULT_WR_CHANNEL" differs only in case from object "default_wr_channel" in the same scope
@@ -36,6 +36,7 @@ Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_
 Info (10281): Verilog HDL Declaration information at dtb_system_mm_interconnect_0_addr_router.sv(49): object "DEFAULT_RD_CHANNEL" differs only in case from object "default_rd_channel" in the same scope
 Warning (10268): Verilog HDL information at usb_ft232.v(54): always construct contains both blocking and non-blocking assignments
 Warning (10268): Verilog HDL information at usb_ft232.v(65): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at daq_dma32.v(83): always construct contains both blocking and non-blocking assignments
 Warning (10268): Verilog HDL information at psi2c_control.v(76): always construct contains both blocking and non-blocking assignments
 Warning (10268): Verilog HDL information at adv3224.v(47): always construct contains both blocking and non-blocking assignments
 Warning (10268): Verilog HDL information at lvds2lcds.v(43): always construct contains both blocking and non-blocking assignments
