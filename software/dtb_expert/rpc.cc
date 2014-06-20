@@ -1,5 +1,7 @@
 // rpc.cpp
 
+#include <cstring>
+
 #include "pixel_dtb.h"
 #include "rpc.h"
 

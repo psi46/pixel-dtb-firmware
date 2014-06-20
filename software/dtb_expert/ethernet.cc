@@ -114,9 +114,9 @@ void hello(unsigned char* frame){
 	while (alt_avalon_sgdma_check_descriptor_status(&tx_descriptor) != 0);
 }
 
-void claim(unsigned char* frame){
+void claim(unsigned char* frame, bool force){
 	bool success = false;
-	if(!claimed){
+	if(!claimed || force){
 		for(int i = 0; i < 6; i++) host_mac[i] = frame[8+i];
 		host_pid[0] = frame[16];
 		host_pid[1] = frame[17];
@@ -201,10 +201,13 @@ void rx_ethernet_isr (void *context)
 		hello(rx_frame);
 		break;
 	case 0x2: //claim
-		claim(rx_frame);
+		claim(rx_frame, false);
 		break;
 	case 0x3: //unclaim
 		unclaim(rx_frame);
+		break;
+	case 0x4: //force claim
+		claim(rx_frame, true);
 		break;
 	}
 }

@@ -1,6 +1,8 @@
 // dtb_config.cc
 
 #include <string.h>
+#include <cstdlib>
+#include <cstdio>
 #include "dtb_config.h"
 #include "fatfs.h"
 
