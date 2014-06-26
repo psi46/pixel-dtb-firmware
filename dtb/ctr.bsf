@@ -1,0 +1,136 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2004 Altera Corporation
+Any  megafunction  design,  and related netlist (encrypted  or  decrypted),
+support information,  device programming or simulation file,  and any other
+associated  documentation or information  provided by  Altera  or a partner
+under  Altera's   Megafunction   Partnership   Program  may  be  used  only
+to program  PLD  devices (but not masked  PLD  devices) from  Altera.   Any
+other  use  of such  megafunction  design,  netlist,  support  information,
+device programming or simulation file,  or any other  related documentation
+or information  is prohibited  for  any  other purpose,  including, but not
+limited to  modification,  reverse engineering,  de-compiling, or use  with
+any other  silicon devices,  unless such use is  explicitly  licensed under
+a separate agreement with  Altera  or a megafunction partner.  Title to the
+intellectual property,  including patents,  copyrights,  trademarks,  trade
+secrets,  or maskworks,  embodied in any such megafunction design, netlist,
+support  information,  device programming or simulation file,  or any other
+related documentation or information provided by  Altera  or a megafunction
+partner, remains with Altera, the megafunction partner, or their respective
+licensors. No other licenses, including any licenses needed under any third
+party's intellectual property, are provided herein.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 64 64 216 256)
+	(text "ctr" (rect 56 0 84 16)(font "Courier New" (font_size 10)(bold)))
+	(text "inst" (rect 16 176 30 186)(font "Arial" (font_size 6)))
+	(port
+		(pt 0 168)
+		(input)
+		(text "res_veto" (rect 20 148 67 160)(font "Courier New" (bold)))
+		(text "res_veto" (rect 20 160 67 172)(font "Courier New" (bold)))
+		(line (pt 0 168)(pt 16 168)(line_width 1))
+	)
+	(port
+		(pt 0 152)
+		(input)
+		(text "trg_veto" (rect 20 132 67 144)(font "Courier New" (bold)))
+		(text "trg_veto" (rect 20 144 67 156)(font "Courier New" (bold)))
+		(line (pt 0 152)(pt 16 152)(line_width 1))
+	)
+	(port
+		(pt 0 24)
+		(input)
+		(text "clk" (rect 20 36 37 48)(font "Courier New" (bold)))
+		(text "clk" (rect 20 20 37 32)(font "Courier New" (bold)))
+		(line (pt 0 24)(pt 16 24)(line_width 1))
+	)
+	(port
+		(pt 0 72)
+		(input)
+		(text "trg" (rect 20 68 37 80)(font "Courier New" (bold)))
+		(text "trg" (rect 20 68 37 80)(font "Courier New" (bold)))
+		(line (pt 0 72)(pt 16 72)(line_width 1))
+	)
+	(port
+		(pt 0 56)
+		(input)
+		(text "cal" (rect 20 52 37 64)(font "Courier New" (bold)))
+		(text "cal" (rect 20 52 37 64)(font "Courier New" (bold)))
+		(line (pt 0 56)(pt 16 56)(line_width 1))
+	)
+	(port
+		(pt 0 120)
+		(input)
+		(text "res_req" (rect 20 100 61 112)(font "Courier New" (bold)))
+		(text "res_req" (rect 20 112 61 124)(font "Courier New" (bold)))
+		(line (pt 0 120)(pt 16 120)(line_width 1))
+	)
+	(port
+		(pt 0 136)
+		(input)
+		(text "nmr_req" (rect 20 116 61 128)(font "Courier New" (bold)))
+		(text "nmr_req" (rect 20 128 61 140)(font "Courier New" (bold)))
+		(line (pt 0 136)(pt 16 136)(line_width 1))
+	)
+	(port
+		(pt 0 40)
+		(input)
+		(text "sync" (rect 24 32 52 46)(font "Arial" (font_size 8)))
+		(text "sync" (rect 24 32 52 46)(font "Arial" (font_size 8)))
+		(line (pt 0 40)(pt 16 40))
+	)
+	(port
+		(pt 0 104)
+		(input)
+		(text "res_tbm" (rect 24 96 70 110)(font "Arial" (font_size 8)))
+		(text "res_tbm" (rect 24 96 64 108)(font "Arial" ))
+		(line (pt 0 104)(pt 16 104))
+	)
+	(port
+		(pt 0 88)
+		(input)
+		(text "res_roc" (rect 20 84 61 96)(font "Courier New" (bold)))
+		(text "res_roc" (rect 20 84 61 96)(font "Courier New" (bold)))
+		(line (pt 0 88)(pt 16 88)(line_width 1))
+	)
+	(port
+		(pt 152 40)
+		(output)
+		(text "running" (rect 91 36 132 48)(font "Courier New" (bold)))
+		(text "running" (rect 91 36 132 48)(font "Courier New" (bold)))
+		(line (pt 136 40)(pt 152 40)(line_width 1))
+	)
+	(port
+		(pt 152 56)
+		(output)
+		(text "ctr_out" (rect 91 52 132 64)(font "Courier New" (bold)))
+		(text "ctr_out" (rect 91 52 132 64)(font "Courier New" (bold)))
+		(line (pt 136 56)(pt 152 56)(line_width 1))
+	)
+	(port
+		(pt 152 72)
+		(output)
+		(text "trg_out" (rect 91 68 132 80)(font "Courier New" (bold)))
+		(text "trg_out" (rect 91 68 132 80)(font "Courier New" (bold)))
+		(line (pt 136 72)(pt 152 72)(line_width 1))
+	)
+	(port
+		(pt 152 88)
+		(output)
+		(text "res_out" (rect 91 84 132 96)(font "Courier New" (bold)))
+		(text "res_out" (rect 91 84 132 96)(font "Courier New" (bold)))
+		(line (pt 136 88)(pt 152 88)(line_width 1))
+	)
+	(drawing
+		(line (pt 16 48)(pt 136 48)(line_width 1))
+		(line (pt 16 144)(pt 72 144)(line_width 1))
+		(line (pt 72 144)(pt 72 176)(line_width 1))
+		(rectangle (rect 16 16 136 176))
+	)
+)

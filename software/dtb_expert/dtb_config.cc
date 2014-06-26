@@ -1,8 +1,9 @@
 // dtb_config.cc
 
 #include <string.h>
-#include <cstdlib>
-#include <cstdio>
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "dtb_config.h"
 #include "fatfs.h"
 
@@ -15,7 +16,7 @@ void DTB_CONFIG::Init()
 	board = 0;
 	hw_version = "";
 	usb_id = "";
-	mac_address = 0x99;
+	mac_address = 0;
 	hostname = "";
 	comment = "";
 }
@@ -71,7 +72,7 @@ bool DTB_CONFIG::Read(const char *filename)
 		par = strchr(tag,  ']'); if (par == 0) continue;
 		*par = 0; par++;
 
-		// Check if Line is a known parameter (if so convert it to an appropiate value)
+		// Check if Line is a known parameter (if so convert it to an appropriate value)
 		if     (strcmp(tag, "BOARD")       == 0) board = GetInt(par);
 		else if(strcmp(tag, "HW-VERSION")  == 0) hw_version = GetString(par);
 		else if(strcmp(tag, "USB-ID")      == 0) usb_id = GetString(par);

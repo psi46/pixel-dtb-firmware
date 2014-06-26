@@ -22,13 +22,13 @@
 <td width="20%" bgcolor="#77BBFF">BSP Version:</td><td>default</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>Aug 6, 2013 3:12:53 PM</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>Jun 23, 2014 12:25:24 PM</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1375819973723</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1403544324968</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated Location:</td><td>/home/caleb/sources/pixel-dtb-firmware/software/dtb_bsp</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated Location:</td><td>/home/caleb/Sources/psi46/firmware/software/dtb_bsp</td>
 </tr>
 </table>
 <br>
@@ -38,7 +38,7 @@
 <th align="left" width="20%">Slave Descriptor</th><th align="left" width="40%">Address Range</th><th align="left" width="20%">Size</th><th align="left" width="20%">Attributes</th>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>descriptor_memory</td><td>0x08402000 - 0x084023FF</td><td>1024</td><td class="listing">memory</td>
+<td>descriptor_memory</td><td>0x08402000 - 0x084020FF</td><td>256</td><td class="listing">memory</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>sgdma_tx</td><td>0x08400440 - 0x0840047F</td><td>64</td><td class="listing">&nbsp;</td>
@@ -51,6 +51,18 @@
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>patterngen_data</td><td>0x08108200 - 0x081083FF</td><td>512</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>eventgen</td><td>0x081080D0 - 0x081080D7</td><td>8</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>clkdiv</td><td>0x081080C0 - 0x081080CF</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>clk_stretch</td><td>0x081080B0 - 0x081080B7</td><td>8</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>deser400</td><td>0x081080A0 - 0x081080AF</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>adc_0</td><td>0x08108090 - 0x08108097</td><td>8</td><td class="listing">&nbsp;</td>
@@ -86,6 +98,15 @@
 <td>PSI2C</td><td>0x08108000 - 0x0810801F</td><td>32</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>main_status</td><td>0x081000B0 - 0x081000BF</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>main_control</td><td>0x081000A0 - 0x081000AF</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>i2c_external</td><td>0x08100090 - 0x08100097</td><td>8</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>SDC_SPI2</td><td>0x08100080 - 0x0810008F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
@@ -107,10 +128,19 @@
 <td>LED</td><td>0x08100020 - 0x0810002F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>main_status</td><td>0x08100010 - 0x0810001F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>daq_dma_5</td><td>0x08002180 - 0x0800219F</td><td>32</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>main_control</td><td>0x08100000 - 0x0810000F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>daq_dma_4</td><td>0x08002140 - 0x0800215F</td><td>32</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>daq_dma_3</td><td>0x08002100 - 0x0800211F</td><td>32</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>daq_dma_2</td><td>0x080020C0 - 0x080020DF</td><td>32</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>daq_dma_1</td><td>0x08002080 - 0x0800209F</td><td>32</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>daq_dma_0</td><td>0x08002040 - 0x0800205F</td><td>32</td><td class="listing">&nbsp;</td>
@@ -125,7 +155,10 @@
 <td>performance_counter</td><td>0x08001800 - 0x0800183F</td><td>64</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>USB</td><td>0x08001100 - 0x08001103</td><td>4</td><td class="listing">&nbsp;</td>
+<td>USB2</td><td>0x08001110 - 0x08001111</td><td>2</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>usb_tx_dma</td><td>0x08001040 - 0x0800107F</td><td>64</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>sysid</td><td>0x08001000 - 0x08001007</td><td>8</td><td class="listing">&nbsp;</td>
@@ -300,7 +333,7 @@
 <td width="20%">Destination:</td><td>public_mk_define</td>
 </tr>
 <tr mode="wrap">
-<td width="20%">Description:</td><td>When your application exits, close file descriptors, call C++ destructors, etc. Code footprint can be reduced by disabling clean exit. If disabled, adds -DALT_NO_CLEAN_EXIT to ALT_CPPFLAGS and -Wl,--defsym, exit=_exit to ALT_LDFLAGS in public.mk.</td>
+<td width="20%">Description:</td><td>When your application exits, close file descriptors, call C++ destructors, etc. Code footprint can be reduced by disabling clean exit. If disabled, adds -DALT_NO_CLEAN_EXIT to ALT_CPPFLAGS -D'exit(a)=_exit(a)' in public.mk.</td>
 </tr>
 <tr mode="wrap">
 <td width="20%">Restrictions:</td><td>none</td>
@@ -489,7 +522,7 @@
 <td width="20%">Destination:</td><td>public_mk_define</td>
 </tr>
 <tr mode="wrap">
-<td width="20%">Description:</td><td>Turns on HAL runtime stack checking feature. Enabling this setting causes additional code to be placed into each subroutine call to generate an exception if a stack collision occurs with the heap or statically allocated data. If true, adds -DALT_STACK_CHECK and -mstack-check to ALT_CPPFLAGS in public.mk.</td>
+<td width="20%">Description:</td><td>Turns on HAL runtime stack checking feature. Enabling this setting causes additional code to be placed into each subroutine call to generate an exception if a stack collision occurs with the heap or statically allocated data. If true, adds -DALT_STACK_CHECK and -fstack-check to ALT_CPPFLAGS in public.mk.</td>
 </tr>
 <tr mode="wrap">
 <td width="20%">Restrictions:</td><td>none</td>
@@ -1596,7 +1629,7 @@
 <td width="20%">Destination:</td><td>public_mk_define</td>
 </tr>
 <tr mode="wrap">
-<td width="20%">Description:</td><td>Enable BSP generation to query if SOPC system is big endian. If true ignores export of 'ALT_CFLAGS += -EB' to public.mk if big endian system. If true ignores export of 'ALT_CFLAGS += -EL' if little endian system.</td>
+<td width="20%">Description:</td><td>Enable BSP generation to query if SOPC system is big endian. If true ignores export of 'ALT_CFLAGS += -meb' to public.mk if big endian system.</td>
 </tr>
 <tr mode="wrap">
 <td width="20%">Restrictions:</td><td>none</td>

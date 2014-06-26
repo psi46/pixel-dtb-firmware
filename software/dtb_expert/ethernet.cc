@@ -260,10 +260,11 @@ int eth_init(bool& initiated){
 	dtb_mac[4] = (char)(MAC >> 8);
 	dtb_mac[5] = (char)MAC;
 
+	// Enable read and write transfers, gigabit Ethernet operation, and CRC forwarding
+	tse[2] |= 0x0000004B; // 0100 1011 command config: CRC_FWD, ETH_SPEED, RX_ENA, TX_ENA
+
 	// Specify the addresses of the PHY devices to be accessed through MDIO interface
 	tse[0x0F] = 0x12; // mdio_addr0
-
-	bool enable_gigabit = !(tse[0x81] & 0x20);//TODO: Verify that this is correct bit
 
 
 	// Write to register 16 of the PHY chip for Ethernet port 1 to enable automatic crossover for all modes
@@ -276,14 +277,9 @@ int eth_init(bool& initiated){
 	tse[0x80] |= 0x8000;
 	while ( tse[0x80] & 0x8000  );
 
-	// Enable read and write transfers, gigabit Ethernet operation, and CRC forwarding
-	if(enable_gigabit){
-		//Enable Gigabit Ethernet
-		tse[2] |= 0x0000004B; // 0100 1011 command config: CRC_FWD, ETH_SPEED, RX_ENA, TX_ENA
-	} else{
-		tse[2] |= 0x00000043; // 0100 0011 command config: CRC_FWD, RX_ENA, TX_ENA
-	}
 
+	while (!(tse[0x81] & 0x20));
+	printf("PHY status register: %02X\n",tse[0x81]);
 	initiated = true;
 	return 0;
 }
@@ -357,6 +353,10 @@ bool eth_write(const void* data, unsigned int size){
  */
 CEthernet::CEthernet(){
 	initiated = false;
+}
+CEthernet::~CEthernet(){
+}
+void CEthernet::Reset(){
 }
 bool CEthernet::Read(void* buffer, unsigned int size){
 	if(!initiated) eth_init(initiated);

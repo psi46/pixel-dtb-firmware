@@ -1,0 +1,7 @@
+set_global_assignment -name IP_TOOL_NAME "RAM initializer"
+set_global_assignment -name IP_TOOL_VERSION "12.1"
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "ram_init.vhd"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "ram_init.bsf"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "ram_init_inst.vhd"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "ram_init.inc"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "ram_init.cmp"]

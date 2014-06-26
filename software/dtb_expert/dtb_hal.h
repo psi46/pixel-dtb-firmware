@@ -9,6 +9,9 @@
 #include "altera_avalon_pio_regs.h"
 #include "io.h"
 #include "rpc_io.h"
+#include "sgdma.h"
+#include "cstdint.h"
+
 
 // basic I/O functions
 
@@ -18,21 +21,34 @@ inline unsigned int _GetLED()
 { IORD_ALTERA_AVALON_PIO_DATA(LED_BASE); }
 
 
-#define MAINCTRL_CLK_EXT  0x01
-#define MAINCTRL_PWR_ON   0x02
-#define MAINCTRL_HV_ON    0x04
-#define MAINCTRL_DUT_nRES 0x08
-#define MAINCTRL_TERM     0x10
-#define MAINCTRL_ADCENA   0x20
-
+#define MAINCTRL_CLK_EXT   0x01
+#define MAINCTRL_PWR_ON    0x02
+#define MAINCTRL_HV_ON     0x04
+#define MAINCTRL_DUT_nRES  0x08
+#define MAINCTRL_TERM      0x10
+#define MAINCTRL_ADCENA    0x20
+#define MAINCTRL_PLL_RESET 0x40
 
 inline void _MainControl(unsigned int value)
 { IOWR_ALTERA_AVALON_PIO_DATA(MAIN_CONTROL_BASE, value); }
 
+
+#define MAINSTATUS_CLK_PRESENT  0x01
+#define MAINSTATUS_CLK_GOOD     0x02
+#define MAINSTATUS_CRC_ERROR    0x04
+#define MAINSTATUS_SD_CARD_DET  0x08
 inline unsigned char _MainStatus()
 {
 	return IORD_ALTERA_AVALON_PIO_DATA(MAIN_STATUS_BASE);
 }
+
+
+inline void SetClkDiv(unsigned char value)
+{ IOWR_ALTERA_AVALON_PIO_DATA(CLKDIV_BASE, value); }
+
+inline void SetClockStretchReg(unsigned char reg, unsigned short value)
+// { IOWR_16DIRECT(CLK_STRETCH_BASE, reg*2, value); }
+{ __builtin_sthio (__IO_CALC_ADDRESS_DYNAMIC (CLK_STRETCH_BASE, reg*2), value); }
 
 // === ADC ==================================================================
 
@@ -53,6 +69,17 @@ inline unsigned short ADC_READ(short reg)
 
 // === DAQ ==================================================================
 
+#define DESER400_RESET      0x01
+#define DESER400_REG_RESET  0x02
+#define DESER400_SEL_MOD0   0x04
+
+inline void _Deser400_Control(unsigned int value)
+{ IOWR_ALTERA_AVALON_PIO_DATA(DESER400_BASE, value); }
+
+
+// *3SDATA
+extern const unsigned int DAQ_DMA_BASE[6];
+
 // -- daq dma register
 #define DAQ_MEM_BASE   0
 #define DAQ_MEM_SIZE   4
@@ -66,11 +93,11 @@ inline unsigned short ADC_READ(short reg)
 #define DAQ_MEM_OVFL  2
 #define DAQ_FIFO_OVFL 4
 
-inline void DAQ_WRITE(short reg, unsigned long value)
-{IOWR_32DIRECT(DAQ_DMA_0_BASE, reg, value); }
+inline void DAQ_WRITE(unsigned int daq_base, short reg, unsigned long value)
+{IOWR_32DIRECT(daq_base, reg, value); }
 
-inline unsigned long DAQ_READ(short reg)
-{ return IORD_32DIRECT(DAQ_DMA_0_BASE, reg); }
+inline unsigned long DAQ_READ(unsigned int daq_base, short reg)
+{ return IORD_32DIRECT(daq_base, reg); }
 
 
 
@@ -116,26 +143,29 @@ inline unsigned int GetI2cHs(unsigned char reg)
 #define IF       0x01  // Interrupt Flag
 
 void I2C_Main_Init();
-// bool I2C_Master_Write(unsigned char data);
-// bool I2C_Master_Read(unsigned char &data);
+void I2C_External_Init();
 
+uint8_t I2C_EEPROM_Write(uint8_t addr, const uint8_t *data, uint8_t length);
+uint8_t I2C_EEPROM_Read(uint8_t *data, uint8_t length);
+
+// I2C EEPROM return codes
+#define EEPROM_OK           0
+#define EEPROM_NOT_PRESENT  1
 
 
 // === USB ===============================================================
 
 class CUSB : public CRpcIo
 {
-	unsigned short write_buffer;
-	unsigned short read_buffer;
-
+	CDma dma;
 	bool ReadByte(unsigned char &value);
-	void WriteByte(unsigned char value);
-	bool IsRxFull() { return (read_buffer & 0x8000) == 0; }
-	bool IsTxFull() { return (write_buffer & 0x8000) == 0; }
+//	void WriteByte(unsigned char value);
 public:
-	CUSB() : write_buffer(0x8000), read_buffer(0x8000) {}
-	bool RxFull();
-	bool Write(const void *buffer, unsigned int size);
+	CUSB() {}
+	~CUSB() {}
+	void Reset();
+	bool RxFull() { return IORD_8DIRECT(USB2_BASE, 1) && 0x01; }
+	bool Write(const void *buffer, uint32_t size);
 	void Flush();
 	bool Read(void *buffer, unsigned int size);
 	bool IsOpen();

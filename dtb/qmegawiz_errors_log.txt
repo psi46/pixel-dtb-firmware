@@ -1,0 +1,141 @@
+
+
+D:/projekte/roctest/DTB/source/FPGA/dtb/ip/psi2c/i2c_fifo.tdf
+
+Feb 08 11AM:52:16>: Megafunction LPM_FIFO+ is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:11:29>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:11:30>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:11:39>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:11:56>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:13:27>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:13:29>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:13:53>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:13:55>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:14:00>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:19:15>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:19:45>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:19:50>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:19:51>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:19:53>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:20:04>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:20:43>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:20:44>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:20:46>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_rom1.vhd
+
+Oct 14 01PM:22:31>: Megafunction LPM_ROM is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_ram_dq0.vhd
+
+Oct 16 04PM:26:39>: Megafunction LPM_RAM_DQ is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_ram_dq0.vhd
+
+Oct 17 09AM:26:39>: Megafunction LPM_RAM_DQ is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_ram_dq0.vhd
+
+Oct 17 09AM:26:49>: Megafunction LPM_RAM_DQ is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_ram_dq1.v
+
+Oct 17 11AM:18:42>: Megafunction LPM_RAM_DQ is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_ram_dq1.v
+
+Oct 17 11AM:18:47>: Megafunction LPM_RAM_DQ is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_ram_dq1.v
+
+Oct 17 11AM:18:50>: Megafunction LPM_RAM_DQ is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_ram_dq1.v
+
+Oct 17 11AM:18:58>: Megafunction LPM_RAM_DQ is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Ablage/pixelDTB/pixelDTB/source/FPGA/dtb/lpm_ram_dq1.v
+
+Oct 17 11AM:19:02>: Megafunction LPM_RAM_DQ is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted

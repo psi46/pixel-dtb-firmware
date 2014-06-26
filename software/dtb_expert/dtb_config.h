@@ -6,8 +6,10 @@
 
 using namespace std;
 
-#define fw_version 0x0101
-#define sw_version 0x0106
+#define VERSION(ver,subver) 256*ver+subver
+
+#define fw_version VERSION(2,3)  // Quartus design version
+#define sw_version VERSION(2,22)  // NIOS II software version
 
 
 struct DTB_CONFIG

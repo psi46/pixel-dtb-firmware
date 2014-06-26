@@ -1,0 +1,73 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2005 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 64 64 152 192)
+	(text "srff_timeout" (rect 16 0 77 12)(font "Arial" ))
+	(text "inst" (rect 16 112 33 124)(font "Arial" ))
+	(port
+		(pt 0 48)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 32 40 46 52)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "sync" (rect 0 0 24 12)(font "Arial" ))
+		(text "sync" (rect 21 59 45 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 1))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "to_disable" (rect 0 0 49 12)(font "Arial" ))
+		(text "to_disable" (rect 21 91 70 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 1))
+	)
+	(port
+		(pt 0 32)
+		(input)
+		(text "s" (rect 0 0 5 12)(font "Arial" ))
+		(text "s" (rect 24 24 29 36)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "r" (rect 0 0 3 12)(font "Arial" ))
+		(text "r" (rect 21 75 24 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 1))
+	)
+	(port
+		(pt 88 32)
+		(output)
+		(text "q" (rect -8 0 -3 12)(font "Arial" ))
+		(text "q" (rect 56 24 61 36)(font "Arial" ))
+		(line (pt 88 32)(pt 72 32)(line_width 1))
+	)
+	(drawing
+		(line (pt 16 40)(pt 24 48)(line_width 1))
+		(line (pt 24 48)(pt 16 56)(line_width 1))
+		(rectangle (rect 16 16 72 112)(line_width 1))
+	)
+)

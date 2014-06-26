@@ -144,12 +144,12 @@ flash2dat_extra_args = $(mem_pad_flag) $(mem_reloc_input_flag)
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 13.0
-ACDS_VERSION := 13.0
+# ACDS_VERSION: 13.1
+ACDS_VERSION := 13.1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 156
+# BUILD_NUMBER: 162
 
 # Optimize for simulation
 SIM_OPTIMIZE ?= 0
@@ -172,7 +172,7 @@ HDL_SIM_INSTALL_FILES += $(HDL_SIM_INSTALL_DIR)/$(MEM_0).dat
 SYM_FILES += $(HDL_SIM_DIR)/$(MEM_0).sym
 HDL_SIM_INSTALL_FILES += $(HDL_SIM_INSTALL_DIR)/$(MEM_0).sym
 $(MEM_0)_START := 0x08402000
-$(MEM_0)_END := 0x084023ff
+$(MEM_0)_END := 0x084020ff
 $(MEM_0)_HIERARCHICAL_PATH := descriptor_memory
 $(MEM_0)_WIDTH := 32
 $(MEM_0)_ENDIANNESS := --little-endian-mem
@@ -182,7 +182,7 @@ $(MEM_0)_CREATE_LANES := 0
 descriptor_memory: check_elf_exists $(MEM_INIT_DIR)/$(MEM_0).hex $(HDL_SIM_DIR)/$(MEM_0).dat $(HDL_SIM_DIR)/$(MEM_0).sym
 
 # Memory: epcs_controller
-MEM_1 := epcs_controller_boot_rom
+MEM_1 := dtb_system_epcs_controller_boot_rom
 $(MEM_1)_NAME := epcs_controller
 $(MEM_1)_MEM_INIT_FILE_PARAM_NAME := INIT_FILE
 HEX_FILES += $(HDL_SIM_DIR)/$(MEM_1).hex

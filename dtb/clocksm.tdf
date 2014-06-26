@@ -1,0 +1,34 @@
+title "clock state machine";
+
+
+SUBDESIGN clocksm
+(
+	clk    : INPUT;
+	syncin : INPUT;
+	veto   : INPUT = GND;
+
+	sync   : OUTPUT;
+	phase  : OUTPUT;
+)
+VARIABLE
+	sm : MACHINE OF BITS (sync, phase)
+	WITH STATES
+	(
+		phase0 = B"00",
+		phase1 = B"10",
+		phase2 = B"01",
+		phase3 = B"01"
+	);
+
+BEGIN
+	sm.clk = clk;
+	TABLE
+		sm,     syncin, veto  => sm;
+		phase0,  1,      x    => phase1;
+		phase1,  1,      x    => phase2;
+		phase1,  0,      x    => phase3;
+		phase2,  0,      x    => phase3;
+		phase3,  0,      0    => phase0;
+		phase3,  1,      0    => phase1; 
+	END TABLE;
+END;

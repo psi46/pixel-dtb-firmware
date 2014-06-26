@@ -11,9 +11,7 @@ CTestboard tb;
 int main()
 {
 	tb.Welcome();
-	tb.SetLed(0x00);
-	check_epcs();
-
+//	check_epcs();
 
 	dtbConfig.Init();
 	dtbConfig.Read("0:DTB.INI");

@@ -7,6 +7,8 @@ class CEthernet : public CRpcIo
 {
 public:
 	CEthernet();
+	~CEthernet();
+	void Reset();
 	bool RxFull();
 	bool RxEmpty();
 	bool Write(const void *buffer, unsigned int size);

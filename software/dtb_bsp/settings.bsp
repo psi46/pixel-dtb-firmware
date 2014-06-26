@@ -2,9 +2,9 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Aug 6, 2013 3:12:53 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1375819973723</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>/home/caleb/sources/pixel-dtb-firmware/software/dtb_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>Jun 23, 2014 12:25:24 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1403544324968</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>/home/caleb/Sources/psi46/firmware/software/dtb_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>../../dtb/dtb_system.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
@@ -653,7 +653,7 @@
                 <Value>0</Value>
                 <DefaultValue>0</DefaultValue>
                 <DestinationFile>public_mk_define</DestinationFile>
-                <Description>Enable BSP generation to query if SOPC system is big endian. If true ignores export of 'ALT_CFLAGS += -EB' to public.mk if big endian system. If true ignores export of 'ALT_CFLAGS += -EL' if little endian system.</Description>
+                <Description>Enable BSP generation to query if SOPC system is big endian. If true ignores export of 'ALT_CFLAGS += -meb' to public.mk if big endian system.</Description>
                 <Restrictions>none</Restrictions>
                 <Enabled>false</Enabled>
                 <Group>none</Group>
@@ -713,7 +713,7 @@
                 <Value>1</Value>
                 <DefaultValue>1</DefaultValue>
                 <DestinationFile>public_mk_define</DestinationFile>
-                <Description>When your application exits, close file descriptors, call C++ destructors, etc. Code footprint can be reduced by disabling clean exit. If disabled, adds -DALT_NO_CLEAN_EXIT to ALT_CPPFLAGS and -Wl,--defsym, exit=_exit to ALT_LDFLAGS in public.mk.</Description>
+                <Description>When your application exits, close file descriptors, call C++ destructors, etc. Code footprint can be reduced by disabling clean exit. If disabled, adds -DALT_NO_CLEAN_EXIT to ALT_CPPFLAGS -D'exit(a)=_exit(a)' in public.mk.</Description>
                 <Restrictions>none</Restrictions>
                 <Enabled>false</Enabled>
                 <Group>none</Group>
@@ -725,7 +725,7 @@
                 <Value>0</Value>
                 <DefaultValue>0</DefaultValue>
                 <DestinationFile>public_mk_define</DestinationFile>
-                <Description>Turns on HAL runtime stack checking feature. Enabling this setting causes additional code to be placed into each subroutine call to generate an exception if a stack collision occurs with the heap or statically allocated data. If true, adds -DALT_STACK_CHECK and -mstack-check to ALT_CPPFLAGS in public.mk.</Description>
+                <Description>Turns on HAL runtime stack checking feature. Enabling this setting causes additional code to be placed into each subroutine call to generate an exception if a stack collision occurs with the heap or statically allocated data. If true, adds -DALT_STACK_CHECK and -fstack-check to ALT_CPPFLAGS in public.mk.</Description>
                 <Restrictions>none</Restrictions>
                 <Enabled>false</Enabled>
                 <Group>none</Group>
@@ -881,9 +881,15 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>USB</slaveDescriptor>
-                <addressRange>0x08001100 - 0x08001103</addressRange>
-                <addressSpan>4</addressSpan>
+                <slaveDescriptor>usb_tx_dma</slaveDescriptor>
+                <addressRange>0x08001040 - 0x0800107F</addressRange>
+                <addressSpan>64</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>USB2</slaveDescriptor>
+                <addressRange>0x08001110 - 0x08001111</addressRange>
+                <addressSpan>2</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
@@ -911,15 +917,33 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>main_control</slaveDescriptor>
-                <addressRange>0x08100000 - 0x0810000F</addressRange>
-                <addressSpan>16</addressSpan>
+                <slaveDescriptor>daq_dma_1</slaveDescriptor>
+                <addressRange>0x08002080 - 0x0800209F</addressRange>
+                <addressSpan>32</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>main_status</slaveDescriptor>
-                <addressRange>0x08100010 - 0x0810001F</addressRange>
-                <addressSpan>16</addressSpan>
+                <slaveDescriptor>daq_dma_2</slaveDescriptor>
+                <addressRange>0x080020C0 - 0x080020DF</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_3</slaveDescriptor>
+                <addressRange>0x08002100 - 0x0800211F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_4</slaveDescriptor>
+                <addressRange>0x08002140 - 0x0800215F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_5</slaveDescriptor>
+                <addressRange>0x08002180 - 0x0800219F</addressRange>
+                <addressSpan>32</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
@@ -961,6 +985,24 @@
         <MemoryMap>
                 <slaveDescriptor>SDC_SPI2</slaveDescriptor>
                 <addressRange>0x08100080 - 0x0810008F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>i2c_external</slaveDescriptor>
+                <addressRange>0x08100090 - 0x08100097</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>main_control</slaveDescriptor>
+                <addressRange>0x081000A0 - 0x081000AF</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>main_status</slaveDescriptor>
+                <addressRange>0x081000B0 - 0x081000BF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
@@ -1031,6 +1073,30 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>deser400</slaveDescriptor>
+                <addressRange>0x081080A0 - 0x081080AF</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>clk_stretch</slaveDescriptor>
+                <addressRange>0x081080B0 - 0x081080B7</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>clkdiv</slaveDescriptor>
+                <addressRange>0x081080C0 - 0x081080CF</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>eventgen</slaveDescriptor>
+                <addressRange>0x081080D0 - 0x081080D7</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>patterngen_data</slaveDescriptor>
                 <addressRange>0x08108200 - 0x081083FF</addressRange>
                 <addressSpan>512</addressSpan>
@@ -1056,8 +1122,8 @@
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>descriptor_memory</slaveDescriptor>
-                <addressRange>0x08402000 - 0x084023FF</addressRange>
-                <addressSpan>1024</addressSpan>
+                <addressRange>0x08402000 - 0x084020FF</addressRange>
+                <addressSpan>256</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <LinkerSection>

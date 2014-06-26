@@ -1,0 +1,14 @@
+_temp
+.qsys_edit
+.sopc_builder
+db
+dtb_system
+greybox_tmb
+incremental_db
+simulation
+*.summary
+*.rpt
+*.bak
+*~
+*.cmp
+*.csv

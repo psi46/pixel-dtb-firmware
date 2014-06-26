@@ -78,12 +78,16 @@ ALT_CPPFLAGS += -DSYSTEM_BUS_WIDTH=32 \
 
 # This following VERSION comment indicates the version of the tool used to 
 # generate this makefile. A makefile variable is provided for VERSION as well. 
-# ACDS_VERSION: 13.0
-ACDS_VERSION := 13.0
+# ACDS_VERSION: 13.1
+ACDS_VERSION := 13.1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 156
+# BUILD_NUMBER: 162
+
+# Quartus Generated JDI File. Required for resolving node instance ID's with 
+# design component names. 
+JDI_FILE := $(ABS_BSP_ROOT_DIR)/../../dtb/dtb.jdi
 
 # Qsys--generated SOPCINFO file. Required for resolving node instance ID's with 
 # design component names. 
@@ -91,7 +95,7 @@ SOPCINFO_FILE := $(ABS_BSP_ROOT_DIR)/../../dtb/dtb_system.sopcinfo
 
 # Big-Endian operation. 
 # setting BIG_ENDIAN is false
-ALT_CFLAGS += -EL
+
 
 # Path to the provided C language runtime initialization code. 
 BSP_CRT0 := $(ALT_LIBRARY_ROOT_DIR)/obj/HAL/src/crt0.o
@@ -152,9 +156,9 @@ SOPC_SYSID_FLAG += --sidp=0x8001000
 ELF_PATCH_FLAG  += --sidp 0x8001000
 
 # The SOPC Timestamp 
-# setting SOPC_TIMESTAMP is 1373490686
-SOPC_SYSID_FLAG += --timestamp=1373490686
-ELF_PATCH_FLAG  += --timestamp 1373490686
+# setting SOPC_TIMESTAMP is 1401796631
+SOPC_SYSID_FLAG += --timestamp=1401796631
+ELF_PATCH_FLAG  += --timestamp 1401796631
 
 # Enable JTAG UART driver to recover when host is inactive causing buffer to 
 # full without returning error. Printf will not fail with this recovery. none 
@@ -177,8 +181,7 @@ ELF_PATCH_FLAG  += --timestamp 1373490686
 
 # When your application exits, close file descriptors, call C++ destructors, 
 # etc. Code footprint can be reduced by disabling clean exit. If disabled, adds 
-# -DALT_NO_CLEAN_EXIT to ALT_CPPFLAGS and -Wl,--defsym, exit=_exit to 
-# ALT_LDFLAGS in public.mk. none 
+# -DALT_NO_CLEAN_EXIT to ALT_CPPFLAGS -D'exit(a)=_exit(a)' in public.mk. none 
 # setting hal.enable_clean_exit is 1
 
 # Add exit() support. This option increases code footprint if your "main()" 
@@ -223,7 +226,7 @@ ALT_CPPFLAGS += -DALT_NO_INSTRUCTION_EMULATION
 # Turns on HAL runtime stack checking feature. Enabling this setting causes 
 # additional code to be placed into each subroutine call to generate an 
 # exception if a stack collision occurs with the heap or statically allocated 
-# data. If true, adds -DALT_STACK_CHECK and -mstack-check to ALT_CPPFLAGS in 
+# data. If true, adds -DALT_STACK_CHECK and -fstack-check to ALT_CPPFLAGS in 
 # public.mk. none 
 # setting hal.enable_runtime_stack_checking is 0
 
@@ -253,8 +256,7 @@ ALT_CPPFLAGS += -DALT_NO_INSTRUCTION_EMULATION
 # setting hal.enable_sopc_sysid_check is 1
 
 # Enable BSP generation to query if SOPC system is big endian. If true ignores 
-# export of 'ALT_CFLAGS += -EB' to public.mk if big endian system. If true 
-# ignores export of 'ALT_CFLAGS += -EL' if little endian system. none 
+# export of 'ALT_CFLAGS += -meb' to public.mk if big endian system. none 
 # setting hal.make.ignore_system_derived.big_endian is 0
 
 # Enable BSP generation to query if SOPC system has a debug core present. If 
