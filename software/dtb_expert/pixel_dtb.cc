@@ -731,6 +731,11 @@ void CTestboard::SetDac(int addr, int value)
 }
 
 
+uint16_t CTestboard::GetADC(uint8_t addr)
+{
+	return ReadADC(addr);
+}
+
 unsigned int CTestboard::ReadADC(unsigned char addr)
 {
 	int res;

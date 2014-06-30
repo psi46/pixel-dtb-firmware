@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP3C40F484) Path("X:/source/FPGA/pixel-dtb-firmware/dtb/") File("dtb.sof") MfrSpec(OpMask(1));
+		Device PartName(EP3C40F484) Path("X:/source/FPGA/pixel-dtb-firmware/dtb_new/") File("dtb.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 
