@@ -63,7 +63,7 @@
  -- Pin directions (input, output or bidir) are based on device operating in user mode.
  ---------------------------------------------------------------------------------
 
-Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Full Version
+Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 CHIP  "dtb"  ASSIGNED TO AN: EP3C40F484C6
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment

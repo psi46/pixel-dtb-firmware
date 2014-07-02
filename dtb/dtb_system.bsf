@@ -103,7 +103,7 @@ applicable agreement for further details.
 	(port
 		(pt 0 1208)
 		(input)
-		(text "sig_sda_sig_in" (rect 0 0 59 12)(font "Arial" (font_size 8)))
+		(text "sig_sda_sig_in" (rect 0 0 58 12)(font "Arial" (font_size 8)))
 		(text "sig_sda_sig_in" (rect 4 1197 88 1208)(font "Arial" (font_size 8)))
 		(line (pt 0 1208)(pt 208 1208)(line_width 1))
 	)
@@ -236,7 +236,7 @@ applicable agreement for further details.
 	(port
 		(pt 0 2088)
 		(input)
-		(text "daq_ch4_write" (rect 0 0 59 12)(font "Arial" (font_size 8)))
+		(text "daq_ch4_write" (rect 0 0 58 12)(font "Arial" (font_size 8)))
 		(text "daq_ch4_write" (rect 4 2077 82 2088)(font "Arial" (font_size 8)))
 		(line (pt 0 2088)(pt 208 2088)(line_width 1))
 	)
@@ -551,7 +551,7 @@ applicable agreement for further details.
 	(port
 		(pt 0 640)
 		(output)
-		(text "sdram_ctrl_reset_phy_clk_n" (rect 0 0 118 12)(font "Arial" (font_size 8)))
+		(text "sdram_ctrl_reset_phy_clk_n" (rect 0 0 117 12)(font "Arial" (font_size 8)))
 		(text "sdram_ctrl_reset_phy_clk_n" (rect 4 629 160 640)(font "Arial" (font_size 8)))
 		(line (pt 0 640)(pt 208 640)(line_width 1))
 	)
@@ -663,7 +663,7 @@ applicable agreement for further details.
 	(port
 		(pt 0 1368)
 		(output)
-		(text "sig_tin_sig_out" (rect 0 0 59 12)(font "Arial" (font_size 8)))
+		(text "sig_tin_sig_out" (rect 0 0 58 12)(font "Arial" (font_size 8)))
 		(text "sig_tin_sig_out" (rect 4 1357 94 1368)(font "Arial" (font_size 8)))
 		(line (pt 0 1368)(pt 208 1368)(line_width 1))
 	)
@@ -705,7 +705,7 @@ applicable agreement for further details.
 	(port
 		(pt 0 1640)
 		(output)
-		(text "sd_card2_sclk" (rect 0 0 59 12)(font "Arial" (font_size 8)))
+		(text "sd_card2_sclk" (rect 0 0 58 12)(font "Arial" (font_size 8)))
 		(text "sd_card2_sclk" (rect 4 1629 82 1640)(font "Arial" (font_size 8)))
 		(line (pt 0 1640)(pt 208 1640)(line_width 1))
 	)
