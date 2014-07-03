@@ -480,15 +480,17 @@ public:
 	uint8_t LoopInterruptColumn;
 	uint8_t LoopInterruptRow;
 	size_t LoopInterruptDac1;
+	uint8_t LoopInterruptDac1Stepsize;
 	size_t LoopInterruptDac2;
+	uint8_t LoopInterruptDac2Stepsize;
 
 	// Not exported internal helper functions:
 	uint8_t GetXtalkRow(uint8_t row, bool xtalk);
 	size_t CalibratedDAC(size_t value);
 
 	RPC_EXPORT void LoopInterruptReset();
-	void LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, size_t &dac2);
-	void LoopInterruptStore(uint16_t id, uint8_t column, uint8_t row, size_t dac1, size_t dac2);
+	void LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, size_t &dac1step, size_t &dac2, size_t &dac2step);
+	void LoopInterruptStore(uint16_t id, uint8_t column, uint8_t row, size_t dac1, size_t dac1step, size_t dac2, size_t dac2step);
 	bool LoopInterruptStatus();
 
 	RPC_EXPORT void SetLoopTriggerDelay(uint16_t delay);

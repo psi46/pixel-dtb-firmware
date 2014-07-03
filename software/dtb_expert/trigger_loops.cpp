@@ -22,6 +22,7 @@ void CTestboard::LoopInterruptReset() {
   LoopInterrupt = false;
   LoopInterruptColumn = LoopInterruptRow = 0;
   LoopInterruptDac1 = LoopInterruptDac2 = 0;
+  LoopInterruptDac1Stepsize = LoopInterruptDac2Stepsize = 1;
   LoopInterruptId = 0;
   LoopInterruptCounter = 0;
 
@@ -40,7 +41,7 @@ bool CTestboard::LoopInterruptStatus() {
 }
 
 // Load the Loop Interrupt values to resume at interrupt position:
-void CTestboard::LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, size_t &dac2) {
+void CTestboard::LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, size_t &dac1step, size_t &dac2, size_t &dac2step) {
 
   // Loop is resumed: turn test loop LED on:
   ToggleLed(4,true);
@@ -57,11 +58,17 @@ void CTestboard::LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row,
   column = LoopInterruptColumn;
   row = LoopInterruptRow;
   dac1 = LoopInterruptDac1;
+  dac1step = LoopInterruptDac1Stepsize;
   dac2 = LoopInterruptDac2;
+  dac2step = LoopInterruptDac2Stepsize;
+
+  // Make sure we have valid increment settings:
+  if(dac1step < 1) dac1step = 1;
+  if(dac2step < 1) dac2step = 1;
 }
 
 // Store the loop interrupt parameter to be recalled when rerunning the command:
-void CTestboard::LoopInterruptStore(uint16_t id, uint8_t column, uint8_t row, size_t dac1, size_t dac2) {
+void CTestboard::LoopInterruptStore(uint16_t id, uint8_t column, uint8_t row, size_t dac1, size_t dac1step, size_t dac2, size_t dac2step) {
 
   // Set the Loop Interrupt flag:
   LoopInterrupt = true;
@@ -70,7 +77,9 @@ void CTestboard::LoopInterruptStore(uint16_t id, uint8_t column, uint8_t row, si
   LoopInterruptColumn = column;
   LoopInterruptRow = row;
   LoopInterruptDac1 = dac1;
+  LoopInterruptDac1Stepsize = dac1step;
   LoopInterruptDac2 = dac2;
+  LoopInterruptDac2Stepsize = dac2step;
 
   // Increment the number of interrupts:
   LoopInterruptCounter++;
@@ -185,7 +194,7 @@ bool CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
   // Check if we resume a previous loop:
   uint8_t colstart = 0, rowstart = 0;
   size_t dummy;
-  LoopInterruptResume(LoopId,colstart,rowstart,dummy,dummy);
+  LoopInterruptResume(LoopId,colstart,rowstart,dummy,dummy,dummy,dummy);
 
   // If FLAG_FORCE_UNMASKED is not set, mask the chip:
   if(!(flags&FLAG_FORCE_UNMASKED)) {
@@ -214,7 +223,7 @@ bool CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
       }
       // Interrupt the loop in case of high buffer fill level:
       else if(!LoopInterruptStatus()) {
-	LoopInterruptStore(LoopId,col,row,0,0);
+	LoopInterruptStore(LoopId,col,row,0,1,0,1);
 	return false;
       }
 
@@ -304,7 +313,7 @@ bool CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
   // Check if we resume a previous loop:
   uint8_t colstart = 0, rowstart = 0;
   size_t dummy;
-  LoopInterruptResume(LoopId,colstart,rowstart,dummy,dummy);
+  LoopInterruptResume(LoopId,colstart,rowstart,dummy,dummy,dummy,dummy);
   
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
@@ -327,7 +336,7 @@ bool CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
       }
       // Interrupt the loop in case of high buffer fill level:
       else if(!LoopInterruptStatus()) {
-	LoopInterruptStore(LoopId,col,row,0,0);
+	LoopInterruptStore(LoopId,col,row,0,1,0,1);
 	return false;
       }
 
@@ -408,7 +417,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
   uint8_t colstart = 0, rowstart = 0;
   size_t dac1start = dac1low;
   size_t dummy;
-  LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dummy);
+  LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dummy,dummy,dummy);
 
   // If FLAG_FORCE_UNMASKED is not set, mask the chip:
   if(!(flags&FLAG_FORCE_UNMASKED)) {
@@ -449,7 +458,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
 	}
 	// Interrupt the loop in case of high buffer fill level:
 	else if(!LoopInterruptStatus()) {
-	  LoopInterruptStore(LoopId,col,row,dac1,0);
+	  LoopInterruptStore(LoopId,col,row,dac1,1,0,1);
 	  return false;
 	}
 
@@ -509,7 +518,7 @@ bool CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
   // Check if we resume a previous loop:
   uint8_t dummy; size_t dummy2;
   size_t dac1start = dac1low;
-  LoopInterruptResume(LoopId,dummy,dummy,dac1start,dummy2);
+  LoopInterruptResume(LoopId,dummy,dummy,dac1start,dummy2,dummy2,dummy2);
 
   // Enable this column on every configured ROC:
   // Set the calibrate bits on every configured ROC
@@ -535,7 +544,7 @@ bool CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
     }
     // Interrupt the loop in case of high buffer fill level:
     else if(!LoopInterruptStatus()) {
-      LoopInterruptStore(LoopId,0,0,dac1,0);
+      LoopInterruptStore(LoopId,0,0,dac1,1,0,1);
       return false;
     }
 
@@ -583,7 +592,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
   uint8_t colstart = 0, rowstart = 0;
   size_t dac1start = dac1low;
   size_t dummy;
-  LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dummy);
+  LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dummy,dummy,dummy);
 
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
@@ -616,7 +625,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
 	}
 	// Interrupt the loop in case of high buffer fill level:
 	else if(!LoopInterruptStatus()) {
-	  LoopInterruptStore(LoopId,col,row,dac1,0);
+	  LoopInterruptStore(LoopId,col,row,dac1,1,0,1);
 	  return false;
 	}
 
@@ -666,7 +675,7 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
   // Check if we resume a previous loop:
   uint8_t dummy; size_t dummy2;
   size_t dac1start = dac1low;
-  LoopInterruptResume(LoopId,dummy,dummy,dac1start,dummy2);
+  LoopInterruptResume(LoopId,dummy,dummy,dac1start,dummy2,dummy2,dummy2);
 
   // Enable this column on the configured ROC:
   // Set the calibrate bits on every configured ROC
@@ -690,7 +699,7 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
     }
     // Interrupt the loop in case of high buffer fill level:
     else if(!LoopInterruptStatus()) {
-      LoopInterruptStore(LoopId,0,0,dac1,0);
+      LoopInterruptStore(LoopId,0,0,dac1,1,0,1);
       return false;
     }
 
@@ -731,7 +740,8 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
   // Check if we resume a previous loop:
   uint8_t colstart = 0, rowstart = 0;
   size_t dac1start = dac1low, dac2start = dac2low;
-  LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dac2start);
+  size_t dummy;
+  LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dummy,dac2start,dummy);
 
   // If FLAG_FORCE_UNMASKED is not set, mask the chip:
   if(!(flags&FLAG_FORCE_UNMASKED)) {
@@ -783,7 +793,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
 	  }
 	  // Interrupt the loop in case of high buffer fill level:
 	  else if(!LoopInterruptStatus()) {
-	    LoopInterruptStore(LoopId,col,row,dac1,dac2);
+	    LoopInterruptStore(LoopId,col,row,dac1,1,dac2,1);
 	    return false;
 	  }
 
@@ -845,9 +855,9 @@ bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
   const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
-  uint8_t dummy;
+  uint8_t dummy; size_t dummy2;
   size_t dac1start = dac1low, dac2start = dac2low;
-  LoopInterruptResume(LoopId,dummy,dummy,dac1start,dac2start);
+  LoopInterruptResume(LoopId,dummy,dummy,dac1start,dummy2,dac2start,dummy2);
 
   // Enable this column on every configured ROC:
   // Set the calibrate bits on every configured ROC
@@ -882,7 +892,7 @@ bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
       }
       // Interrupt the loop in case of high buffer fill level:
       else if(!LoopInterruptStatus()) {
-	LoopInterruptStore(LoopId,0,0,dac1,dac2);
+	LoopInterruptStore(LoopId,0,0,dac1,1,dac2,1);
 	return false;
       }
 
@@ -933,7 +943,8 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
   // Check if we resume a previous loop:
   uint8_t colstart = 0, rowstart = 0;
   size_t dac1start = dac1low, dac2start = dac2low;
-  LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dac2start);
+  size_t dummy;
+  LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dummy,dac2start,dummy);
 
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
@@ -974,7 +985,7 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
 	  }
 	  // Interrupt the loop in case of high buffer fill level:
 	  else if(!LoopInterruptStatus()) {
-	    LoopInterruptStore(LoopId,col,row,dac1,dac2);
+	    LoopInterruptStore(LoopId,col,row,dac1,1,dac2,1);
 	    return false;
 	  }
 
@@ -1026,9 +1037,9 @@ bool CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
   const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
-  uint8_t dummy;
+  uint8_t dummy; size_t dummy2;
   size_t dac1start = dac1low, dac2start = dac2low;
-  LoopInterruptResume(LoopId,dummy,dummy,dac1start,dac2start);
+  LoopInterruptResume(LoopId,dummy,dummy,dac1start,dummy2,dac2start,dummy2);
 
   // Enable this column on the configured ROC:
   // Set the calibrate bits on every configured ROC
@@ -1060,7 +1071,7 @@ bool CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
       }
       // Interrupt the loop in case of high buffer fill level:
       else if(!LoopInterruptStatus()) {
-	LoopInterruptStore(LoopId,0,0,dac1,dac2);
+	LoopInterruptStore(LoopId,0,0,dac1,1,dac2,1);
 	return false;
       }
 
