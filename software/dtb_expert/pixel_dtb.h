@@ -489,8 +489,8 @@ public:
 	size_t CalibratedDAC(size_t value);
 
 	RPC_EXPORT void LoopInterruptReset();
-	void LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, size_t &dac1step, size_t &dac2, size_t &dac2step);
-	void LoopInterruptStore(uint16_t id, uint8_t column, uint8_t row, size_t dac1, size_t dac1step, size_t dac2, size_t dac2step);
+	void LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, uint8_t &dac1step, size_t &dac2, uint8_t &dac2step);
+	void LoopInterruptStore(uint16_t id, uint8_t column, uint8_t row, size_t dac1, uint8_t dac1step, size_t dac2, uint8_t dac2step);
 	bool LoopInterruptStatus();
 
 	RPC_EXPORT void SetLoopTriggerDelay(uint16_t delay);
