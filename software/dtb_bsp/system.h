@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
  *
- * Generated: Tue Jun 03 15:35:50 CEST 2014
+ * Generated: Tue Jul 01 14:49:22 CEST 2014
  */
 
 /*
@@ -141,6 +141,7 @@
 #define __ALTERA_NIOS2_QSYS
 #define __ALTMEMDDR2
 #define __DAQ_DMA
+#define __DELAY_IN
 #define __DELAY_OUT
 #define __DELAY_TRIGGER
 #define __EVENTSIM
@@ -740,7 +741,7 @@
 #define MAIN_CONTROL_BIT_CLEARING_EDGE_REGISTER 0
 #define MAIN_CONTROL_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define MAIN_CONTROL_CAPTURE 0
-#define MAIN_CONTROL_DATA_WIDTH 7
+#define MAIN_CONTROL_DATA_WIDTH 8
 #define MAIN_CONTROL_DO_TEST_BENCH_WIRING 0
 #define MAIN_CONTROL_DRIVEN_SIM_VALUE 0
 #define MAIN_CONTROL_EDGE_TYPE "NONE"
@@ -909,6 +910,20 @@
 
 
 /*
+ * rda_delay configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_rda_delay delay_in
+#define RDA_DELAY_BASE 0x81080e0
+#define RDA_DELAY_IRQ -1
+#define RDA_DELAY_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define RDA_DELAY_NAME "/dev/rda_delay"
+#define RDA_DELAY_SPAN 4
+#define RDA_DELAY_TYPE "delay_in"
+
+
+/*
  * sgdma_rx configuration
  *
  */
@@ -1026,7 +1041,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1401796631
+#define SYSID_TIMESTAMP 1404218649
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 

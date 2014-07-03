@@ -67,13 +67,17 @@ module deser160_serpar
   deser160_serpar_delay del_tin (clk, sync, reset, delay,  tin_ena,  tin_del );
 
   // stop timing (tout) ------------------------------------------------------
-  reg tout_del1, tout_del;
+  
+  wire tout_del = tout;
+  /*
+  reg tout_del;
   always @(posedge clk or posedge reset)
   begin
-    if (reset) { tout_del, tout_del1 } <= 2'b00;
-    else if (sync) { tout_del, tout_del1 } <= { tout_del1,  tout };
-  end 
-
+    if (reset) tout_del <= 0;
+    else if (sync) tout_del <= tout;
+  end
+  */
+  
   // --- start/stop marker ---------------------------------------------------
   reg mark_start;
   reg mark_end;
