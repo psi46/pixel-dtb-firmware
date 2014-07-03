@@ -410,6 +410,12 @@ bool CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
 
 bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
 
+  // Setting the default increment step size for DAC scan to 1:
+  return LoopMultiRocAllPixelsDacScan(roc_i2c, nTriggers, flags, dac1register, dac1low, dac1high, 1);
+}
+
+bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1step, uint8_t dac1low, uint8_t dac1high) {
+
   const uint16_t LoopId = 0xac34;
   const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
@@ -417,7 +423,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
   uint8_t colstart = 0, rowstart = 0;
   size_t dac1start = dac1low;
   size_t dummy; uint8_t dummy2;
-  LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dummy2,dummy,dummy2);
+  LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dac1step,dummy,dummy2);
 
   // If FLAG_FORCE_UNMASKED is not set, mask the chip:
   if(!(flags&FLAG_FORCE_UNMASKED)) {
@@ -449,7 +455,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
       }
 
       // Loop over the DAC range specified:
-      for (size_t dac1 = dac1start; dac1 <= dac1high; dac1++) {
+      for (size_t dac1 = dac1start; dac1 <= dac1high; dac1 += dac1step) {
 
 	// Return true if we had too many retrys:
 	if(LoopInterruptCounter >= LOOP_MAX_INTERRUPTS) {
@@ -458,7 +464,7 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
 	}
 	// Interrupt the loop in case of high buffer fill level:
 	else if(!LoopInterruptStatus()) {
-	  LoopInterruptStore(LoopId,col,row,dac1,1,0,1);
+	  LoopInterruptStore(LoopId,col,row,dac1,dac1step,0,1);
 	  return false;
 	}
 
@@ -669,13 +675,18 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
 
 bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high) {
 
+  return LoopSingleRocOnePixelDacScan(roc_i2c, column, row, nTriggers, flags, dac1register, 1, dac1low, dac1high);
+}
+
+bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1step, uint8_t dac1low, uint8_t dac1high) {
+
   const uint16_t LoopId = 0xfe5d;
   const uint16_t TriggerDelay = GetLoopTriggerDelay(nTriggers);
 
   // Check if we resume a previous loop:
   uint8_t dummy; size_t dummy2;
   size_t dac1start = dac1low;
-  LoopInterruptResume(LoopId,dummy,dummy,dac1start,dummy,dummy2,dummy);
+  LoopInterruptResume(LoopId,dummy,dummy,dac1start,dac1step,dummy2,dummy);
 
   // Enable this column on the configured ROC:
   // Set the calibrate bits on every configured ROC
@@ -690,7 +701,7 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Loop over the DAC range specified:
-  for (size_t dac1 = dac1start; dac1 <= dac1high; dac1++) {
+  for (size_t dac1 = dac1start; dac1 <= dac1high; dac1 += dac1step) {
 
     // Return true if we had too many retrys:
     if(LoopInterruptCounter >= LOOP_MAX_INTERRUPTS) {
@@ -699,7 +710,7 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
     }
     // Interrupt the loop in case of high buffer fill level:
     else if(!LoopInterruptStatus()) {
-      LoopInterruptStore(LoopId,0,0,dac1,1,0,1);
+      LoopInterruptStore(LoopId,0,0,dac1,dac1step,0,1);
       return false;
     }
 

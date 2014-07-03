@@ -1272,6 +1272,24 @@ bool rpc__LoopMultiRocAllPixelsDacScan$b1CSSCCC(rpcMessage &msg)
 	return true;
 }
 
+bool rpc__LoopMultiRocAllPixelsDacScan$b1CSSCCCC(rpcMessage &msg)
+{
+	if (!msg.CheckCmdSize(8)) return false;
+	uint16_t rpc_par2 = msg.Get_UINT16();
+	uint16_t rpc_par3 = msg.Get_UINT16();
+	uint8_t rpc_par4 = msg.Get_UINT8();
+	uint8_t rpc_par5 = msg.Get_UINT8();
+	uint8_t rpc_par6 = msg.Get_UINT8();
+	uint8_t rpc_par7 = msg.Get_UINT8();
+	vector<uint8_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
+	bool rpc_par0 = tb.LoopMultiRocAllPixelsDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7);
+	msg.CreateCmd(120);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
+	return true;
+}
+
 bool rpc__LoopMultiRocOnePixelDacScan$b1CCCSSCCC(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(9)) return false;
@@ -1284,7 +1302,7 @@ bool rpc__LoopMultiRocOnePixelDacScan$b1CCCSSCCC(rpcMessage &msg)
 	uint8_t rpc_par8 = msg.Get_UINT8();
 	vector<uint8_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
 	bool rpc_par0 = tb.LoopMultiRocOnePixelDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8);
-	msg.CreateCmd(120);
+	msg.CreateCmd(121);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -1301,7 +1319,7 @@ bool rpc__LoopSingleRocAllPixelsDacScan$bCSSCCC(rpcMessage &msg)
 	uint8_t rpc_par5 = msg.Get_UINT8();
 	uint8_t rpc_par6 = msg.Get_UINT8();
 	bool rpc_par0 = tb.LoopSingleRocAllPixelsDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6);
-	msg.CreateCmd(121);
+	msg.CreateCmd(122);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -1320,7 +1338,27 @@ bool rpc__LoopSingleRocOnePixelDacScan$bCCCSSCCC(rpcMessage &msg)
 	uint8_t rpc_par7 = msg.Get_UINT8();
 	uint8_t rpc_par8 = msg.Get_UINT8();
 	bool rpc_par0 = tb.LoopSingleRocOnePixelDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8);
-	msg.CreateCmd(122);
+	msg.CreateCmd(123);
+	msg.Put_BOOL(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
+	return true;
+}
+
+bool rpc__LoopSingleRocOnePixelDacScan$bCCCSSCCCC(rpcMessage &msg)
+{
+	if (!msg.CheckCmdSize(11)) return false;
+	uint8_t rpc_par1 = msg.Get_UINT8();
+	uint8_t rpc_par2 = msg.Get_UINT8();
+	uint8_t rpc_par3 = msg.Get_UINT8();
+	uint16_t rpc_par4 = msg.Get_UINT16();
+	uint16_t rpc_par5 = msg.Get_UINT16();
+	uint8_t rpc_par6 = msg.Get_UINT8();
+	uint8_t rpc_par7 = msg.Get_UINT8();
+	uint8_t rpc_par8 = msg.Get_UINT8();
+	uint8_t rpc_par9 = msg.Get_UINT8();
+	bool rpc_par0 = tb.LoopSingleRocOnePixelDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9);
+	msg.CreateCmd(124);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -1340,7 +1378,7 @@ bool rpc__LoopMultiRocAllPixelsDacDacScan$b1CSSCCCCCC(rpcMessage &msg)
 	uint8_t rpc_par9 = msg.Get_UINT8();
 	vector<uint8_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
 	bool rpc_par0 = tb.LoopMultiRocAllPixelsDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9);
-	msg.CreateCmd(123);
+	msg.CreateCmd(125);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -1362,7 +1400,7 @@ bool rpc__LoopMultiRocOnePixelDacDacScan$b1CCCSSCCCCCC(rpcMessage &msg)
 	uint8_t rpc_par11 = msg.Get_UINT8();
 	vector<uint8_t> rpc_par1; if (!rpc_RecvVector(msg, rpc_par1)) return false;
 	bool rpc_par0 = tb.LoopMultiRocOnePixelDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9,rpc_par10,rpc_par11);
-	msg.CreateCmd(124);
+	msg.CreateCmd(126);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -1382,7 +1420,7 @@ bool rpc__LoopSingleRocAllPixelsDacDacScan$bCSSCCCCCC(rpcMessage &msg)
 	uint8_t rpc_par8 = msg.Get_UINT8();
 	uint8_t rpc_par9 = msg.Get_UINT8();
 	bool rpc_par0 = tb.LoopSingleRocAllPixelsDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9);
-	msg.CreateCmd(125);
+	msg.CreateCmd(127);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -1404,7 +1442,7 @@ bool rpc__LoopSingleRocOnePixelDacDacScan$bCCCSSCCCCCC(rpcMessage &msg)
 	uint8_t rpc_par10 = msg.Get_UINT8();
 	uint8_t rpc_par11 = msg.Get_UINT8();
 	bool rpc_par0 = tb.LoopSingleRocOnePixelDacDacScan(rpc_par1,rpc_par2,rpc_par3,rpc_par4,rpc_par5,rpc_par6,rpc_par7,rpc_par8,rpc_par9,rpc_par10,rpc_par11);
-	msg.CreateCmd(126);
+	msg.CreateCmd(128);
 	msg.Put_BOOL(rpc_par0);
 	if (!msg.SendCmd()) return false;
 	msg.Flush();
@@ -1418,14 +1456,26 @@ bool rpc__VectorTest$v1S2S(rpcMessage &msg)
 	uint32_t rpc_par2_hdr;
 	vectorR<uint16_t> rpc_par2;
 	tb.VectorTest(rpc_par1,rpc_par2);
-	msg.CreateCmd(127);
+	msg.CreateCmd(129);
 	if (!msg.SendCmd()) return false;
 	if (!rpc_SendVector(msg, rpc_par2_hdr, rpc_par2)) return false;
 	msg.Flush();
 	return true;
 }
 
-const uint16_t rpc_cmdListSize = 128;
+bool rpc__GetADC$SC(rpcMessage &msg)
+{
+	if (!msg.CheckCmdSize(1)) return false;
+	uint8_t rpc_par1 = msg.Get_UINT8();
+	uint16_t rpc_par0 = tb.GetADC(rpc_par1);
+	msg.CreateCmd(130);
+	msg.Put_UINT16(rpc_par0);
+	if (!msg.SendCmd()) return false;
+	msg.Flush();
+	return true;
+}
+
+const uint16_t rpc_cmdListSize = 131;
 
 const CRpcCall rpc_cmdlist[] =
 {
@@ -1549,14 +1599,17 @@ const CRpcCall rpc_cmdlist[] =
 	/*   117 */ { rpc__LoopSingleRocAllPixelsCalibrate$bCSS, "LoopSingleRocAllPixelsCalibrate$bCSS" },
 	/*   118 */ { rpc__LoopSingleRocOnePixelCalibrate$bCCCSS, "LoopSingleRocOnePixelCalibrate$bCCCSS" },
 	/*   119 */ { rpc__LoopMultiRocAllPixelsDacScan$b1CSSCCC, "LoopMultiRocAllPixelsDacScan$b1CSSCCC" },
-	/*   120 */ { rpc__LoopMultiRocOnePixelDacScan$b1CCCSSCCC, "LoopMultiRocOnePixelDacScan$b1CCCSSCCC" },
-	/*   121 */ { rpc__LoopSingleRocAllPixelsDacScan$bCSSCCC, "LoopSingleRocAllPixelsDacScan$bCSSCCC" },
-	/*   122 */ { rpc__LoopSingleRocOnePixelDacScan$bCCCSSCCC, "LoopSingleRocOnePixelDacScan$bCCCSSCCC" },
-	/*   123 */ { rpc__LoopMultiRocAllPixelsDacDacScan$b1CSSCCCCCC, "LoopMultiRocAllPixelsDacDacScan$b1CSSCCCCCC" },
-	/*   124 */ { rpc__LoopMultiRocOnePixelDacDacScan$b1CCCSSCCCCCC, "LoopMultiRocOnePixelDacDacScan$b1CCCSSCCCCCC" },
-	/*   125 */ { rpc__LoopSingleRocAllPixelsDacDacScan$bCSSCCCCCC, "LoopSingleRocAllPixelsDacDacScan$bCSSCCCCCC" },
-	/*   126 */ { rpc__LoopSingleRocOnePixelDacDacScan$bCCCSSCCCCCC, "LoopSingleRocOnePixelDacDacScan$bCCCSSCCCCCC" },
-	/*   127 */ { rpc__VectorTest$v1S2S, "VectorTest$v1S2S" }
+	/*   120 */ { rpc__LoopMultiRocAllPixelsDacScan$b1CSSCCCC, "LoopMultiRocAllPixelsDacScan$b1CSSCCCC" },
+	/*   121 */ { rpc__LoopMultiRocOnePixelDacScan$b1CCCSSCCC, "LoopMultiRocOnePixelDacScan$b1CCCSSCCC" },
+	/*   122 */ { rpc__LoopSingleRocAllPixelsDacScan$bCSSCCC, "LoopSingleRocAllPixelsDacScan$bCSSCCC" },
+	/*   123 */ { rpc__LoopSingleRocOnePixelDacScan$bCCCSSCCC, "LoopSingleRocOnePixelDacScan$bCCCSSCCC" },
+	/*   124 */ { rpc__LoopSingleRocOnePixelDacScan$bCCCSSCCCC, "LoopSingleRocOnePixelDacScan$bCCCSSCCCC" },
+	/*   125 */ { rpc__LoopMultiRocAllPixelsDacDacScan$b1CSSCCCCCC, "LoopMultiRocAllPixelsDacDacScan$b1CSSCCCCCC" },
+	/*   126 */ { rpc__LoopMultiRocOnePixelDacDacScan$b1CCCSSCCCCCC, "LoopMultiRocOnePixelDacDacScan$b1CCCSSCCCCCC" },
+	/*   127 */ { rpc__LoopSingleRocAllPixelsDacDacScan$bCSSCCCCCC, "LoopSingleRocAllPixelsDacDacScan$bCSSCCCCCC" },
+	/*   128 */ { rpc__LoopSingleRocOnePixelDacDacScan$bCCCSSCCCCCC, "LoopSingleRocOnePixelDacDacScan$bCCCSSCCCCCC" },
+	/*   129 */ { rpc__VectorTest$v1S2S, "VectorTest$v1S2S" },
+	/*   130 */ { rpc__GetADC$SC, "GetADC$SC" }
 };
 
 void rpc_Dispatcher(CRpcIo &rpc_io)
@@ -1569,7 +1622,7 @@ void rpc_Dispatcher(CRpcIo &rpc_io)
 		{
 			uint16_t cmd = msg.GetCmd();
 			if (rpc_error.HasError()) continue;
-			if (cmd >= 128) continue;
+			if (cmd >= 131) continue;
 			if (!rpc_cmdlist[cmd].call(msg)) msg.GetIo().Reset();
 		}
 	}
