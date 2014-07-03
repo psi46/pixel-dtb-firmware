@@ -313,6 +313,11 @@ void CTestboard::Init()
 	// -- default Test Loop parameter settings
 	SetLoopTriggerDelay(0);
 	LoopInterruptReset(); // Reset loop interrupt to none.
+	// -- default ROC_I2C_ADDRESSES for a module: 0-15
+	for(int i = 0; i < 16; i++) {
+	  ROC_I2C_ADDRESSES[i] = i;
+	}
+
 }
 
 
