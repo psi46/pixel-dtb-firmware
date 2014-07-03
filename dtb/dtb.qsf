@@ -1551,6 +1551,12 @@ set_location_assignment LAB_X6_Y16_N0 -to "instDESER400_4|dffom:inst476"
 
 
 
+set_global_assignment -name QIP_FILE gl_dff16e.qip
+set_global_assignment -name QIP_FILE gl_dff16.qip
+set_global_assignment -name QIP_FILE gl_or6x15.qip
+set_global_assignment -name QIP_FILE gl_type_decode.qip
+set_global_assignment -name QIP_FILE gl_or7x16.qip
+set_global_assignment -name BDF_FILE DTB_serFSM_1.bdf
 set_global_assignment -name SDC_FILE dtb.sdc
 set_global_assignment -name QIP_FILE dtb_system/synthesis/dtb_system.qip
 set_global_assignment -name AHDL_FILE clocksm.tdf

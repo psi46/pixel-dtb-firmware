@@ -101,6 +101,13 @@ applicable agreement for further details.
 		(line (pt 0 392)(pt 16 392))
 	)
 	(port
+		(pt 0 440)
+		(input)
+		(text "Trailer_OLD_NEW_0_1" (rect 24 432 153 446)(font "Arial" (font_size 8)))
+		(text "Trailer_OLD_NEW_0_1" (rect 24 432 153 446)(font "Arial" (font_size 8)))
+		(line (pt 0 440)(pt 16 440))
+	)
+	(port
 		(pt 248 264)
 		(output)
 		(text "twTP1" (rect 0 0 36 14)(font "Arial" (font_size 8)))

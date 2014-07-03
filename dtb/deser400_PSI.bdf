@@ -20,7 +20,7 @@ applicable agreement for further details.
 */
 (header "graphic" (version "1.4"))
 (properties
-	(page_setup "orientation\n1\npaper_size\n8\npaper_source\n6\nmargin\n0.394:0.394:0.394:0.394\n")
+	(page_setup "orientation\n1\npaper_size\n8\npaper_source\n12\nmargin\n0.000:0.000:0.000:0.000\n")
 )
 (pin
 	(input)
@@ -197,6 +197,22 @@ applicable agreement for further details.
 		(line (pt 109 12)(pt 113 8)(color 85 0 127))
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (color 85 0 127)(font_size 6)))
+)
+(pin
+	(input)
+	(rect 1408 1032 1616 1048)
+	(text "INPUT" (rect 165 0 193 10)(font "Arial" (font_size 6)))
+	(text "Trailer_OLD_NEW_0_1" (rect 5 0 118 12)(font "Arial" ))
+	(pt 208 8)
+	(drawing
+		(line (pt 124 12)(pt 149 12))
+		(line (pt 124 4)(pt 149 4))
+		(line (pt 153 8)(pt 208 8))
+		(line (pt 124 12)(pt 124 4))
+		(line (pt 149 4)(pt 153 8))
+		(line (pt 149 12)(pt 153 8))
+	)
+	(text "VCC" (rect 168 7 188 17)(font "Arial" (font_size 6)))
 )
 (pin
 	(output)
@@ -425,23 +441,6 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 2024 1472 2200 1488)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "twTP2" (rect 90 0 119 12)(font "Arial" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 52 4)(pt 78 4))
-		(line (pt 52 12)(pt 78 12))
-		(line (pt 52 12)(pt 52 4))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 82 8)(pt 78 12))
-		(line (pt 78 12)(pt 82 8))
-	)
-	(annotation_block (location)(rect 2224 1472 2320 1504))
-)
-(pin
-	(output)
 	(rect 608 1000 784 1016)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "twTP1" (rect 90 0 119 12)(font "Arial" ))
@@ -457,31 +456,22 @@ applicable agreement for further details.
 	)
 	(annotation_block (location)(rect 808 1000 904 1032))
 )
-(symbol
-	(rect 1912 1464 1960 1496)
-	(text "LCELL" (rect 1 0 28 10)(font "Arial" (color 0 0 0)(font_size 6)))
-	(text "inst49" (rect 3 21 32 33)(font "Arial" ))
-	(port
-		(pt 0 16)
-		(input)
-		(text "IN" (rect 2 7 13 19)(font "Courier New" (bold))(invisible))
-		(text "IN" (rect 2 7 13 19)(font "Courier New" (color 0 0 0)(bold))(invisible))
-		(line (pt 0 16)(pt 14 16))
-	)
-	(port
-		(pt 48 16)
-		(output)
-		(text "OUT" (rect 32 7 49 19)(font "Courier New" (bold))(invisible))
-		(text "OUT" (rect 32 7 49 19)(font "Courier New" (color 0 0 0)(bold))(invisible))
-		(line (pt 32 16)(pt 48 16))
-	)
+(pin
+	(output)
+	(rect 2016 312 2192 328)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "twTP2" (rect 90 0 119 12)(font "Arial" ))
+	(pt 0 8)
 	(drawing
-		(line (pt 14 25)(pt 14 7))
-		(line (pt 14 7)(pt 32 16))
-		(line (pt 14 25)(pt 32 16))
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1912 1448 2040 1464))
-	(fill (color 255 0 0))
+	(annotation_block (location)(rect 2280 264 2376 296))
 )
 (symbol
 	(rect 1976 408 2040 464)
@@ -2086,7 +2076,7 @@ applicable agreement for further details.
 	(annotation_block (location)(rect 1544 368 1632 384))
 )
 (symbol
-	(rect 1728 408 1792 456)
+	(rect 1712 408 1776 456)
 	(text "OR2" (rect 1 0 19 10)(font "Arial" (font_size 6)))
 	(text "inst453" (rect 3 37 38 49)(font "Arial" ))
 	(port
@@ -2117,7 +2107,7 @@ applicable agreement for further details.
 		(arc (pt 49 24)(pt 25 13)(rect -6 13 57 76))
 		(arc (pt 25 35)(pt 49 24)(rect -6 -27 57 36))
 	)
-	(annotation_block (location)(rect 1728 392 1816 408))
+	(annotation_block (location)(rect 1712 392 1800 408))
 )
 (symbol
 	(rect 1624 400 1688 456)
@@ -4159,85 +4149,6 @@ applicable agreement for further details.
 	(fill (color 255 0 0))
 )
 (symbol
-	(rect 1840 1184 2000 1280)
-	(text "HeaderTrailer" (rect 32 0 108 14)(font "Arial" (font_size 8)))
-	(text "inst502" (rect 72 80 107 92)(font "Arial" ))
-	(port
-		(pt 0 24)
-		(input)
-		(text "Sdat" (rect 0 8 25 22)(font "Arial" (font_size 8)))
-		(text "Sdat" (rect 21 19 46 33)(font "Arial" (font_size 8)))
-		(line (pt 0 24)(pt 16 24))
-	)
-	(port
-		(pt 0 72)
-		(input)
-		(text "CLK" (rect 0 8 23 22)(font "Arial" (font_size 8)))
-		(text "CLK" (rect 21 67 44 81)(font "Arial" (font_size 8))(invisible))
-		(line (pt 0 72)(pt 16 72))
-	)
-	(port
-		(pt 160 40)
-		(output)
-		(text "TBM_HEADER" (rect 0 8 80 22)(font "Arial" (font_size 8)))
-		(text "TBM_HEADER" (rect 67 35 147 49)(font "Arial" (font_size 8)))
-		(line (pt 160 40)(pt 144 40))
-	)
-	(port
-		(pt 160 56)
-		(output)
-		(text "ROC_HEADER" (rect 0 8 81 22)(font "Arial" (font_size 8)))
-		(text "ROC_HEADER" (rect 66 51 147 65)(font "Arial" (font_size 8)))
-		(line (pt 160 56)(pt 144 56))
-	)
-	(port
-		(pt 160 72)
-		(output)
-		(text "TBM_TRAILER" (rect 0 8 81 22)(font "Arial" (font_size 8)))
-		(text "TBM_TRAILER" (rect 66 67 147 81)(font "Arial" (font_size 8)))
-		(line (pt 160 72)(pt 144 72))
-	)
-	(port
-		(pt 160 24)
-		(output)
-		(text "sdo" (rect 110 16 131 30)(font "Arial" (font_size 8)))
-		(text "sdo" (rect 110 16 131 30)(font "Arial" (font_size 8)))
-		(line (pt 160 24)(pt 144 24))
-	)
-	(port
-		(pt 48 96)
-		(output)
-		(text "allowROC_H" (rect 40 46 54 117)(font "Arial" (font_size 8))(vertical))
-		(text "allowROC_H" (rect 40 6 54 77)(font "Arial" (color 255 0 0)(font_size 8))(vertical))
-		(line (pt 48 96)(pt 48 80))
-	)
-	(port
-		(pt 0 48)
-		(output)
-		(text "TP" (rect 24 32 38 46)(font "Arial" (font_size 8)))
-		(text "TP" (rect 24 40 38 54)(font "Arial" (font_size 8)))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 56)
-		(output)
-		(text "TPP" (rect 24 40 45 54)(font "Arial" (font_size 8)))
-		(text "TPP" (rect 24 48 45 62)(font "Arial" (font_size 8)))
-		(line (pt 0 56)(pt 16 56))
-	)
-	(drawing
-		(line (pt 16 64)(pt 24 72))
-		(line (pt 24 72)(pt 16 80))
-		(line (pt 64 16)(pt 72 24))
-		(line (pt 72 24)(pt 64 32))
-		(line (pt 72 16)(pt 80 24))
-		(line (pt 80 24)(pt 72 32))
-		(line (pt 80 16)(pt 88 24))
-		(line (pt 88 24)(pt 80 32))
-		(rectangle (rect 16 16 144 80))
-	)
-)
-(symbol
 	(rect 2322 928 2354 944)
 	(text "VCC" (rect 7 0 27 10)(font "Arial" (font_size 6)))
 	(text "inst503" (rect 3 5 38 17)(font "Arial" )(invisible))
@@ -4265,85 +4176,6 @@ applicable agreement for further details.
 	)
 	(drawing
 		(line (pt 8 8)(pt 24 8))
-	)
-)
-(symbol
-	(rect 1846 944 2006 1040)
-	(text "HeaderTrailer" (rect 32 0 108 14)(font "Arial" (font_size 8)))
-	(text "inst501" (rect 72 80 107 92)(font "Arial" ))
-	(port
-		(pt 0 24)
-		(input)
-		(text "Sdat" (rect 0 8 25 22)(font "Arial" (font_size 8)))
-		(text "Sdat" (rect 21 19 46 33)(font "Arial" (font_size 8)))
-		(line (pt 0 24)(pt 16 24))
-	)
-	(port
-		(pt 0 72)
-		(input)
-		(text "CLK" (rect 0 8 23 22)(font "Arial" (font_size 8)))
-		(text "CLK" (rect 21 67 44 81)(font "Arial" (font_size 8))(invisible))
-		(line (pt 0 72)(pt 16 72))
-	)
-	(port
-		(pt 160 40)
-		(output)
-		(text "TBM_HEADER" (rect 0 8 80 22)(font "Arial" (font_size 8)))
-		(text "TBM_HEADER" (rect 67 35 147 49)(font "Arial" (font_size 8)))
-		(line (pt 160 40)(pt 144 40))
-	)
-	(port
-		(pt 160 56)
-		(output)
-		(text "ROC_HEADER" (rect 0 8 81 22)(font "Arial" (font_size 8)))
-		(text "ROC_HEADER" (rect 66 51 147 65)(font "Arial" (font_size 8)))
-		(line (pt 160 56)(pt 144 56))
-	)
-	(port
-		(pt 160 72)
-		(output)
-		(text "TBM_TRAILER" (rect 0 8 81 22)(font "Arial" (font_size 8)))
-		(text "TBM_TRAILER" (rect 66 67 147 81)(font "Arial" (font_size 8)))
-		(line (pt 160 72)(pt 144 72))
-	)
-	(port
-		(pt 160 24)
-		(output)
-		(text "sdo" (rect 110 16 131 30)(font "Arial" (font_size 8)))
-		(text "sdo" (rect 110 16 131 30)(font "Arial" (font_size 8)))
-		(line (pt 160 24)(pt 144 24))
-	)
-	(port
-		(pt 48 96)
-		(output)
-		(text "allowROC_H" (rect 40 46 54 117)(font "Arial" (font_size 8))(vertical))
-		(text "allowROC_H" (rect 40 6 54 77)(font "Arial" (color 255 0 0)(font_size 8))(vertical))
-		(line (pt 48 96)(pt 48 80))
-	)
-	(port
-		(pt 0 48)
-		(output)
-		(text "TP" (rect 24 32 38 46)(font "Arial" (font_size 8)))
-		(text "TP" (rect 24 40 38 54)(font "Arial" (font_size 8)))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 56)
-		(output)
-		(text "TPP" (rect 24 40 45 54)(font "Arial" (font_size 8)))
-		(text "TPP" (rect 24 48 45 62)(font "Arial" (font_size 8)))
-		(line (pt 0 56)(pt 16 56))
-	)
-	(drawing
-		(line (pt 16 64)(pt 24 72))
-		(line (pt 24 72)(pt 16 80))
-		(line (pt 64 16)(pt 72 24))
-		(line (pt 72 24)(pt 64 32))
-		(line (pt 72 16)(pt 80 24))
-		(line (pt 80 24)(pt 72 32))
-		(line (pt 80 16)(pt 88 24))
-		(line (pt 88 24)(pt 80 32))
-		(rectangle (rect 16 16 144 80))
 	)
 )
 (symbol
@@ -5722,7 +5554,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 808 1168 1016 1312)
+	(rect 784 1168 992 1312)
 	(text "NRZI_decoder" (rect 5 0 76 12)(font "Arial" ))
 	(text "inst4003" (rect 136 104 177 116)(font "Arial" ))
 	(port
@@ -6091,61 +5923,6 @@ applicable agreement for further details.
 	(fill (color 177 177 177))
 )
 (symbol
-	(rect 2224 1496 2288 1600)
-	(text "lpm_and0" (rect 4 1 70 17)(font "Arial" (font_size 10)))
-	(text "inst4" (rect 8 88 31 100)(font "Arial" ))
-	(port
-		(pt 0 24)
-		(input)
-		(text "data0" (rect 0 0 31 14)(font "Arial" (font_size 8)))
-		(text "data0" (rect 4 -3 35 11)(font "Arial" (font_size 8))(invisible))
-		(line (pt 0 24)(pt 16 24))
-	)
-	(port
-		(pt 0 40)
-		(input)
-		(text "data1" (rect 0 0 31 14)(font "Arial" (font_size 8)))
-		(text "data1" (rect 4 13 35 27)(font "Arial" (font_size 8))(invisible))
-		(line (pt 0 40)(pt 16 40))
-	)
-	(port
-		(pt 0 56)
-		(input)
-		(text "data2" (rect 0 0 31 14)(font "Arial" (font_size 8)))
-		(text "data2" (rect 4 29 35 43)(font "Arial" (font_size 8))(invisible))
-		(line (pt 0 56)(pt 16 56))
-	)
-	(port
-		(pt 0 72)
-		(input)
-		(text "data3" (rect 0 0 31 14)(font "Arial" (font_size 8)))
-		(text "data3" (rect 4 45 35 59)(font "Arial" (font_size 8))(invisible))
-		(line (pt 0 72)(pt 16 72))
-	)
-	(port
-		(pt 0 88)
-		(input)
-		(text "data4" (rect 0 0 31 14)(font "Arial" (font_size 8)))
-		(text "data4" (rect 4 61 35 75)(font "Arial" (font_size 8))(invisible))
-		(line (pt 0 88)(pt 16 88))
-	)
-	(port
-		(pt 64 56)
-		(output)
-		(text "result" (rect 0 0 31 14)(font "Arial" (font_size 8)))
-		(text "result" (rect 12 31 43 45)(font "Arial" (font_size 8))(invisible))
-		(line (pt 64 56)(pt 43 56))
-	)
-	(drawing
-		(line (pt 16 44)(pt 16 20))
-		(line (pt 16 68)(pt 16 92))
-		(line (pt 16 44)(pt 32 44))
-		(line (pt 16 68)(pt 32 68))
-		(line (pt 16 68)(pt 16 44))
-		(arc (pt 32 68)(pt 32 44)(rect 20 44 44 68))
-	)
-)
-(symbol
 	(rect 1696 1024 1760 1128)
 	(text "lpm_and0" (rect 4 1 70 17)(font "Arial" (font_size 10)))
 	(text "inst1" (rect 8 88 31 100)(font "Arial" ))
@@ -6262,6 +6039,228 @@ applicable agreement for further details.
 		(arc (pt 32 68)(pt 32 44)(rect 20 44 44 68))
 	)
 	(fill (color 177 177 177))
+)
+(symbol
+	(rect 1904 304 1952 336)
+	(text "LCELL" (rect 1 0 28 10)(font "Arial" (color 0 0 0)(font_size 6)))
+	(text "inst49" (rect 3 21 32 33)(font "Arial" ))
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN" (rect 2 7 13 19)(font "Courier New" (bold))(invisible))
+		(text "IN" (rect 2 7 13 19)(font "Courier New" (color 0 0 0)(bold))(invisible))
+		(line (pt 0 16)(pt 14 16))
+	)
+	(port
+		(pt 48 16)
+		(output)
+		(text "OUT" (rect 32 7 49 19)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 32 7 49 19)(font "Courier New" (color 0 0 0)(bold))(invisible))
+		(line (pt 32 16)(pt 48 16))
+	)
+	(drawing
+		(line (pt 14 25)(pt 14 7))
+		(line (pt 14 7)(pt 32 16))
+		(line (pt 14 25)(pt 32 16))
+	)
+	(annotation_block (location)(rect 1904 288 2032 304))
+	(fill (color 255 0 0))
+)
+(symbol
+	(rect 1808 296 1872 352)
+	(text "dffom" (rect 7 -1 55 15)(font "Courier New" (font_size 10)(bold)))
+	(text "inst467" (rect 3 44 38 56)(font "Arial" ))
+	(port
+		(pt 0 24)
+		(input)
+		(text "D" (rect 20 20 25 32)(font "Courier New" (bold)))
+		(text "D" (rect 20 20 25 32)(font "Courier New" (bold)))
+		(line (pt 0 24)(pt 16 24))
+	)
+	(port
+		(pt 0 40)
+		(input)
+		(text "CK" (rect 28 36 39 48)(font "Courier New" (bold))(invisible))
+		(text "CK" (rect 28 36 39 48)(font "Courier New" (bold))(invisible))
+		(line (pt 0 40)(pt 16 40))
+	)
+	(port
+		(pt 64 24)
+		(output)
+		(text "Q" (rect 38 20 43 32)(font "Courier New" (bold)))
+		(text "Q" (rect 38 20 43 32)(font "Courier New" (bold)))
+		(line (pt 48 24)(pt 64 24))
+	)
+	(drawing
+		(line (pt 16 16)(pt 48 16))
+		(line (pt 16 48)(pt 48 48))
+		(line (pt 16 48)(pt 16 16))
+		(line (pt 48 48)(pt 48 16))
+		(line (pt 16 32)(pt 24 40))
+		(line (pt 24 40)(pt 16 48))
+	)
+	(annotation_block (location)(rect 1808 280 1896 296))
+	(fill (color 226 226 226))
+)
+(symbol
+	(rect 1840 1168 2000 1280)
+	(text "HeaderTrailer" (rect 24 0 100 14)(font "Arial" (font_size 8)))
+	(text "inst502" (rect 72 96 107 108)(font "Arial" ))
+	(port
+		(pt 0 40)
+		(input)
+		(text "Sdat" (rect 0 24 25 38)(font "Arial" (font_size 8)))
+		(text "Sdat" (rect 21 35 46 49)(font "Arial" (font_size 8)))
+		(line (pt 0 40)(pt 16 40))
+	)
+	(port
+		(pt 0 88)
+		(input)
+		(text "CLK" (rect 0 24 23 38)(font "Arial" (font_size 8)))
+		(text "CLK" (rect 21 83 44 97)(font "Arial" (font_size 8))(invisible))
+		(line (pt 0 88)(pt 16 88))
+	)
+	(port
+		(pt 0 24)
+		(input)
+		(text "Trailer_OLD_NEW_0_1" (rect 24 16 153 30)(font "Arial" (font_size 8)))
+		(text "Trailer_OLD_NEW_0_1" (rect 16 16 145 30)(font "Arial" (font_size 8)))
+		(line (pt 0 24)(pt 16 24))
+	)
+	(port
+		(pt 160 56)
+		(output)
+		(text "TBM_HEADER" (rect 0 24 80 38)(font "Arial" (font_size 8)))
+		(text "TBM_HEADER" (rect 72 51 152 65)(font "Arial" (font_size 8)))
+		(line (pt 160 56)(pt 144 56))
+	)
+	(port
+		(pt 160 72)
+		(output)
+		(text "ROC_HEADER" (rect 0 24 81 38)(font "Arial" (font_size 8)))
+		(text "ROC_HEADER" (rect 71 67 152 81)(font "Arial" (font_size 8)))
+		(line (pt 160 72)(pt 144 72))
+	)
+	(port
+		(pt 160 88)
+		(output)
+		(text "TBM_TRAILER" (rect 0 24 81 38)(font "Arial" (font_size 8)))
+		(text "TBM_TRAILER" (rect 71 83 152 97)(font "Arial" (font_size 8)))
+		(line (pt 160 88)(pt 144 88))
+	)
+	(port
+		(pt 160 40)
+		(output)
+		(text "sdo" (rect 110 32 131 46)(font "Arial" (font_size 8)))
+		(text "sdo" (rect 122 32 143 46)(font "Arial" (font_size 8)))
+		(line (pt 160 40)(pt 144 40))
+	)
+	(port
+		(pt 48 112)
+		(output)
+		(text "allowROC_H" (rect 40 62 54 133)(font "Arial" (font_size 8))(vertical))
+		(text "allowROC_H" (rect 40 22 54 93)(font "Arial" (color 255 0 0)(font_size 8))(vertical))
+		(line (pt 48 112)(pt 48 96))
+	)
+	(port
+		(pt 0 64)
+		(output)
+		(text "TP" (rect 24 48 38 62)(font "Arial" (font_size 8)))
+		(text "TP" (rect 24 56 38 70)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 72)
+		(output)
+		(text "TPP" (rect 24 56 45 70)(font "Arial" (font_size 8)))
+		(text "TPP" (rect 24 64 45 78)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 16 72))
+	)
+	(drawing
+		(line (pt 16 80)(pt 24 88))
+		(line (pt 24 88)(pt 16 96))
+		(rectangle (rect 16 16 144 96))
+	)
+)
+(symbol
+	(rect 1848 928 2008 1040)
+	(text "HeaderTrailer" (rect 24 0 100 14)(font "Arial" (font_size 8)))
+	(text "inst501" (rect 72 96 107 108)(font "Arial" ))
+	(port
+		(pt 0 40)
+		(input)
+		(text "Sdat" (rect 0 24 25 38)(font "Arial" (font_size 8)))
+		(text "Sdat" (rect 21 35 46 49)(font "Arial" (font_size 8)))
+		(line (pt 0 40)(pt 16 40))
+	)
+	(port
+		(pt 0 88)
+		(input)
+		(text "CLK" (rect 0 24 23 38)(font "Arial" (font_size 8)))
+		(text "CLK" (rect 21 83 44 97)(font "Arial" (font_size 8))(invisible))
+		(line (pt 0 88)(pt 16 88))
+	)
+	(port
+		(pt 0 24)
+		(input)
+		(text "Trailer_OLD_NEW_0_1" (rect 24 16 153 30)(font "Arial" (font_size 8)))
+		(text "Trailer_OLD_NEW_0_1" (rect 16 16 145 30)(font "Arial" (font_size 8)))
+		(line (pt 0 24)(pt 16 24))
+	)
+	(port
+		(pt 160 56)
+		(output)
+		(text "TBM_HEADER" (rect 0 24 80 38)(font "Arial" (font_size 8)))
+		(text "TBM_HEADER" (rect 72 51 152 65)(font "Arial" (font_size 8)))
+		(line (pt 160 56)(pt 144 56))
+	)
+	(port
+		(pt 160 72)
+		(output)
+		(text "ROC_HEADER" (rect 0 24 81 38)(font "Arial" (font_size 8)))
+		(text "ROC_HEADER" (rect 71 67 152 81)(font "Arial" (font_size 8)))
+		(line (pt 160 72)(pt 144 72))
+	)
+	(port
+		(pt 160 88)
+		(output)
+		(text "TBM_TRAILER" (rect 0 24 81 38)(font "Arial" (font_size 8)))
+		(text "TBM_TRAILER" (rect 71 83 152 97)(font "Arial" (font_size 8)))
+		(line (pt 160 88)(pt 144 88))
+	)
+	(port
+		(pt 160 40)
+		(output)
+		(text "sdo" (rect 110 32 131 46)(font "Arial" (font_size 8)))
+		(text "sdo" (rect 122 32 143 46)(font "Arial" (font_size 8)))
+		(line (pt 160 40)(pt 144 40))
+	)
+	(port
+		(pt 48 112)
+		(output)
+		(text "allowROC_H" (rect 40 62 54 133)(font "Arial" (font_size 8))(vertical))
+		(text "allowROC_H" (rect 40 22 54 93)(font "Arial" (color 255 0 0)(font_size 8))(vertical))
+		(line (pt 48 112)(pt 48 96))
+	)
+	(port
+		(pt 0 64)
+		(output)
+		(text "TP" (rect 24 48 38 62)(font "Arial" (font_size 8)))
+		(text "TP" (rect 24 56 38 70)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 72)
+		(output)
+		(text "TPP" (rect 24 56 45 70)(font "Arial" (font_size 8)))
+		(text "TPP" (rect 24 64 45 78)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 16 72))
+	)
+	(drawing
+		(line (pt 16 80)(pt 24 88))
+		(line (pt 24 88)(pt 16 96))
+		(rectangle (rect 16 16 144 96))
+	)
 )
 (connector
 	(pt 792 504)
@@ -6766,33 +6765,8 @@ applicable agreement for further details.
 	(pt 592 768)
 )
 (connector
-	(pt 1696 440)
-	(pt 1728 440)
-)
-(connector
-	(text "CLK400" (rect 1760 480 1801 495)(font "Arial Narrow" (color 255 0 0)(font_size 8)(bold)))
-	(pt 1776 480)
-	(pt 1808 480)
-)
-(connector
-	(pt 1808 448)
-	(pt 1808 480)
-)
-(connector
 	(pt 1960 352)
 	(pt 2160 352)
-)
-(connector
-	(pt 1792 432)
-	(pt 1808 432)
-)
-(connector
-	(pt 1688 424)
-	(pt 1728 424)
-)
-(connector
-	(pt 1696 440)
-	(pt 1696 792)
 )
 (connector
 	(text "lPSAsel[1]" (rect 1304 384 1354 396)(font "Arial" ))
@@ -7544,14 +7518,6 @@ applicable agreement for further details.
 	(pt 664 1072)
 )
 (connector
-	(pt 760 1192)
-	(pt 808 1192)
-)
-(connector
-	(pt 760 1072)
-	(pt 760 1192)
-)
-(connector
 	(pt 728 1072)
 	(pt 760 1072)
 )
@@ -7572,18 +7538,6 @@ applicable agreement for further details.
 	(pt 408 1232)
 	(pt 440 1232)
 	(color 255 0 0)
-)
-(connector
-	(text "CLK400" (rect 759 1288 807 1301)(font "Arial" (color 255 0 0)(font_size 8)(bold_italic)))
-	(pt 776 1288)
-	(pt 808 1288)
-	(color 255 0 0)
-)
-(connector
-	(text "5bOUT[4..0]" (rect 738 1208 798 1220)(font "Arial" ))
-	(pt 728 1208)
-	(pt 808 1208)
-	(bus)
 )
 (connector
 	(text "C400[2..0]" (rect 1072 1096 1123 1108)(font "Arial" ))
@@ -7650,6 +7604,14 @@ applicable agreement for further details.
 	(pt 1440 1480)
 )
 (connector
+	(pt 1624 1592)
+	(pt 1632 1592)
+)
+(connector
+	(pt 1624 1592)
+	(pt 1624 1480)
+)
+(connector
 	(pt 1528 1512)
 	(pt 1520 1512)
 )
@@ -7670,6 +7632,10 @@ applicable agreement for further details.
 	(pt 984 1440)
 	(pt 1040 1440)
 	(bus)
+)
+(connector
+	(pt 744 1472)
+	(pt 744 1624)
 )
 (connector
 	(pt 1520 1512)
@@ -7700,6 +7666,16 @@ applicable agreement for further details.
 	(pt 1440 1496)
 )
 (connector
+	(text "CLK320" (rect 1400 1640 1438 1652)(font "Arial" ))
+	(pt 1407 1640)
+	(pt 1448 1640)
+)
+(connector
+	(text "CLK320" (rect 1584 1592 1622 1604)(font "Arial" ))
+	(pt 1591 1608)
+	(pt 1632 1608)
+)
+(connector
 	(text "CLK320" (rect 1584 1496 1622 1508)(font "Arial" ))
 	(pt 1591 1496)
 	(pt 1632 1496)
@@ -7723,12 +7699,32 @@ applicable agreement for further details.
 	(pt 1120 1384)
 )
 (connector
+	(pt 1512 1624)
+	(pt 1520 1624)
+)
+(connector
+	(pt 1520 1624)
+	(pt 1632 1624)
+)
+(connector
 	(pt 976 1472)
 	(pt 1032 1472)
 )
 (connector
 	(pt 1032 1472)
 	(pt 1040 1472)
+)
+(connector
+	(pt 1504 1480)
+	(pt 1624 1480)
+)
+(connector
+	(pt 1624 1480)
+	(pt 1632 1480)
+)
+(connector
+	(pt 744 1624)
+	(pt 1448 1624)
 )
 (connector
 	(text "en5b" (rect 1312 1040 1335 1052)(font "Arial" ))
@@ -7760,18 +7756,27 @@ applicable agreement for further details.
 	(color 0 128 0)
 )
 (connector
+	(text "SS[0]" (rect 726 1456 753 1468)(font "Arial" ))
+	(pt 720 1472)
+	(pt 744 1472)
+)
+(connector
+	(pt 744 1472)
+	(pt 752 1472)
+)
+(connector
 	(text "CLK320" (rect 536 1456 574 1468)(font "Arial" ))
 	(pt 536 1472)
 	(pt 576 1472)
 )
 (connector
-	(pt 1024 1232)
-	(pt 1016 1232)
-)
-(connector
 	(text "CHANNELb" (rect 1848 1576 1907 1588)(font "Arial" ))
 	(pt 1848 1592)
 	(pt 1912 1592)
+)
+(connector
+	(pt 1784 1592)
+	(pt 1696 1592)
 )
 (connector
 	(text "CHANNELa" (rect 1855 1464 1914 1476)(font "Arial" ))
@@ -7781,10 +7786,6 @@ applicable agreement for further details.
 (connector
 	(pt 1784 1480)
 	(pt 1696 1480)
-)
-(connector
-	(pt 1960 1480)
-	(pt 2024 1480)
 )
 (connector
 	(pt 536 1008)
@@ -8039,30 +8040,8 @@ applicable agreement for further details.
 	(pt 2242 1208)
 )
 (connector
-	(pt 2006 968)
-	(pt 2242 968)
-)
-(connector
 	(pt 2048 872)
 	(pt 1904 872)
-)
-(connector
-	(text "clk160" (rect 1802 1016 1843 1029)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
-	(pt 1810 1016)
-	(pt 1846 1016)
-)
-(connector
-	(text "CHANNELa" (rect 1793 952 1852 964)(font "Arial" ))
-	(pt 1786 968)
-	(pt 1846 968)
-)
-(connector
-	(pt 1904 1040)
-	(pt 1904 872)
-)
-(connector
-	(pt 1894 1040)
-	(pt 1904 1040)
 )
 (connector
 	(pt 2048 896)
@@ -8081,14 +8060,6 @@ applicable agreement for further details.
 	(pt 2032 1016)
 )
 (connector
-	(pt 2006 1000)
-	(pt 2016 1000)
-)
-(connector
-	(pt 2006 1016)
-	(pt 2032 1016)
-)
-(connector
 	(text "la_deserDATAwe" (rect 2666 1104 2748 1116)(font "Arial" ))
 	(pt 2632 1120)
 	(pt 2760 1120)
@@ -8103,10 +8074,6 @@ applicable agreement for further details.
 	(pt 2242 1240)
 )
 (connector
-	(pt 2016 1000)
-	(pt 2242 1000)
-)
-(connector
 	(text "clk160" (rect 2194 1264 2235 1277)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
 	(pt 2210 1280)
 	(pt 2242 1280)
@@ -8114,24 +8081,6 @@ applicable agreement for further details.
 (connector
 	(pt 2346 1064)
 	(pt 2346 1304)
-)
-(connector
-	(text "clk160" (rect 1794 1256 1835 1269)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
-	(pt 1802 1256)
-	(pt 1840 1256)
-)
-(connector
-	(pt 1840 1256)
-	(pt 1842 1256)
-)
-(connector
-	(text "CHANNELb" (rect 1784 1192 1843 1204)(font "Arial" ))
-	(pt 1786 1208)
-	(pt 1840 1208)
-)
-(connector
-	(pt 1840 1208)
-	(pt 1842 1208)
 )
 (connector
 	(text "CLK160" (rect 1755 1480 1793 1492)(font "Arial" ))
@@ -8175,11 +8124,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1016 1208)
-	(pt 1128 1208)
-	(bus)
-)
-(connector
 	(pt 1272 1208)
 	(pt 1368 1208)
 	(bus)
@@ -8193,14 +8137,6 @@ applicable agreement for further details.
 	(text "CLK400" (rect 1080 1224 1128 1237)(font "Arial" (color 255 0 0)(font_size 8)(bold_italic)))
 	(pt 1097 1224)
 	(pt 1128 1224)
-)
-(connector
-	(pt 912 1312)
-	(pt 912 1392)
-)
-(connector
-	(pt 912 1392)
-	(pt 832 1392)
 )
 (connector
 	(pt 576 1272)
@@ -8233,22 +8169,10 @@ applicable agreement for further details.
 	(pt 736 1272)
 )
 (connector
-	(pt 704 1272)
-	(pt 736 1272)
-)
-(connector
-	(pt 736 1272)
-	(pt 808 1272)
-)
-(connector
 	(text "CLK400" (rect 856 1352 904 1365)(font "Arial" (color 255 0 0)(font_size 8)(bold_italic)))
 	(pt 920 1352)
 	(pt 873 1352)
 	(color 255 0 0)
-)
-(connector
-	(pt 1024 1232)
-	(pt 1024 1288)
 )
 (connector
 	(pt 1024 1288)
@@ -8298,10 +8222,6 @@ applicable agreement for further details.
 (connector
 	(pt 2000 1256)
 	(pt 2242 1256)
-)
-(connector
-	(pt 2032 1016)
-	(pt 2242 1016)
 )
 (connector
 	(text "CLK160" (rect 1923 1328 1961 1340)(font "Arial" ))
@@ -8403,10 +8323,6 @@ applicable agreement for further details.
 (connector
 	(pt 2000 1224)
 	(pt 2242 1224)
-)
-(connector
-	(pt 2006 984)
-	(pt 2242 984)
 )
 (connector
 	(pt 2458 1040)
@@ -8529,10 +8445,6 @@ applicable agreement for further details.
 	(pt 1664 1112)
 )
 (connector
-	(pt 1760 1296)
-	(pt 2114 1296)
-)
-(connector
 	(text "PQb[4]" (rect 1664 1248 1698 1260)(font "Arial" ))
 	(pt 1696 1264)
 	(pt 1664 1264)
@@ -8558,59 +8470,190 @@ applicable agreement for further details.
 	(pt 1664 1328)
 )
 (connector
-	(pt 744 1472)
-	(pt 744 1624)
+	(pt 1872 320)
+	(pt 1904 320)
 )
 (connector
-	(text "CLK320" (rect 1400 1640 1438 1652)(font "Arial" ))
-	(pt 1407 1640)
-	(pt 1448 1640)
+	(pt 1952 320)
+	(pt 2016 320)
 )
 (connector
-	(pt 744 1624)
-	(pt 1448 1624)
+	(text "CLK400" (rect 1760 480 1801 495)(font "Arial Narrow" (color 255 0 0)(font_size 8)(bold)))
+	(pt 1776 480)
+	(pt 1800 480)
 )
 (connector
-	(text "SS[0]" (rect 726 1456 753 1468)(font "Arial" ))
-	(pt 720 1472)
-	(pt 744 1472)
+	(pt 1808 448)
+	(pt 1800 448)
 )
 (connector
-	(pt 744 1472)
-	(pt 752 1472)
+	(pt 1808 336)
+	(pt 1800 336)
 )
 (connector
-	(pt 1624 1592)
-	(pt 1632 1592)
+	(pt 1800 336)
+	(pt 1800 448)
 )
 (connector
-	(pt 1624 1480)
-	(pt 1624 1592)
+	(pt 1800 448)
+	(pt 1800 480)
 )
 (connector
-	(text "CLK320" (rect 1584 1592 1622 1604)(font "Arial" ))
-	(pt 1591 1608)
-	(pt 1632 1608)
+	(pt 1696 440)
+	(pt 1712 440)
 )
 (connector
-	(pt 1784 1592)
-	(pt 1696 1592)
+	(pt 1688 424)
+	(pt 1712 424)
 )
 (connector
-	(pt 1504 1480)
-	(pt 1624 1480)
+	(pt 1696 792)
+	(pt 1696 440)
 )
 (connector
-	(pt 1624 1480)
-	(pt 1632 1480)
+	(pt 1808 320)
+	(pt 1792 320)
 )
 (connector
-	(pt 1512 1624)
-	(pt 1520 1624)
+	(pt 1792 320)
+	(pt 1792 432)
 )
 (connector
-	(pt 1520 1624)
-	(pt 1632 1624)
+	(pt 1776 432)
+	(pt 1792 432)
+)
+(connector
+	(pt 1792 432)
+	(pt 1808 432)
+)
+(connector
+	(pt 1760 1296)
+	(pt 2114 1296)
+)
+(connector
+	(pt 2016 1000)
+	(pt 2242 1000)
+)
+(connector
+	(pt 2032 1016)
+	(pt 2242 1016)
+)
+(connector
+	(text "clk160" (rect 1794 1256 1835 1269)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
+	(pt 1802 1256)
+	(pt 1840 1256)
+)
+(connector
+	(text "CHANNELb" (rect 1784 1192 1843 1204)(font "Arial" ))
+	(pt 1786 1208)
+	(pt 1840 1208)
+)
+(connector
+	(text "clk160" (rect 1802 1016 1843 1029)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
+	(pt 1810 1016)
+	(pt 1848 1016)
+)
+(connector
+	(text "CHANNELa" (rect 1793 952 1852 964)(font "Arial" ))
+	(pt 1786 968)
+	(pt 1848 968)
+)
+(connector
+	(pt 2008 968)
+	(pt 2242 968)
+)
+(connector
+	(pt 2008 984)
+	(pt 2242 984)
+)
+(connector
+	(pt 2008 1000)
+	(pt 2016 1000)
+)
+(connector
+	(pt 2008 1016)
+	(pt 2032 1016)
+)
+(connector
+	(pt 1848 952)
+	(pt 1640 952)
+)
+(connector
+	(pt 1840 1192)
+	(pt 1640 1192)
+)
+(connector
+	(pt 1616 1040)
+	(pt 1640 1040)
+)
+(connector
+	(pt 1640 1192)
+	(pt 1640 1040)
+)
+(connector
+	(pt 1640 1040)
+	(pt 1640 952)
+)
+(connector
+	(pt 760 1192)
+	(pt 784 1192)
+)
+(connector
+	(pt 760 1072)
+	(pt 760 1192)
+)
+(connector
+	(text "CLK400" (rect 735 1288 783 1301)(font "Arial" (color 255 0 0)(font_size 8)(bold_italic)))
+	(pt 752 1288)
+	(pt 784 1288)
+	(color 255 0 0)
+)
+(connector
+	(text "5bOUT[4..0]" (rect 714 1208 774 1220)(font "Arial" ))
+	(pt 728 1208)
+	(pt 784 1208)
+	(bus)
+)
+(connector
+	(pt 888 1392)
+	(pt 888 1312)
+)
+(connector
+	(pt 832 1392)
+	(pt 888 1392)
+)
+(connector
+	(pt 1024 1288)
+	(pt 1024 1232)
+)
+(connector
+	(pt 704 1272)
+	(pt 736 1272)
+)
+(connector
+	(pt 736 1272)
+	(pt 784 1272)
+)
+(connector
+	(pt 992 1208)
+	(pt 1128 1208)
+	(bus)
+)
+(connector
+	(pt 992 1232)
+	(pt 1024 1232)
+)
+(connector
+	(pt 1896 1040)
+	(pt 1896 1048)
+)
+(connector
+	(pt 1896 1048)
+	(pt 1904 1048)
+)
+(connector
+	(pt 1904 872)
+	(pt 1904 1048)
 )
 (junction (pt 896 328))
 (junction (pt 472 568))
@@ -8698,8 +8741,6 @@ applicable agreement for further details.
 (junction (pt 2242 1040))
 (junction (pt 2242 1280))
 (junction (pt 2346 1304))
-(junction (pt 1840 1256))
-(junction (pt 1840 1208))
 (junction (pt 696 864))
 (junction (pt 680 424))
 (junction (pt 736 1272))
@@ -8711,6 +8752,9 @@ applicable agreement for further details.
 (junction (pt 2442 1264))
 (junction (pt 2456 1248))
 (junction (pt 2456 1008))
+(junction (pt 1800 448))
+(junction (pt 1792 432))
+(junction (pt 1640 1040))
 (text "-" (rect 816 344 820 358)(font "Arial" (font_size 8)))
 (text "SerDatIN" (rect 397 296 443 308)(font "Arial" ))
 (text "-" (rect 816 704 820 718)(font "Arial" (font_size 8)))

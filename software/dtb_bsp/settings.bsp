@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>03.06.2014 15:35:47</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1401802547200</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>03.07.2014 13:59:21</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1404388761399</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>X:\source\FPGA\pixel-dtb-firmware\software\dtb_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\dtb\dtb_system.sopcinfo</SopcDesignFile>
@@ -1094,6 +1094,12 @@
                 <slaveDescriptor>eventgen</slaveDescriptor>
                 <addressRange>0x081080D0 - 0x081080D7</addressRange>
                 <addressSpan>8</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>rda_delay</slaveDescriptor>
+                <addressRange>0x081080E0 - 0x081080E3</addressRange>
+                <addressSpan>4</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>

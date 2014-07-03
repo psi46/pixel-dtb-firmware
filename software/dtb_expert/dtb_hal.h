@@ -19,13 +19,14 @@ inline void _SetLED(unsigned int value)
 { IOWR_ALTERA_AVALON_PIO_DATA(LED_BASE, value); }
 
 
-#define MAINCTRL_CLK_EXT   0x01
-#define MAINCTRL_PWR_ON    0x02
-#define MAINCTRL_HV_ON     0x04
-#define MAINCTRL_DUT_nRES  0x08
-#define MAINCTRL_TERM      0x10
-#define MAINCTRL_ADCENA    0x20
-#define MAINCTRL_PLL_RESET 0x40
+#define MAINCTRL_CLK_EXT      0x01
+#define MAINCTRL_PWR_ON       0x02
+#define MAINCTRL_HV_ON        0x04
+#define MAINCTRL_DUT_nRES     0x08
+#define MAINCTRL_TERM         0x10
+#define MAINCTRL_ADCENA       0x20
+#define MAINCTRL_PLL_RESET    0x40
+#define MAINCTRL_DESER400_OLD 0x80
 
 inline void _MainControl(unsigned int value)
 { IOWR_ALTERA_AVALON_PIO_DATA(MAIN_CONTROL_BASE, value); }
@@ -47,6 +48,10 @@ inline void SetClkDiv(unsigned char value)
 inline void SetClockStretchReg(unsigned char reg, unsigned short value)
 // { IOWR_16DIRECT(CLK_STRETCH_BASE, reg*2, value); }
 { __builtin_sthio (__IO_CALC_ADDRESS_DYNAMIC (CLK_STRETCH_BASE, reg*2), value); }
+
+inline void SetToutRdbDelay(unsigned char value)
+{ IOWR_ALTERA_AVALON_PIO_DATA(DELAY_TIN_BASE, value); }
+
 
 // === ADC ==================================================================
 

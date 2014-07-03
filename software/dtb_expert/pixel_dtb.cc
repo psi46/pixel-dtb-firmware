@@ -285,6 +285,8 @@ void CTestboard::Init()
 	Sig_SetMode(SIG_SDA, SIG_MODE_NORMAL);
 	Sig_SetMode(SIG_TIN, SIG_MODE_NORMAL);
 
+	Sig_SetRdaToutDelay(0);
+
 	// --- signal probe
 	SignalProbeD1(PROBE_OFF);
 	SignalProbeD2(PROBE_OFF);
@@ -372,7 +374,7 @@ void CTestboard::SetClock(unsigned char MHz)
 }
 
 
-RPC_EXPORT void CTestboard::SetClockStretch(uint8_t src,
+void CTestboard::SetClockStretch(uint8_t src,
 	uint16_t delay, uint16_t width)
 {
 	  if (width > 0)
@@ -428,6 +430,7 @@ void CTestboard::Sig_SetDelay(uint8_t signal, uint16_t delay, int8_t duty)
 	IOWR_16DIRECT(sig, 4, delayC);
 	IOWR_16DIRECT(sig, 6,  0);
 }
+
 
 void CTestboard::Sig_SetMode(uint8_t signal, uint8_t mode)
 {
@@ -537,13 +540,49 @@ void CTestboard::Sig_Restore()
 
 void CTestboard::Sig_SetLVDS()
 {
+	mainCtrl &= ~MAINCTRL_TERM;
+	_MainControl(mainCtrl);
 	IOWR_8DIRECT(LCDS_IO_BASE, 0, 0x41);
 }
 
 void CTestboard::Sig_SetLCDS()
 {
+	mainCtrl |=  MAINCTRL_TERM;
+	_MainControl(mainCtrl);
 	IOWR_8DIRECT(LCDS_IO_BASE, 0, 0x40);
 }
+
+
+void CTestboard::Sig_SetRdaToutDelay(uint8_t delay)
+{
+	const unsigned char delayStep[20] =
+	{
+		0x00, //  0:  0.00 ns
+		0x01, //  1:  1.25 ns
+		0x02, //  2:  2.50 ns
+		0x03, //  3:  3.75 ns
+		0x06, //  4:  5.00 ns
+		0x07, //  5:  6.25 ns
+		0x0e, //  6:  7.50 ns
+		0x0f, //  7:  8.75 ns
+		0x1e, //  8: 10.00 ns
+		0x1f, //  9: 11.25 ns
+		0x20, // 10: 12.50 ns
+		0x21, // 11: 13.75 ns
+		0x22, // 12: 15.00 ns
+		0x23, // 13: 16.25 ns
+		0x26, // 14: 17.50 ns
+		0x27, // 15: 18.75 ns
+		0x2e, // 16: 20.00 ns
+		0x2f, // 17: 21.25 ns
+		0x3e, // 18: 22.50 ns
+		0x3f  // 19: 23.75 ns
+	};
+
+	if (delay >= 20) delay = 20;
+	SetToutRdbDelay(delayStep[delay]);
+}
+
 
 
 // === VD/VA power supply control ===========================================
@@ -1568,6 +1607,15 @@ void CTestboard::Daq_Select_Deser400()
 	daq_select_deser400 = true;
 	Daq_Deser400_Reset();
 }
+
+
+void CTestboard::Daq_Deser400_OldFormat(bool old)
+{
+	if (old) mainCtrl |=  MAINCTRL_DESER400_OLD;
+	else     mainCtrl &= ~MAINCTRL_DESER400_OLD;
+	_MainControl(mainCtrl);
+}
+
 
 void CTestboard::Daq_Deser400_Reset(uint8_t reset)
 {
