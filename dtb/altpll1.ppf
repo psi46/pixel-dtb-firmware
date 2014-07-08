@@ -6,6 +6,7 @@
 <pin name="clkswitch" direction="input" scope="external"  />
 <pin name="inclk0" direction="input" scope="external" source="clock"  />
 <pin name="inclk1" direction="input" scope="external" source="clock"  />
+<pin name="activeclock" direction="output" scope="external"  />
 <pin name="c0" direction="output" scope="external" source="clock"  />
 <pin name="c1" direction="output" scope="external" source="clock"  />
 <pin name="c2" direction="output" scope="external" source="clock"  />

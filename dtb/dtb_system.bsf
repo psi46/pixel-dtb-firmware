@@ -75,8 +75,8 @@ applicable agreement for further details.
 	(port
 		(pt 0 1040)
 		(input)
-		(text "status_export[3..0]" (rect 0 0 74 12)(font "Arial" (font_size 8)))
-		(text "status_export[3..0]" (rect 4 1029 118 1040)(font "Arial" (font_size 8)))
+		(text "status_export[6..0]" (rect 0 0 74 12)(font "Arial" (font_size 8)))
+		(text "status_export[6..0]" (rect 4 1029 118 1040)(font "Arial" (font_size 8)))
 		(line (pt 0 1040)(pt 208 1040)(line_width 3))
 	)
 	(port
@@ -649,8 +649,8 @@ applicable agreement for further details.
 	(port
 		(pt 0 1000)
 		(output)
-		(text "control_export[7..0]" (rect 0 0 76 12)(font "Arial" (font_size 8)))
-		(text "control_export[7..0]" (rect 4 989 124 1000)(font "Arial" (font_size 8)))
+		(text "control_export[8..0]" (rect 0 0 76 12)(font "Arial" (font_size 8)))
+		(text "control_export[8..0]" (rect 4 989 124 1000)(font "Arial" (font_size 8)))
 		(line (pt 0 1000)(pt 208 1000)(line_width 3))
 	)
 	(port

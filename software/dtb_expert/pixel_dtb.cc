@@ -262,6 +262,7 @@ void CTestboard::Init()
 	mainCtrl = 0;
 	_MainControl(0);
 
+	SetClockSource(0);
 
 	isPowerOn = false;
 
@@ -346,18 +347,32 @@ void CTestboard::SetClockSource(uint8_t source)
 {
 	if (source > 1) return;
 
-	if (source == 1) mainCtrl |= MAINCTRL_CLK_EXT;
-	else mainCtrl &= ~MAINCTRL_CLK_EXT;
+	if (((source == 0) && (_MainStatus() & MAINSTATUS_CLK_ACTIVE_DAQ))
+	 || ((source == 1) && !(_MainStatus() & MAINSTATUS_CLK_ACTIVE_DAQ)))
+		mainCtrl |= MAINCTRL_CLK_SEL_DAQ;
 
-	_MainControl(mainCtrl | MAINCTRL_PLL_RESET);
-	uDelay(10);
-	_MainControl(mainCtrl);
-	uDelay(100);
+	if (((source == 0) && (_MainStatus() & MAINSTATUS_CLK_ACTIVE_SMPL))
+	 || ((source == 1) && !(_MainStatus() & MAINSTATUS_CLK_ACTIVE_SMPL)))
+		mainCtrl |= MAINCTRL_CLK_SEL_SMPL;
+
+	if (mainCtrl & (MAINCTRL_CLK_SEL_DAQ | MAINCTRL_CLK_SEL_SMPL))
+	{
+		_MainControl(mainCtrl);
+		uDelay(1);
+		mainCtrl &= ~(MAINCTRL_CLK_SEL_DAQ | MAINCTRL_CLK_SEL_SMPL);
+		_MainControl(mainCtrl);
+		uDelay(1);
+		_MainControl(mainCtrl | MAINCTRL_PLL_RESET);
+		uDelay(1);
+		_MainControl(mainCtrl);
+		uDelay(10);
+	}
 }
+
 
 bool CTestboard::IsClockPresent()
 {
-	return _MainStatus() | MAINSTATUS_CLK_PRESENT;
+	return (_MainStatus() & MAINSTATUS_CLK_EXT_BAD) == 0;
 }
 
 

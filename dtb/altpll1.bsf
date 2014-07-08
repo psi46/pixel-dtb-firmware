@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2012 Altera Corporation
+Copyright (C) 1991-2013 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -20,8 +20,8 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.2"))
 (symbol
-	(rect 0 0 272 208)
-	(text "altpll1" (rect 119 0 159 16)(font "Arial" (font_size 10)))
+	(rect 0 0 288 208)
+	(text "altpll1" (rect 127 0 167 16)(font "Arial" (font_size 10)))
 	(text "inst" (rect 8 192 25 204)(font "Arial" ))
 	(port
 		(pt 0 64)
@@ -52,37 +52,43 @@ applicable agreement for further details.
 		(line (pt 0 112)(pt 56 112))
 	)
 	(port
-		(pt 272 64)
+		(pt 288 64)
 		(output)
 		(text "c0" (rect 0 0 14 14)(font "Arial" (font_size 8)))
-		(text "c0" (rect 256 50 266 63)(font "Arial" (font_size 8)))
+		(text "c0" (rect 272 50 282 63)(font "Arial" (font_size 8)))
 	)
 	(port
-		(pt 272 80)
+		(pt 288 80)
 		(output)
 		(text "c1" (rect 0 0 14 14)(font "Arial" (font_size 8)))
-		(text "c1" (rect 256 66 264 79)(font "Arial" (font_size 8)))
+		(text "c1" (rect 272 66 280 79)(font "Arial" (font_size 8)))
 	)
 	(port
-		(pt 272 96)
+		(pt 288 96)
 		(output)
 		(text "c2" (rect 0 0 14 14)(font "Arial" (font_size 8)))
-		(text "c2" (rect 256 82 266 95)(font "Arial" (font_size 8)))
+		(text "c2" (rect 272 82 282 95)(font "Arial" (font_size 8)))
 	)
 	(port
-		(pt 272 112)
+		(pt 288 112)
 		(output)
 		(text "c3" (rect 0 0 14 14)(font "Arial" (font_size 8)))
-		(text "c3" (rect 256 98 266 111)(font "Arial" (font_size 8)))
+		(text "c3" (rect 272 98 282 111)(font "Arial" (font_size 8)))
 	)
 	(port
-		(pt 272 128)
+		(pt 288 128)
 		(output)
 		(text "locked" (rect 0 0 36 14)(font "Arial" (font_size 8)))
-		(text "locked" (rect 237 114 266 127)(font "Arial" (font_size 8)))
+		(text "locked" (rect 253 114 282 127)(font "Arial" (font_size 8)))
+	)
+	(port
+		(pt 288 144)
+		(output)
+		(text "activeclock" (rect 0 0 63 14)(font "Arial" (font_size 8)))
+		(text "activeclock" (rect 230 130 282 143)(font "Arial" (font_size 8)))
 	)
 	(drawing
-		(text "Cyclone III" (rect 210 192 465 395)(font "Arial" ))
+		(text "Cyclone III" (rect 226 192 497 395)(font "Arial" ))
 		(text "inclk0 frequency: 40.000 MHz" (rect 66 59 255 129)(font "Arial" ))
 		(text "inclk1 frequency: 40.000 MHz" (rect 66 72 255 155)(font "Arial" ))
 		(text "Operation Mode: Normal" (rect 66 85 231 181)(font "Arial" ))
@@ -106,9 +112,9 @@ applicable agreement for further details.
 		(text "10/1" (rect 90 162 195 335)(font "Arial" ))
 		(text "135.00" (rect 115 162 256 335)(font "Arial" ))
 		(text "50.00" (rect 152 162 325 335)(font "Arial" ))
-		(line (pt 0 0)(pt 273 0))
-		(line (pt 273 0)(pt 273 209))
-		(line (pt 0 209)(pt 273 209))
+		(line (pt 0 0)(pt 289 0))
+		(line (pt 289 0)(pt 289 209))
+		(line (pt 0 209)(pt 289 209))
 		(line (pt 0 0)(pt 0 209))
 		(line (pt 64 104)(pt 180 104))
 		(line (pt 64 117)(pt 180 117))
@@ -125,10 +131,11 @@ applicable agreement for further details.
 		(line (pt 223 48)(pt 223 191))
 		(line (pt 56 191)(pt 223 191))
 		(line (pt 56 48)(pt 56 191))
-		(line (pt 271 64)(pt 223 64))
-		(line (pt 271 80)(pt 223 80))
-		(line (pt 271 96)(pt 223 96))
-		(line (pt 271 112)(pt 223 112))
-		(line (pt 271 128)(pt 223 128))
+		(line (pt 287 64)(pt 223 64))
+		(line (pt 287 80)(pt 223 80))
+		(line (pt 287 96)(pt 223 96))
+		(line (pt 287 112)(pt 223 112))
+		(line (pt 287 128)(pt 223 128))
+		(line (pt 287 144)(pt 223 144))
 	)
 )

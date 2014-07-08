@@ -19,24 +19,27 @@ inline void _SetLED(unsigned int value)
 { IOWR_ALTERA_AVALON_PIO_DATA(LED_BASE, value); }
 
 
-#define MAINCTRL_CLK_EXT      0x01
-#define MAINCTRL_PWR_ON       0x02
-#define MAINCTRL_HV_ON        0x04
-#define MAINCTRL_DUT_nRES     0x08
-#define MAINCTRL_TERM         0x10
-#define MAINCTRL_ADCENA       0x20
-#define MAINCTRL_PLL_RESET    0x40
-#define MAINCTRL_DESER400_OLD 0x80
+#define MAINCTRL_CLK_SEL_SMPL 0x0001
+#define MAINCTRL_CLK_SEL_DAQ  0x0002
+#define MAINCTRL_PWR_ON       0x0004
+#define MAINCTRL_HV_ON        0x0008
+#define MAINCTRL_DUT_nRES     0x0010
+#define MAINCTRL_TERM         0x0020
+#define MAINCTRL_ADCENA       0x0040
+#define MAINCTRL_PLL_RESET    0x0080
+#define MAINCTRL_DESER400_OLD 0x0100
 
-inline void _MainControl(unsigned int value)
+inline void _MainControl(unsigned short value)
 { IOWR_ALTERA_AVALON_PIO_DATA(MAIN_CONTROL_BASE, value); }
 
-
-#define MAINSTATUS_CLK_PRESENT  0x01
-#define MAINSTATUS_CLK_GOOD     0x02
-#define MAINSTATUS_CRC_ERROR    0x04
-#define MAINSTATUS_SD_CARD_DET  0x08
-inline unsigned char _MainStatus()
+#define MAINSTATUS_CLK_EXT_BAD     0x0001
+#define MAINSTATUS_CLK_ACTIVE_SMPL 0x0002
+#define MAINSTATUS_CLK_ACTIVE_DAQ  0x0004
+#define MAINSTATUS_CLK_LOCKED_SMPL 0x0008
+#define MAINSTATUS_CLK_LOCKED_DAQ  0x0010
+#define MAINSTATUS_CRC_ERROR       0x0020
+#define MAINSTATUS_SD_CARD_DET     0x0040
+inline unsigned short _MainStatus()
 {
 	return IORD_ALTERA_AVALON_PIO_DATA(MAIN_STATUS_BASE);
 }
