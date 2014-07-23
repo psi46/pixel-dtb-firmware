@@ -570,7 +570,7 @@ void CTestboard::Sig_SetLCDS()
 
 void CTestboard::Sig_SetRdaToutDelay(uint8_t delay)
 {
-	const unsigned char delayStep[20] =
+	static const unsigned char delayStep[20] =
 	{
 		0x00, //  0:  0.00 ns
 		0x01, //  1:  1.25 ns
