@@ -117,21 +117,24 @@ void CTestboard::SetLoopTriggerDelay(uint16_t delay) {
 
 uint16_t CTestboard::GetLoopTriggerDelay(uint16_t nTriggers) {
   
-  // ROC Header 12clk, Pixel 24clk = 36clk
-  uint16_t readout_time = 36;
+  uint16_t readout_time;
 
-  // Check if we have a TBM. This usually implies a module with two data streams a 8 ROCs:    
+  // Check if we have a TBM. This usually implies a module with two data streams of 8 ROCs:
   if(daq_select_deser400) {
-    // Two streams a 8 ROCs, in addition: TBM Header + trailer 32clk: 320clk
-    // Adding safety margin of some 80 clk:
-    //if(nTriggers > 15) { 
-    readout_time = 600; // FIXME: nothing shorter is stable w/ current DESER400!
-    //}
-    //else { readout_time = 230; } // Trigger stacking possible!
+    // Two streams a 8 ROCs, in addition: TBM Header + trailer 32bit (divided into two streams):
+    // Makes ~310bits per DESER400 channel (160MHz) -> ~ 80 BC
+    // Add a safety margin of another 20 BC:
+    readout_time = 100;
+  }
+  // Seems like we have a single ROC:
+  else {
+    // ROC Header 12bit (3 BC), Pixel 24bit (6 BC) = 36bit (160MHz) -> 9 BC
+    // Adding a safety margin of another 6 BC:
+    readout_time = 15;
   }
 
-  // Now select the larger delay and add the user-defined additional delay:
-  return (readout_time > pg_delaysum ? readout_time : pg_delaysum) + LoopTriggerDelay;
+  // Now add pg delay and estimated readout time, add the user-defined additional delay:
+  return (readout_time + pg_delaysum + LoopTriggerDelay);
 }
 
 // Setup of data storage structures in the NIOS stack. Stores all
