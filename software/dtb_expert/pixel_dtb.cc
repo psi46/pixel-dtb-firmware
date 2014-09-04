@@ -1136,6 +1136,12 @@ void CTestboard::roc_Col_Enable(uint8_t col, bool on)
 	SetI2cHs(0, TBM_present?3:1);
 }
 
+void CTestboard::roc_AllCol_Enable(bool on)
+{
+  int col;
+  for (col = 0; col < ROC_NUMCOLS; col++) { roc_Col_Enable(col, on); }
+}
+
 
 // -- mask all pixels of a column and the coresponding double column
 void CTestboard::roc_Col_Mask(uint8_t col)

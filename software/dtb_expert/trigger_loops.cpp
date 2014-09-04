@@ -199,21 +199,23 @@ bool CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
   size_t dummy; uint8_t dummy2;
   LoopInterruptResume(LoopId,colstart,rowstart,dummy,dummy2,dummy,dummy2);
 
-  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
-  if(!(flags&FLAG_FORCE_UNMASKED)) {
-    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+  for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
       roc_I2cAddr(roc_i2c.at(roc));
-      roc_Chip_Mask();
-    }
+      // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+      if(!(flags&FLAG_FORCE_UNMASKED)) { roc_Chip_Mask(); }
+      // If FLAG_FORCE_UNMASKED is set, also attach all columns:
+      else { roc_AllCol_Enable(true); }
   }
 
   // Loop over all columns:
   for (uint8_t col = colstart; col < ROC_NUMCOLS; col++) {
 
     // Enable this column on every configured ROC:
-    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
-      roc_I2cAddr(roc_i2c.at(roc));
-      roc_Col_Enable(col, true);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	roc_I2cAddr(roc_i2c.at(roc));
+	roc_Col_Enable(col, true);
+      }
     }
 
     // Loop over all rows:
@@ -258,12 +260,22 @@ bool CTestboard::LoopMultiRocAllPixelsCalibrate(vector<uint8_t> &roc_i2c, uint16
     rowstart = 0;
 
     // Disable this column on every ROC configured:
-    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
-      roc_I2cAddr(roc_i2c.at(roc));
-      roc_Col_Enable(col, false);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	roc_I2cAddr(roc_i2c.at(roc));
+	roc_Col_Enable(col, false);
+      }
     }
 
   } // Loop over all columns
+
+  // If FLAG_FORCE_UNMASKED is set detach all columns:
+  if(flags&FLAG_FORCE_UNMASKED) {
+    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+      roc_I2cAddr(roc_i2c.at(roc));
+      roc_AllCol_Enable(false);
+    }
+  }
 
   // Reached the end of the loop:
   LoopInterruptReset();
@@ -280,10 +292,15 @@ bool CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t
   // Take into account both Xtalks and Cals flags
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
-    roc_Col_Enable(column, true);
-    // If masked, enable the pixel:
-    if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c.at(roc),column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      roc_Chip_Mask();
+      roc_Col_Enable(column, true);
+      // If masked, enable the pixel:
+      LoopPixTrim(roc_i2c.at(roc),column, row);
+    }
+    // With FLAG_FORCE_UNMASK, attach all columns:
+    else { roc_AllCol_Enable(true); }
+
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
   }
 
@@ -298,9 +315,12 @@ bool CTestboard::LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t
   // Disable this column on every ROC configured:
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      roc_Pix_Mask(column, row);
+      roc_Col_Enable(column, false);
+    }
+    else { roc_AllCol_Enable(false); }
     roc_ClrCal();
-    roc_Col_Enable(column, false);
   }
 
   // Reached the end of the loop:
@@ -321,13 +341,15 @@ bool CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
   // If FLAG_FORCE_UNMASKED is not set, mask the chip:
-  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
+  if(!(flags&FLAG_FORCE_UNMASKED)) { roc_Chip_Mask(); }
+  // If FLAG_FORCE_UNMASKED is set, also attach all columns:
+  else { roc_AllCol_Enable(true); }
 
   // Loop over all columns:
   for (uint8_t col = colstart; col < ROC_NUMCOLS; col++) {
 
     // Enable this column on the configured ROC:
-    roc_Col_Enable(col, true);
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Col_Enable(col, true);
 
     // Loop over all rows:
     for (uint8_t row = rowstart; row < ROC_NUMROWS; row++) {
@@ -365,9 +387,12 @@ bool CTestboard::LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTrig
     rowstart = 0;
 
     // Disable this column on every ROC configured:
-    roc_Col_Enable(col, false);
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Col_Enable(col, false);
 
   } // Loop over all columns
+
+  // If the chip was unmask, detach all columns:
+  if(flags&FLAG_FORCE_UNMASKED) { roc_AllCol_Enable(false); }
 
   // Reached the end of the loop:
   LoopInterruptReset();
@@ -384,11 +409,15 @@ bool CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
   // Take into account both Xtalks and Cals flags
   roc_I2cAddr(roc_i2c);
   // If FLAG_FORCE_UNMASKED is not set, mask the chip:
-  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
+  if(!(flags&FLAG_FORCE_UNMASKED)) {
+    roc_Chip_Mask();
+    roc_Col_Enable(column, true);
+    // If masked, enable the pixel:
+    LoopPixTrim(roc_i2c,column, row);
+  }
+  // If FLAG_FORCE_UNMASKED is set, also attach all columns:
+  else { roc_AllCol_Enable(true); }
 
-  roc_Col_Enable(column, true);
-  // If masked, enable the pixel:
-  if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c,column, row);
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Send the triggers:
@@ -399,9 +428,14 @@ bool CTestboard::LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column,
 
   // Clear the calibrate signal on thr ROC configured
   // Disable this column on the ROC configured:
-  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
+  if(!(flags&FLAG_FORCE_UNMASKED)) {
+    roc_Pix_Mask(column, row);
+    roc_Col_Enable(column, false);
+  }
+  // If the chip was unmask, detach all columns:
+  else { roc_AllCol_Enable(false); }
+
   roc_ClrCal();
-  roc_Col_Enable(column, false);
 
   // Reached the end of the loop:
   LoopInterruptReset();
@@ -428,21 +462,23 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
   size_t dummy; uint8_t dummy2;
   LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dac1step,dummy,dummy2);
 
-  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
-  if(!(flags&FLAG_FORCE_UNMASKED)) {
-    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
-      roc_I2cAddr(roc_i2c.at(roc));
-      roc_Chip_Mask();
-    }
+  for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+    roc_I2cAddr(roc_i2c.at(roc));
+    // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+    if(!(flags&FLAG_FORCE_UNMASKED)) { roc_Chip_Mask(); }
+    // With FLAG_FORCE_UNMASK, attach all columns:
+    else { roc_AllCol_Enable(true); }
   }
 
   // Loop over all columns:
   for (uint8_t col = colstart; col < ROC_NUMCOLS; col++) {
 
     // Enable this column on every configured ROC:
-    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
-      roc_I2cAddr(roc_i2c.at(roc));
-      roc_Col_Enable(col, true);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	roc_I2cAddr(roc_i2c.at(roc));
+	roc_Col_Enable(col, true);
+      }
     }
 
     // Loop over all rows:
@@ -507,12 +543,22 @@ bool CTestboard::LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t
     rowstart = 0;
 
     // Disable this column on every ROC configured:
-    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
-      roc_I2cAddr(roc_i2c.at(roc));
-      roc_Col_Enable(col, false);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	roc_I2cAddr(roc_i2c.at(roc));
+	roc_Col_Enable(col, false);
+      }
     }
 
   } // Loop over all columns
+
+  // If the chip was unmask, detach all columns:
+  if(flags&FLAG_FORCE_UNMASKED) { 
+    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+      roc_I2cAddr(roc_i2c.at(roc));
+      roc_AllCol_Enable(false);
+    }
+  }
 
   // Reached the end of the loop:
   LoopInterruptReset();
@@ -539,11 +585,14 @@ bool CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
   // Take into account both Xtalks and Cals flags
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
-    roc_Col_Enable(column, true);
-
-    // If masked, enable the pixel:
-    if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c.at(roc),column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      roc_Chip_Mask();
+      roc_Col_Enable(column, true);
+      // If masked, enable the pixel:
+      LoopPixTrim(roc_i2c.at(roc),column, row);
+    }
+    // With FLAG_FORCE_UNMASK, attach all columns:
+    else { roc_AllCol_Enable(true); }
 
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
   }
@@ -587,9 +636,13 @@ bool CTestboard::LoopMultiRocOnePixelDacScan(vector<uint8_t> &roc_i2c, uint8_t c
   // Disable this column on every ROC configured:
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      roc_Pix_Mask(column, row);
+      roc_Col_Enable(column, false);
+    }
+    // If the chip was unmask, detach all columns:
+    else { roc_AllCol_Enable(false); }
     roc_ClrCal();
-    roc_Col_Enable(column, false);
   }
 
   // Reached the end of the loop:
@@ -616,13 +669,15 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
   // If FLAG_FORCE_UNMASKED is not set, mask the chip:
-  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
+  if(!(flags&FLAG_FORCE_UNMASKED)) { roc_Chip_Mask(); }
+  // If FLAG_FORCE_UNMASKED is set, also attach all columns:
+  else { roc_AllCol_Enable(true); }
 
   // Loop over all columns:
   for (uint8_t col = colstart; col < ROC_NUMCOLS; col++) {
 
     // Enable this column on the configured ROC:
-    roc_Col_Enable(col, true);
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Col_Enable(col, true);
 
     // Loop over all rows:
     for (uint8_t row = rowstart; row < ROC_NUMROWS; row++) {
@@ -677,9 +732,12 @@ bool CTestboard::LoopSingleRocAllPixelsDacScan(uint8_t roc_i2c, uint16_t nTrigge
     rowstart = 0;
 
     // Disable this column on every ROC configured:
-    roc_Col_Enable(col, false);
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Col_Enable(col, false);
 
   } // Loop over all columns
+
+  // If the chip was unmask, detach all columns:
+  if(!(flags&FLAG_FORCE_UNMASKED)) { roc_AllCol_Enable(false); }
 
   // Reached the end of the loop:
   LoopInterruptReset();
@@ -706,11 +764,15 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
   // Take into account both Xtalks and Cals flags
   roc_I2cAddr(roc_i2c);
   // If FLAG_FORCE_UNMASKED is not set, mask the chip:
-  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
+  if(!(flags&FLAG_FORCE_UNMASKED)) {
+    roc_Chip_Mask();
+    roc_Col_Enable(column, true);
+    // If masked, enable the pixel:
+    LoopPixTrim(roc_i2c,column, row);
+  }
+  // If FLAG_FORCE_UNMASKED is set, also attach all columns:
+  else { roc_AllCol_Enable(true); }
 
-  roc_Col_Enable(column, true);
-  // If masked, enable the pixel:
-  if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c,column, row);
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Loop over the DAC range specified:
@@ -745,9 +807,14 @@ bool CTestboard::LoopSingleRocOnePixelDacScan(uint8_t roc_i2c, uint8_t column, u
 
   // Clear the calibrate signal on thr ROC configured
   // Disable this column on the ROC configured:
-  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
+  if(!(flags&FLAG_FORCE_UNMASKED)) {
+    roc_Pix_Mask(column, row);
+    roc_Col_Enable(column, false);
+  }
+  // If the chip was unmask, detach all columns:
+  else { roc_AllCol_Enable(false); }
+
   roc_ClrCal();
-  roc_Col_Enable(column, false);
 
   // Reached the end of the loop:
   LoopInterruptReset();
@@ -771,21 +838,23 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
   size_t dac1start = dac1low, dac2start = dac2low;
   LoopInterruptResume(LoopId,colstart,rowstart,dac1start,dac1step,dac2start,dac2step);
 
-  // If FLAG_FORCE_UNMASKED is not set, mask the chip:
-  if(!(flags&FLAG_FORCE_UNMASKED)) {
-    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+  for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
       roc_I2cAddr(roc_i2c.at(roc));
-      roc_Chip_Mask();
-    }
+      // If FLAG_FORCE_UNMASKED is not set, mask the chip:
+      if(!(flags&FLAG_FORCE_UNMASKED)) { roc_Chip_Mask(); }
+      // With FLAG_FORCE_UNMASK, attach all columns:
+      else { roc_AllCol_Enable(true); }
   }
 
   // Loop over all columns:
   for (uint8_t col = colstart; col < ROC_NUMCOLS; col++) {
 
     // Enable this column on every configured ROC:
-    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
-      roc_I2cAddr(roc_i2c.at(roc));
-      roc_Col_Enable(col, true);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	roc_I2cAddr(roc_i2c.at(roc));
+	roc_Col_Enable(col, true);
+      }
     }
 
     // Loop over all rows:
@@ -865,12 +934,22 @@ bool CTestboard::LoopMultiRocAllPixelsDacDacScan(vector<uint8_t> &roc_i2c, uint1
     rowstart = 0;
 
     // Disable this column on every ROC configured:
-    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
-      roc_I2cAddr(roc_i2c.at(roc));
-      roc_Col_Enable(col, false);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+	roc_I2cAddr(roc_i2c.at(roc));
+	roc_Col_Enable(col, false);
+      }
     }
 
   } // Loop over all columns
+
+  // If the chip was unmask, detach all columns:
+  if(flags&FLAG_FORCE_UNMASKED) { 
+    for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
+      roc_I2cAddr(roc_i2c.at(roc));
+      roc_AllCol_Enable(false);
+    }
+  }
 
   // Reached the end of the loop:
   LoopInterruptReset();
@@ -897,10 +976,15 @@ bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
   // Take into account both Xtalks and Cals flags
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
-    roc_Col_Enable(column, true);
-    // If masked, enable the pixel:
-    if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c.at(roc),column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      roc_Chip_Mask();
+      roc_Col_Enable(column, true);
+      // If masked, enable the pixel:
+      LoopPixTrim(roc_i2c.at(roc),column, row);
+    }
+    // With FLAG_FORCE_UNMASK, attach all columns:
+    else { roc_AllCol_Enable(true); }
+
     roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
   }
 
@@ -958,9 +1042,14 @@ bool CTestboard::LoopMultiRocOnePixelDacDacScan(vector<uint8_t> &roc_i2c, uint8_
   // Disable this column on every ROC configured:
   for(size_t roc = 0; roc < roc_i2c.size(); roc++) {
     roc_I2cAddr(roc_i2c.at(roc));
-    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
+    if(!(flags&FLAG_FORCE_UNMASKED)) {
+      roc_Pix_Mask(column, row);
+      roc_Col_Enable(column, false);
+    }
+    // If the chip was unmask, detach all columns:
+    else { roc_AllCol_Enable(false); }
+
     roc_ClrCal();
-    roc_Col_Enable(column, false);
   }
 
   // Reached the end of the loop:
@@ -986,13 +1075,15 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
   // Set the I2C output to the correct ROC:
   roc_I2cAddr(roc_i2c);
   // If FLAG_FORCE_UNMASKED is not set, mask the chip:
-  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
+  if(!(flags&FLAG_FORCE_UNMASKED)) { roc_Chip_Mask(); }
+  // If FLAG_FORCE_UNMASKED is set, also attach all columns:
+  else { roc_AllCol_Enable(true); }
 
   // Loop over all columns:
   for (uint8_t col = colstart; col < ROC_NUMCOLS; col++) {
 
     // Enable this column on the configured ROC:
-    roc_Col_Enable(col, true);
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Col_Enable(col, true);
 
     // Loop over all rows:
     for (uint8_t row = rowstart; row < ROC_NUMROWS; row++) {
@@ -1059,9 +1150,12 @@ bool CTestboard::LoopSingleRocAllPixelsDacDacScan(uint8_t roc_i2c, uint16_t nTri
       rowstart = 0;
 
     // Disable this column on every ROC configured:
-    roc_Col_Enable(col, false);
+    if(!(flags&FLAG_FORCE_UNMASKED)) roc_Col_Enable(col, false);
 
   } // Loop over all columns
+
+  // If the chip was unmask, detach all columns:
+  if(flags&FLAG_FORCE_UNMASKED) { roc_AllCol_Enable(false); }
 
   // Reached the end of the loop:
   LoopInterruptReset();
@@ -1088,11 +1182,15 @@ bool CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
   // Take into account both Xtalks and Cals flags
   roc_I2cAddr(roc_i2c);
   // If FLAG_FORCE_UNMASKED is not set, mask the chip:
-  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Chip_Mask();
+  if(!(flags&FLAG_FORCE_UNMASKED)) {
+    roc_Chip_Mask();
+    roc_Col_Enable(column, true);
+    // If masked, enable the pixel:
+    LoopPixTrim(roc_i2c,column, row);
+  }
+  // If FLAG_FORCE_UNMASKED is set, also attach all columns:
+  else { roc_AllCol_Enable(true); }
 
-  roc_Col_Enable(column, true);
-  // If masked, enable the pixel:
-  if(!(flags&FLAG_FORCE_UNMASKED)) LoopPixTrim(roc_i2c,column, row);
   roc_Pix_Cal(column, GetXtalkRow(row,(flags&FLAG_XTALK)), (flags&FLAG_CALS));
 
   // Loop over the DAC range specified:
@@ -1140,9 +1238,14 @@ bool CTestboard::LoopSingleRocOnePixelDacDacScan(uint8_t roc_i2c, uint8_t column
 
   // Clear the calibrate signal on the ROC configured
   // Disable this column on the ROC configured:
-  if(!(flags&FLAG_FORCE_UNMASKED)) roc_Pix_Mask(column, row);
+  if(!(flags&FLAG_FORCE_UNMASKED)) {
+    roc_Pix_Mask(column, row);
+    roc_Col_Enable(column, false);
+  }
+  // If the chip was unmask, detach all columns:
+  else { roc_AllCol_Enable(false); }
+
   roc_ClrCal();
-  roc_Col_Enable(column, false);
 
   // Reached the end of the loop:
   LoopInterruptReset();
