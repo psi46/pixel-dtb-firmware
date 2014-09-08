@@ -711,6 +711,25 @@ uint16_t CTestboard::_GetIA()	// get VA current in 100 uA
   return ADC_to_uA100(ReadADC(1));
 }
 
+
+uint16_t CTestboard::_GetVD_Reg()  // get VD reg at the capacitor in mV
+{
+	return ReadADC(4)/2;
+}
+
+
+uint16_t CTestboard::_GetVDAC_Reg()  // get VDAC reg at the capacitor in mV
+{
+	return ReadADC(5)/2;
+}
+
+
+uint16_t CTestboard::_GetVD_Cap()  // get unregulated VD at the capacitor in mV
+{
+	return ReadADC(6);
+}
+
+
 unsigned int CTestboard::mV_to_DAC(int mV)
 {
 	if (mV > 4000) mV = 4000; else if (mV < 0) mV = 0;
