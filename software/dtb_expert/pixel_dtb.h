@@ -4,6 +4,7 @@
 
 #include "dtb_hal.h"
 #include "rpc.h"
+#include "ethernet.h"
 #include "FlashMemory.h"
 
 
@@ -65,6 +66,7 @@ class CTestboard
 {
 	CRpcIo *rpc_io;
 	CUSB usb;
+	CEthernet ethernet;
 
 	static const uint16_t flashUpgradeVersion;
 	uint16_t ugRecordCounter;
@@ -122,7 +124,25 @@ class CTestboard
 
 public:
 	CTestboard();
-	CRpcIo* GetIo() { return rpc_io; }
+	CRpcIo* GetIo() { 
+		printf("Getting the io:\n");
+		while(true){
+			if(0){ //ethernet.IsOpen()){
+				rpc_io = &ethernet;
+				SetLed(0x0F);
+				printf("Set rpc_io to Ethernet\n");
+				break;
+			}
+			if(1){ //usb.IsOpen()){
+				rpc_io = &usb;
+				SetLed(0x09);
+				printf("Set rpc_io to USB\n");
+				break;
+			}
+		}
+		printf("Finished Getting IO:\n");
+		return rpc_io;
+	} 
 
 
 	// === RPC ==============================================================
@@ -467,9 +487,9 @@ public:
 	RPC_EXPORT bool TestColPixel(uint8_t col, uint8_t trimbit, bool sensor_cal, vectorR<uint8_t> &res);
 
 	// Ethernet test functions
-	bool Ethernet_Init();
-	RPC_EXPORT void Ethernet_Send(string &message);
-	RPC_EXPORT uint32_t Ethernet_RecvPackets();
+	//bool Ethernet_Init();
+	//RPC_EXPORT void Ethernet_Send(string &message);
+	//RPC_EXPORT uint32_t Ethernet_RecvPackets();
 
 
 

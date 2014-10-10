@@ -2,11 +2,11 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>08.07.2014 13:42:43</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1404819763006</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>X:\source\FPGA\pixel-dtb-firmware\software\dtb_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>Oct 6, 2014 1:52:40 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1412621560199</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>/home/caleb/Sources/psi46/firmware/software/dtb_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
-        <SopcDesignFile>..\..\dtb\dtb_system.sopcinfo</SopcDesignFile>
+        <SopcDesignFile>../../dtb/dtb_system.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>cpu</Cpu>
         <SchemaVersion>1.9</SchemaVersion>

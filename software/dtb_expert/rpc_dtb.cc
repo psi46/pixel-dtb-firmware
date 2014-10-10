@@ -1197,14 +1197,14 @@ bool rpc__Ethernet_Send$v3c(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(0)) return false;
 	string rpc_par1; if (!msg.RecvString(rpc_par1)) return false;
-	tb.Ethernet_Send(rpc_par1);
+	//tb.Ethernet_Send(rpc_par1);
 	return true;
 }
 
 bool rpc__Ethernet_RecvPackets$I(rpcMessage &msg)
 {
 	if (!msg.CheckCmdSize(0)) return false;
-	uint32_t rpc_par0 = tb.Ethernet_RecvPackets();
+	uint32_t rpc_par0;// = tb.Ethernet_RecvPackets();
 	msg.CreateCmd(116);
 	msg.Put_UINT32(rpc_par0);
 	if (!msg.SendCmd()) return false;

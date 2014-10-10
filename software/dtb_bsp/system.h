@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
  *
- * Generated: Tue Jul 08 13:42:46 CEST 2014
+ * Generated: Mon Oct 06 13:52:41 CDT 2014
  */
 
 /*
@@ -1041,7 +1041,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1404813994
+#define SYSID_TIMESTAMP 1411510469
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 

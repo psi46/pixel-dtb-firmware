@@ -171,3 +171,13 @@ void CUSB::Flush()
 	IOWR_8DIRECT(USB2_BASE, 1, 1); // FT232 send immediate
 }
 
+bool CUSB::IsOpen(){
+ //TODO: Possibly broken...
+	return false;
+	short status = IORD_16DIRECT(USB2_BASE, 0);
+	if((status & 0x8000)){
+		return false;
+	} else{
+		return true;
+	}
+}

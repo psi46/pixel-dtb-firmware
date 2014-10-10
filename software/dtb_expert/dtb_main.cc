@@ -21,7 +21,7 @@ int main()
 	dtbConfig.Init();
 	dtbConfig.Read("0:DTB.INI");
 
-	tb.Ethernet_Init();
+//	tb.Ethernet_Init();
 
 	rpc_Dispatcher(*tb.GetIo());
 

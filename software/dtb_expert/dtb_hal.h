@@ -174,6 +174,7 @@ public:
 	bool Write(const void *buffer, uint32_t size);
 	void Flush();
 	bool Read(void *buffer, unsigned int size);
+	bool IsOpen();
 };
 
 

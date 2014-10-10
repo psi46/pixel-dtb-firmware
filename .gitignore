@@ -11,3 +11,13 @@
 *.lai
 *.la
 *.a
+
+# Quartus Local Files
+*.map
+*.elf
+*.objdump
+*.qws
+
+#Nios Local Files
+software/dtb_bsp/obj/
+software/dtb_expert/obj/
