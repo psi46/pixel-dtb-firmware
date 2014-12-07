@@ -8,7 +8,7 @@ then
 	echo "Aborting."
 else
 	echo "Generating SOF flash file..."
-	sof2flash --input="../dtb/dtb.sof" --output="dtb.flash" --epcs
+	sof2flash --input="../dtb/output_files/dtb.sof" --output="dtb.flash" --epcs
 	echo "Generating ELF flash file..."
 	elf2flash --input="../software/dtb_expert/dtb_expert.elf" --output="dtb_expert.flash" --epcs --after="dtb.flash"
 	echo "Merging flash files to dtb_v${version}.flash..."

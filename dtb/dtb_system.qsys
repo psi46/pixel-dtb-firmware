@@ -32,7 +32,7 @@
    {
       datum _sortIndex
       {
-         value = "36";
+         value = "38";
          type = "int";
       }
    }
@@ -82,7 +82,7 @@
    {
       datum _sortIndex
       {
-         value = "46";
+         value = "48";
          type = "int";
       }
    }
@@ -132,7 +132,7 @@
    {
       datum _sortIndex
       {
-         value = "48";
+         value = "50";
          type = "int";
       }
       datum sopceditor_expanded
@@ -158,7 +158,7 @@
    {
       datum _sortIndex
       {
-         value = "49";
+         value = "51";
          type = "int";
       }
    }
@@ -174,7 +174,7 @@
    {
       datum _sortIndex
       {
-         value = "35";
+         value = "37";
          type = "int";
       }
       datum sopceditor_expanded
@@ -191,19 +191,19 @@
          type = "String";
       }
    }
-   element performance_counter.control_slave
-   {
-      datum baseAddress
-      {
-         value = "134223872";
-         type = "long";
-      }
-   }
    element sysid.control_slave
    {
       datum baseAddress
       {
          value = "134221824";
+         type = "long";
+      }
+   }
+   element performance_counter.control_slave
+   {
+      datum baseAddress
+      {
+         value = "134223872";
          type = "long";
       }
    }
@@ -228,11 +228,11 @@
          type = "int";
       }
    }
-   element sgdma_rx.csr
+   element sgdma_tx.csr
    {
       datum baseAddress
       {
-         value = "138413056";
+         value = "138413120";
          type = "long";
       }
    }
@@ -244,100 +244,12 @@
          type = "long";
       }
    }
-   element sgdma_tx.csr
+   element sgdma_rx.csr
    {
       datum baseAddress
       {
-         value = "138413120";
+         value = "138413056";
          type = "long";
-      }
-   }
-   element clk_stretch.ctrl
-   {
-      datum baseAddress
-      {
-         value = "176";
-         type = "long";
-      }
-   }
-   element daq_dma_0.ctrl
-   {
-      datum baseAddress
-      {
-         value = "134225984";
-         type = "String";
-      }
-   }
-   element probe_d1.ctrl
-   {
-      datum baseAddress
-      {
-         value = "80";
-         type = "long";
-      }
-   }
-   element eventgen.ctrl
-   {
-      datum baseAddress
-      {
-         value = "208";
-         type = "String";
-      }
-   }
-   element adc_0.ctrl
-   {
-      datum baseAddress
-      {
-         value = "144";
-         type = "long";
-      }
-   }
-   element delay_tin.ctrl
-   {
-      datum baseAddress
-      {
-         value = "56";
-         type = "long";
-      }
-   }
-   element delay_ctr.ctrl
-   {
-      datum baseAddress
-      {
-         value = "48";
-         type = "long";
-      }
-   }
-   element patterngen.ctrl
-   {
-      datum baseAddress
-      {
-         value = "64";
-         type = "long";
-      }
-   }
-   element probe_d2.ctrl
-   {
-      datum baseAddress
-      {
-         value = "96";
-         type = "long";
-      }
-   }
-   element delay_sda.ctrl
-   {
-      datum baseAddress
-      {
-         value = "40";
-         type = "long";
-      }
-   }
-   element rda_delay.ctrl
-   {
-      datum baseAddress
-      {
-         value = "224";
-         type = "String";
       }
    }
    element delay_clk.ctrl
@@ -350,6 +262,110 @@
       datum baseAddress
       {
          value = "32";
+         type = "long";
+      }
+   }
+   element probe_d1.ctrl
+   {
+      datum baseAddress
+      {
+         value = "80";
+         type = "long";
+      }
+   }
+   element clk_stretch.ctrl
+   {
+      datum baseAddress
+      {
+         value = "176";
+         type = "long";
+      }
+   }
+   element patterngen.ctrl
+   {
+      datum baseAddress
+      {
+         value = "64";
+         type = "long";
+      }
+   }
+   element delay_tin.ctrl
+   {
+      datum baseAddress
+      {
+         value = "56";
+         type = "long";
+      }
+   }
+   element probe_async_d1.ctrl
+   {
+      datum baseAddress
+      {
+         value = "192";
+         type = "String";
+      }
+   }
+   element daq_dma_0.ctrl
+   {
+      datum baseAddress
+      {
+         value = "134225984";
+         type = "String";
+      }
+   }
+   element probe_d2.ctrl
+   {
+      datum baseAddress
+      {
+         value = "96";
+         type = "long";
+      }
+   }
+   element adc_0.ctrl
+   {
+      datum baseAddress
+      {
+         value = "144";
+         type = "long";
+      }
+   }
+   element probe_async_d2.ctrl
+   {
+      datum baseAddress
+      {
+         value = "208";
+         type = "String";
+      }
+   }
+   element delay_ctr.ctrl
+   {
+      datum baseAddress
+      {
+         value = "48";
+         type = "long";
+      }
+   }
+   element rda_delay.ctrl
+   {
+      datum baseAddress
+      {
+         value = "224";
+         type = "String";
+      }
+   }
+   element eventgen.ctrl
+   {
+      datum baseAddress
+      {
+         value = "208";
+         type = "String";
+      }
+   }
+   element delay_sda.ctrl
+   {
+      datum baseAddress
+      {
+         value = "40";
          type = "long";
       }
    }
@@ -439,7 +455,7 @@
    {
       datum _sortIndex
       {
-         value = "37";
+         value = "39";
          type = "int";
       }
       datum sopceditor_expanded
@@ -452,7 +468,7 @@
    {
       datum _sortIndex
       {
-         value = "39";
+         value = "41";
          type = "int";
       }
    }
@@ -460,7 +476,7 @@
    {
       datum _sortIndex
       {
-         value = "38";
+         value = "40";
          type = "int";
       }
       datum sopceditor_expanded
@@ -473,7 +489,7 @@
    {
       datum _sortIndex
       {
-         value = "40";
+         value = "42";
          type = "int";
       }
       datum sopceditor_expanded
@@ -504,7 +520,7 @@
    {
       datum _sortIndex
       {
-         value = "44";
+         value = "46";
          type = "int";
       }
    }
@@ -512,7 +528,7 @@
    {
       datum _sortIndex
       {
-         value = "47";
+         value = "49";
          type = "int";
       }
    }
@@ -551,7 +567,7 @@
    {
       datum _sortIndex
       {
-         value = "50";
+         value = "52";
          type = "int";
       }
    }
@@ -559,7 +575,7 @@
    {
       datum _sortIndex
       {
-         value = "45";
+         value = "47";
          type = "int";
       }
    }
@@ -630,7 +646,7 @@
    {
       datum _sortIndex
       {
-         value = "41";
+         value = "43";
          type = "int";
       }
       datum sopceditor_expanded
@@ -665,11 +681,37 @@
          type = "int";
       }
    }
+   element probe_async_d1
+   {
+      datum _sortIndex
+      {
+         value = "35";
+         type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "1";
+         type = "boolean";
+      }
+   }
+   element probe_async_d2
+   {
+      datum _sortIndex
+      {
+         value = "36";
+         type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "1";
+         type = "boolean";
+      }
+   }
    element probe_d1
    {
       datum _sortIndex
       {
-         value = "42";
+         value = "44";
          type = "int";
       }
    }
@@ -677,7 +719,7 @@
    {
       datum _sortIndex
       {
-         value = "43";
+         value = "45";
          type = "int";
       }
    }
@@ -703,7 +745,7 @@
    {
       datum _sortIndex
       {
-         value = "51";
+         value = "53";
          type = "int";
       }
    }
@@ -715,11 +757,11 @@
          type = "long";
       }
    }
-   element deser400.s1
+   element ROC_addr.s1
    {
       datum baseAddress
       {
-         value = "160";
+         value = "112";
          type = "long";
       }
    }
@@ -731,14 +773,6 @@
          type = "long";
       }
    }
-   element clkdiv.s1
-   {
-      datum baseAddress
-      {
-         value = "192";
-         type = "long";
-      }
-   }
    element SDC_SPI2.s1
    {
       datum baseAddress
@@ -747,16 +781,35 @@
          type = "long";
       }
    }
-   element ram_ext.s1
+   element deser160.s1
    {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
       datum baseAddress
       {
-         value = "0";
+         value = "112";
+         type = "long";
+      }
+   }
+   element deser400.s1
+   {
+      datum baseAddress
+      {
+         value = "160";
+         type = "long";
+      }
+   }
+   element clkdiv.s1
+   {
+      datum baseAddress
+      {
+         value = "192";
+         type = "long";
+      }
+   }
+   element descriptor_memory.s1
+   {
+      datum baseAddress
+      {
+         value = "138420224";
          type = "long";
       }
    }
@@ -773,27 +826,16 @@
          type = "long";
       }
    }
-   element deser160.s1
+   element ram_ext.s1
    {
-      datum baseAddress
+      datum _lockedAddress
       {
-         value = "112";
-         type = "long";
+         value = "1";
+         type = "boolean";
       }
-   }
-   element ROC_addr.s1
-   {
       datum baseAddress
       {
-         value = "112";
-         type = "long";
-      }
-   }
-   element descriptor_memory.s1
-   {
-      datum baseAddress
-      {
-         value = "138420224";
+         value = "0";
          type = "long";
       }
    }
@@ -1096,6 +1138,16 @@
  <interface
    name="rda_delay"
    internal="rda_delay.in_delay"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="sig_d1a"
+   internal="probe_async_d1.signal"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="sig_d2a"
+   internal="probe_async_d2.signal"
    type="conduit"
    dir="end" />
  <module kind="clock_source" version="13.1" enabled="1" name="clk_sys">
@@ -1554,7 +1606,7 @@
   <parameter name="tightlyCoupledInstructionMaster2AddrWidth" value="1" />
   <parameter name="tightlyCoupledInstructionMaster3AddrWidth" value="1" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='ram_ext.s1' start='0x0' end='0x8000000' /><slave name='epcs_controller.epcs_control_port' start='0x8000000' end='0x8000800' /><slave name='cpu.jtag_debug_module' start='0x8000800' end='0x8001000' /></address-map>]]></parameter>
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='ram_ext.s1' start='0x0' end='0x8000000' /><slave name='epcs_controller.epcs_control_port' start='0x8000000' end='0x8000800' /><slave name='cpu.jtag_debug_module' start='0x8000800' end='0x8001000' /><slave name='sysid.control_slave' start='0x8001000' end='0x8001008' /><slave name='usb_tx_dma.csr' start='0x8001040' end='0x8001080' /><slave name='USB2.ctrl' start='0x8001110' end='0x8001112' /><slave name='performance_counter.control_slave' start='0x8001800' end='0x8001840' /><slave name='sys_timer.s1' start='0x8002000' end='0x8002020' /><slave name='jtag_uart.avalon_jtag_slave' start='0x8002020' end='0x8002028' /><slave name='daq_dma_0.ctrl' start='0x8002040' end='0x8002060' /><slave name='daq_dma_1.ctrl' start='0x8002080' end='0x80020A0' /><slave name='daq_dma_2.ctrl' start='0x80020C0' end='0x80020E0' /><slave name='daq_dma_3.ctrl' start='0x8002100' end='0x8002120' /><slave name='daq_dma_4.ctrl' start='0x8002140' end='0x8002160' /><slave name='daq_dma_5.ctrl' start='0x8002180' end='0x80021A0' /><slave name='LED.s1' start='0x8100020' end='0x8100030' /><slave name='button.s1' start='0x8100030' end='0x8100040' /><slave name='LCDS_io.slave' start='0x8100040' end='0x8100041' /><slave name='crosspoint_switch.slave' start='0x8100050' end='0x8100058' /><slave name='i2c_main.slave' start='0x8100060' end='0x8100068' /><slave name='ROC_addr.s1' start='0x8100070' end='0x8100080' /><slave name='SDC_SPI2.s1' start='0x8100080' end='0x8100090' /><slave name='i2c_external.slave' start='0x8100090' end='0x8100098' /><slave name='main_control.s1' start='0x81000A0' end='0x81000B0' /><slave name='main_status.s1' start='0x81000B0' end='0x81000C0' /><slave name='PSI2C.ctrl' start='0x8108000' end='0x8108020' /><slave name='delay_clk.ctrl' start='0x8108020' end='0x8108028' /><slave name='delay_sda.ctrl' start='0x8108028' end='0x8108030' /><slave name='delay_ctr.ctrl' start='0x8108030' end='0x8108038' /><slave name='delay_tin.ctrl' start='0x8108038' end='0x8108040' /><slave name='patterngen.ctrl' start='0x8108040' end='0x8108048' /><slave name='probe_d1.ctrl' start='0x8108050' end='0x8108051' /><slave name='probe_d2.ctrl' start='0x8108060' end='0x8108061' /><slave name='deser160.s1' start='0x8108070' end='0x8108080' /><slave name='fifo.s1' start='0x8108080' end='0x8108090' /><slave name='adc_0.ctrl' start='0x8108090' end='0x8108098' /><slave name='deser400.s1' start='0x81080A0' end='0x81080B0' /><slave name='clk_stretch.ctrl' start='0x81080B0' end='0x81080B8' /><slave name='clkdiv.s1' start='0x81080C0' end='0x81080D0' /><slave name='eventgen.ctrl' start='0x81080D0' end='0x81080D8' /><slave name='rda_delay.ctrl' start='0x81080E0' end='0x81080E4' /><slave name='patterngen.data' start='0x8108200' end='0x8108400' /><slave name='tse_mac.control_port' start='0x8400000' end='0x8400400' /><slave name='sgdma_rx.csr' start='0x8400400' end='0x8400440' /><slave name='sgdma_tx.csr' start='0x8400440' end='0x8400480' /><slave name='descriptor_memory.s1' start='0x8402000' end='0x8402100' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='ram_ext.s1' start='0x0' end='0x8000000' /><slave name='epcs_controller.epcs_control_port' start='0x8000000' end='0x8000800' /><slave name='cpu.jtag_debug_module' start='0x8000800' end='0x8001000' /><slave name='sysid.control_slave' start='0x8001000' end='0x8001008' /><slave name='usb_tx_dma.csr' start='0x8001040' end='0x8001080' /><slave name='USB2.ctrl' start='0x8001110' end='0x8001112' /><slave name='performance_counter.control_slave' start='0x8001800' end='0x8001840' /><slave name='sys_timer.s1' start='0x8002000' end='0x8002020' /><slave name='jtag_uart.avalon_jtag_slave' start='0x8002020' end='0x8002028' /><slave name='daq_dma_0.ctrl' start='0x8002040' end='0x8002060' /><slave name='daq_dma_1.ctrl' start='0x8002080' end='0x80020A0' /><slave name='daq_dma_2.ctrl' start='0x80020C0' end='0x80020E0' /><slave name='daq_dma_3.ctrl' start='0x8002100' end='0x8002120' /><slave name='daq_dma_4.ctrl' start='0x8002140' end='0x8002160' /><slave name='daq_dma_5.ctrl' start='0x8002180' end='0x80021A0' /><slave name='LED.s1' start='0x8100020' end='0x8100030' /><slave name='button.s1' start='0x8100030' end='0x8100040' /><slave name='LCDS_io.slave' start='0x8100040' end='0x8100041' /><slave name='crosspoint_switch.slave' start='0x8100050' end='0x8100058' /><slave name='i2c_main.slave' start='0x8100060' end='0x8100068' /><slave name='ROC_addr.s1' start='0x8100070' end='0x8100080' /><slave name='SDC_SPI2.s1' start='0x8100080' end='0x8100090' /><slave name='i2c_external.slave' start='0x8100090' end='0x8100098' /><slave name='main_control.s1' start='0x81000A0' end='0x81000B0' /><slave name='main_status.s1' start='0x81000B0' end='0x81000C0' /><slave name='probe_async_d1.ctrl' start='0x81000C0' end='0x81000C1' /><slave name='probe_async_d2.ctrl' start='0x81000D0' end='0x81000D1' /><slave name='PSI2C.ctrl' start='0x8108000' end='0x8108020' /><slave name='delay_clk.ctrl' start='0x8108020' end='0x8108028' /><slave name='delay_sda.ctrl' start='0x8108028' end='0x8108030' /><slave name='delay_ctr.ctrl' start='0x8108030' end='0x8108038' /><slave name='delay_tin.ctrl' start='0x8108038' end='0x8108040' /><slave name='patterngen.ctrl' start='0x8108040' end='0x8108048' /><slave name='probe_d1.ctrl' start='0x8108050' end='0x8108051' /><slave name='probe_d2.ctrl' start='0x8108060' end='0x8108061' /><slave name='deser160.s1' start='0x8108070' end='0x8108080' /><slave name='fifo.s1' start='0x8108080' end='0x8108090' /><slave name='adc_0.ctrl' start='0x8108090' end='0x8108098' /><slave name='deser400.s1' start='0x81080A0' end='0x81080B0' /><slave name='clk_stretch.ctrl' start='0x81080B0' end='0x81080B8' /><slave name='clkdiv.s1' start='0x81080C0' end='0x81080D0' /><slave name='eventgen.ctrl' start='0x81080D0' end='0x81080D8' /><slave name='rda_delay.ctrl' start='0x81080E0' end='0x81080E4' /><slave name='patterngen.data' start='0x8108200' end='0x8108400' /><slave name='tse_mac.control_port' start='0x8400000' end='0x8400400' /><slave name='sgdma_rx.csr' start='0x8400400' end='0x8400440' /><slave name='sgdma_tx.csr' start='0x8400440' end='0x8400480' /><slave name='descriptor_memory.s1' start='0x8402000' end='0x8402100' /></address-map>]]></parameter>
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="deviceFamilyName" value="Cyclone III" />
   <parameter name="internalIrqMaskSystemInfo" value="2044" />
@@ -1873,6 +1925,12 @@
  </module>
  <module kind="delay_in" version="1.0" enabled="1" name="rda_delay">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="40000000" />
+ </module>
+ <module kind="probe_async" version="1.0" enabled="1" name="probe_async_d1">
+  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
+ </module>
+ <module kind="probe_async" version="1.0" enabled="1" name="probe_async_d2">
+  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
  <connection
    kind="avalon"
@@ -2936,6 +2994,44 @@
    end="rda_delay.ctrl">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00e0" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="clock"
+   version="13.1"
+   start="clk_sys.clk"
+   end="probe_async_d1.clock" />
+ <connection
+   kind="reset"
+   version="13.1"
+   start="clk_sys.clk_reset"
+   end="probe_async_d1.clock_reset" />
+ <connection
+   kind="avalon"
+   version="13.1"
+   start="peripheral_bridge.m0"
+   end="probe_async_d1.ctrl">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00c0" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="clock"
+   version="13.1"
+   start="clk_sys.clk"
+   end="probe_async_d2.clock" />
+ <connection
+   kind="reset"
+   version="13.1"
+   start="clk_sys.clk_reset"
+   end="probe_async_d2.clock_reset" />
+ <connection
+   kind="avalon"
+   version="13.1"
+   start="peripheral_bridge.m0"
+   end="probe_async_d2.ctrl">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00d0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />

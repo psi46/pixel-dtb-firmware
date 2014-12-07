@@ -73,9 +73,55 @@ set_output_delay -clock "usb_clk" -max 7.5ns [get_ports {USB_wr_n}]
 # tpd constraints
 
 set_multicycle_path \
-	-from {deser400_PSI:instDESER400_*|lpm_dff0:inst487|lpm_ff:|lpm_ff_component|dffs[*]} \
-	-to   {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]} \
-	-setup -end 3
+	-from {deser400_PSI:instDESER400_*|lpm_dff0:inst487|lpm_ff:lpm_ff_component|dffs[*]} \
+	-setup 4
+set_multicycle_path \
+	-from {deser400_PSI:instDESER400_*|lpm_dff0:inst487|lpm_ff:lpm_ff_component|dffs[*]} \
+	-hold 3
+	
+set_multicycle_path \
+	-from {deser400_PSI:instDESER400_*|inst4487} \
+	-setup 4
+set_multicycle_path \
+	-from {deser400_PSI:instDESER400_*|inst4487} \
+	-hold 3
+
+set_multicycle_path \
+	-from {deser400_PSI:instDESER400_*|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg} \
+	-to {deser400_PSI:instDESER400_*|inst10[*]} \
+	-setup 3
+set_multicycle_path \
+	-from {deser400_PSI:instDESER400_*|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg} \
+	-to {deser400_PSI:instDESER400_*|inst10[*]} \
+	-hold 2
+
+set_multicycle_path \
+	-from {deser400_PSI:instDESER400_*|DECODE_5b4b:inst488|OUT_4b_o[*]} \
+	-to {deser400_PSI:instDESER400_*|gl_dff4e:inst469|lpm_ff:lpm_ff_component|dffs[*]} \
+	-setup 3
+set_multicycle_path \
+	-from {deser400_PSI:instDESER400_*|DECODE_5b4b:inst488|OUT_4b_o[*]} \
+	-to {deser400_PSI:instDESER400_*|gl_dff4e:inst469|lpm_ff:lpm_ff_component|dffs[*]} \
+	-hold 2
+
+set_multicycle_path \
+	-from {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]} \
+	-to {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]} \
+	-setup 3
+set_multicycle_path \
+	-from {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]} \
+	-to {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]} \
+	-hold 2
+
+set_multicycle_path \
+	-from {deser400_PSI:instDESER400_*|gl_dff8e:inst442|lpm_ff:lpm_ff_component|dffs[*]} \
+	-to {*} \
+	-setup 4
+set_multicycle_path \
+	-from {deser400_PSI:instDESER400_*|gl_dff8e:inst442|lpm_ff:lpm_ff_component|dffs[*]} \
+	-to {*} \
+	-hold 3
+
 
 set_false_path -from {dtb_system:inst|delay_out:delay_*|ext_mode[*]} -to {*}
 set_false_path -from {dtb_system:inst|delay_out:delay_*|delr[*]} -to {*}
@@ -83,7 +129,12 @@ set_false_path -from {dtb_system:inst|delay_out:delay_*|delf[*]} -to {*}
 set_false_path -from {dtb_system:inst|delay_out:delay_*|ext_sel} -to {*}
 
 set_false_path -from {dtb_system:inst|dtb_system_main_control:main_control|data_out[*]}
-	
+
+set_false_path -from {dtb_system:inst|probe_async:probe_async_d1|sel[*]} -to {*}
+set_false_path -from {dtb_system:inst|probe_async:probe_async_d2|sel[*]} -to {*}
+set_false_path -from {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|error} -to {*}
+set_false_path -from {deser400_PSI:instDESER400_*|dffom:inst377|inst} -to {*}
+
 # report_path -from [get_ports {LVDS2LCDS_sdata_*}] -npaths 40 -panel_name {SDATA delay}
 
 write_sdc -expand "dtb_report.sdc"

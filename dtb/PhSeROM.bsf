@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2012 Altera Corporation
+Copyright (C) 1991-2013 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -31,18 +31,25 @@ applicable agreement for further details.
 		(line (pt 0 32)(pt 88 32)(line_width 3))
 	)
 	(port
+		(pt 0 80)
+		(input)
+		(text "rden" (rect 0 0 25 14)(font "Arial" (font_size 8)))
+		(text "rden" (rect 4 66 24 79)(font "Arial" (font_size 8)))
+		(line (pt 0 80)(pt 88 80))
+	)
+	(port
 		(pt 0 112)
 		(input)
 		(text "clock" (rect 0 0 29 14)(font "Arial" (font_size 8)))
 		(text "clock" (rect 4 98 27 111)(font "Arial" (font_size 8)))
-		(line (pt 0 112)(pt 144 112))
+		(line (pt 0 112)(pt 80 112))
 	)
 	(port
 		(pt 216 32)
 		(output)
 		(text "q[3..0]" (rect 0 0 35 14)(font "Arial" (font_size 8)))
 		(text "q[3..0]" (rect 183 18 211 31)(font "Arial" (font_size 8)))
-		(line (pt 216 32)(pt 160 32)(line_width 3))
+		(line (pt 216 32)(pt 136 32)(line_width 3))
 	)
 	(drawing
 		(text "4 bits" (rect 109 23 191 153)(font "Arial" )(vertical))
@@ -54,14 +61,6 @@ applicable agreement for further details.
 		(line (pt 104 96)(pt 104 24))
 		(line (pt 118 58)(pt 123 63))
 		(line (pt 118 62)(pt 123 57))
-		(line (pt 152 27)(pt 160 27))
-		(line (pt 160 27)(pt 160 39))
-		(line (pt 160 39)(pt 152 39))
-		(line (pt 152 39)(pt 152 27))
-		(line (pt 152 34)(pt 154 36))
-		(line (pt 154 36)(pt 152 38))
-		(line (pt 144 36)(pt 152 36))
-		(line (pt 136 32)(pt 152 32)(line_width 3))
 		(line (pt 88 27)(pt 96 27))
 		(line (pt 96 27)(pt 96 39))
 		(line (pt 96 39)(pt 88 39))
@@ -70,8 +69,15 @@ applicable agreement for further details.
 		(line (pt 90 36)(pt 88 38))
 		(line (pt 80 36)(pt 88 36))
 		(line (pt 96 32)(pt 104 32)(line_width 3))
+		(line (pt 88 75)(pt 96 75))
+		(line (pt 96 75)(pt 96 87))
+		(line (pt 96 87)(pt 88 87))
+		(line (pt 88 87)(pt 88 75))
+		(line (pt 88 82)(pt 90 84))
+		(line (pt 90 84)(pt 88 86))
+		(line (pt 80 84)(pt 88 84))
+		(line (pt 96 80)(pt 104 80))
 		(line (pt 80 112)(pt 80 36))
-		(line (pt 144 112)(pt 144 36))
 		(line (pt 0 0)(pt 217 0))
 		(line (pt 217 0)(pt 217 130))
 		(line (pt 0 130)(pt 217 130))

@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2012 Altera Corporation
+Copyright (C) 1991-2014 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -36,34 +36,6 @@ applicable agreement for further details.
 		(text "PLLareset400" (rect 0 0 79 14)(font "Arial" (font_size 8)))
 		(text "PLLareset400" (rect 21 371 100 385)(font "Arial" (font_size 8)))
 		(line (pt 0 376)(pt 16 376))
-	)
-	(port
-		(pt 0 176)
-		(input)
-		(text "CLK400" (rect 0 0 44 14)(font "Arial" (font_size 8)))
-		(text "CLK400" (rect 21 171 65 185)(font "Arial" (font_size 8)))
-		(line (pt 0 176)(pt 16 176))
-	)
-	(port
-		(pt 0 200)
-		(input)
-		(text "C1" (rect 0 0 15 14)(font "Arial" (font_size 8)))
-		(text "C1" (rect 21 195 36 209)(font "Arial" (font_size 8)))
-		(line (pt 0 200)(pt 16 200))
-	)
-	(port
-		(pt 0 224)
-		(input)
-		(text "C2" (rect 0 0 15 14)(font "Arial" (font_size 8)))
-		(text "C2" (rect 21 219 36 233)(font "Arial" (font_size 8)))
-		(line (pt 0 224)(pt 16 224))
-	)
-	(port
-		(pt 0 248)
-		(input)
-		(text "C3" (rect 0 0 15 14)(font "Arial" (font_size 8)))
-		(text "C3" (rect 21 243 36 257)(font "Arial" (font_size 8)))
-		(line (pt 0 248)(pt 16 248))
 	)
 	(port
 		(pt 0 320)
@@ -106,6 +78,13 @@ applicable agreement for further details.
 		(text "Trailer_OLD_NEW_0_1" (rect 24 432 153 446)(font "Arial" (font_size 8)))
 		(text "Trailer_OLD_NEW_0_1" (rect 24 432 153 446)(font "Arial" (font_size 8)))
 		(line (pt 0 440)(pt 16 440))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "sclk[7..0]" (rect 0 0 50 14)(font "Arial" (font_size 8)))
+		(text "sclk[7..0]" (rect 21 171 71 185)(font "Arial" (font_size 8)))
+		(line (pt 0 176)(pt 16 176)(color 0 128 255)(line_width 3))
 	)
 	(port
 		(pt 248 264)
@@ -201,23 +180,9 @@ applicable agreement for further details.
 	(port
 		(pt 248 424)
 		(output)
-		(text "TP" (rect 197 408 211 422)(font "Arial" (font_size 8)))
-		(text "TP" (rect 197 416 211 430)(font "Arial" (font_size 8)))
-		(line (pt 248 424)(pt 232 424))
-	)
-	(port
-		(pt 248 440)
-		(output)
-		(text "TPP" (rect 197 424 218 438)(font "Arial" (font_size 8)))
-		(text "TPP" (rect 197 432 218 446)(font "Arial" (font_size 8)))
-		(line (pt 248 440)(pt 232 440))
-	)
-	(port
-		(pt 248 456)
-		(output)
-		(text "TPPP" (rect 197 440 225 454)(font "Arial" (font_size 8)))
-		(text "TPPP" (rect 197 448 225 462)(font "Arial" (font_size 8)))
-		(line (pt 248 456)(pt 232 456))
+		(text "TP[9..0]" (rect 197 408 239 422)(font "Arial" (font_size 8)))
+		(text "TP[9..0]" (rect 192 416 234 430)(font "Arial" (font_size 8)))
+		(line (pt 248 424)(pt 232 424)(color 128 0 255)(line_width 3))
 	)
 	(drawing
 		(rectangle (rect 16 0 232 464))

@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2012 Altera Corporation
+Copyright (C) 1991-2013 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -75,23 +75,9 @@ applicable agreement for further details.
 	(port
 		(pt 48 112)
 		(output)
-		(text "allowROC_H" (rect 40 62 54 133)(font "Arial" (font_size 8))(vertical))
-		(text "allowROC_H" (rect 40 22 54 93)(font "Arial" (color 255 0 0)(font_size 8))(vertical))
+		(text "gate" (rect 40 62 54 86)(font "Arial" (font_size 8))(vertical))
+		(text "gate" (rect 40 72 54 96)(font "Arial" (color 255 0 0)(font_size 8))(vertical))
 		(line (pt 48 112)(pt 48 96))
-	)
-	(port
-		(pt 0 64)
-		(output)
-		(text "TP" (rect 24 48 38 62)(font "Arial" (font_size 8)))
-		(text "TP" (rect 24 56 38 70)(font "Arial" (font_size 8)))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 72)
-		(output)
-		(text "TPP" (rect 24 56 45 70)(font "Arial" (font_size 8)))
-		(text "TPP" (rect 24 64 45 78)(font "Arial" (font_size 8)))
-		(line (pt 0 72)(pt 16 72))
 	)
 	(drawing
 		(line (pt 16 80)(pt 24 88))

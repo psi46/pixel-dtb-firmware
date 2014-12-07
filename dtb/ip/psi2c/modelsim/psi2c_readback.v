@@ -23,6 +23,7 @@ module psi2c_readback
 	wire nto;  // not timeout
 	wire last;
 	wire running;
+	wire toflag; // time out flag
 
 	srff_timeout ffto
 	(
@@ -32,7 +33,8 @@ module psi2c_readback
 		.s(go),
 		.r(running),
 		.to_disable(i2c_send),
-		.q(nto)
+		.q(nto),
+		.to(toflag)
 	);
 
 	rda_bitcounter bitcounter
@@ -54,7 +56,7 @@ module psi2c_readback
 	always @(posedge clk or posedge reset)
 	begin
 		if (reset) shiftreg <= 0;
-		else if (running && sync) shiftreg <= {shiftreg[28:0], rdaff};
+		else if (running && sync) shiftreg <= {shiftreg[27:0], rdaff};
 	end
 	
 	// rda data mapper
@@ -68,6 +70,6 @@ module psi2c_readback
 	wire _d4 = shiftreg[14];
 	wire _d0 = shiftreg[9];
 	
-	assign d = {running || nto, 2'b00, _s3, _rw, _d4, _d0, start, ha, pa, ra, rd};
+	assign d = {running || nto, toflag, 1'b0, _s3, _rw, _d4, _d0, start, ha, pa, ra, rd};
 	
 endmodule

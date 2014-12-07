@@ -19,7 +19,7 @@
 ## PROGRAM "Quartus II"
 ## VERSION "Version 13.1.0 Build 162 10/23/2013 SJ Full Version"
 
-## DATE    "Tue Jul 08 12:55:32 2014"
+## DATE    "Sun Dec 07 21:45:04 2014"
 
 ##
 ## DEVICE  "EP3C40F484C6"
@@ -166,12 +166,28 @@ set_false_path -from [get_keepers {dtb_system:inst|delay_out:delay_*|delr[*]}]
 set_false_path -from [get_keepers {dtb_system:inst|delay_out:delay_*|delf[*]}] 
 set_false_path -from [get_keepers {dtb_system:inst|delay_out:delay_*|ext_sel}] 
 set_false_path -from [get_keepers {dtb_system:inst|dtb_system_main_control:main_control|data_out[*]}] 
+set_false_path -from [get_keepers {dtb_system:inst|probe_async:probe_async_d1|sel[*]}] 
+set_false_path -from [get_keepers {dtb_system:inst|probe_async:probe_async_d2|sel[*]}] 
+set_false_path -from [get_keepers {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|error}] 
+set_false_path -from [get_keepers {deser400_PSI:instDESER400_*|dffom:inst377|inst}] 
 
 
 #**************************************************************
 # Set Multicycle Path
 #**************************************************************
 
+set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|lpm_dff0:inst487|lpm_ff:lpm_ff_component|dffs[*]}] 4
+set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|lpm_dff0:inst487|lpm_ff:lpm_ff_component|dffs[*]}] 3
+set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|inst4487}] 4
+set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|inst4487}] 3
+set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg}] -to [get_keepers {deser400_PSI:instDESER400_*|inst10[*]}] 3
+set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg}] -to [get_keepers {deser400_PSI:instDESER400_*|inst10[*]}] 2
+set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|DECODE_5b4b:inst488|OUT_4b_o[*]}] -to [get_keepers {deser400_PSI:instDESER400_*|gl_dff4e:inst469|lpm_ff:lpm_ff_component|dffs[*]}] 3
+set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|DECODE_5b4b:inst488|OUT_4b_o[*]}] -to [get_keepers {deser400_PSI:instDESER400_*|gl_dff4e:inst469|lpm_ff:lpm_ff_component|dffs[*]}] 2
+set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]}] -to [get_keepers {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]}] 3
+set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]}] -to [get_keepers {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]}] 2
+set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|gl_dff8e:inst442|lpm_ff:lpm_ff_component|dffs[*]}] 4
+set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|gl_dff8e:inst442|lpm_ff:lpm_ff_component|dffs[*]}] 3
 
 
 #**************************************************************
