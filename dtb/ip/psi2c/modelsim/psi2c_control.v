@@ -12,7 +12,7 @@
 --  3 w: send S                                    D7  D6  D5  D4  D3  D2  D1  D0
 --  4 w: send  P                                   D7  D6  D5  D4  D3  D2  D1  D0
 --  5 w: send SP                                   D7  D6  D5  D4  D3  D2  D1  D0
---  1 r: rdb raw   run 0   0   _s3 _rw _d4 _d0 S   ha4 ha3 ha2 ha1 ha0 pa2 pa1 pa0
+--  1 r: rdb raw   run to  0   _s3 _rw _d4 _d0 S   ha4 ha3 ha2 ha1 ha0 pa2 pa1 pa0
 --                 ra7 ra6 ra5 ra4 ra3 ra2 ra1 ra0 rd7 rd6 rd5 rd4 rd3 rd2 rd1 rd0
 --
 --  tbm = read back on
@@ -42,7 +42,7 @@ module i2c_control
 	input        read,
 	output reg [31:0]readdata,
 
-	output go,
+	output reg go,
 	input full,
 	output reg [11:0]memd,
 	output memw,
@@ -59,29 +59,35 @@ module i2c_control
 	              writedata[3:0], !writedata[0]};
   always @(*)
 	case (address)
-		2: memd <= {2'b00, i2c_data};
-		3: memd <= {2'b10, i2c_data}; // S
-		4: memd <= {2'b01, i2c_data}; //  P
-		5: memd <= {2'b11, i2c_data}; // SP
+		3'd2: memd <= {2'b00, i2c_data};
+		3'd3: memd <= {2'b10, i2c_data}; // S
+		3'd4: memd <= {2'b01, i2c_data}; //  P
+		3'd5: memd <= {2'b11, i2c_data}; // SP
 		default: memd <= writedata[11:0];
 	endcase
 	
 	always @(*)
 	case (address)
-		1:      readdata <= rda;
-		default readdata <= {1'b0, full, rdbff, busy || rda[31]};
+		3'd1:   readdata <= rda;
+		default readdata <= {28'h1234_567, 1'b0, full, rdbff, busy || rda[31]};
 	endcase
 
 	// tbm mode
 	always @(posedge clk or posedge reset)
 	begin
-		if (reset) rdbff <= 0;
-		else if (write && (address == 0))
-			rdbff = writedata[1];
+		if (reset)
+		begin
+		  rdbff <= 0;
+		  go    <= 0;
+    end
+		else if (write && (address == 3'd0))
+		begin
+			rdbff <= writedata[1];
+			go    <= writedata[0];
+		end
+		else go <= 0;
 	end
 	
 	assign tbm = rdbff;
-	
-	// go signal
-	assign go = write & writedata[0] & (address == 0);
+
 endmodule

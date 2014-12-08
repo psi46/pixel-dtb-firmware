@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
  *
- * Generated: Tue Jul 08 13:42:46 CEST 2014
+ * Generated: Tue Nov 25 15:27:13 CET 2014
  */
 
 /*
@@ -149,6 +149,7 @@
 #define __LVDS2LCDS
 #define __PATTERNGENERATOR
 #define __PROBE
+#define __PROBE_ASYNC
 #define __PSI2C
 #define __SPI_MASTER
 #define __USB_FT232
@@ -829,6 +830,34 @@
 
 
 /*
+ * probe_async_d1 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_probe_async_d1 probe_async
+#define PROBE_ASYNC_D1_BASE 0x81000c0
+#define PROBE_ASYNC_D1_IRQ -1
+#define PROBE_ASYNC_D1_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PROBE_ASYNC_D1_NAME "/dev/probe_async_d1"
+#define PROBE_ASYNC_D1_SPAN 1
+#define PROBE_ASYNC_D1_TYPE "probe_async"
+
+
+/*
+ * probe_async_d2 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_probe_async_d2 probe_async
+#define PROBE_ASYNC_D2_BASE 0x81000d0
+#define PROBE_ASYNC_D2_IRQ -1
+#define PROBE_ASYNC_D2_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PROBE_ASYNC_D2_NAME "/dev/probe_async_d2"
+#define PROBE_ASYNC_D2_SPAN 1
+#define PROBE_ASYNC_D2_TYPE "probe_async"
+
+
+/*
  * probe_d1 configuration
  *
  */
@@ -1041,7 +1070,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1404813994
+#define SYSID_TIMESTAMP 1416922601
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 

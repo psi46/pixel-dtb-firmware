@@ -594,7 +594,7 @@ void CTestboard::Sig_SetRdaToutDelay(uint8_t delay)
 		0x3f  // 19: 23.75 ns
 	};
 
-	if (delay >= 20) delay = 20;
+	if (delay > 19) delay = 19;
 	SetToutRdbDelay(delayStep[delay]);
 }
 
@@ -887,13 +887,51 @@ void CTestboard::SetRocAddress(uint8_t addr)
 
 void CTestboard::SignalProbeD1(uint8_t signal)
 {
-	_Probe1(signal);
+	if (signal == 0)
+	{
+		_Probe1(0);
+		_Probe1a(0);
+	}
+	else if (signal <= 30)
+	{
+		_Probe1(signal);
+		_Probe1a(31);
+	}
+	else if (signal >= 100 && signal <= 129)
+	{
+		_Probe1(0);
+		_Probe1a(signal-99);
+	}
+	else
+	{
+		_Probe1(0);
+		_Probe1a(0);
+	}
 }
 
 
 void CTestboard::SignalProbeD2(uint8_t signal)
 {
-	_Probe2(signal);
+	if (signal == 0)
+	{
+		_Probe2(0);
+		_Probe2a(0);
+	}
+	else if (signal <= 24)
+	{
+		_Probe2(signal);
+		_Probe2a(31);
+	}
+	else if (signal >= 100 && signal <= 129)
+	{
+		_Probe2(0);
+		_Probe2a(signal-99);
+	}
+	else
+	{
+		_Probe2(0);
+		_Probe2a(0);
+	}
 }
 
 
@@ -1226,12 +1264,11 @@ void CTestboard::tbm_Set(uint8_t reg, uint8_t value)
 
 bool CTestboard::tbm_GetRaw(uint8_t reg, uint32_t &value)
 {
-        if (!TBM_present) { value = -1; return false; }
+        if (!TBM_present) { value = 0x00000000; return false; }
 
-        while (GetI2cHs(0) & 1);
         SetI2cHs(3, (HUB_address & (0x1f<<3)) + 4);
         SetI2cHs(3, reg | 1);
-        SetI2cHs(4, 0x7ff);
+        SetI2cHs(4, 0xff);
         SetI2cHs(0, 3);
 
         short count = 0;
@@ -1239,7 +1276,7 @@ bool CTestboard::tbm_GetRaw(uint8_t reg, uint32_t &value)
         while ((GetI2cHs(0) & 1) && count<500) count++;
         value = GetI2cHs(1);
 
-        return value >= 0;
+        return (value & 0x40000000) != 0;
 }
 
 bool CTestboard::tbm_Get(uint8_t reg, uint8_t &value)

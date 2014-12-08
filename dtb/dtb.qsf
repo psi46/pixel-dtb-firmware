@@ -192,22 +192,22 @@ set_location_assignment PIN_N19 -to SD_miso
 set_location_assignment PIN_R19 -to SD_mosi
 set_location_assignment PIN_AA21 -to Switches[0]
 set_location_assignment PIN_AA22 -to Switches[1]
-set_location_assignment PIN_E16 -to UI_IOs[0]
-set_location_assignment PIN_B16 -to UI_IOs[1]
-set_location_assignment PIN_A16 -to UI_IOs[2]
-set_location_assignment PIN_E15 -to UI_IOs[3]
-set_location_assignment PIN_B15 -to UI_IOs[4]
-set_location_assignment PIN_A15 -to UI_IOs[5]
-set_location_assignment PIN_E14 -to UI_IOs[6]
-set_location_assignment PIN_B14 -to UI_IOs[7]
-set_location_assignment PIN_A14 -to UI_IOs[8]
-set_location_assignment PIN_C13 -to UI_IOs[9]
-set_location_assignment PIN_B13 -to UI_IOs[10]
-set_location_assignment PIN_A13 -to UI_IOs[11]
-set_location_assignment PIN_E12 -to UI_IOs[12]
-set_location_assignment PIN_D13 -to UI_IOs[13]
-set_location_assignment PIN_F11 -to UI_IOs[14]
-set_location_assignment PIN_E11 -to UI_IOs[15]
+# set_location_assignment PIN_E16 -to UI_IOs[0]
+# set_location_assignment PIN_B16 -to UI_IOs[1]
+# set_location_assignment PIN_A16 -to UI_IOs[2]
+# set_location_assignment PIN_E15 -to UI_IOs[3]
+# set_location_assignment PIN_B15 -to UI_IOs[4]
+# set_location_assignment PIN_A15 -to UI_IOs[5]
+# set_location_assignment PIN_E14 -to UI_IOs[6]
+# set_location_assignment PIN_B14 -to UI_IOs[7]
+# set_location_assignment PIN_A14 -to UI_IOs[8]
+# set_location_assignment PIN_C13 -to UI_IOs[9]
+# set_location_assignment PIN_B13 -to UI_IOs[10]
+# set_location_assignment PIN_A13 -to UI_IOs[11]
+# set_location_assignment PIN_E12 -to UI_IOs[12]
+# set_location_assignment PIN_D13 -to UI_IOs[13]
+# set_location_assignment PIN_F11 -to UI_IOs[14]
+# set_location_assignment PIN_E11 -to UI_IOs[15]
 
 set_location_assignment PIN_F11 -to twTP1
 set_location_assignment PIN_E11 -to "twTP1(n)"
@@ -358,7 +358,7 @@ set_instance_assignment -name IO_STANDARD LVDS_E_3R -to twTP3
 
 # EDA Netlist Writer Assignments
 # ==============================
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_SIMULATION_TOOL "<None>"
 
 # Assembler Assignments
 # =====================
@@ -376,7 +376,7 @@ set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -
 
 	# EDA Netlist Writer Assignments
 	# ==============================
-set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT NONE -section_id eda_simulation
 
 # end EDA_TOOL_SETTINGS(eda_simulation)
 # -------------------------------------
@@ -869,688 +869,72 @@ set_instance_assignment -name FAST_INPUT_REGISTER ON -to I_adc_*
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to SD_cd
 
 
-
-#######sdata_l alt
-
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst382"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst384"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst385"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst386"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst387"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst388"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst389"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst398"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst399"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst402"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst424"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst425"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst431"
-##set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst433"
-
-##set_location_assignment LAB_X2_Y13_N0 -to "instDESER400_1|dffom:inst383"
-##set_location_assignment LAB_X2_Y13_N0 -to "instDESER400_1|dffom:inst400"
-##set_location_assignment LAB_X2_Y13_N0 -to "instDESER400_1|dffom:inst432"
-##set_location_assignment LAB_X2_Y13_N0 -to "instDESER400_1|dffom:inst435"
-##set_location_assignment LAB_X2_Y13_N0 -to "instDESER400_1|dffom:inst436"
-##
-##set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst381"
-##set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst396"
-##set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst397"
-##set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst401"
-##set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst414"
-##set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst421"
-##set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst422"
-##set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst423"
-##set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst430"
-##
-##set_location_assignment LAB_X4_Y13_N0 -to "instDESER400_1|dffom:inst380"
-##set_location_assignment LAB_X4_Y13_N0 -to "instDESER400_1|dffom:inst429"
-##set_location_assignment LAB_X4_Y13_N0 -to "instDESER400_1|dffom:inst426"
-##set_location_assignment LAB_X4_Y13_N0 -to "instDESER400_1|dffom:inst434"
-##
-##
-##set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst410"
-##set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst411"
-##set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst412"
-##set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst413"
-##set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst415"
-##set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst416"
-##set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst417"
-##set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst418"
-##
-##
-##set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst390
-##set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst391
-##set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst392
-##set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst393"
-##set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst394"
-##set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst395"
-##set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst403
-##set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst404"
-##set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst405
-##set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst406"
-##set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst407
-##set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst408"
-##set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst419
-##set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst420"
-##set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst427
-##set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst428"
-##
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst444"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst445"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst446"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst447"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst459"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst460"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst461"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst462"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst454"
-
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst448"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst449"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst450"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst451"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst463"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst464"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst465"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst466"
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst456"
-
-##set_location_assignment LAB_X7_Y13_N0 -to instDESER400_1|inst453
-##set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst457"
-
-##set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst365"
-##set_location_assignment LAB_X8_Y13_N0 -to instDESER400_1|inst50
-##set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst371"
-##set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst372"
-##set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst373"
-##set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst374"
-##set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst376"
-
-##set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst377"
-##set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|blockPHfinding:inst62"
-##set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|frame_det:inst63"
-
-##set_location_assignment LAB_X9_Y13_N0 -to "instDESER400_1|dffom:inst357"
-##set_location_assignment LAB_X9_Y13_N0 -to "instDESER400_1|dffom:inst361"
-##set_location_assignment LAB_X9_Y13_N0 -to "instDESER400_1|dffom:inst362"
-##set_location_assignment LAB_X9_Y13_N0 -to "instDESER400_1|dffom:inst363"
-##set_location_assignment LAB_X9_Y13_N0 -to "instDESER400_1|dffom:inst364"
-
-##set_location_assignment LAB_X9_Y13_N0 -to instDESER400_1|inst437
-
-##set_location_assignment LAB_X10_Y13_N0 -to "instDESER400_1|gl_dff8e:inst442"
-##set_location_assignment LAB_X10_Y13_N0 -to "instDESER400_1|sr4:inst443"
-
-##set_location_assignment LAB_X10_Y12_N0 -to "instDESER400_1|Counter3bMOD5:inst468"
-##set_location_assignment LAB_X10_Y12_N0 -to "instDESER400_1|dffom:inst492"
-##set_location_assignment LAB_X10_Y12_N0 -to "instDESER400_1|sr4:inst494"
-##set_location_assignment LAB_X10_Y12_N0 -to "instDESER400_1|lpm_or3:inst51"
-
-##set_location_assignment LAB_X9_Y12_N0 -to "instDESER400_1|lpm_dff0:inst487"
-##set_location_assignment LAB_X9_Y12_N0 -to "instDESER400_1|DECODE_5b4b:inst488"
-
-##set_location_assignment LAB_X8_Y12_N0 -to "instDESER400_1|sr4:inst493"
-##set_location_assignment LAB_X8_Y12_N0 -to "instDESER400_1|lpm_counter3:inst1107"
-##set_location_assignment LAB_X8_Y12_N0 -to instDESER400_1|inst1108
-
-##set_location_assignment LAB_X8_Y12_N0 -to "instDESER400_1|gl_dff4e:inst469"
-##set_location_assignment LAB_X8_Y12_N0 -to "instDESER400_1|lpm_shiftreg0:inst470"
-##set_location_assignment LAB_X8_Y12_N0 -to "instDESER400_1|dffom:inst486"
-
-##set_location_assignment LAB_X7_Y12_N0 -to "instDESER400_1|dffom:inst471"
-##set_location_assignment LAB_X7_Y12_N0 -to instDESER400_1|inst472
-
-##set_location_assignment LAB_X6_Y12_N0 -to instDESER400_1|inst475
-##set_location_assignment LAB_X6_Y12_N0 -to "instDESER400_1|dffom:inst476"
-
-
-#######sdata_l 
-
-set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst431"
-set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst382"
-set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst384"
-set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst386"
-set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst387"
-set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst388"
-set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst389"
-set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst398"
-set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst421"
-set_location_assignment LAB_X1_Y13_N0 -to "instDESER400_1|dffom:inst422"
-
-set_location_assignment LAB_X2_Y13_N0 -to "instDESER400_1|dffom:inst399"
-set_location_assignment LAB_X2_Y13_N0 -to "instDESER400_1|dffom:inst433"
-set_location_assignment LAB_X2_Y13_N0 -to "instDESER400_1|dffom:inst435"
-
-set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst383"
-set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst385"
-set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst397"
-set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst400"
-set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst432"
-set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst434"
-set_location_assignment LAB_X3_Y13_N0 -to "instDESER400_1|dffom:inst436"
-
-set_location_assignment LAB_X4_Y13_N0 -to "instDESER400_1|dffom:inst381"
-set_location_assignment LAB_X4_Y13_N0 -to "instDESER400_1|dffom:inst396"
-set_location_assignment LAB_X4_Y13_N0 -to "instDESER400_1|dffom:inst401"
-set_location_assignment LAB_X4_Y13_N0 -to "instDESER400_1|dffom:inst414"
-set_location_assignment LAB_X4_Y13_N0 -to "instDESER400_1|dffom:inst423"
-set_location_assignment LAB_X4_Y13_N0 -to "instDESER400_1|dffom:inst424"
-set_location_assignment LAB_X4_Y13_N0 -to "instDESER400_1|dffom:inst430"
-
-set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst380"
-set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst402"
-set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst425"
-set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst426"
-set_location_assignment LAB_X5_Y13_N0 -to "instDESER400_1|dffom:inst429"
-
-
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst410"
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst411"
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst412"
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst413"
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst415"
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst416"
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst417"
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst418"
-
-set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst390
-set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst391
-set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst392
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst393"
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst394"
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst395"
-set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst403
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst404"
-set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst405
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst406"
-set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst407
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst408"
-set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst419
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst420"
-set_location_assignment LAB_X6_Y13_N0 -to instDESER400_1|inst427
-set_location_assignment LAB_X6_Y13_N0 -to "instDESER400_1|dffom:inst428"
-
-set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst444"
-set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst445"
-set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst446"
-set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst447"
-set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst459"
-set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst460"
-set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst461"
-set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|gl_and2:inst462"
-set_location_assignment LAB_X7_Y13_N0 -to "instDESER400_1|dffom:inst454"
-
-set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst448"
-set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst449"
-set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst450"
-set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst451"
-set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|gl_and2:inst463"
-set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|gl_and2:inst464"
-set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|gl_and2:inst465"
-set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|gl_and2:inst466"
-set_location_assignment LAB_X8_Y13_N0 -to "instDESER400_1|dffom:inst456"
-
-set_location_assignment LAB_X9_Y13_N0 -to instDESER400_1|inst453
-set_location_assignment LAB_X9_Y13_N0 -to "instDESER400_1|dffom:inst457"
-set_location_assignment LAB_X9_Y13_N0 -to "instDESER400_1|dffom:inst371"
-set_location_assignment LAB_X9_Y13_N0 -to "instDESER400_1|dffom:inst372"
-set_location_assignment LAB_X9_Y13_N0 -to "instDESER400_1|dffom:inst373"
-set_location_assignment LAB_X9_Y13_N0 -to "instDESER400_1|dffom:inst374"
-set_location_assignment LAB_X9_Y13_N0 -to "instDESER400_1|dffom:inst376"
-
-set_location_assignment LAB_X10_Y13_N0 -to "instDESER400_1|dffom:inst377"
-set_location_assignment LAB_X10_Y13_N0 -to "instDESER400_1|blockPHfinding:inst62"
-set_location_assignment LAB_X10_Y13_N0 -to "instDESER400_1|frame_det:inst63"
-set_location_assignment LAB_X10_Y13_N0 -to instDESER400_1|inst437
-
-set_location_assignment LAB_X11_Y13_N0 -to "instDESER400_1|gl_dff8e:inst442"
-set_location_assignment LAB_X11_Y13_N0 -to "instDESER400_1|sr4:inst443"
-
-set_location_assignment LAB_X11_Y12_N0 -to "instDESER400_1|Counter3bMOD5:inst468"
-set_location_assignment LAB_X11_Y12_N0 -to "instDESER400_1|dffom:inst492"
-set_location_assignment LAB_X11_Y12_N0 -to "instDESER400_1|sr2:inst494"
-set_location_assignment LAB_X11_Y12_N0 -to "instDESER400_1|lpm_or3:inst51"
-
-set_location_assignment LAB_X10_Y12_N0 -to "instDESER400_1|lpm_dff0:inst487"
-set_location_assignment LAB_X10_Y12_N0 -to instDESER400_1|inst4487
-set_location_assignment LAB_X10_Y12_N0 -to "instDESER400_1|sr3:inst4001"
-set_location_assignment LAB_X10_Y12_N0 -to "instDESER400_1|sr3:inst4002"
-
-set_location_assignment LAB_X9_Y12_N0 -to "instDESER400_1|gl_dff5en:inst4004"
-set_location_assignment LAB_X9_Y12_N0 -to "instDESER400_1|DECODE_5b4b:inst488"
-
-
-##set_location_assignment LAB_X9_Y12_N0 -to "instDESER400_1|NRZI_decoder:inst4003"
-## 50 LCells !!
-
-set_location_assignment LAB_X8_Y12_N0 -to "instDESER400_1|pedge_s:inst493"
-set_location_assignment LAB_X8_Y12_N0 -to "instDESER400_1|lpm_counter4:inst1107"
-set_location_assignment LAB_X8_Y12_N0 -to instDESER400_1|inst1108
-
-set_location_assignment LAB_X8_Y12_N0 -to "instDESER400_1|gl_dff4e:inst469"
-set_location_assignment LAB_X8_Y12_N0 -to "instDESER400_1|lpm_shiftreg0:inst470"
-set_location_assignment LAB_X8_Y12_N0 -to "instDESER400_1|dffom:inst486"
-
-set_location_assignment LAB_X7_Y12_N0 -to "instDESER400_1|dffom:inst471"
-set_location_assignment LAB_X7_Y12_N0 -to instDESER400_1|inst472
-
-set_location_assignment LAB_X6_Y12_N0 -to instDESER400_1|inst475
-set_location_assignment LAB_X6_Y12_N0 -to "instDESER400_1|dffom:inst476"
-
-
-
-
-
-#######sdata_k 
-set_location_assignment LAB_X1_Y15_N0 -to "instDESER400_2|dffom:inst431"
-set_location_assignment LAB_X1_Y15_N0 -to "instDESER400_2|dffom:inst382"
-set_location_assignment LAB_X1_Y15_N0 -to "instDESER400_2|dffom:inst384"
-set_location_assignment LAB_X1_Y15_N0 -to "instDESER400_2|dffom:inst386"
-set_location_assignment LAB_X1_Y15_N0 -to "instDESER400_2|dffom:inst387"
-set_location_assignment LAB_X1_Y15_N0 -to "instDESER400_2|dffom:inst388"
-set_location_assignment LAB_X1_Y15_N0 -to "instDESER400_2|dffom:inst389"
-set_location_assignment LAB_X1_Y15_N0 -to "instDESER400_2|dffom:inst398"
-set_location_assignment LAB_X1_Y15_N0 -to "instDESER400_2|dffom:inst421"
-set_location_assignment LAB_X1_Y15_N0 -to "instDESER400_2|dffom:inst422"
-
-set_location_assignment LAB_X2_Y15_N0 -to "instDESER400_2|dffom:inst399"
-set_location_assignment LAB_X2_Y15_N0 -to "instDESER400_2|dffom:inst433"
-set_location_assignment LAB_X2_Y15_N0 -to "instDESER400_2|dffom:inst435"
-
-set_location_assignment LAB_X3_Y15_N0 -to "instDESER400_2|dffom:inst383"
-set_location_assignment LAB_X3_Y15_N0 -to "instDESER400_2|dffom:inst385"
-set_location_assignment LAB_X3_Y15_N0 -to "instDESER400_2|dffom:inst397"
-set_location_assignment LAB_X3_Y15_N0 -to "instDESER400_2|dffom:inst400"
-set_location_assignment LAB_X3_Y15_N0 -to "instDESER400_2|dffom:inst432"
-set_location_assignment LAB_X3_Y15_N0 -to "instDESER400_2|dffom:inst434"
-set_location_assignment LAB_X3_Y15_N0 -to "instDESER400_2|dffom:inst436"
-
-set_location_assignment LAB_X4_Y15_N0 -to "instDESER400_2|dffom:inst381"
-set_location_assignment LAB_X4_Y15_N0 -to "instDESER400_2|dffom:inst396"
-set_location_assignment LAB_X4_Y15_N0 -to "instDESER400_2|dffom:inst401"
-set_location_assignment LAB_X4_Y15_N0 -to "instDESER400_2|dffom:inst414"
-set_location_assignment LAB_X4_Y15_N0 -to "instDESER400_2|dffom:inst423"
-set_location_assignment LAB_X4_Y15_N0 -to "instDESER400_2|dffom:inst424"
-set_location_assignment LAB_X4_Y15_N0 -to "instDESER400_2|dffom:inst430"
-
-set_location_assignment LAB_X5_Y15_N0 -to "instDESER400_2|dffom:inst380"
-set_location_assignment LAB_X5_Y15_N0 -to "instDESER400_2|dffom:inst402"
-set_location_assignment LAB_X5_Y15_N0 -to "instDESER400_2|dffom:inst425"
-set_location_assignment LAB_X5_Y15_N0 -to "instDESER400_2|dffom:inst426"
-set_location_assignment LAB_X5_Y15_N0 -to "instDESER400_2|dffom:inst429"
-
-
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst410"
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst411"
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst412"
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst413"
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst415"
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst416"
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst417"
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst418"
-
-set_location_assignment LAB_X6_Y15_N0 -to instDESER400_2|inst390
-set_location_assignment LAB_X6_Y15_N0 -to instDESER400_2|inst391
-set_location_assignment LAB_X6_Y15_N0 -to instDESER400_2|inst392
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst393"
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst394"
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst395"
-set_location_assignment LAB_X6_Y15_N0 -to instDESER400_2|inst403
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst404"
-set_location_assignment LAB_X6_Y15_N0 -to instDESER400_2|inst405
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst406"
-set_location_assignment LAB_X6_Y15_N0 -to instDESER400_2|inst407
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst408"
-set_location_assignment LAB_X6_Y15_N0 -to instDESER400_2|inst419
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst420"
-set_location_assignment LAB_X6_Y15_N0 -to instDESER400_2|inst427
-set_location_assignment LAB_X6_Y15_N0 -to "instDESER400_2|dffom:inst428"
-
-set_location_assignment LAB_X7_Y15_N0 -to "instDESER400_2|dffom:inst444"
-set_location_assignment LAB_X7_Y15_N0 -to "instDESER400_2|dffom:inst445"
-set_location_assignment LAB_X7_Y15_N0 -to "instDESER400_2|dffom:inst446"
-set_location_assignment LAB_X7_Y15_N0 -to "instDESER400_2|dffom:inst447"
-set_location_assignment LAB_X7_Y15_N0 -to "instDESER400_2|gl_and2:inst459"
-set_location_assignment LAB_X7_Y15_N0 -to "instDESER400_2|gl_and2:inst460"
-set_location_assignment LAB_X7_Y15_N0 -to "instDESER400_2|gl_and2:inst461"
-set_location_assignment LAB_X7_Y15_N0 -to "instDESER400_2|gl_and2:inst462"
-set_location_assignment LAB_X7_Y15_N0 -to "instDESER400_2|dffom:inst454"
-
-set_location_assignment LAB_X8_Y15_N0 -to "instDESER400_2|dffom:inst448"
-set_location_assignment LAB_X8_Y15_N0 -to "instDESER400_2|dffom:inst449"
-set_location_assignment LAB_X8_Y15_N0 -to "instDESER400_2|dffom:inst450"
-set_location_assignment LAB_X8_Y15_N0 -to "instDESER400_2|dffom:inst451"
-set_location_assignment LAB_X8_Y15_N0 -to "instDESER400_2|gl_and2:inst463"
-set_location_assignment LAB_X8_Y15_N0 -to "instDESER400_2|gl_and2:inst464"
-set_location_assignment LAB_X8_Y15_N0 -to "instDESER400_2|gl_and2:inst465"
-set_location_assignment LAB_X8_Y15_N0 -to "instDESER400_2|gl_and2:inst466"
-set_location_assignment LAB_X8_Y15_N0 -to "instDESER400_2|dffom:inst456"
-
-set_location_assignment LAB_X9_Y15_N0 -to instDESER400_2|inst453
-set_location_assignment LAB_X9_Y15_N0 -to "instDESER400_2|dffom:inst457"
-set_location_assignment LAB_X9_Y15_N0 -to "instDESER400_2|dffom:inst371"
-set_location_assignment LAB_X9_Y15_N0 -to "instDESER400_2|dffom:inst372"
-set_location_assignment LAB_X9_Y15_N0 -to "instDESER400_2|dffom:inst373"
-set_location_assignment LAB_X9_Y15_N0 -to "instDESER400_2|dffom:inst374"
-set_location_assignment LAB_X9_Y15_N0 -to "instDESER400_2|dffom:inst376"
-
-set_location_assignment LAB_X10_Y15_N0 -to "instDESER400_2|dffom:inst377"
-set_location_assignment LAB_X10_Y15_N0 -to "instDESER400_2|blockPHfinding:inst62"
-set_location_assignment LAB_X10_Y15_N0 -to "instDESER400_2|frame_det:inst63"
-set_location_assignment LAB_X10_Y15_N0 -to instDESER400_2|inst437
-
-set_location_assignment LAB_X11_Y15_N0 -to "instDESER400_2|gl_dff8e:inst442"
-set_location_assignment LAB_X11_Y15_N0 -to "instDESER400_2|sr4:inst443"
-
-set_location_assignment LAB_X11_Y14_N0 -to "instDESER400_2|Counter3bMOD5:inst468"
-set_location_assignment LAB_X11_Y14_N0 -to "instDESER400_2|dffom:inst492"
-set_location_assignment LAB_X11_Y14_N0 -to "instDESER400_2|sr2:inst494"
-set_location_assignment LAB_X11_Y14_N0 -to "instDESER400_2|lpm_or3:inst51"
-
-set_location_assignment LAB_X10_Y14_N0 -to "instDESER400_2|lpm_dff0:inst487"
-set_location_assignment LAB_X10_Y14_N0 -to instDESER400_2|inst4487
-set_location_assignment LAB_X10_Y14_N0 -to "instDESER400_2|sr3:inst4001"
-set_location_assignment LAB_X10_Y14_N0 -to "instDESER400_2|sr3:inst4002"
-
-set_location_assignment LAB_X9_Y14_N0 -to "instDESER400_2|gl_dff5en:inst4004"
-set_location_assignment LAB_X9_Y14_N0 -to "instDESER400_2|DECODE_5b4b:inst488"
-
-
-##set_location_assignment LAB_X9_Y14_N0 -to "instDESER400_2|NRZI_decoder:inst4003"
-## 50 LCells !!
-
-set_location_assignment LAB_X8_Y14_N0 -to "instDESER400_2|pedge_s:inst493"
-set_location_assignment LAB_X8_Y14_N0 -to "instDESER400_2|lpm_counter4:inst1107"
-set_location_assignment LAB_X8_Y14_N0 -to instDESER400_2|inst1108
-
-set_location_assignment LAB_X8_Y14_N0 -to "instDESER400_2|gl_dff4e:inst469"
-set_location_assignment LAB_X8_Y14_N0 -to "instDESER400_2|lpm_shiftreg0:inst470"
-set_location_assignment LAB_X8_Y14_N0 -to "instDESER400_2|dffom:inst486"
-
-set_location_assignment LAB_X7_Y14_N0 -to "instDESER400_2|dffom:inst471"
-set_location_assignment LAB_X7_Y14_N0 -to instDESER400_2|inst472
-
-set_location_assignment LAB_X6_Y14_N0 -to instDESER400_2|inst475
-set_location_assignment LAB_X6_Y14_N0 -to "instDESER400_2|dffom:inst476"
-
-
-
-
-
-#######sdata_m 
-
-set_location_assignment LAB_X1_Y21_N0 -to "instDESER400_3|dffom:inst431"
-set_location_assignment LAB_X1_Y21_N0 -to "instDESER400_3|dffom:inst382"
-set_location_assignment LAB_X1_Y21_N0 -to "instDESER400_3|dffom:inst384"
-set_location_assignment LAB_X1_Y21_N0 -to "instDESER400_3|dffom:inst386"
-set_location_assignment LAB_X1_Y21_N0 -to "instDESER400_3|dffom:inst387"
-set_location_assignment LAB_X1_Y21_N0 -to "instDESER400_3|dffom:inst388"
-set_location_assignment LAB_X1_Y21_N0 -to "instDESER400_3|dffom:inst389"
-set_location_assignment LAB_X1_Y21_N0 -to "instDESER400_3|dffom:inst398"
-set_location_assignment LAB_X1_Y21_N0 -to "instDESER400_3|dffom:inst421"
-set_location_assignment LAB_X1_Y21_N0 -to "instDESER400_3|dffom:inst422"
-
-set_location_assignment LAB_X2_Y21_N0 -to "instDESER400_3|dffom:inst399"
-set_location_assignment LAB_X2_Y21_N0 -to "instDESER400_3|dffom:inst433"
-set_location_assignment LAB_X2_Y21_N0 -to "instDESER400_3|dffom:inst435"
-
-set_location_assignment LAB_X3_Y21_N0 -to "instDESER400_3|dffom:inst383"
-set_location_assignment LAB_X3_Y21_N0 -to "instDESER400_3|dffom:inst385"
-set_location_assignment LAB_X3_Y21_N0 -to "instDESER400_3|dffom:inst397"
-set_location_assignment LAB_X3_Y21_N0 -to "instDESER400_3|dffom:inst400"
-set_location_assignment LAB_X3_Y21_N0 -to "instDESER400_3|dffom:inst432"
-set_location_assignment LAB_X3_Y21_N0 -to "instDESER400_3|dffom:inst434"
-set_location_assignment LAB_X3_Y21_N0 -to "instDESER400_3|dffom:inst436"
-
-set_location_assignment LAB_X4_Y21_N0 -to "instDESER400_3|dffom:inst381"
-set_location_assignment LAB_X4_Y21_N0 -to "instDESER400_3|dffom:inst396"
-set_location_assignment LAB_X4_Y21_N0 -to "instDESER400_3|dffom:inst401"
-set_location_assignment LAB_X4_Y21_N0 -to "instDESER400_3|dffom:inst414"
-set_location_assignment LAB_X4_Y21_N0 -to "instDESER400_3|dffom:inst423"
-set_location_assignment LAB_X4_Y21_N0 -to "instDESER400_3|dffom:inst424"
-set_location_assignment LAB_X4_Y21_N0 -to "instDESER400_3|dffom:inst430"
-
-set_location_assignment LAB_X5_Y21_N0 -to "instDESER400_3|dffom:inst380"
-set_location_assignment LAB_X5_Y21_N0 -to "instDESER400_3|dffom:inst402"
-set_location_assignment LAB_X5_Y21_N0 -to "instDESER400_3|dffom:inst425"
-set_location_assignment LAB_X5_Y21_N0 -to "instDESER400_3|dffom:inst426"
-set_location_assignment LAB_X5_Y21_N0 -to "instDESER400_3|dffom:inst429"
-
-
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst410"
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst411"
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst412"
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst413"
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst415"
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst416"
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst417"
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst418"
-
-set_location_assignment LAB_X6_Y21_N0 -to instDESER400_3|inst390
-set_location_assignment LAB_X6_Y21_N0 -to instDESER400_3|inst391
-set_location_assignment LAB_X6_Y21_N0 -to instDESER400_3|inst392
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst393"
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst394"
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst395"
-set_location_assignment LAB_X6_Y21_N0 -to instDESER400_3|inst403
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst404"
-set_location_assignment LAB_X6_Y21_N0 -to instDESER400_3|inst405
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst406"
-set_location_assignment LAB_X6_Y21_N0 -to instDESER400_3|inst407
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst408"
-set_location_assignment LAB_X6_Y21_N0 -to instDESER400_3|inst419
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst420"
-set_location_assignment LAB_X6_Y21_N0 -to instDESER400_3|inst427
-set_location_assignment LAB_X6_Y21_N0 -to "instDESER400_3|dffom:inst428"
-
-set_location_assignment LAB_X7_Y21_N0 -to "instDESER400_3|dffom:inst444"
-set_location_assignment LAB_X7_Y21_N0 -to "instDESER400_3|dffom:inst445"
-set_location_assignment LAB_X7_Y21_N0 -to "instDESER400_3|dffom:inst446"
-set_location_assignment LAB_X7_Y21_N0 -to "instDESER400_3|dffom:inst447"
-set_location_assignment LAB_X7_Y21_N0 -to "instDESER400_3|gl_and2:inst459"
-set_location_assignment LAB_X7_Y21_N0 -to "instDESER400_3|gl_and2:inst460"
-set_location_assignment LAB_X7_Y21_N0 -to "instDESER400_3|gl_and2:inst461"
-set_location_assignment LAB_X7_Y21_N0 -to "instDESER400_3|gl_and2:inst462"
-set_location_assignment LAB_X7_Y21_N0 -to "instDESER400_3|dffom:inst454"
-
-set_location_assignment LAB_X8_Y21_N0 -to "instDESER400_3|dffom:inst448"
-set_location_assignment LAB_X8_Y21_N0 -to "instDESER400_3|dffom:inst449"
-set_location_assignment LAB_X8_Y21_N0 -to "instDESER400_3|dffom:inst450"
-set_location_assignment LAB_X8_Y21_N0 -to "instDESER400_3|dffom:inst451"
-set_location_assignment LAB_X8_Y21_N0 -to "instDESER400_3|gl_and2:inst463"
-set_location_assignment LAB_X8_Y21_N0 -to "instDESER400_3|gl_and2:inst464"
-set_location_assignment LAB_X8_Y21_N0 -to "instDESER400_3|gl_and2:inst465"
-set_location_assignment LAB_X8_Y21_N0 -to "instDESER400_3|gl_and2:inst466"
-set_location_assignment LAB_X8_Y21_N0 -to "instDESER400_3|dffom:inst456"
-
-set_location_assignment LAB_X9_Y21_N0 -to instDESER400_3|inst453
-set_location_assignment LAB_X9_Y21_N0 -to "instDESER400_3|dffom:inst457"
-set_location_assignment LAB_X9_Y21_N0 -to "instDESER400_3|dffom:inst371"
-set_location_assignment LAB_X9_Y21_N0 -to "instDESER400_3|dffom:inst372"
-set_location_assignment LAB_X9_Y21_N0 -to "instDESER400_3|dffom:inst373"
-set_location_assignment LAB_X9_Y21_N0 -to "instDESER400_3|dffom:inst374"
-set_location_assignment LAB_X9_Y21_N0 -to "instDESER400_3|dffom:inst376"
-
-set_location_assignment LAB_X10_Y21_N0 -to "instDESER400_3|dffom:inst377"
-set_location_assignment LAB_X10_Y21_N0 -to "instDESER400_3|blockPHfinding:inst62"
-set_location_assignment LAB_X10_Y21_N0 -to "instDESER400_3|frame_det:inst63"
-set_location_assignment LAB_X10_Y21_N0 -to instDESER400_3|inst437
-
-set_location_assignment LAB_X11_Y21_N0 -to "instDESER400_3|gl_dff8e:inst442"
-set_location_assignment LAB_X11_Y21_N0 -to "instDESER400_3|sr4:inst443"
-
-set_location_assignment LAB_X11_Y20_N0 -to "instDESER400_3|Counter3bMOD5:inst468"
-set_location_assignment LAB_X11_Y20_N0 -to "instDESER400_3|dffom:inst492"
-set_location_assignment LAB_X11_Y20_N0 -to "instDESER400_3|sr2:inst494"
-set_location_assignment LAB_X11_Y20_N0 -to "instDESER400_3|lpm_or3:inst51"
-
-set_location_assignment LAB_X10_Y20_N0 -to "instDESER400_3|lpm_dff0:inst487"
-set_location_assignment LAB_X10_Y20_N0 -to instDESER400_3|inst4487
-set_location_assignment LAB_X10_Y20_N0 -to "instDESER400_3|sr3:inst4001"
-set_location_assignment LAB_X10_Y20_N0 -to "instDESER400_3|sr3:inst4002"
-
-set_location_assignment LAB_X9_Y20_N0 -to "instDESER400_3|gl_dff5en:inst4004"
-set_location_assignment LAB_X9_Y20_N0 -to "instDESER400_3|DECODE_5b4b:inst488"
-
-
-##set_location_assignment LAB_X9_Y20_N0 -to "instDESER400_3|NRZI_decoder:inst4003"
-## 50 LCells !!
-
-set_location_assignment LAB_X8_Y20_N0 -to "instDESER400_3|pedge_s:inst493"
-set_location_assignment LAB_X8_Y20_N0 -to "instDESER400_3|lpm_counter4:inst1107"
-set_location_assignment LAB_X8_Y20_N0 -to instDESER400_3|inst1108
-
-set_location_assignment LAB_X8_Y20_N0 -to "instDESER400_3|gl_dff4e:inst469"
-set_location_assignment LAB_X8_Y20_N0 -to "instDESER400_3|lpm_shiftreg0:inst470"
-set_location_assignment LAB_X8_Y20_N0 -to "instDESER400_3|dffom:inst486"
-
-set_location_assignment LAB_X7_Y20_N0 -to "instDESER400_3|dffom:inst471"
-set_location_assignment LAB_X7_Y20_N0 -to instDESER400_3|inst472
-
-set_location_assignment LAB_X6_Y20_N0 -to instDESER400_3|inst475
-set_location_assignment LAB_X6_Y20_N0 -to "instDESER400_3|dffom:inst476"
-
-
-
-#######sdata_n 
-
-set_location_assignment LAB_X1_Y17_N0 -to "instDESER400_4|dffom:inst431"
-set_location_assignment LAB_X1_Y17_N0 -to "instDESER400_4|dffom:inst382"
-set_location_assignment LAB_X1_Y17_N0 -to "instDESER400_4|dffom:inst384"
-set_location_assignment LAB_X1_Y17_N0 -to "instDESER400_4|dffom:inst386"
-set_location_assignment LAB_X1_Y17_N0 -to "instDESER400_4|dffom:inst387"
-set_location_assignment LAB_X1_Y17_N0 -to "instDESER400_4|dffom:inst388"
-set_location_assignment LAB_X1_Y17_N0 -to "instDESER400_4|dffom:inst389"
-set_location_assignment LAB_X1_Y17_N0 -to "instDESER400_4|dffom:inst398"
-set_location_assignment LAB_X1_Y17_N0 -to "instDESER400_4|dffom:inst421"
-set_location_assignment LAB_X1_Y17_N0 -to "instDESER400_4|dffom:inst422"
-
-set_location_assignment LAB_X2_Y17_N0 -to "instDESER400_4|dffom:inst399"
-set_location_assignment LAB_X2_Y17_N0 -to "instDESER400_4|dffom:inst433"
-set_location_assignment LAB_X2_Y17_N0 -to "instDESER400_4|dffom:inst435"
-
-set_location_assignment LAB_X3_Y17_N0 -to "instDESER400_4|dffom:inst383"
-set_location_assignment LAB_X3_Y17_N0 -to "instDESER400_4|dffom:inst385"
-set_location_assignment LAB_X3_Y17_N0 -to "instDESER400_4|dffom:inst397"
-set_location_assignment LAB_X3_Y17_N0 -to "instDESER400_4|dffom:inst400"
-set_location_assignment LAB_X3_Y17_N0 -to "instDESER400_4|dffom:inst432"
-set_location_assignment LAB_X3_Y17_N0 -to "instDESER400_4|dffom:inst434"
-set_location_assignment LAB_X3_Y17_N0 -to "instDESER400_4|dffom:inst436"
-
-set_location_assignment LAB_X4_Y17_N0 -to "instDESER400_4|dffom:inst381"
-set_location_assignment LAB_X4_Y17_N0 -to "instDESER400_4|dffom:inst396"
-set_location_assignment LAB_X4_Y17_N0 -to "instDESER400_4|dffom:inst401"
-set_location_assignment LAB_X4_Y17_N0 -to "instDESER400_4|dffom:inst414"
-set_location_assignment LAB_X4_Y17_N0 -to "instDESER400_4|dffom:inst423"
-set_location_assignment LAB_X4_Y17_N0 -to "instDESER400_4|dffom:inst424"
-set_location_assignment LAB_X4_Y17_N0 -to "instDESER400_4|dffom:inst430"
-
-set_location_assignment LAB_X5_Y17_N0 -to "instDESER400_4|dffom:inst380"
-set_location_assignment LAB_X5_Y17_N0 -to "instDESER400_4|dffom:inst402"
-set_location_assignment LAB_X5_Y17_N0 -to "instDESER400_4|dffom:inst425"
-set_location_assignment LAB_X5_Y17_N0 -to "instDESER400_4|dffom:inst426"
-set_location_assignment LAB_X5_Y17_N0 -to "instDESER400_4|dffom:inst429"
-
-
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst410"
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst411"
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst412"
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst413"
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst415"
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst416"
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst417"
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst418"
-
-set_location_assignment LAB_X6_Y17_N0 -to instDESER400_4|inst390
-set_location_assignment LAB_X6_Y17_N0 -to instDESER400_4|inst391
-set_location_assignment LAB_X6_Y17_N0 -to instDESER400_4|inst392
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst393"
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst394"
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst395"
-set_location_assignment LAB_X6_Y17_N0 -to instDESER400_4|inst403
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst404"
-set_location_assignment LAB_X6_Y17_N0 -to instDESER400_4|inst405
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst406"
-set_location_assignment LAB_X6_Y17_N0 -to instDESER400_4|inst407
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst408"
-set_location_assignment LAB_X6_Y17_N0 -to instDESER400_4|inst419
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst420"
-set_location_assignment LAB_X6_Y17_N0 -to instDESER400_4|inst427
-set_location_assignment LAB_X6_Y17_N0 -to "instDESER400_4|dffom:inst428"
-
-set_location_assignment LAB_X7_Y17_N0 -to "instDESER400_4|dffom:inst444"
-set_location_assignment LAB_X7_Y17_N0 -to "instDESER400_4|dffom:inst445"
-set_location_assignment LAB_X7_Y17_N0 -to "instDESER400_4|dffom:inst446"
-set_location_assignment LAB_X7_Y17_N0 -to "instDESER400_4|dffom:inst447"
-set_location_assignment LAB_X7_Y17_N0 -to "instDESER400_4|gl_and2:inst459"
-set_location_assignment LAB_X7_Y17_N0 -to "instDESER400_4|gl_and2:inst460"
-set_location_assignment LAB_X7_Y17_N0 -to "instDESER400_4|gl_and2:inst461"
-set_location_assignment LAB_X7_Y17_N0 -to "instDESER400_4|gl_and2:inst462"
-set_location_assignment LAB_X7_Y17_N0 -to "instDESER400_4|dffom:inst454"
-
-set_location_assignment LAB_X8_Y17_N0 -to "instDESER400_4|dffom:inst448"
-set_location_assignment LAB_X8_Y17_N0 -to "instDESER400_4|dffom:inst449"
-set_location_assignment LAB_X8_Y17_N0 -to "instDESER400_4|dffom:inst450"
-set_location_assignment LAB_X8_Y17_N0 -to "instDESER400_4|dffom:inst451"
-set_location_assignment LAB_X8_Y17_N0 -to "instDESER400_4|gl_and2:inst463"
-set_location_assignment LAB_X8_Y17_N0 -to "instDESER400_4|gl_and2:inst464"
-set_location_assignment LAB_X8_Y17_N0 -to "instDESER400_4|gl_and2:inst465"
-set_location_assignment LAB_X8_Y17_N0 -to "instDESER400_4|gl_and2:inst466"
-set_location_assignment LAB_X8_Y17_N0 -to "instDESER400_4|dffom:inst456"
-
-set_location_assignment LAB_X9_Y17_N0 -to instDESER400_4|inst453
-set_location_assignment LAB_X9_Y17_N0 -to "instDESER400_4|dffom:inst457"
-set_location_assignment LAB_X9_Y17_N0 -to "instDESER400_4|dffom:inst371"
-set_location_assignment LAB_X9_Y17_N0 -to "instDESER400_4|dffom:inst372"
-set_location_assignment LAB_X9_Y17_N0 -to "instDESER400_4|dffom:inst373"
-set_location_assignment LAB_X9_Y17_N0 -to "instDESER400_4|dffom:inst374"
-set_location_assignment LAB_X9_Y17_N0 -to "instDESER400_4|dffom:inst376"
-
-set_location_assignment LAB_X10_Y17_N0 -to "instDESER400_4|dffom:inst377"
-set_location_assignment LAB_X10_Y17_N0 -to "instDESER400_4|blockPHfinding:inst62"
-set_location_assignment LAB_X10_Y17_N0 -to "instDESER400_4|frame_det:inst63"
-set_location_assignment LAB_X10_Y17_N0 -to instDESER400_4|inst437
-
-set_location_assignment LAB_X11_Y17_N0 -to "instDESER400_4|gl_dff8e:inst442"
-set_location_assignment LAB_X11_Y17_N0 -to "instDESER400_4|sr4:inst443"
-
-set_location_assignment LAB_X11_Y16_N0 -to "instDESER400_4|Counter3bMOD5:inst468"
-set_location_assignment LAB_X11_Y16_N0 -to "instDESER400_4|dffom:inst492"
-set_location_assignment LAB_X11_Y16_N0 -to "instDESER400_4|sr2:inst494"
-set_location_assignment LAB_X11_Y16_N0 -to "instDESER400_4|lpm_or3:inst51"
-
-set_location_assignment LAB_X10_Y16_N0 -to "instDESER400_4|lpm_dff0:inst487"
-set_location_assignment LAB_X10_Y16_N0 -to instDESER400_4|inst4487
-set_location_assignment LAB_X10_Y16_N0 -to "instDESER400_4|sr3:inst4001"
-set_location_assignment LAB_X10_Y16_N0 -to "instDESER400_4|sr3:inst4002"
-
-set_location_assignment LAB_X9_Y16_N0 -to "instDESER400_4|gl_dff5en:inst4004"
-set_location_assignment LAB_X9_Y16_N0 -to "instDESER400_4|DECODE_5b4b:inst488"
-
-
-##set_location_assignment LAB_X9_Y16_N0 -to "instDESER400_4|NRZI_decoder:inst4003"
-## 50 LCells !!
-
-set_location_assignment LAB_X8_Y16_N0 -to "instDESER400_4|pedge_s:inst493"
-set_location_assignment LAB_X8_Y16_N0 -to "instDESER400_4|lpm_counter4:inst1107"
-set_location_assignment LAB_X8_Y16_N0 -to instDESER400_4|inst1108
-
-set_location_assignment LAB_X8_Y16_N0 -to "instDESER400_4|gl_dff4e:inst469"
-set_location_assignment LAB_X8_Y16_N0 -to "instDESER400_4|lpm_shiftreg0:inst470"
-set_location_assignment LAB_X8_Y16_N0 -to "instDESER400_4|dffom:inst486"
-
-set_location_assignment LAB_X7_Y16_N0 -to "instDESER400_4|dffom:inst471"
-set_location_assignment LAB_X7_Y16_N0 -to instDESER400_4|inst472
-
-set_location_assignment LAB_X6_Y16_N0 -to instDESER400_4|inst475
-set_location_assignment LAB_X6_Y16_N0 -to "instDESER400_4|dffom:inst476"
-
-
-
-
-
-
+####### sdata1
+set_location_assignment FF_X5_Y13_N1 -to instDESER400_1|ovs|s1[0]
+set_location_assignment FF_X4_Y13_N1 -to instDESER400_1|ovs|s1[1]
+set_location_assignment FF_X3_Y13_N1 -to instDESER400_1|ovs|s1[2]
+set_location_assignment FF_X2_Y13_N1 -to instDESER400_1|ovs|s1[3]
+set_location_assignment FF_X5_Y13_N3 -to instDESER400_1|ovs|s1[4]
+set_location_assignment FF_X4_Y13_N3 -to instDESER400_1|ovs|s1[5]
+set_location_assignment FF_X3_Y13_N3 -to instDESER400_1|ovs|s1[6]
+set_location_assignment FF_X2_Y13_N3 -to instDESER400_1|ovs|s1[7]
+
+set_location_assignment FF_X5_Y13_N5 -to instDESER400_1|ovs|s2[0]
+set_location_assignment FF_X5_Y13_N7 -to instDESER400_1|ovs|s2[1]
+set_location_assignment FF_X5_Y13_N9 -to instDESER400_1|ovs|s2[2]
+set_location_assignment FF_X5_Y13_N11 -to instDESER400_1|ovs|s2[3]
+set_location_assignment FF_X5_Y13_N13 -to instDESER400_1|ovs|s2[4]
+set_location_assignment FF_X4_Y13_N5 -to instDESER400_1|ovs|s2[5]
+set_location_assignment FF_X3_Y13_N5 -to instDESER400_1|ovs|s2[6]
+set_location_assignment FF_X2_Y13_N5 -to instDESER400_1|ovs|s2[7]
+
+####### sdata2
+set_location_assignment FF_X5_Y15_N1 -to instDESER400_2|ovs|s1[0]
+set_location_assignment FF_X4_Y15_N1 -to instDESER400_2|ovs|s1[1]
+set_location_assignment FF_X3_Y15_N1 -to instDESER400_2|ovs|s1[2]
+set_location_assignment FF_X2_Y15_N1 -to instDESER400_2|ovs|s1[3]
+set_location_assignment FF_X5_Y15_N3 -to instDESER400_2|ovs|s1[4]
+set_location_assignment FF_X4_Y15_N3 -to instDESER400_2|ovs|s1[5]
+set_location_assignment FF_X3_Y15_N3 -to instDESER400_2|ovs|s1[6]
+set_location_assignment FF_X2_Y15_N3 -to instDESER400_2|ovs|s1[7]
+
+set_location_assignment FF_X5_Y15_N5 -to instDESER400_2|ovs|s2[0]
+set_location_assignment FF_X5_Y15_N7 -to instDESER400_2|ovs|s2[1]
+set_location_assignment FF_X5_Y15_N9 -to instDESER400_2|ovs|s2[2]
+set_location_assignment FF_X5_Y15_N11 -to instDESER400_2|ovs|s2[3]
+set_location_assignment FF_X5_Y15_N13 -to instDESER400_2|ovs|s2[4]
+set_location_assignment FF_X4_Y15_N5 -to instDESER400_2|ovs|s2[5]
+set_location_assignment FF_X3_Y15_N5 -to instDESER400_2|ovs|s2[6]
+set_location_assignment FF_X2_Y15_N5 -to instDESER400_2|ovs|s2[7]
+
+####### sdata3
+set_location_assignment FF_X5_Y21_N1 -to instDESER400_3|ovs|s1[0]
+set_location_assignment FF_X4_Y21_N1 -to instDESER400_3|ovs|s1[1]
+set_location_assignment FF_X3_Y21_N1 -to instDESER400_3|ovs|s1[2]
+set_location_assignment FF_X2_Y21_N1 -to instDESER400_3|ovs|s1[3]
+set_location_assignment FF_X5_Y21_N3 -to instDESER400_3|ovs|s1[4]
+set_location_assignment FF_X4_Y21_N3 -to instDESER400_3|ovs|s1[5]
+set_location_assignment FF_X3_Y21_N3 -to instDESER400_3|ovs|s1[6]
+set_location_assignment FF_X2_Y21_N3 -to instDESER400_3|ovs|s1[7]
+
+set_location_assignment FF_X5_Y21_N5 -to instDESER400_3|ovs|s2[0]
+set_location_assignment FF_X5_Y21_N7 -to instDESER400_3|ovs|s2[1]
+set_location_assignment FF_X5_Y21_N9 -to instDESER400_3|ovs|s2[2]
+set_location_assignment FF_X5_Y21_N11 -to instDESER400_3|ovs|s2[3]
+set_location_assignment FF_X5_Y21_N13 -to instDESER400_3|ovs|s2[4]
+set_location_assignment FF_X4_Y21_N5 -to instDESER400_3|ovs|s2[5]
+set_location_assignment FF_X3_Y21_N5 -to instDESER400_3|ovs|s2[6]
+set_location_assignment FF_X2_Y21_N5 -to instDESER400_3|ovs|s2[7]
+
+
+
+set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
+set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING ON
+set_global_assignment -name SEED 2
+set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VERILOG_FILE oversampling.v
+set_global_assignment -name VERILOG_FILE HeaderTrailer.v
 set_global_assignment -name QIP_FILE gl_dff16e.qip
 set_global_assignment -name QIP_FILE gl_dff16.qip
 set_global_assignment -name QIP_FILE gl_or6x15.qip
@@ -1611,4 +995,74 @@ set_global_assignment -name QIP_FILE ram_dq_PHASE_k.qip
 set_global_assignment -name QIP_FILE ram_dq_PHASE_m.qip
 set_global_assignment -name QIP_FILE ram_dq_PHASE_n.qip
 set_global_assignment -name VERILOG_FILE daq_switch.v
+set_global_assignment -name VERILOG_FILE deser400_gate.v
+set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
+set_global_assignment -name AUTO_ROM_RECOGNITION ON
+set_global_assignment -name AUTO_RAM_RECOGNITION ON
+set_global_assignment -name INFER_RAMS_FROM_RAW_LOGIC ON
+
+set_instance_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -to instDESER400_1
+set_instance_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -to instDESER400_2
+set_instance_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -to instDESER400_3
+
+set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION OFF -to instDESER400_1
+set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION OFF -to instDESER400_2
+set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION OFF -to instDESER400_3
+
+
+set_global_assignment -name SMART_RECOMPILE ON
+set_global_assignment -name ENABLE_DRC_SETTINGS ON
+set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
+set_global_assignment -name PLACEMENT_EFFORT_MULTIPLIER 2.0
+set_global_assignment -name ROUTER_EFFORT_MULTIPLIER 2.0
+set_global_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION ON
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name PARTITION_NETLIST_TYPE POST_SYNTH -section_id "dtb_system:inst"
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id "dtb_system:inst"
+set_global_assignment -name PARTITION_COLOR 52377 -section_id "dtb_system:inst"
+set_global_assignment -name PARTITION_IMPORT_EXISTING_LOGICLOCK_REGIONS UPDATE_CONFLICTING -section_id "dtb_system:inst"
+set_instance_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE SPEED -to instDESER400_*|ovs
+
+
+set_global_assignment -name LL_ENABLED ON -section_id deser1
+set_global_assignment -name LL_AUTO_SIZE OFF -section_id deser1
+set_global_assignment -name LL_STATE LOCKED -section_id deser1
+set_global_assignment -name LL_RESERVED OFF -section_id deser1
+set_global_assignment -name LL_SECURITY_ROUTING_INTERFACE OFF -section_id deser1
+set_global_assignment -name LL_IGNORE_IO_BANK_SECURITY_CONSTRAINT OFF -section_id deser1
+set_global_assignment -name LL_PR_REGION OFF -section_id deser1
+set_global_assignment -name LL_ROUTING_REGION_EXPANSION_SIZE 2147483647 -section_id deser1
+set_global_assignment -name LL_WIDTH 6 -section_id deser1
+set_global_assignment -name LL_HEIGHT 1 -section_id deser1
+set_global_assignment -name LL_ORIGIN X1_Y13 -section_id deser1
+
+set_global_assignment -name LL_ENABLED ON -section_id deser2
+set_global_assignment -name LL_AUTO_SIZE OFF -section_id deser2
+set_global_assignment -name LL_STATE LOCKED -section_id deser2
+set_global_assignment -name LL_RESERVED OFF -section_id deser2
+set_global_assignment -name LL_SECURITY_ROUTING_INTERFACE OFF -section_id deser2
+set_global_assignment -name LL_IGNORE_IO_BANK_SECURITY_CONSTRAINT OFF -section_id deser2
+set_global_assignment -name LL_PR_REGION OFF -section_id deser2
+set_global_assignment -name LL_ROUTING_REGION_EXPANSION_SIZE 2147483647 -section_id deser2
+set_global_assignment -name LL_WIDTH 6 -section_id deser2
+set_global_assignment -name LL_HEIGHT 1 -section_id deser2
+set_global_assignment -name LL_ORIGIN X1_Y15 -section_id deser2
+
+set_global_assignment -name LL_ENABLED ON -section_id deser3
+set_global_assignment -name LL_AUTO_SIZE OFF -section_id deser3
+set_global_assignment -name LL_STATE LOCKED -section_id deser3
+set_global_assignment -name LL_RESERVED OFF -section_id deser3
+set_global_assignment -name LL_SECURITY_ROUTING_INTERFACE OFF -section_id deser3
+set_global_assignment -name LL_IGNORE_IO_BANK_SECURITY_CONSTRAINT OFF -section_id deser3
+set_global_assignment -name LL_PR_REGION OFF -section_id deser3
+set_global_assignment -name LL_ROUTING_REGION_EXPANSION_SIZE 2147483647 -section_id deser3
+set_global_assignment -name LL_WIDTH 6 -section_id deser3
+set_global_assignment -name LL_HEIGHT 1 -section_id deser3
+set_global_assignment -name LL_ORIGIN X1_Y21 -section_id deser3
+
+set_instance_assignment -name LL_MEMBER_OF deser1 -to "deser400_PSI:instDESER400_1|oversampling:ovs" -section_id deser1
+set_instance_assignment -name LL_MEMBER_OF deser2 -to "deser400_PSI:instDESER400_2|oversampling:ovs" -section_id deser2
+set_instance_assignment -name LL_MEMBER_OF deser3 -to "deser400_PSI:instDESER400_3|oversampling:ovs" -section_id deser3
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_instance_assignment -name PARTITION_HIERARCHY inst_74401 -to "dtb_system:inst" -section_id "dtb_system:inst"

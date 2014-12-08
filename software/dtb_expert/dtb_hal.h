@@ -53,7 +53,7 @@ inline void SetClockStretchReg(unsigned char reg, unsigned short value)
 { __builtin_sthio (__IO_CALC_ADDRESS_DYNAMIC (CLK_STRETCH_BASE, reg*2), value); }
 
 inline void SetToutRdbDelay(unsigned char value)
-{ IOWR_ALTERA_AVALON_PIO_DATA(DELAY_TIN_BASE, value); }
+{ IOWR_ALTERA_AVALON_PIO_DATA(RDA_DELAY_BASE, value); }
 
 
 // === ADC ==================================================================
@@ -109,6 +109,8 @@ inline unsigned long DAQ_READ(unsigned int daq_base, short reg)
 
 inline void _Probe1(unsigned char value) { IOWR_8DIRECT(PROBE_D1_BASE, 0, value); }
 inline void _Probe2(unsigned char value) { IOWR_8DIRECT(PROBE_D2_BASE, 0, value); }
+inline void _Probe1a(unsigned char value) { IOWR_8DIRECT(PROBE_ASYNC_D1_BASE, 0, value); }
+inline void _Probe2a(unsigned char value) { IOWR_8DIRECT(PROBE_ASYNC_D2_BASE, 0, value); }
 
 void Adv3224Init();
 
@@ -116,7 +118,7 @@ inline void SetI2cHs(unsigned char reg, unsigned int value)
 { IOWR_32DIRECT(PSI2C_BASE, reg<<2, value); }
 
 inline unsigned int GetI2cHs(unsigned char reg)
-{ return IORD(PSI2C_BASE, reg<<2); }
+{ return IORD_32DIRECT(PSI2C_BASE, reg<<2); }
 
 
 // === I2C master ========================================================

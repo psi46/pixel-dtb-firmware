@@ -7,7 +7,10 @@ greybox_tmb
 incremental_db
 simulation
 *.summary
+*.smsg
 *.rpt
+*.pin
+*.jdi
 *.bak
 *~
 *.cmp
