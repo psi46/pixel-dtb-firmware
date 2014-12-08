@@ -495,7 +495,7 @@ public:
 
 	// Not exported internal helper functions:
 	uint8_t GetXtalkRow(uint8_t row, bool xtalk);
-	size_t CalibratedDAC(size_t value);
+	size_t CalibratedDAC(uint8_t register, size_t value);
 
 	RPC_EXPORT void LoopInterruptReset();
 	void LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, uint8_t &dac1step, size_t &dac2, uint8_t &dac2step);
