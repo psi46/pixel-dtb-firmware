@@ -28,6 +28,10 @@ module dtb_daq
 	input tin,
 	input tout,
 
+	// soft TBM
+	input tbm_write,
+	input [15:0]tbm_data,
+	
 	// adc input port
 	input [11:0]adc_data,
 	input adc_or,
@@ -113,6 +117,11 @@ module dtb_daq
 		begin
 			daq0_write     <= evsim_write;
 			daq0_writedata <= evsim_data;
+		end
+		else if (tbm_write)
+		begin
+			daq0_write     <= tbm_write;
+			daq0_writedata <= tbm_data;
 		end
 		else if (write_ana)
 		begin

@@ -192,6 +192,13 @@ applicable agreement for further details.
 		(line (pt 136 496)(pt 136 480)(color 0 128 255)(line_width 3))
 	)
 	(port
+		(pt 184 496)
+		(input)
+		(text "trg_ctrl[36..0]" (rect 176 445 190 520)(font "Arial" (font_size 8))(vertical))
+		(text "trg_ctrl[36..0]" (rect 176 389 190 464)(font "Arial" (font_size 8))(vertical))
+		(line (pt 184 496)(pt 184 480)(color 0 128 255)(line_width 3))
+	)
+	(port
 		(pt 272 144)
 		(output)
 		(text "ctr" (rect 112 80 127 94)(font "Arial" (font_size 8)))

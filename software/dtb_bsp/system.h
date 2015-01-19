@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
  *
- * Generated: Tue Nov 25 15:27:13 CET 2014
+ * Generated: Mon Jan 19 20:50:19 CET 2015
  */
 
 /*
@@ -152,6 +152,7 @@
 #define __PROBE_ASYNC
 #define __PSI2C
 #define __SPI_MASTER
+#define __TRIGGER_PORT
 #define __USB_FT232
 
 
@@ -1070,8 +1071,22 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1416922601
+#define SYSID_TIMESTAMP 1421683570
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
+
+
+/*
+ * trigger configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_trigger trigger_port
+#define TRIGGER_BASE 0x8108100
+#define TRIGGER_IRQ -1
+#define TRIGGER_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define TRIGGER_NAME "/dev/trigger"
+#define TRIGGER_SPAN 64
+#define TRIGGER_TYPE "trigger_port"
 
 
 /*

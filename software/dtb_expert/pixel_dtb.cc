@@ -235,6 +235,13 @@ void CTestboard::Init()
 	Pg_SetCmd(0, 0);
 	pg_delaysum = 0;
 
+	// -- Init trigger system
+	Trigger_Write(0, 0x004);  // enable pg direct out
+	Trigger_Write(2, 0);      // trigger generator periodic mode
+	Trigger_Write(3, 10000);  // generator periode 10000 clock cycles
+	Trigger_Write(4, 100);    // Trigger Delay 100 clock cycles
+	Trigger_Write(5, 60000);  // Token time out 60000 clock cycles
+
 	// --- shutdown DAQ ---------------------------------
 	// close all open DAQ channels
 	Daq_Close(0);
@@ -1289,6 +1296,42 @@ bool CTestboard::tbm_Get(uint8_t reg, uint8_t &value)
         value = (unsigned char)(x & 0xff);
         return true;
 }
+
+
+// --- Trigger --------------------------------------------------------------
+
+void CTestboard::Trigger_Select(uint16_t mask)
+{
+	Trigger_Write(0, mask);
+}
+
+void CTestboard::Trigger_Delay(uint8_t delay)
+{
+	Trigger_Write(4, delay);
+}
+
+void CTestboard::Trigger_Timeout(uint16_t timeout)
+{
+	Trigger_Write(5, timeout);
+}
+
+void CTestboard::Trigger_SetGenPeriodic(uint32_t periode)
+{
+	Trigger_Write(3, periode);
+	Trigger_Write(2, 0);
+}
+
+void CTestboard::Trigger_SetGenRandom(uint32_t rate)
+{
+	Trigger_Write(3, rate);
+	Trigger_Write(2, 1);
+}
+
+void CTestboard::Trigger_Send( uint8_t send)
+{
+	Trigger_Write(1, send);
+}
+
 
 // --- Data aquisition ------------------------------------------------------
 
