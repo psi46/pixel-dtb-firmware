@@ -265,27 +265,19 @@
          type = "long";
       }
    }
-   element probe_async_d2.ctrl
+   element probe_d1.ctrl
    {
       datum baseAddress
       {
-         value = "208";
-         type = "String";
-      }
-   }
-   element delay_sda.ctrl
-   {
-      datum baseAddress
-      {
-         value = "40";
+         value = "80";
          type = "long";
       }
    }
-   element patterngen.ctrl
+   element probe_d2.ctrl
    {
       datum baseAddress
       {
-         value = "64";
+         value = "96";
          type = "long";
       }
    }
@@ -297,27 +289,11 @@
          type = "String";
       }
    }
-   element probe_async_d1.ctrl
-   {
-      datum baseAddress
-      {
-         value = "192";
-         type = "String";
-      }
-   }
    element clk_stretch.ctrl
    {
       datum baseAddress
       {
          value = "176";
-         type = "long";
-      }
-   }
-   element probe_d1.ctrl
-   {
-      datum baseAddress
-      {
-         value = "80";
          type = "long";
       }
    }
@@ -329,14 +305,6 @@
          type = "String";
       }
    }
-   element daq_dma_0.ctrl
-   {
-      datum baseAddress
-      {
-         value = "134225984";
-         type = "String";
-      }
-   }
    element delay_ctr.ctrl
    {
       datum baseAddress
@@ -345,12 +313,20 @@
          type = "long";
       }
    }
-   element adc_0.ctrl
+   element daq_dma_0.ctrl
    {
       datum baseAddress
       {
-         value = "144";
-         type = "long";
+         value = "134225984";
+         type = "String";
+      }
+   }
+   element probe_async_d1.ctrl
+   {
+      datum baseAddress
+      {
+         value = "192";
+         type = "String";
       }
    }
    element delay_tin.ctrl
@@ -361,11 +337,35 @@
          type = "long";
       }
    }
-   element probe_d2.ctrl
+   element probe_async_d2.ctrl
    {
       datum baseAddress
       {
-         value = "96";
+         value = "208";
+         type = "String";
+      }
+   }
+   element adc_0.ctrl
+   {
+      datum baseAddress
+      {
+         value = "144";
+         type = "long";
+      }
+   }
+   element patterngen.ctrl
+   {
+      datum baseAddress
+      {
+         value = "64";
+         type = "long";
+      }
+   }
+   element delay_sda.ctrl
+   {
+      datum baseAddress
+      {
+         value = "40";
          type = "long";
       }
    }
@@ -757,6 +757,30 @@
          type = "long";
       }
    }
+   element descriptor_memory.s1
+   {
+      datum baseAddress
+      {
+         value = "138420224";
+         type = "long";
+      }
+   }
+   element deser400.s1
+   {
+      datum baseAddress
+      {
+         value = "160";
+         type = "long";
+      }
+   }
+   element fifo.s1
+   {
+      datum baseAddress
+      {
+         value = "128";
+         type = "long";
+      }
+   }
    element ram_ext.s1
    {
       datum _lockedAddress
@@ -770,19 +794,11 @@
          type = "long";
       }
    }
-   element fifo.s1
+   element deser160.s1
    {
       datum baseAddress
       {
-         value = "128";
-         type = "long";
-      }
-   }
-   element deser400.s1
-   {
-      datum baseAddress
-      {
-         value = "160";
+         value = "112";
          type = "long";
       }
    }
@@ -799,22 +815,6 @@
       datum baseAddress
       {
          value = "112";
-         type = "long";
-      }
-   }
-   element deser160.s1
-   {
-      datum baseAddress
-      {
-         value = "112";
-         type = "long";
-      }
-   }
-   element descriptor_memory.s1
-   {
-      datum baseAddress
-      {
-         value = "138420224";
          type = "long";
       }
    }
@@ -1166,7 +1166,7 @@
    internal="probe_async_d2.signal"
    type="conduit"
    dir="end" />
- <interface name="trigger" internal="trigger.trg_port" type="conduit" dir="end" />
+ <interface name="trigger" internal="trigger.trigger" type="conduit" dir="end" />
  <module kind="clock_source" version="13.1" enabled="1" name="clk_sys">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -1949,7 +1949,9 @@
  <module kind="probe_async" version="1.0" enabled="1" name="probe_async_d2">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
- <module kind="trigger_port" version="1.0" enabled="1" name="trigger" />
+ <module kind="trigger_port" version="1.0" enabled="1" name="trigger">
+  <parameter name="AUTO_CLOCK_SINK_CLOCK_RATE" value="40000000" />
+ </module>
  <connection
    kind="avalon"
    version="13.1"
@@ -3052,7 +3054,6 @@
   <parameter name="baseAddress" value="0x00d0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
- <connection kind="clock" version="13.1" start="clk_daq.clk" end="trigger.clock" />
  <connection
    kind="reset"
    version="13.1"
@@ -3067,6 +3068,11 @@
   <parameter name="baseAddress" value="0x0100" />
   <parameter name="defaultConnection" value="false" />
  </connection>
+ <connection
+   kind="clock"
+   version="13.1"
+   start="clk_daq.clk"
+   end="trigger.clock_sink" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="0" />
 </system>
