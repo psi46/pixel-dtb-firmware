@@ -171,6 +171,20 @@ applicable agreement for further details.
 		(line (pt 0 512)(pt 16 512))
 	)
 	(port
+		(pt 0 120)
+		(input)
+		(text "tbm_write" (rect 24 112 80 126)(font "Arial" (font_size 8)))
+		(text "tbm_write" (rect 24 112 80 126)(font "Arial" (font_size 8)))
+		(line (pt 0 120)(pt 16 120))
+	)
+	(port
+		(pt 0 136)
+		(input)
+		(text "tbm_data[15..0]" (rect 24 128 111 142)(font "Arial" (font_size 8)))
+		(text "tbm_data[15..0]" (rect 24 128 111 142)(font "Arial" (font_size 8)))
+		(line (pt 0 136)(pt 16 136)(color 0 128 255)(line_width 3))
+	)
+	(port
 		(pt 288 64)
 		(output)
 		(text "daq0_write" (rect 0 16 51 28)(font "Arial" ))
