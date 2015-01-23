@@ -231,6 +231,7 @@ localparam SM_TOUT  = 6'b00_1100;
 localparam SM_WAIT  = 6'b00_1000;
 localparam SM_PCAM1 = 6'b01_1000;
 localparam SM_PCAM2 = 6'b01_0000;
+localparam SM_TRL0  = 6'b11_1000;
 localparam SM_TRL1  = 6'b10_0010;
 localparam SM_TRL2  = 6'b00_0011;
 localparam SM_TRL3  = 6'b10_0000;
@@ -239,6 +240,19 @@ assign queue_read  = sm_readout[0];
 assign daq_write   = sm_readout[1] && sync;
 assign tin         = sm_readout[2];
 assign deser_ena   = sm_readout[3];
+
+// trailer delay counter
+reg [2:0]trldel;
+wire trl_start = trldel[2];
+always @(posedge clk or posedge reset)
+begin
+	if (reset) trldel <= 0;
+	else if (sync)
+	begin
+		if (~&sm_readout[5:4]) trldel <= 0;
+		else if (!trl_start) trldel <= trldel + 3'd1;
+	end
+end
 
 always @(posedge clk or posedge reset)
 begin
@@ -267,7 +281,7 @@ begin
 				begin
 					token_timeout_counter <= token_timeout_counter - 17'd1;
 					if (tout_missing) sm_readout <= SM_PCAM1;
-					else if (tout || flag_resr) sm_readout <= SM_TRL1;
+					else if (tout || flag_resr) sm_readout <= SM_TRL0;
 				end
 			SM_PCAM1:
 				begin
@@ -278,8 +292,10 @@ begin
 			SM_PCAM2:
 				begin
 					set_rsr <= 0;
-					sm_readout <= SM_TRL1;
+					sm_readout <= SM_TRL0;
 				end
+			SM_TRL0:
+				if (trl_start) sm_readout <= SM_TRL1;
 			SM_TRL1:
 				sm_readout <= SM_TRL2;
 			SM_TRL2:
