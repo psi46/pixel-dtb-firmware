@@ -106,7 +106,7 @@ inline unsigned long DAQ_READ(unsigned int daq_base, short reg)
 { return IORD_32DIRECT(daq_base, reg); }
 
 inline void Trigger_Write(short reg, unsigned long value)
-{IOWR_32DIRECT(TRIGGER_BASE, reg, value); }
+{IOWR_32DIRECT(TRIGGER_BASE, reg<<2, value); }
 
 inline void _Probe1(unsigned char value) { IOWR_8DIRECT(PROBE_D1_BASE, 0, value); }
 inline void _Probe2(unsigned char value) { IOWR_8DIRECT(PROBE_D2_BASE, 0, value); }

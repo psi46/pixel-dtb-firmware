@@ -168,6 +168,7 @@ module trigger
 	wire [3:0]trig_tbm_pos;
 	wire [4:0]trig_ctr;
 	wire deser_ena_tbm;
+	wire roc_tin_tbm;
 	
 	assign deser_ena = deser_ena_tbm
 		|| !(sel_async || sel_sync || sel_single || sel_gen || sel_pg);
@@ -180,7 +181,7 @@ module trigger
 		.trg_in_tbm(trig_tbm),
 		.trg_in_ctr(trig_ctr),
 		.trg_pos(trig_tbm_pos),
-		.tin(roc_tin),
+		.tin(roc_tin_tbm),
 		.tout(roc_tout),
 		.deser_ena(deser_ena_tbm),
 		.ctr(roc_ctr),
@@ -189,6 +190,8 @@ module trigger
 		.token_timeout(token_timeout)
 	);
 
+	assign roc_tin = roc_tin_tbm || (pg_tin && sel_dir_pg);
+	
 
 	// === switch =====================================================
 
