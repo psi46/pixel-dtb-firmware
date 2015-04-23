@@ -219,6 +219,7 @@ public:
 	#define SIG_MODE_NORMAL  0
 	#define SIG_MODE_LO      1
 	#define SIG_MODE_HI      2
+	#define SIG_MODE_RDM     3
 
 	RPC_EXPORT void Sig_SetMode(uint8_t signal, uint8_t mode);
 	RPC_EXPORT void Sig_SetPRBS(uint8_t signal, uint8_t speed);
@@ -555,7 +556,7 @@ public:
 
 	// Not exported internal helper functions:
 	uint8_t GetXtalkRow(uint8_t row, bool xtalk);
-	size_t CalibratedDAC(size_t value);
+	size_t CalibratedDAC(uint8_t register, size_t value);
 
 	RPC_EXPORT void LoopInterruptReset();
 	void LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, uint8_t &dac1step, size_t &dac2, uint8_t &dac2step);
