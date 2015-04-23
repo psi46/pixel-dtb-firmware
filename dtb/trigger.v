@@ -58,6 +58,7 @@ module trigger
 	
 	wire [7:0]trg_delay;
 	wire [15:0]token_timeout;
+	wire enable_tout_delay;
 	// --- control signals end ----------
 
 	wire [22:0]dummy23;
@@ -82,7 +83,8 @@ module trigger
 		.reg2({dummy31, gen_sel_random}),
 		.reg3(gen_rate),
 		.reg4({dummy24, trg_delay}),
-		.reg5({dummy16, token_timeout})
+		.reg5({dummy16, token_timeout}),
+		.reg6({dummy31, enable_tout_delay})
 	);
 
 
@@ -187,7 +189,8 @@ module trigger
 		.ctr(roc_ctr),
 		.daq_write(daq_write),
 		.daq_data(daq_data),
-		.token_timeout(token_timeout)
+		.token_timeout(token_timeout),
+		.enable_tout_delay(enable_tout_delay)
 	);
 
 	assign roc_tin = roc_tin_tbm || (pg_tin && sel_dir_pg);

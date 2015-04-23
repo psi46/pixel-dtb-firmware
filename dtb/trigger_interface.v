@@ -18,7 +18,8 @@ module trigger_interface
 	output reg [31:0]reg2,
 	output reg [31:0]reg3,
 	output reg [31:0]reg4,
-	output reg [31:0]reg5
+	output reg [31:0]reg5,
+	output reg [31:0]reg6
 );
 
 	// register 0
@@ -74,6 +75,13 @@ module trigger_interface
 	begin
 		if (reset) reg5 <= 0;
 		else if (write && (address == 4'd5)) reg5 <= writedata;
+	end
+
+	// register 6
+	always @(posedge clk or posedge reset)
+	begin
+		if (reset) reg6 <= 0;
+		else if (write && (address == 4'd6)) reg6 <= writedata;
 	end
 
 endmodule

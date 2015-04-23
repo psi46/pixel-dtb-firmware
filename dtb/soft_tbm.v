@@ -21,7 +21,8 @@ module soft_tbm
   output daq_write,
   output reg [15:0]daq_data,
 
-	input [15:0]token_timeout
+	input [15:0]token_timeout,
+	input enable_tout_delay
 );
 
 wire ro_enable; // a readout can be started
@@ -39,6 +40,7 @@ wire [7:0]queue_trigger_counter;
 wire [3:0]queue_trg_pos;
 wire [5:0]queue_flags;
 
+wire tout_int;
 wire tout_missing;
 
 wire syn;  // sync event
@@ -52,6 +54,17 @@ wire rsr_int = rsr || set_rsr;
 assign queue_clear = rst;
 assign queue_clear_token = rsr_int;
 assign trg_pass = trg && !queue_full;
+
+// === tout delay for ADC ===========================================
+
+reg [15:0]tout_delay;
+always @(posedge clk or posedge reset)
+begin
+	if (reset) tout_delay <= 0;
+	else if (sync) tout_delay <= {tout_delay[14:0], tout};
+end
+
+assign tout_int = enable_tout_delay ? tout_delay[15] : tout;
 
 
 // === receive and decode events ====================================
@@ -281,7 +294,7 @@ begin
 				begin
 					token_timeout_counter <= token_timeout_counter - 17'd1;
 					if (tout_missing) sm_readout <= SM_PCAM1;
-					else if (tout || flag_resr) sm_readout <= SM_TRL0;
+					else if (tout_int || flag_resr) sm_readout <= SM_TRL0;
 				end
 			SM_PCAM1:
 				begin

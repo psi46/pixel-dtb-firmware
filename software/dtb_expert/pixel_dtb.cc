@@ -241,6 +241,7 @@ void CTestboard::Init()
 	Trigger_Write(3, 10000);  // generator periode 10000 clock cycles
 	Trigger_Write(4, 100);    // Trigger Delay 100 clock cycles
 	Trigger_Write(5, 60000);  // Token time out 60000 clock cycles
+	Trigger_Write(6, 0);      // softTBM tout delay disable
 
 	// --- shutdown DAQ ---------------------------------
 	// close all open DAQ channels
@@ -1662,6 +1663,9 @@ void CTestboard::Daq_Select_ADC(uint16_t blocksize, uint8_t source, uint8_t star
 	ADC_WRITE(ADC_START, s);
 	ADC_WRITE(ADC_STOP, p);
 	ADC_WRITE(ADC_CTRL, 1);
+
+	// softTBM tout delay enable
+	Trigger_Write(6, 1);
 }
 
 
@@ -1684,6 +1688,9 @@ void CTestboard::Daq_DeselectAll()
 	// disable data simulator
 	daq_select_datasim = false;
 	IOWR_32DIRECT(EVENTGEN_BASE, 0, 0);
+
+	// softTBM tout delay disable
+	Trigger_Write(6, 0);
 }
 
 void CTestboard::Daq_Select_Deser160(uint8_t shift)
@@ -1705,6 +1712,9 @@ void CTestboard::Daq_Select_Deser160(uint8_t shift)
 	// enable deser160
 	daq_select_deser160 = true;
 	IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, (shift & 0x7) | 0x8);
+
+	// softTBM tout delay disable
+	Trigger_Write(6, 0);
 }
 
 void CTestboard::Daq_Select_Deser400()
@@ -1726,6 +1736,9 @@ void CTestboard::Daq_Select_Deser400()
 	// enable deser400
 	daq_select_deser400 = true;
 	Daq_Deser400_Reset();
+
+	// softTBM tout delay disable
+	Trigger_Write(6, 0);
 }
 
 
@@ -1768,6 +1781,9 @@ void CTestboard::Daq_Select_Datagenerator(uint16_t startvalue)
 	IOWR_32DIRECT(EVENTGEN_BASE, 0, 0);
 	IOWR_32DIRECT(EVENTGEN_BASE, 1, startvalue);
 	IOWR_32DIRECT(EVENTGEN_BASE, 0, 1);
+
+	// softTBM tout delay disable
+	Trigger_Write(6, 0);
 }
 
 
