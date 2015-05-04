@@ -467,12 +467,7 @@ void CTestboard::Sig_SetMode(uint8_t signal, uint8_t mode)
 		default: return;
 	}
 
-	switch (mode)
-	{
-		case 0: IOWR_16DIRECT(sig, 6, 0); break;
-		case 1: IOWR_16DIRECT(sig, 6, 1); break;
-		case 2: IOWR_16DIRECT(sig, 6, 3); break;
-	}
+	if (mode <= 3) IOWR_16DIRECT(sig, 6, mode);
 }
 
 void CTestboard::Sig_SetPRBS(uint8_t signal, uint8_t speed)
