@@ -219,7 +219,6 @@ public:
 	#define SIG_MODE_NORMAL  0
 	#define SIG_MODE_LO      1
 	#define SIG_MODE_HI      2
-	#define SIG_MODE_RDM     3
 
 	RPC_EXPORT void Sig_SetMode(uint8_t signal, uint8_t mode);
 	RPC_EXPORT void Sig_SetPRBS(uint8_t signal, uint8_t speed);
