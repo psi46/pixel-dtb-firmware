@@ -46,8 +46,13 @@ module trigger
 	wire sel_single;
 	wire sel_gen;
 	wire sel_pg;
+
+	wire sel_dir_async;
+	wire sel_dir_sync;
 	wire sel_dir_single;
+	wire sel_dir_gen;
 	wire sel_dir_pg;
+
 	wire sel_chain;
 	wire sel_sync_out;
 	
@@ -61,7 +66,7 @@ module trigger
 	wire enable_tout_delay;
 	// --- control signals end ----------
 
-	wire [22:0]dummy23;
+	wire [19:0]dummy20;
 	wire [26:0]dummy27;
 	wire [30:0]dummy31;
 	wire [23:0]dummy24;
@@ -77,8 +82,10 @@ module trigger
 		.writedata(ctrl_writedata),
 		.address(ctrl_address),
 
-		.reg0({dummy23, sel_async, sel_sync, sel_single, sel_gen,
-			sel_pg, sel_dir_single, sel_dir_pg, sel_chain, sel_sync_out}),
+		.reg0({dummy20,
+			sel_dir_async, sel_dir_sync, sel_dir_gen,
+			sel_async, sel_sync, sel_single, sel_gen,	sel_pg,
+			sel_dir_single, sel_dir_pg, sel_chain, sel_sync_out}),
 		.reg1({dummy27, send_trig}),
 		.reg2({dummy31, gen_sel_random}),
 		.reg3(gen_rate),
@@ -210,8 +217,13 @@ module trigger
 		.sel_single(sel_single),
 		.sel_gen(sel_gen),
 		.sel_pg(sel_pg),
+		
+		.sel_dir_async(sel_dir_async),
+		.sel_dir_sync(sel_dir_sync),
 		.sel_dir_single(sel_dir_single),
+		.sel_dir_gen(sel_dir_gen),
 		.sel_dir_pg(sel_dir_pg),
+		
 		.sel_chain(sel_chain),
 		.sel_sync_out(sel_sync_out),
 

@@ -16,7 +16,10 @@ module trigger_control
 	input sel_gen,        // select trigger generator input
 	input sel_pg,         // select pattern generator input
 
+	input sel_dir_async,  // select async input for direct output
+	input sel_dir_sync,   // select sync input for direct output
 	input sel_dir_single, // select single trigger for direct output
+	input sel_dir_gen,    // select trigger generator input for direct output
 	input sel_dir_pg,     // select pattern generator for direct output
 
 	input sel_chain,      // sync in -> sync out (fast desy chain)
@@ -80,9 +83,15 @@ module trigger_control
 	assign dst_tbm_pos = src_async_pos & {4{src_async_gated[1]}};
 
 	//
+	wire [4:0]src_dir_async_gated  = {5{sel_dir_async}}  & src_async;
+	wire [4:0]src_dir_sync_gated   = {5{sel_dir_sync}}   & src_sync;
 	wire [4:0]src_dir_single_gated = {5{sel_dir_single}} & src_single;
+	wire [4:0]src_dir_gen_gated    = {5{sel_dir_gen}}    & src_gen;
 	wire [4:0]src_dir_pg_gated     = {5{sel_dir_pg}}     & src_pg;
+
+	wire [4:0]sum_dir = src_dir_async_gated | src_dir_sync_gated
+		| src_dir_single_gated | src_dir_gen_gated | src_dir_pg_gated;
 	
-	assign dst_dir = src_dir_single_gated | src_dir_pg_gated;
+	assign dst_dir = sum_dir;
 
 endmodule

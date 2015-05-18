@@ -361,15 +361,20 @@ public:
 	RPC_EXPORT void Pg_Loop(uint16_t period);
 
 	// --- Trigger ----------------------------------------------------------
-	#define TRG_SEL_ASYNC      0x100
-	#define TRG_SEL_SYNC       0x080
-	#define TRG_SEL_SINGLE     0x040
-	#define TRG_SEL_GEN        0x020
-	#define TRG_SEL_PG         0x010
-	#define TRG_SEL_SINGLE_DIR 0x008
-	#define TRG_SEL_PG_DIR     0x004
-	#define TRG_SEL_CHAIN      0x002
-	#define TRG_SEL_SYNC_OUT   0x001
+	#define TRG_SEL_ASYNC      0x0100
+	#define TRG_SEL_SYNC       0x0080
+	#define TRG_SEL_SINGLE     0x0040
+	#define TRG_SEL_GEN        0x0020
+	#define TRG_SEL_PG         0x0010
+
+	#define TRG_SEL_ASYNC_DIR  0x0800
+	#define TRG_SEL_SYNC_DIR   0x0400
+	#define TRG_SEL_SINGLE_DIR 0x0008
+	#define TRG_SEL_GEN_DIR    0x0200
+	#define TRG_SEL_PG_DIR     0x0004
+
+	#define TRG_SEL_CHAIN      0x0002
+	#define TRG_SEL_SYNC_OUT   0x0001
 	RPC_EXPORT void Trigger_Select(uint16_t mask);
 
 	RPC_EXPORT void Trigger_Delay(uint8_t delay);
