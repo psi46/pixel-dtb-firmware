@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2013 Altera Corporation
+Copyright (C) 1991-2014 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -995,11 +995,6 @@ applicable agreement for further details.
 	(pt -3712 -144)
 )
 (connector
-	(text "sclk[0]" (rect -3710 -144 -3677 -132)(font "Arial" ))
-	(pt -3656 -128)
-	(pt -3712 -128)
-)
-(connector
 	(text "sync" (rect -3710 -128 -3686 -116)(font "Arial" ))
 	(pt -3656 -112)
 	(pt -3712 -112)
@@ -1266,6 +1261,11 @@ applicable agreement for further details.
 (connector
 	(pt -3344 -128)
 	(pt -3416 -128)
+)
+(connector
+	(text "sclk[6]" (rect -3710 -144 -3677 -132)(font "Arial" ))
+	(pt -3656 -128)
+	(pt -3712 -128)
 )
 (junction (pt -3920 256))
 (junction (pt -3952 632))

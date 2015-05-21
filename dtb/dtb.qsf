@@ -930,7 +930,7 @@ set_location_assignment FF_X2_Y21_N5 -to instDESER400_3|ovs|s2[7]
 
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING ON
-set_global_assignment -name SEED 2
+set_global_assignment -name SEED 1
 set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
@@ -1001,6 +1001,10 @@ set_global_assignment -name LL_ORIGIN X1_Y21 -section_id deser3
 set_instance_assignment -name LL_MEMBER_OF deser1 -to "deser400_PSI:instDESER400_1|oversampling:ovs" -section_id deser1
 set_instance_assignment -name LL_MEMBER_OF deser2 -to "deser400_PSI:instDESER400_2|oversampling:ovs" -section_id deser2
 set_instance_assignment -name LL_MEMBER_OF deser3 -to "deser400_PSI:instDESER400_3|oversampling:ovs" -section_id deser3
+set_location_assignment IOIBUF_X0_Y21_N15 -to LVDS2LCDS_sdata_III~input
+set_global_assignment -name VERILOG_FILE phasedet.v
+set_global_assignment -name VERILOG_FILE clocksm.v
+set_global_assignment -name VERILOG_FILE clockgen.v
 set_global_assignment -name VERILOG_FILE soft_tbm_queue.v
 set_global_assignment -name VERILOG_FILE soft_tbm.v
 set_global_assignment -name VERILOG_FILE ctr_encoder.v
@@ -1022,8 +1026,6 @@ set_global_assignment -name QIP_FILE gl_or7x16.qip
 set_global_assignment -name BDF_FILE DTB_serFSM_1.bdf
 set_global_assignment -name SDC_FILE dtb.sdc
 set_global_assignment -name QIP_FILE dtb_system/synthesis/dtb_system.qip
-set_global_assignment -name AHDL_FILE clocksm.tdf
-set_global_assignment -name AHDL_FILE clockgen.tdf
 set_global_assignment -name VERILOG_FILE deser160_serpar.v
 set_global_assignment -name VERILOG_FILE deser160_sampling.v
 set_global_assignment -name VERILOG_FILE deser160.v

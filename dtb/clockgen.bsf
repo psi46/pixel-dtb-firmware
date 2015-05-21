@@ -4,10 +4,10 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2005 Altera Corporation
+Copyright (C) 1991-2014 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
-functions, and any output files any of the foregoing 
+functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
 to the terms and conditions of the Altera Program License 
@@ -18,9 +18,9 @@ programming logic devices manufactured by Altera and sold by
 Altera or its authorized distributors.  Please refer to the 
 applicable agreement for further details.
 */
-(header "symbol" (version "1.1"))
+(header "symbol" (version "1.2"))
 (symbol
-	(rect 64 48 208 280)
+	(rect 64 64 208 296)
 	(text "clockgen" (rect 16 0 59 12)(font "Arial" ))
 	(text "inst" (rect 16 216 33 228)(font "Arial" ))
 	(port
@@ -28,7 +28,7 @@ applicable agreement for further details.
 		(input)
 		(text "clk" (rect 0 16 14 28)(font "Arial" ))
 		(text "clk" (rect 32 24 46 36)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 1))
+		(line (pt 0 32)(pt 16 32))
 	)
 	(port
 		(pt 0 128)
@@ -38,11 +38,11 @@ applicable agreement for further details.
 		(line (pt 0 128)(pt 16 128))
 	)
 	(port
-		(pt 0 56)
+		(pt 0 64)
 		(input)
 		(text "shift" (rect 24 152 48 166)(font "Arial" (font_size 8)))
-		(text "shift" (rect 24 48 48 62)(font "Arial" (font_size 8)))
-		(line (pt 0 56)(pt 16 56))
+		(text "shift" (rect 24 56 48 70)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 16 64))
 	)
 	(port
 		(pt 0 88)
@@ -52,44 +52,51 @@ applicable agreement for further details.
 		(line (pt 0 88)(pt 16 88)(line_width 3))
 	)
 	(port
+		(pt 0 48)
+		(input)
+		(text "reset" (rect 24 40 53 54)(font "Arial" (font_size 8)))
+		(text "reset" (rect 24 40 53 54)(font "Arial" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
 		(pt 144 128)
 		(output)
 		(text "sync" (rect 94 120 122 134)(font "Arial" (font_size 8)))
-		(text "sync" (rect 94 120 122 134)(font "Arial" (font_size 8)))
+		(text "sync" (rect 100 120 123 134)(font "Arial" (font_size 8)))
 		(line (pt 144 128)(pt 128 128))
 	)
 	(port
 		(pt 144 144)
 		(output)
 		(text "phase" (rect 94 136 129 150)(font "Arial" (font_size 8)))
-		(text "phase" (rect 94 136 129 150)(font "Arial" (font_size 8)))
+		(text "phase" (rect 94 136 123 150)(font "Arial" (font_size 8)))
 		(line (pt 144 144)(pt 128 144))
 	)
 	(port
 		(pt 144 192)
 		(output)
 		(text "adcclk" (rect 94 160 130 174)(font "Arial" (font_size 8)))
-		(text "adcclk" (rect 88 184 124 198)(font "Arial" (font_size 8)))
+		(text "adcclk" (rect 93 184 123 198)(font "Arial" (font_size 8)))
 		(line (pt 144 192)(pt 128 192))
 	)
 	(port
 		(pt 144 176)
 		(output)
 		(text "adcsync" (rect 94 160 143 174)(font "Arial" (font_size 8)))
-		(text "adcsync" (rect 80 168 129 182)(font "Arial" (font_size 8)))
+		(text "adcsync" (rect 82 168 123 182)(font "Arial" (font_size 8)))
 		(line (pt 144 176)(pt 128 176))
 	)
 	(drawing
-		(line (pt 16 24)(pt 24 32)(line_width 1))
-		(line (pt 24 32)(pt 16 40)(line_width 1))
-		(line (pt 16 16)(pt 128 16)(line_width 1))
-		(line (pt 128 104)(pt 120 104)(line_width 1))
-		(line (pt 120 104)(pt 120 112)(line_width 1))
-		(line (pt 16 104)(pt 24 104)(line_width 1))
-		(line (pt 24 104)(pt 24 112)(line_width 1))
-		(line (pt 16 104)(pt 16 16)(line_width 1))
-		(line (pt 128 16)(pt 128 104)(line_width 1))
-		(line (pt 128 160)(pt 16 160)(line_width 1))
-		(rectangle (rect 16 112 128 208)(line_width 1))
+		(line (pt 16 24)(pt 24 32))
+		(line (pt 24 32)(pt 16 40))
+		(line (pt 16 16)(pt 128 16))
+		(line (pt 128 104)(pt 120 104))
+		(line (pt 120 104)(pt 120 112))
+		(line (pt 16 104)(pt 24 104))
+		(line (pt 24 104)(pt 24 112))
+		(line (pt 16 104)(pt 16 16))
+		(line (pt 128 16)(pt 128 104))
+		(line (pt 128 160)(pt 16 160))
+		(rectangle (rect 16 112 128 208))
 	)
 )
