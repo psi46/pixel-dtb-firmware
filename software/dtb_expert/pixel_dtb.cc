@@ -261,6 +261,9 @@ void CTestboard::Init()
 	TBM_present = false;
 	MOD_present = false;
 	HUB_address = 0;
+	HUB_address0 = 0;
+	HUB_address1 = 0;
+	layer_1 = false;
 
 	currentClock = MHZ_40;
 	SetClock_(MHZ_1_25);
@@ -1082,16 +1085,33 @@ void CTestboard::Pg_Loop(unsigned short period)
 
 // --- ROC functions ----------------------------------------------------
 
+// -- port numbers for the 16 rocs on layer 2-4 modules
 const unsigned char CTestboard::MODCONF[16]
 = { 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3 };
 
+// -- port numbers for the 16 rocs on a layer 1 module
+// -- Note: even if it doesn't seem so, only four rocs share the same port (2 TBMs!)
+const unsigned char CTestboard::MODCONF_L1[16]
+= { 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1 }
 
 // -- set the i2c address for the following commands
 void CTestboard::roc_I2cAddr(uint8_t id)
 {
 	ChipId = id & 0x0f;
 	ChipId = id << 4;
-	if (MOD_present) HUB_address = (HUB_address & 0xf8) + MODCONF[id];
+	if (layer_1) roc_I2cAddr_Layer_1(id);
+	else
+	{
+		if (MOD_present) HUB_address = (HUB_address & 0xf8) + MODCONF[id];
+	}
+}
+
+
+// -- for layer 1 modules we have to reset the HUB_address as well
+void CTestboard:roc_I2cAddr_Layer_1(uint8_t id)
+{
+	if ( id > 3 && 12 > id) if (MOD_present) HUB_address = (HUB_address1 & 0xf8) + MODCONF_L1[id];
+	else {if (MOD_present) HUB_address = (HUB_address0 & 0xf8) + MODCONF_L1[id];}
 }
 
 
@@ -1256,6 +1276,18 @@ void CTestboard::mod_Addr(uint8_t hub)
 {
         MOD_present = true;
         HUB_address = ((hub & 0x1f)<<3);
+}
+
+
+void CTestboard::set_layer_1(bool on, uint8_t hub1)
+{
+	    if (on)
+	    {
+			layer_1 = on;
+			HUB_address0 = HUB_address;
+			HUB_address1 = ((hub1 & 0x1f)<<3);
+		}
+
 }
 
 

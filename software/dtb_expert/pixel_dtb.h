@@ -103,7 +103,11 @@ class CTestboard
 	bool TBM_present;
 	bool MOD_present;
 	unsigned char HUB_address;
+	unsigned char HUB_address0
+	unsigned char HUB_address1;
 	static const unsigned char MODCONF[16];
+	static const unsigned char MODCONF_L1[16];
+	const bool layer_1;
 
 
 	void InitDac();
@@ -471,6 +475,7 @@ public:
 	RPC_EXPORT void tbm_Addr(uint8_t hub, uint8_t port);
 
 	RPC_EXPORT void mod_Addr(uint8_t hub);
+	RPC_EXPORT void set_layer_1(bool on, uint8_t hub0); // switch for layer 1 and additional hubid
 
 	RPC_EXPORT void tbm_Set(uint8_t reg, uint8_t value);
 
