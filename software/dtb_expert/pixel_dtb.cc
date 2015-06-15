@@ -1107,7 +1107,7 @@ void CTestboard::roc_I2cAddr(uint8_t id)
 }
 
 
-// -- for layer 1 modules we have to reset the HUB_address as well
+// -- for layer 1 modules we have to reset the HUB_address as well, not only the roc address
 void CTestboard:roc_I2cAddr_Layer_1(uint8_t id)
 {
 	if ( id > 3 && 12 > id) if (MOD_present) HUB_address = (HUB_address1 & 0xf8) + MODCONF_L1[id];
@@ -1279,15 +1279,13 @@ void CTestboard::mod_Addr(uint8_t hub)
 }
 
 
-void CTestboard::set_layer_1(bool on, uint8_t hub1)
+// set both hub addresses and enable layer 1 switch
+void CTestboard::mod_Addr(uint8_t hub0, uint8_t hub1);
 {
-	    if (on)
-	    {
-			layer_1 = on;
-			HUB_address0 = HUB_address;
-			HUB_address1 = ((hub1 & 0x1f)<<3);
-		}
-
+		layer_1 = true;
+		MOD_present = true;
+		HUB_address0 = ((hub0 & 0x1f)<<3);
+		HUB_address1 = ((hub1 & 0x1f)<<3);
 }
 
 
