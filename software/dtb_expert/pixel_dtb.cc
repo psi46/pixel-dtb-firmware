@@ -1092,7 +1092,7 @@ const unsigned char CTestboard::MODCONF[16]
 // -- port numbers for the 16 rocs on a layer 1 module
 // -- Note: even if it doesn't seem so, only four rocs share the same port (2 TBMs!)
 const unsigned char CTestboard::MODCONF_L1[16]
-= { 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1 }
+= { 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1 };
 
 // -- set the i2c address for the following commands
 void CTestboard::roc_I2cAddr(uint8_t id)
@@ -1108,10 +1108,16 @@ void CTestboard::roc_I2cAddr(uint8_t id)
 
 
 // -- for layer 1 modules we have to reset the HUB_address as well, not only the roc address
-void CTestboard:roc_I2cAddr_Layer_1(uint8_t id)
+void CTestboard::roc_I2cAddr_Layer_1(uint8_t id)
 {
-	if ( id > 3 && 12 > id) if (MOD_present) HUB_address = (HUB_address1 & 0xf8) + MODCONF_L1[id];
-	else {if (MOD_present) HUB_address = (HUB_address0 & 0xf8) + MODCONF_L1[id];}
+	if ( id > 3 && 12 > id)
+	{
+		if (MOD_present) HUB_address = (HUB_address1 & 0xf8) + MODCONF_L1[id];
+	}
+	else
+	{
+		if (MOD_present) HUB_address = (HUB_address0 & 0xf8) + MODCONF_L1[id];
+	}
 }
 
 
@@ -1280,7 +1286,7 @@ void CTestboard::mod_Addr(uint8_t hub)
 
 
 // set both hub addresses and enable layer 1 switch
-void CTestboard::mod_Addr(uint8_t hub0, uint8_t hub1);
+void CTestboard::mod_Addr(uint8_t hub0, uint8_t hub1)
 {
 		layer_1 = true;
 		MOD_present = true;
