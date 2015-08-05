@@ -480,59 +480,12 @@ public:
 
 	RPC_EXPORT bool tbm_GetRaw(uint8_t reg, uint32_t &value);
 
-	int16_t DecodePixel(vector<uint16_t> &data, int16_t &pos, int16_t &n, int16_t &ph, int16_t &col, int16_t &row);
 
-	RPC_EXPORT bool GetPixelAddressInverted();
-    RPC_EXPORT void SetPixelAddressInverted(bool status);
-
-
-
-// --- ROC test functions
-
-	int16_t DecodeReadout(vector<uint16_t> &data, int16_t &pos, vector<uint16_t> &ph, vector<uint16_t> &col, vector<uint16_t> &row);
-	RPC_EXPORT int32_t CountReadouts(int32_t nTriggers);
-	RPC_EXPORT int32_t CountReadouts(int32_t nTriggers, int32_t chipId);
-	RPC_EXPORT int32_t CountReadouts(int32_t nTriggers, int32_t dacReg, int32_t dacValue);
-	RPC_EXPORT int32_t PH(int32_t col, int32_t row, int32_t trim, int16_t nTriggers);
-	//int32_t ThresholdBinary(int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t dacMin, int32_t dacMax, bool reverseMode);
-	int32_t Threshold(int32_t start, int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg);
-	//bool FindReadout(int32_t thrLevel, int32_t nTrig, int32_t dacReg, int32_t &dacMin, int32_t &dacMax, bool reverseMode);
-	RPC_EXPORT int32_t PixelThreshold(int32_t col, int32_t row, int32_t start, int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg, bool xtalk, bool cals);
-	RPC_EXPORT bool test_pixel_address(int32_t col, int32_t row);
-
-
-	//new functions
-	RPC_EXPORT int8_t CalibratePixel(int16_t nTriggers, int16_t col, int16_t row, int16_t &nReadouts, int32_t &PHsum);
-	RPC_EXPORT int8_t CalibrateDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1, int16_t dacLower1, int16_t dacUpper1, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum);
-    RPC_EXPORT int8_t CalibrateDacDacScan(int16_t nTriggers, int16_t col, int16_t row, int16_t dacReg1, int16_t dacLower1, int16_t dacUpper1, int16_t dacReg2, int16_t dacLower2, int16_t dacUpper2, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum);
-    //RPC_EXPORT int8_t CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum);
-    void ChipThresholdIntern(int32_t start[], int32_t step, int32_t thrLevel, int32_t nTrig, int32_t dacReg, bool xtalk, bool cals, int32_t res[]);
-    int8_t ThresholdMap(int32_t nTriggers, int32_t dacReg, bool rising, bool xtalk, bool cals, vectorR<int16_t> &thrValue);
-    //RPC_EXPORT int8_t ThresholdMap(int16_t nTriggers, int16_t dacReg, int16_t dacRange, vectorR<int16_t> &thrValue);
-
-    int8_t CalibrateReadouts(int16_t nTriggers, int16_t &nReadouts, int32_t &PHsum);
-
-    RPC_EXPORT int16_t TrimChip(vector<int16_t> &trim);
-
-    //int8_t Daq_Enable2(int32_t block);
-    //int8_t Daq_Disable2();
-
-
-    // Module compatible functions
-	void Daq_Enable2(int32_t block);
-	int8_t Daq_Read2(vector<uint16_t> &data, uint16_t daq_read_size, uint32_t &n);
-	void Daq_Disable2();
-	void DecodeTbmTrailer(unsigned int raw, int16_t &dataId, int16_t &data);
-	void DecodeTbmHeader(unsigned int raw, int16_t &evNr, int16_t &stkCnt);
-	void DecodePixel(unsigned int raw, int16_t &n, int16_t &ph, int16_t &col, int16_t &row);
-	int8_t Decode(const vector<uint16_t> &data, vector<uint16_t> &n, vector<uint16_t> &ph, vector<uint32_t> &adr, uint8_t channel = 0);
-	//int8_t Decode2(const vector<uint16_t> &data, vector<int16_t> &n, vector<int32_t> &ph, vector<uint32_t> &adr);
-	RPC_EXPORT int16_t CalibrateMap(int16_t nTriggers, vectorR<int16_t> &nReadouts, vectorR<int32_t> &PHsum, vectorR<uint32_t> &addres);
-	RPC_EXPORT int16_t TriggerRow(int16_t nTriggers, int16_t col, vector<int16_t> &rocs, int16_t delay=4);
+	RPC_EXPORT int16_t TrimChip(vector<int16_t> &trim);
 
 	// Wafer test functions
 	RPC_EXPORT bool TestColPixel(uint8_t col, uint8_t trimbit, bool sensor_cal, vectorR<uint8_t> &res);
-
+ 
 	// Ethernet test functions
 	bool Ethernet_Init();
 	RPC_EXPORT void Ethernet_Send(string &message);
