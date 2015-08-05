@@ -400,6 +400,8 @@ public:
 	RPC_EXPORT uint8_t Daq_FillLevel(uint8_t channel);
 	RPC_EXPORT uint8_t Daq_FillLevel();
 
+	void Daq_MemReset(uint8_t channel);
+	
 	uint8_t Daq_Read(vectorR<uint16_t> &data,
 			 uint32_t blocksize = 65536, uint8_t channel = 0);
 
