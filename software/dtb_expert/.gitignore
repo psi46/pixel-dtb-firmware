@@ -1,0 +1,6 @@
+*.elf
+*.map
+*.objdump
+.force_relink
+.settings
+obj/*
