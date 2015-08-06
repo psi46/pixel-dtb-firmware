@@ -1444,20 +1444,6 @@ void CTestboard::Daq_Stop(uint8_t channel)
 	ToggleLed(1,false);
 }
 
-void CTestboard::Daq_MemReset(uint8_t channel) {
-
-  	if (channel >= DAQ_CHANNELS) return;
-	if (daq_mem_base[channel] == 0) return;
-
-	// read the DMA DAQ base address status
-	unsigned int daq_base = DAQ_DMA_BASE[channel];
-	// read the start address
-	int32_t p = DAQ_READ(daq_base, DAQ_MEM_BASE);
-	// reset read and write pointer to the base address:
-	DAQ_WRITE(daq_base, DAQ_MEM_READ,p);
-	DAQ_WRITE(daq_base, DAQ_MEM_WRITE,p);
-}
-
 uint32_t CTestboard::Daq_GetSize(uint8_t channel)
 {
 	if (channel >= DAQ_CHANNELS) return 0;

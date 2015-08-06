@@ -45,7 +45,8 @@ void CTestboard::LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row,
 
   // Reset DAQ read and write pointers to the start of the allocated memory:
   for(uint8_t channel = 0; channel < DAQ_CHANNELS; channel++) {
-    Daq_MemReset(channel);
+    // Calling Daq_Start once more resets the memory by writing '1' to DAQ_CONTROL:
+    Daq_Start(channel);
   }
   
   // Loop is resumed: turn test loop LED on:
