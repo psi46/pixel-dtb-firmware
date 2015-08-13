@@ -1405,6 +1405,42 @@ void CTestboard::Daq_Close(uint8_t channel)
 	LoopInterruptReset();
 }
 
+void CTestboard::Daq_MemReset(uint8_t channel) {
+
+  if (channel >= DAQ_CHANNELS) return;
+
+  if (daq_mem_base[channel]) {
+    // Store previously allocated space:
+    int32_t buffersize = daq_mem_size[channel];
+
+    // Stop the DAQ
+    Daq_Stop(channel);
+
+    // reset FIFO and delete pointer
+    IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, 0); // FIFO reset
+    uDelay(1);
+    delete[] daq_mem_base[channel];
+
+    // re-allocate memory
+    daq_mem_base[channel] = new uint16_t[buffersize];
+    daq_mem_size[channel] = buffersize;
+
+    // set DMA to allocated memory
+    unsigned int daq_base = DAQ_DMA_BASE[channel];
+    DAQ_WRITE(daq_base, DAQ_MEM_BASE, (unsigned long)(daq_mem_base[channel]));
+    DAQ_WRITE(daq_base, DAQ_MEM_SIZE, daq_mem_size[channel]);
+
+    alt_dcache_flush(daq_mem_base[channel], buffersize*2);
+
+    // Reset DESER400:
+    Daq_Deser400_Reset(3);
+    
+    // Restart DAQ:
+    Daq_Start(channel);
+  }
+
+}
+
 void CTestboard::Daq_Start(uint8_t channel)
 {
 	if (channel >= DAQ_CHANNELS) return;
