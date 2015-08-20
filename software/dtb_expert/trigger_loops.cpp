@@ -43,12 +43,6 @@ bool CTestboard::LoopInterruptStatus() {
 // Load the Loop Interrupt values to resume at interrupt position:
 void CTestboard::LoopInterruptResume(uint16_t id, uint8_t &column, uint8_t &row, size_t &dac1, uint8_t &dac1step, size_t &dac2, uint8_t &dac2step) {
 
-  // Reset DAQ read and write pointers to the start of the allocated memory:
-  for(uint8_t channel = 0; channel < DAQ_CHANNELS; channel++) {
-    // Run Daq_MemReset to reinitialize the DAQ and ist storage:
-    Daq_MemReset(channel);
-  }
-  
   // Loop is resumed: turn test loop LED on:
   ToggleLed(4,true);
 
