@@ -103,7 +103,11 @@ class CTestboard
 	bool TBM_present;
 	bool MOD_present;
 	unsigned char HUB_address;
+	unsigned char HUB_address0;
+	unsigned char HUB_address1;
 	static const unsigned char MODCONF[16];
+	static const unsigned char MODCONF_L1[16];
+	bool layer_1;
 
 
 	void InitDac();
@@ -432,6 +436,7 @@ public:
 	// --- ROC/module Communication -----------------------------------------
 	// -- set the i2c address for the following commands
 	RPC_EXPORT void roc_I2cAddr(uint8_t id);
+	RPC_EXPORT void roc_I2cAddr_Layer_1(uint8_t id);
 
 	// -- sends "ClrCal" command to ROC
 	RPC_EXPORT void roc_ClrCal();
@@ -472,6 +477,7 @@ public:
 	RPC_EXPORT void tbm_Addr(uint8_t hub, uint8_t port);
 
 	RPC_EXPORT void mod_Addr(uint8_t hub);
+	RPC_EXPORT void mod_Addr(uint8_t hub0, uint8_t hub1); // set switch for layer 1 and additional hubid
 
 	RPC_EXPORT void tbm_Set(uint8_t reg, uint8_t value);
 
