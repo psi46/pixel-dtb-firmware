@@ -9,7 +9,7 @@
 
 // Use a maximum of 85% of allocated DAQ buffer before reading out:
 #define LOOP_MAX_FILLLEVEL  85
-#define LOOP_MAX_INTERRUPTS 20
+#define LOOP_MAX_INTERRUPTS 150
 
 // Wait this long when setting DACs to lowest value
 // they need time to settle after large jumps. Time given in usec.
