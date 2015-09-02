@@ -505,6 +505,7 @@ public:
 
 	// Test Loop parameters
 	uint16_t LoopTriggerDelay;
+	uint16_t LoopTrimDelay;
 
 	// Loop parameter storage for interrupts:
 	bool LoopInterrupt;
@@ -528,6 +529,7 @@ public:
 	bool LoopInterruptStatus();
 
 	RPC_EXPORT void SetLoopTriggerDelay(uint16_t delay);
+	RPC_EXPORT void SetLoopTrimDelay(uint16_t delay);
 	uint16_t GetLoopTriggerDelay(uint16_t nTriggers);
 	RPC_EXPORT bool SetI2CAddresses(vector<uint8_t> &roc_i2c);
 	RPC_EXPORT bool SetTrimValues(uint8_t roc_i2c, vector<uint8_t> &trimvalues);

@@ -119,6 +119,11 @@ void CTestboard::SetLoopTriggerDelay(uint16_t delay) {
   LoopTriggerDelay = delay;
 }
 
+// Additionally configurable delay after trimming a pixel:
+void CTestboard::SetLoopTrimDelay(uint16_t delay) {
+  LoopTrimDelay = delay;
+}
+
 uint16_t CTestboard::GetLoopTriggerDelay(uint16_t nTriggers) {
   
   uint16_t readout_time;
@@ -188,6 +193,9 @@ void CTestboard::LoopPixTrim(uint8_t roc_i2c, uint8_t column, uint8_t row) {
   // If the trim value is within the valid trim bit range (0-15) enable the pixel and trim it accordingly:
   if(value < 16) roc_Pix_Trim(column, row, value);
   // If not, do nothing - it's masked and should stay.
+
+  // Wait any additionally requested delay after trimming:
+  cDelay(LoopTrimDelay);
 }
 
 
