@@ -207,17 +207,19 @@ end
 // first readout after buffer empty must be delayed
 
 reg [4:0]ro_delay;
-assign ro_enable = ro_delay[4];
+wire ro_veto = !ro_delay[4];
 
 always @(posedge clk or posedge reset) begin
 	if (reset) begin
 		ro_delay <= 5'd0;
 	end
 	else if (sync) begin
-		if (queue_empty) ro_delay = 5'd12;
-		else if (!ro_enable) ro_delay = ro_delay - 5'd1;
+		if (trg_pass && (queue_size <= 1)) ro_delay = 5'd10;
+		else if (ro_veto) ro_delay = ro_delay - 5'd1;
 	end
 end
+
+assign ro_enable = !queue_empty && !ro_veto && !token_veto;
 
 
 // === header/trailer generator =====================================
