@@ -8,6 +8,7 @@
 module deser400_gate
 (
 	input clk,
+	input sync,
 	input reset,
 	output reg gate
 );
@@ -29,7 +30,7 @@ module deser400_gate
 				.aload (1'b0),
 				.aset (1'b0),
 				.cin (1'b1),
-				.clk_en (1'b1),
+				.clk_en (sync),
 				.cnt_en (1'b1),
 				.cout (),
 				.data ({22{1'b0}}),

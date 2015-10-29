@@ -219,7 +219,7 @@ always @(posedge clk or posedge reset) begin
 	end
 end
 
-assign ro_enable = !queue_empty && !ro_veto && !token_veto;
+assign ro_enable = !queue_empty && !ro_veto;
 
 
 // === header/trailer generator =====================================
