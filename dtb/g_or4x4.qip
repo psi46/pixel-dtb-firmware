@@ -1,5 +1,0 @@
-set_global_assignment -name IP_TOOL_NAME "LPM_OR"
-set_global_assignment -name IP_TOOL_VERSION "9.1"
-set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "g_or4x4.tdf"]
-set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "g_or4x4.bsf"]
-set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "g_or4x4.inc"]

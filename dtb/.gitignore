@@ -6,6 +6,7 @@ dtb_system
 greybox_tmb
 incremental_db
 simulation
+unused
 *.summary
 *.smsg
 *.rpt

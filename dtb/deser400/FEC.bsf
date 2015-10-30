@@ -1,0 +1,113 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2012 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 472 344)
+	(text "FEC" (rect 24 8 46 22)(font "Arial" (font_size 8)))
+	(text "inst" (rect 16 264 33 276)(font "Arial" ))
+	(port
+		(pt 0 88)
+		(input)
+		(text "sclk[7..0]" (rect 0 8 50 22)(font "Arial" (font_size 8)))
+		(text "sclk[7..0]" (rect 21 83 71 97)(font "Arial" (font_size 8)))
+		(line (pt 0 88)(pt 16 88)(line_width 3))
+	)
+	(port
+		(pt 0 104)
+		(input)
+		(text "res" (rect 0 8 18 22)(font "Arial" (font_size 8)))
+		(text "res" (rect 21 99 39 113)(font "Arial" (font_size 8)))
+		(line (pt 0 104)(pt 16 104))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "TOUT" (rect 0 8 31 22)(font "Arial" (font_size 8)))
+		(text "TOUT" (rect 21 203 52 217)(font "Arial" (font_size 8)))
+		(line (pt 0 208)(pt 16 208))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "trigger" (rect 24 168 60 182)(font "Arial" (font_size 8)))
+		(text "trigger" (rect 24 136 60 150)(font "Arial" (font_size 8)))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 296 0)
+		(input)
+		(text "pg_data[3..0]" (rect 288 24 302 98)(font "Arial" (font_size 8))(vertical))
+		(text "pg_data[3..0]" (rect 288 24 302 98)(font "Arial" (font_size 8))(vertical))
+		(line (pt 296 0)(pt 296 16)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 0 72)
+		(input)
+		(text "clkena" (rect 24 64 60 78)(font "Arial" (font_size 8)))
+		(text "clkena" (rect 24 64 60 78)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 16 72))
+	)
+	(port
+		(pt 0 40)
+		(input)
+		(text "clk_sys" (rect 24 32 67 46)(font "Arial" (font_size 8)))
+		(text "clk_sys" (rect 24 32 67 46)(font "Arial" (font_size 8)))
+		(line (pt 0 40)(pt 16 40))
+	)
+	(port
+		(pt 0 56)
+		(input)
+		(text "clk_daq" (rect 0 8 43 22)(font "Arial" (font_size 8)))
+		(text "clk_daq" (rect 21 51 64 65)(font "Arial" (font_size 8)))
+		(line (pt 0 56)(pt 16 56))
+	)
+	(port
+		(pt 408 208)
+		(output)
+		(text "TIN" (rect 280 8 297 22)(font "Arial" (font_size 8)))
+		(text "TIN" (rect 370 203 387 217)(font "Arial" (font_size 8)))
+		(line (pt 408 208)(pt 392 208))
+	)
+	(port
+		(pt 408 144)
+		(output)
+		(text "ROC_CLK" (rect 280 8 336 22)(font "Arial" (font_size 8)))
+		(text "ROC_CLK" (rect 336 136 392 150)(font "Arial" (font_size 8)))
+		(line (pt 408 144)(pt 392 144))
+	)
+	(port
+		(pt 408 160)
+		(output)
+		(text "ROC_CTR" (rect 280 8 336 22)(font "Arial" (font_size 8)))
+		(text "ROC_CTR" (rect 336 152 392 166)(font "Arial" (font_size 8)))
+		(line (pt 408 160)(pt 392 160))
+	)
+	(port
+		(pt 312 0)
+		(output)
+		(text "pg_trigger" (rect 304 24 318 81)(font "Arial" (font_size 8))(vertical))
+		(text "pg_trigger" (rect 304 24 318 81)(font "Arial" (font_size 8))(vertical))
+		(line (pt 312 0)(pt 312 16))
+	)
+	(drawing
+		(rectangle (rect 16 24 392 264))
+	)
+)

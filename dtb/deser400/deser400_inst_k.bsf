@@ -1,0 +1,169 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2012 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 312 472)
+	(text "deser400_inst_k" (rect 5 0 99 14)(font "Arial" (font_size 8)))
+	(text "inst" (rect 152 384 169 396)(font "Arial" ))
+	(port
+		(pt 0 376)
+		(input)
+		(text "PLLareset400" (rect 0 0 79 14)(font "Arial" (font_size 8)))
+		(text "PLLareset400" (rect 21 371 100 385)(font "Arial" (font_size 8)))
+		(line (pt 0 376)(pt 16 376))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "CLK400" (rect 0 0 44 14)(font "Arial" (font_size 8)))
+		(text "CLK400" (rect 21 171 65 185)(font "Arial" (font_size 8)))
+		(line (pt 0 176)(pt 16 176))
+	)
+	(port
+		(pt 0 200)
+		(input)
+		(text "C1" (rect 0 0 15 14)(font "Arial" (font_size 8)))
+		(text "C1" (rect 21 195 36 209)(font "Arial" (font_size 8)))
+		(line (pt 0 200)(pt 16 200))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "C2" (rect 0 0 15 14)(font "Arial" (font_size 8)))
+		(text "C2" (rect 21 219 36 233)(font "Arial" (font_size 8)))
+		(line (pt 0 224)(pt 16 224))
+	)
+	(port
+		(pt 0 248)
+		(input)
+		(text "C3" (rect 0 0 15 14)(font "Arial" (font_size 8)))
+		(text "C3" (rect 21 243 36 257)(font "Arial" (font_size 8)))
+		(line (pt 0 248)(pt 16 248))
+	)
+	(port
+		(pt 0 320)
+		(input)
+		(text "CLK320" (rect 0 0 44 14)(font "Arial" (font_size 8)))
+		(text "CLK320" (rect 21 315 65 329)(font "Arial" (font_size 8)))
+		(line (pt 0 320)(pt 16 320))
+	)
+	(port
+		(pt 0 344)
+		(input)
+		(text "CLK160" (rect 0 0 44 14)(font "Arial" (font_size 8)))
+		(text "CLK160" (rect 21 339 65 353)(font "Arial" (font_size 8)))
+		(line (pt 0 344)(pt 16 344))
+	)
+	(port
+		(pt 0 88)
+		(input)
+		(text "sdata_k" (rect 0 0 44 14)(font "Arial" (font_size 8)))
+		(text "sdata_k" (rect 21 83 65 97)(font "Arial" (font_size 8)))
+		(line (pt 0 88)(pt 16 88))
+	)
+	(port
+		(pt 0 136)
+		(input)
+		(text "LEDT[22]" (rect 24 128 74 142)(font "Arial" (font_size 8)))
+		(text "LEDT[22]" (rect 24 128 74 142)(font "Arial" (font_size 8)))
+		(line (pt 0 136)(pt 16 136))
+	)
+	(port
+		(pt 248 264)
+		(output)
+		(text "twTP1" (rect 0 0 36 14)(font "Arial" (font_size 8)))
+		(text "twTP1" (rect 191 259 227 273)(font "Arial" (font_size 8)))
+		(line (pt 248 264)(pt 232 264))
+	)
+	(port
+		(pt 248 288)
+		(output)
+		(text "twTP2" (rect 0 0 36 14)(font "Arial" (font_size 8)))
+		(text "twTP2" (rect 191 283 227 297)(font "Arial" (font_size 8)))
+		(line (pt 248 288)(pt 232 288))
+	)
+	(port
+		(pt 248 312)
+		(output)
+		(text "twTP3" (rect 0 0 36 14)(font "Arial" (font_size 8)))
+		(text "twTP3" (rect 191 307 227 321)(font "Arial" (font_size 8)))
+		(line (pt 248 312)(pt 232 312))
+	)
+	(port
+		(pt 248 336)
+		(output)
+		(text "kXORsel[3..0]" (rect 0 0 76 14)(font "Arial" (font_size 8)))
+		(text "kXORsel[3..0]" (rect 154 331 230 345)(font "Arial" (font_size 8)))
+		(line (pt 248 336)(pt 232 336)(line_width 3))
+	)
+	(port
+		(pt 248 48)
+		(output)
+		(text "kPSA[7..0]" (rect 0 0 59 14)(font "Arial" (font_size 8)))
+		(text "kPSA[7..0]" (rect 172 43 231 57)(font "Arial" (font_size 8)))
+		(line (pt 248 48)(pt 232 48)(line_width 3))
+	)
+	(port
+		(pt 248 88)
+		(output)
+		(text "ka_deserDATA[7..0]" (rect 0 0 115 14)(font "Arial" (font_size 8)))
+		(text "ka_deserDATA[7..0]" (rect 115 83 230 97)(font "Arial" (font_size 8)))
+		(line (pt 248 88)(pt 232 88)(line_width 3))
+	)
+	(port
+		(pt 248 104)
+		(output)
+		(text "ka_deserDATAwe" (rect 0 0 106 14)(font "Arial" (font_size 8)))
+		(text "ka_deserDATAwe" (rect 125 99 231 113)(font "Arial" (font_size 8)))
+		(line (pt 248 104)(pt 232 104))
+	)
+	(port
+		(pt 248 136)
+		(output)
+		(text "kb_deserDATA[7..0]" (rect 0 0 115 14)(font "Arial" (font_size 8)))
+		(text "kb_deserDATA[7..0]" (rect 115 131 230 145)(font "Arial" (font_size 8)))
+		(line (pt 248 136)(pt 232 136)(line_width 3))
+	)
+	(port
+		(pt 248 152)
+		(output)
+		(text "kb_deserDATAwe" (rect 0 0 106 14)(font "Arial" (font_size 8)))
+		(text "kb_deserDATAwe" (rect 125 147 231 161)(font "Arial" (font_size 8)))
+		(line (pt 248 152)(pt 232 152))
+	)
+	(port
+		(pt 248 360)
+		(output)
+		(text "ka_Hpulse" (rect 197 352 256 366)(font "Arial" (font_size 8)))
+		(text "ka_Hpulse" (rect 181 352 240 366)(font "Arial" (font_size 8)))
+		(line (pt 248 360)(pt 232 360))
+	)
+	(port
+		(pt 248 376)
+		(output)
+		(text "kb_Hpulse" (rect 197 368 256 382)(font "Arial" (font_size 8)))
+		(text "kb_Hpulse" (rect 181 368 240 382)(font "Arial" (font_size 8)))
+		(line (pt 248 376)(pt 232 376))
+	)
+	(drawing
+		(rectangle (rect 16 24 232 384))
+	)
+)

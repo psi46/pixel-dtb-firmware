@@ -6458,175 +6458,6 @@ applicable agreement for further details.
 	(pt -736 3680)
 )
 (connector
-	(text "ma_Hpulse" (rect 626 1464 681 1476)(font "Arial" ))
-	(pt 608 1480)
-	(pt 672 1480)
-)
-(connector
-	(text "mb_Hpulse" (rect 626 1480 681 1492)(font "Arial" ))
-	(pt 608 1496)
-	(pt 672 1496)
-)
-(connector
-	(pt 1248 1360)
-	(pt 1248 1384)
-)
-(connector
-	(text "REGreset" (rect 1178 1368 1226 1380)(font "Arial" ))
-	(pt 1248 1384)
-	(pt 1168 1384)
-)
-(connector
-	(pt 1136 1136)
-	(pt 1136 1232)
-)
-(connector
-	(pt 824 1168)
-	(pt 824 1328)
-	(bus)
-)
-(connector
-	(pt 928 1520)
-	(pt 928 1544)
-)
-(connector
-	(text "REGreset" (rect 858 1528 906 1540)(font "Arial" ))
-	(pt 928 1544)
-	(pt 848 1544)
-)
-(connector
-	(pt 792 1136)
-	(pt 792 1392)
-)
-(connector
-	(text "ma_deserDATA[15..0]" (rect 1366 1264 1474 1276)(font "Arial" ))
-	(pt 1344 1280)
-	(pt 1464 1280)
-	(bus)
-)
-(connector
-	(text "ma_deserDATAwe" (rect 1377 1296 1466 1308)(font "Arial" ))
-	(pt 1344 1296)
-	(pt 1464 1296)
-)
-(connector
-	(text "writeEVENT_mb" (rect 1378 1384 1457 1396)(font "Arial" ))
-	(pt 1024 1400)
-	(pt 1464 1400)
-)
-(connector
-	(text "mb_deserDATA[15..0]" (rect 1366 1424 1474 1436)(font "Arial" ))
-	(pt 1024 1440)
-	(pt 1464 1440)
-	(bus)
-)
-(connector
-	(text "mb_deserDATAwe" (rect 1377 1456 1466 1468)(font "Arial" ))
-	(pt 1024 1456)
-	(pt 1464 1456)
-)
-(connector
-	(text "writeEVENT_ma" (rect 1378 1224 1457 1236)(font "Arial" ))
-	(pt 1344 1240)
-	(pt 1464 1240)
-)
-(connector
-	(pt 1104 1280)
-	(pt 1104 1208)
-	(bus)
-)
-(connector
-	(pt 608 1208)
-	(pt 1104 1208)
-	(bus)
-)
-(connector
-	(pt 1088 1296)
-	(pt 1088 1224)
-)
-(connector
-	(pt 608 1224)
-	(pt 1088 1224)
-)
-(connector
-	(pt 608 1256)
-	(pt 760 1256)
-	(bus)
-)
-(connector
-	(pt 608 1272)
-	(pt 744 1272)
-)
-(connector
-	(pt 760 1440)
-	(pt 760 1256)
-	(bus)
-)
-(connector
-	(pt 744 1456)
-	(pt 744 1272)
-)
-(connector
-	(pt 608 1136)
-	(pt 792 1136)
-)
-(connector
-	(pt 792 1136)
-	(pt 1136 1136)
-)
-(connector
-	(text "mPSA[7..0]" (rect 650 1152 706 1164)(font "Arial" ))
-	(pt 608 1168)
-	(pt 824 1168)
-	(bus)
-)
-(connector
-	(text "CLK160" (rect 1072 1328 1120 1341)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
-	(pt 1120 1336)
-	(pt 1160 1336)
-)
-(connector
-	(pt 1104 1280)
-	(pt 1160 1280)
-	(bus)
-)
-(connector
-	(pt 824 1168)
-	(pt 1160 1168)
-	(bus)
-)
-(connector
-	(pt 1088 1296)
-	(pt 1160 1296)
-)
-(connector
-	(pt 1136 1232)
-	(pt 1160 1232)
-)
-(connector
-	(text "CLK160" (rect 752 1488 800 1501)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
-	(pt 800 1496)
-	(pt 840 1496)
-)
-(connector
-	(pt 760 1440)
-	(pt 840 1440)
-	(bus)
-)
-(connector
-	(pt 824 1328)
-	(pt 840 1328)
-	(bus)
-)
-(connector
-	(pt 744 1456)
-	(pt 840 1456)
-)
-(connector
-	(pt 792 1392)
-	(pt 840 1392)
-)
-(connector
 	(pt 824 592)
 	(pt 824 752)
 	(bus)
@@ -6729,39 +6560,6 @@ applicable agreement for further details.
 (connector
 	(pt 1136 80)
 	(pt 1160 80)
-)
-(connector
-	(text "CLK320" (rect 263 1432 311 1445)(font "Arial" (color 166 202 240)(font_size 8)(bold_italic)))
-	(pt 360 1440)
-	(pt 312 1440)
-)
-(connector
-	(text "CLK160" (rect 264 1456 312 1469)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
-	(pt 360 1464)
-	(pt 312 1464)
-)
-(connector
-	(text "areset400" (rect 286 1480 334 1492)(font "Arial" ))
-	(pt 360 1496)
-	(pt 280 1496)
-)
-(connector
-	(text "REGreset" (rect 250 1496 298 1508)(font "Arial" ))
-	(pt 360 1512)
-	(pt 232 1512)
-)
-(connector
-	(text "sdata_m" (rect 283 1192 325 1204)(font "Arial" ))
-	(pt 360 1208)
-	(pt 256 1208)
-)
-(connector
-	(pt 360 1248)
-	(pt 344 1248)
-)
-(connector
-	(pt 360 1264)
-	(pt 328 1264)
 )
 (connector
 	(text "ka_Hpulse" (rect 626 888 677 900)(font "Arial" ))
@@ -6979,14 +6777,6 @@ applicable agreement for further details.
 	(pt 120 984)
 )
 (connector
-	(pt 360 1560)
-	(pt 120 1560)
-)
-(connector
-	(pt 120 984)
-	(pt 120 1560)
-)
-(connector
 	(text "PLL_reset" (rect -1490 -160 -1441 -148)(font "Arial" ))
 	(pt -1496 -144)
 	(pt -1392 -144)
@@ -7099,12 +6889,6 @@ applicable agreement for further details.
 	(text "TP_deser2[9..0]" (rect 618 952 695 964)(font "Arial" ))
 	(pt 608 968)
 	(pt 696 968)
-	(bus)
-)
-(connector
-	(text "TP_deser3[9..0]" (rect 618 1528 695 1540)(font "Arial" ))
-	(pt 608 1544)
-	(pt 696 1544)
 	(bus)
 )
 (connector
@@ -7953,164 +7737,10 @@ applicable agreement for further details.
 	(pt -592 2936)
 )
 (connector
-	(pt 328 112)
-	(pt 328 688)
-)
-(connector
-	(pt 328 688)
-	(pt 328 1264)
-)
-(connector
-	(pt 344 96)
-	(pt 344 672)
-)
-(connector
-	(pt 344 672)
-	(pt 344 1248)
-)
-(connector
 	(text "sclk[7..0]" (rect 240 712 287 727)(font "Arial Narrow" (color 255 0 0)(font_size 8)(bold)))
 	(pt 360 720)
 	(pt 288 720)
 	(bus)
-)
-(connector
-	(text "sclk[7..0]" (rect 240 1288 287 1303)(font "Arial Narrow" (color 255 0 0)(font_size 8)(bold)))
-	(pt 360 1296)
-	(pt 288 1296)
-	(bus)
-)
-(connector
-	(pt 1104 128)
-	(pt 1104 56)
-	(bus)
-)
-(connector
-	(pt 1088 144)
-	(pt 1088 72)
-)
-(connector
-	(text "la_Hpulse" (rect 618 312 666 324)(font "Arial" ))
-	(pt 608 328)
-	(pt 672 328)
-)
-(connector
-	(text "lb_Hpulse" (rect 618 328 666 340)(font "Arial" ))
-	(pt 608 344)
-	(pt 672 344)
-)
-(connector
-	(text "sdata_I" (rect 283 40 319 52)(font "Arial" ))
-	(pt 360 56)
-	(pt 256 56)
-)
-(connector
-	(pt 1104 56)
-	(pt 608 56)
-	(bus)
-)
-(connector
-	(pt 1088 72)
-	(pt 608 72)
-)
-(connector
-	(pt 768 104)
-	(pt 608 104)
-	(bus)
-)
-(connector
-	(pt 752 120)
-	(pt 608 120)
-)
-(connector
-	(text "CLK320" (rect 263 280 311 293)(font "Arial" (color 166 202 240)(font_size 8)(bold_italic)))
-	(pt 360 288)
-	(pt 312 288)
-)
-(connector
-	(text "CLK160" (rect 264 304 312 317)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
-	(pt 360 312)
-	(pt 312 312)
-)
-(connector
-	(text "areset400" (rect 230 328 278 340)(font "Arial" ))
-	(pt 224 344)
-	(pt 360 344)
-)
-(connector
-	(text "REGreset" (rect 234 344 282 356)(font "Arial" ))
-	(pt 224 360)
-	(pt 360 360)
-)
-(connector
-	(pt 768 288)
-	(pt 768 104)
-	(bus)
-)
-(connector
-	(pt 752 304)
-	(pt 752 120)
-)
-(connector
-	(pt 120 408)
-	(pt 360 408)
-)
-(connector
-	(text "TP_deser1[9..0]" (rect 618 376 695 388)(font "Arial" ))
-	(pt 696 392)
-	(pt 608 392)
-	(bus)
-)
-(connector
-	(text "sclk[7..0]" (rect 240 136 287 151)(font "Arial Narrow" (color 255 0 0)(font_size 8)(bold)))
-	(pt 360 144)
-	(pt 288 144)
-	(bus)
-)
-(connector
-	(pt 120 24)
-	(pt 120 408)
-)
-(connector
-	(pt 120 408)
-	(pt 120 984)
-)
-(connector
-	(pt 608 -16)
-	(pt 792 -16)
-)
-(connector
-	(pt 792 -16)
-	(pt 1136 -16)
-)
-(connector
-	(text "lPSA[7..0]" (rect 650 0 699 12)(font "Arial" ))
-	(pt 608 16)
-	(pt 824 16)
-	(bus)
-)
-(connector
-	(pt 824 16)
-	(pt 1160 16)
-	(bus)
-)
-(connector
-	(text "GATE" (rect 258 80 286 92)(font "Arial" ))
-	(pt 240 96)
-	(pt 344 96)
-)
-(connector
-	(pt 344 96)
-	(pt 360 96)
-)
-(connector
-	(text "ENDofGATE" (rect 257 96 319 108)(font "Arial" ))
-	(pt 240 112)
-	(pt 328 112)
-)
-(connector
-	(pt 328 112)
-	(pt 360 112)
 )
 (connector
 	(pt -560 3896)
@@ -8270,6 +7900,376 @@ applicable agreement for further details.
 	(text "sync" (rect -718 -232 -694 -220)(font "Arial" ))
 	(pt -672 -216)
 	(pt -720 -216)
+)
+(connector
+	(text "ma_Hpulse" (rect 626 1464 681 1476)(font "Arial" ))
+	(pt 608 1480)
+	(pt 672 1480)
+)
+(connector
+	(text "mb_Hpulse" (rect 626 1480 681 1492)(font "Arial" ))
+	(pt 608 1496)
+	(pt 672 1496)
+)
+(connector
+	(pt 1104 1208)
+	(pt 608 1208)
+	(bus)
+)
+(connector
+	(pt 1088 1224)
+	(pt 608 1224)
+)
+(connector
+	(pt 760 1256)
+	(pt 608 1256)
+	(bus)
+)
+(connector
+	(pt 744 1272)
+	(pt 608 1272)
+)
+(connector
+	(text "CLK320" (rect 263 1432 311 1445)(font "Arial" (color 166 202 240)(font_size 8)(bold_italic)))
+	(pt 360 1440)
+	(pt 312 1440)
+)
+(connector
+	(text "CLK160" (rect 264 1456 312 1469)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
+	(pt 360 1464)
+	(pt 312 1464)
+)
+(connector
+	(text "areset400" (rect 286 1480 334 1492)(font "Arial" ))
+	(pt 360 1496)
+	(pt 280 1496)
+)
+(connector
+	(text "REGreset" (rect 250 1496 298 1508)(font "Arial" ))
+	(pt 360 1512)
+	(pt 232 1512)
+)
+(connector
+	(text "sdata_m" (rect 283 1192 325 1204)(font "Arial" ))
+	(pt 360 1208)
+	(pt 256 1208)
+)
+(connector
+	(pt 344 1248)
+	(pt 360 1248)
+)
+(connector
+	(pt 328 1264)
+	(pt 360 1264)
+)
+(connector
+	(pt 120 1560)
+	(pt 360 1560)
+)
+(connector
+	(text "TP_deser3[9..0]" (rect 618 1528 695 1540)(font "Arial" ))
+	(pt 608 1544)
+	(pt 696 1544)
+	(bus)
+)
+(connector
+	(text "sclk[7..0]" (rect 240 1288 287 1303)(font "Arial Narrow" (color 255 0 0)(font_size 8)(bold)))
+	(pt 360 1296)
+	(pt 288 1296)
+	(bus)
+)
+(connector
+	(pt 120 984)
+	(pt 120 1560)
+)
+(connector
+	(pt 328 112)
+	(pt 328 688)
+)
+(connector
+	(pt 328 688)
+	(pt 328 1264)
+)
+(connector
+	(pt 344 96)
+	(pt 344 672)
+)
+(connector
+	(pt 344 672)
+	(pt 344 1248)
+)
+(connector
+	(pt 824 1168)
+	(pt 824 1328)
+	(bus)
+)
+(connector
+	(pt 928 1544)
+	(pt 928 1520)
+)
+(connector
+	(text "REGreset" (rect 858 1528 906 1540)(font "Arial" ))
+	(pt 848 1544)
+	(pt 928 1544)
+)
+(connector
+	(pt 792 1136)
+	(pt 792 1392)
+)
+(connector
+	(text "writeEVENT_mb" (rect 1378 1384 1457 1396)(font "Arial" ))
+	(pt 1024 1400)
+	(pt 1464 1400)
+)
+(connector
+	(text "mb_deserDATA[15..0]" (rect 1366 1424 1474 1436)(font "Arial" ))
+	(pt 1024 1440)
+	(pt 1464 1440)
+	(bus)
+)
+(connector
+	(text "mb_deserDATAwe" (rect 1377 1456 1466 1468)(font "Arial" ))
+	(pt 1024 1456)
+	(pt 1464 1456)
+)
+(connector
+	(text "CLK160" (rect 752 1488 800 1501)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
+	(pt 800 1496)
+	(pt 840 1496)
+)
+(connector
+	(pt 760 1440)
+	(pt 840 1440)
+	(bus)
+)
+(connector
+	(pt 824 1328)
+	(pt 840 1328)
+	(bus)
+)
+(connector
+	(pt 744 1456)
+	(pt 840 1456)
+)
+(connector
+	(pt 792 1392)
+	(pt 840 1392)
+)
+(connector
+	(pt 760 1256)
+	(pt 760 1440)
+	(bus)
+)
+(connector
+	(pt 744 1272)
+	(pt 744 1456)
+)
+(connector
+	(pt 608 1136)
+	(pt 792 1136)
+)
+(connector
+	(pt 792 1136)
+	(pt 1136 1136)
+)
+(connector
+	(pt 1248 1384)
+	(pt 1248 1360)
+)
+(connector
+	(text "REGreset" (rect 1178 1368 1226 1380)(font "Arial" ))
+	(pt 1168 1384)
+	(pt 1248 1384)
+)
+(connector
+	(pt 1136 1136)
+	(pt 1136 1232)
+)
+(connector
+	(text "ma_deserDATA[15..0]" (rect 1366 1264 1474 1276)(font "Arial" ))
+	(pt 1344 1280)
+	(pt 1464 1280)
+	(bus)
+)
+(connector
+	(text "ma_deserDATAwe" (rect 1377 1296 1466 1308)(font "Arial" ))
+	(pt 1344 1296)
+	(pt 1464 1296)
+)
+(connector
+	(text "writeEVENT_ma" (rect 1378 1224 1457 1236)(font "Arial" ))
+	(pt 1344 1240)
+	(pt 1464 1240)
+)
+(connector
+	(text "CLK160" (rect 1072 1328 1120 1341)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
+	(pt 1120 1336)
+	(pt 1160 1336)
+)
+(connector
+	(pt 1104 1280)
+	(pt 1160 1280)
+	(bus)
+)
+(connector
+	(pt 1088 1296)
+	(pt 1160 1296)
+)
+(connector
+	(pt 1136 1232)
+	(pt 1160 1232)
+)
+(connector
+	(pt 1104 1208)
+	(pt 1104 1280)
+	(bus)
+)
+(connector
+	(pt 1088 1224)
+	(pt 1088 1296)
+)
+(connector
+	(text "mPSA[7..0]" (rect 650 1152 706 1164)(font "Arial" ))
+	(pt 608 1168)
+	(pt 824 1168)
+	(bus)
+)
+(connector
+	(pt 824 1168)
+	(pt 1160 1168)
+	(bus)
+)
+(connector
+	(pt 1104 128)
+	(pt 1104 56)
+	(bus)
+)
+(connector
+	(pt 1088 144)
+	(pt 1088 72)
+)
+(connector
+	(text "la_Hpulse" (rect 618 312 666 324)(font "Arial" ))
+	(pt 608 328)
+	(pt 672 328)
+)
+(connector
+	(text "lb_Hpulse" (rect 618 328 666 340)(font "Arial" ))
+	(pt 608 344)
+	(pt 672 344)
+)
+(connector
+	(text "sdata_I" (rect 283 40 319 52)(font "Arial" ))
+	(pt 360 56)
+	(pt 256 56)
+)
+(connector
+	(pt 1104 56)
+	(pt 608 56)
+	(bus)
+)
+(connector
+	(pt 1088 72)
+	(pt 608 72)
+)
+(connector
+	(pt 768 104)
+	(pt 608 104)
+	(bus)
+)
+(connector
+	(pt 752 120)
+	(pt 608 120)
+)
+(connector
+	(text "CLK320" (rect 263 280 311 293)(font "Arial" (color 166 202 240)(font_size 8)(bold_italic)))
+	(pt 360 288)
+	(pt 312 288)
+)
+(connector
+	(text "CLK160" (rect 264 304 312 317)(font "Arial" (color 0 128 0)(font_size 8)(bold_italic)))
+	(pt 360 312)
+	(pt 312 312)
+)
+(connector
+	(text "areset400" (rect 230 328 278 340)(font "Arial" ))
+	(pt 224 344)
+	(pt 360 344)
+)
+(connector
+	(text "REGreset" (rect 234 344 282 356)(font "Arial" ))
+	(pt 224 360)
+	(pt 360 360)
+)
+(connector
+	(pt 768 288)
+	(pt 768 104)
+	(bus)
+)
+(connector
+	(pt 752 304)
+	(pt 752 120)
+)
+(connector
+	(pt 120 408)
+	(pt 360 408)
+)
+(connector
+	(text "TP_deser1[9..0]" (rect 618 376 695 388)(font "Arial" ))
+	(pt 696 392)
+	(pt 608 392)
+	(bus)
+)
+(connector
+	(text "sclk[7..0]" (rect 240 136 287 151)(font "Arial Narrow" (color 255 0 0)(font_size 8)(bold)))
+	(pt 360 144)
+	(pt 288 144)
+	(bus)
+)
+(connector
+	(pt 120 24)
+	(pt 120 408)
+)
+(connector
+	(pt 120 408)
+	(pt 120 984)
+)
+(connector
+	(pt 608 -16)
+	(pt 792 -16)
+)
+(connector
+	(pt 792 -16)
+	(pt 1136 -16)
+)
+(connector
+	(text "lPSA[7..0]" (rect 650 0 699 12)(font "Arial" ))
+	(pt 608 16)
+	(pt 824 16)
+	(bus)
+)
+(connector
+	(pt 824 16)
+	(pt 1160 16)
+	(bus)
+)
+(connector
+	(text "GATE" (rect 258 80 286 92)(font "Arial" ))
+	(pt 240 96)
+	(pt 344 96)
+)
+(connector
+	(pt 344 96)
+	(pt 360 96)
+)
+(connector
+	(text "ENDofGATE" (rect 257 96 319 108)(font "Arial" ))
+	(pt 240 112)
+	(pt 328 112)
+)
+(connector
+	(pt 328 112)
+	(pt 360 112)
 )
 (junction (pt -1288 1520))
 (junction (pt -608 1312))
