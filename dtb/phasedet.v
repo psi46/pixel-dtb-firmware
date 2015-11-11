@@ -10,7 +10,7 @@ module phasedet
 	input enable,
 
 	input in,
-	input ref,
+	input ref_in,
 
 	output shift
 );
@@ -22,7 +22,7 @@ module phasedet
 	always @(negedge clk or posedge reset)
 	begin
 		if (reset) ref_ff <= 0;
-		else ref_ff <= ref && enable;
+		else ref_ff <= ref_in && enable;
 	end
 
 	always @(posedge clk or posedge reset)

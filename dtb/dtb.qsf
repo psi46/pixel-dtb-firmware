@@ -209,14 +209,14 @@ set_location_assignment PIN_AA22 -to Switches[1]
 # set_location_assignment PIN_F11 -to UI_IOs[14]
 # set_location_assignment PIN_E11 -to UI_IOs[15]
 
-set_location_assignment PIN_F11 -to twTP1
-set_location_assignment PIN_E11 -to "twTP1(n)"
+# set_location_assignment PIN_F11 -to twTP1
+# set_location_assignment PIN_E11 -to "twTP1(n)"
 
-set_location_assignment PIN_B13 -to twTP2
-set_location_assignment PIN_A13 -to "twTP2(n)"
+# set_location_assignment PIN_B13 -to twTP2
+# set_location_assignment PIN_A13 -to "twTP2(n)"
 
-set_location_assignment PIN_B14 -to twTP3
-set_location_assignment PIN_A14 -to "twTP3(n)"
+# set_location_assignment PIN_B14 -to twTP3
+# set_location_assignment PIN_A14 -to "twTP3(n)"
 
 
 set_location_assignment PIN_V22 -to USB_clk
@@ -352,9 +352,9 @@ set_instance_assignment -name IO_STANDARD LVDS -to LVDS2LCDS_sdata_IV
 set_instance_assignment -name IO_STANDARD LVDS -to LVDS2LCDS_tin
 set_instance_assignment -name IO_STANDARD LVDS -to LVDS2LCDS_tout
 set_instance_assignment -name IO_STANDARD LVDS -to ADC_clk
-set_instance_assignment -name IO_STANDARD LVDS_E_3R -to twTP1
-set_instance_assignment -name IO_STANDARD LVDS_E_3R -to twTP2
-set_instance_assignment -name IO_STANDARD LVDS_E_3R -to twTP3
+# set_instance_assignment -name IO_STANDARD LVDS_E_3R -to twTP1
+# set_instance_assignment -name IO_STANDARD LVDS_E_3R -to twTP2
+# set_instance_assignment -name IO_STANDARD LVDS_E_3R -to twTP3
 
 # EDA Netlist Writer Assignments
 # ==============================
@@ -870,61 +870,61 @@ set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to SD_cd
 
 
 ####### sdata1
-set_location_assignment FF_X5_Y13_N1 -to instDESER400_1|ovs|s1[0]
-set_location_assignment FF_X4_Y13_N1 -to instDESER400_1|ovs|s1[1]
-set_location_assignment FF_X3_Y13_N1 -to instDESER400_1|ovs|s1[2]
-set_location_assignment FF_X2_Y13_N1 -to instDESER400_1|ovs|s1[3]
-set_location_assignment FF_X5_Y13_N3 -to instDESER400_1|ovs|s1[4]
-set_location_assignment FF_X4_Y13_N3 -to instDESER400_1|ovs|s1[5]
-set_location_assignment FF_X3_Y13_N3 -to instDESER400_1|ovs|s1[6]
-set_location_assignment FF_X2_Y13_N3 -to instDESER400_1|ovs|s1[7]
+set_location_assignment FF_X5_Y13_N1 -to "deser_tbm:inst24|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s1[0]"
+set_location_assignment FF_X4_Y13_N1 -to "deser_tbm:inst24|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s1[1]"
+set_location_assignment FF_X3_Y13_N1 -to "deser_tbm:inst24|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s1[2]"
+set_location_assignment FF_X2_Y13_N1 -to "deser_tbm:inst24|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s1[3]"
+set_location_assignment FF_X5_Y13_N3 -to "deser_tbm:inst24|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s1[4]"
+set_location_assignment FF_X4_Y13_N3 -to "deser_tbm:inst24|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s1[5]"
+set_location_assignment FF_X3_Y13_N3 -to "deser_tbm:inst24|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s1[6]"
+set_location_assignment FF_X2_Y13_N3 -to "deser_tbm:inst24|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s1[7]"
 
-set_location_assignment FF_X5_Y13_N5 -to instDESER400_1|ovs|s2[0]
-set_location_assignment FF_X5_Y13_N7 -to instDESER400_1|ovs|s2[1]
-set_location_assignment FF_X5_Y13_N9 -to instDESER400_1|ovs|s2[2]
-set_location_assignment FF_X5_Y13_N11 -to instDESER400_1|ovs|s2[3]
-set_location_assignment FF_X5_Y13_N13 -to instDESER400_1|ovs|s2[4]
-set_location_assignment FF_X4_Y13_N5 -to instDESER400_1|ovs|s2[5]
-set_location_assignment FF_X3_Y13_N5 -to instDESER400_1|ovs|s2[6]
-set_location_assignment FF_X2_Y13_N5 -to instDESER400_1|ovs|s2[7]
+set_location_assignment FF_X5_Y13_N5 -to "*|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s2[0]"
+set_location_assignment FF_X5_Y13_N7 -to "*|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s2[1]"
+set_location_assignment FF_X5_Y13_N9 -to "*|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s2[2]"
+set_location_assignment FF_X5_Y13_N11 -to "*|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s2[3]"
+set_location_assignment FF_X5_Y13_N13 -to "*|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s2[4]"
+set_location_assignment FF_X4_Y13_N5 -to "*|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s2[5]"
+set_location_assignment FF_X3_Y13_N5 -to "*|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s2[6]"
+set_location_assignment FF_X2_Y13_N5 -to "*|deser400_top:ds400_I|deser400_PSI:inst_deser400|oversampling:ovs|s2[7]"
 
 ####### sdata2
-set_location_assignment FF_X5_Y15_N1 -to instDESER400_2|ovs|s1[0]
-set_location_assignment FF_X4_Y15_N1 -to instDESER400_2|ovs|s1[1]
-set_location_assignment FF_X3_Y15_N1 -to instDESER400_2|ovs|s1[2]
-set_location_assignment FF_X2_Y15_N1 -to instDESER400_2|ovs|s1[3]
-set_location_assignment FF_X5_Y15_N3 -to instDESER400_2|ovs|s1[4]
-set_location_assignment FF_X4_Y15_N3 -to instDESER400_2|ovs|s1[5]
-set_location_assignment FF_X3_Y15_N3 -to instDESER400_2|ovs|s1[6]
-set_location_assignment FF_X2_Y15_N3 -to instDESER400_2|ovs|s1[7]
+set_location_assignment FF_X5_Y15_N1 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s1[0]"
+set_location_assignment FF_X4_Y15_N1 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s1[1]"
+set_location_assignment FF_X3_Y15_N1 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s1[2]"
+set_location_assignment FF_X2_Y15_N1 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s1[3]"
+set_location_assignment FF_X5_Y15_N3 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s1[4]"
+set_location_assignment FF_X4_Y15_N3 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s1[5]"
+set_location_assignment FF_X3_Y15_N3 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s1[6]"
+set_location_assignment FF_X2_Y15_N3 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s1[7]"
 
-set_location_assignment FF_X5_Y15_N5 -to instDESER400_2|ovs|s2[0]
-set_location_assignment FF_X5_Y15_N7 -to instDESER400_2|ovs|s2[1]
-set_location_assignment FF_X5_Y15_N9 -to instDESER400_2|ovs|s2[2]
-set_location_assignment FF_X5_Y15_N11 -to instDESER400_2|ovs|s2[3]
-set_location_assignment FF_X5_Y15_N13 -to instDESER400_2|ovs|s2[4]
-set_location_assignment FF_X4_Y15_N5 -to instDESER400_2|ovs|s2[5]
-set_location_assignment FF_X3_Y15_N5 -to instDESER400_2|ovs|s2[6]
-set_location_assignment FF_X2_Y15_N5 -to instDESER400_2|ovs|s2[7]
+set_location_assignment FF_X5_Y15_N5 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s2[0]"
+set_location_assignment FF_X5_Y15_N7 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s2[1]"
+set_location_assignment FF_X5_Y15_N9 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s2[2]"
+set_location_assignment FF_X5_Y15_N11 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s2[3]"
+set_location_assignment FF_X5_Y15_N13 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s2[4]"
+set_location_assignment FF_X4_Y15_N5 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s2[5]"
+set_location_assignment FF_X3_Y15_N5 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s2[6]"
+set_location_assignment FF_X2_Y15_N5 -to "*|deser400_top:ds400_II|deser400_PSI:inst_deser400|oversampling:ovs|s2[7]"
 
 ####### sdata3
-set_location_assignment FF_X5_Y21_N1 -to instDESER400_3|ovs|s1[0]
-set_location_assignment FF_X4_Y21_N1 -to instDESER400_3|ovs|s1[1]
-set_location_assignment FF_X3_Y21_N1 -to instDESER400_3|ovs|s1[2]
-set_location_assignment FF_X2_Y21_N1 -to instDESER400_3|ovs|s1[3]
-set_location_assignment FF_X5_Y21_N3 -to instDESER400_3|ovs|s1[4]
-set_location_assignment FF_X4_Y21_N3 -to instDESER400_3|ovs|s1[5]
-set_location_assignment FF_X3_Y21_N3 -to instDESER400_3|ovs|s1[6]
-set_location_assignment FF_X2_Y21_N3 -to instDESER400_3|ovs|s1[7]
+set_location_assignment FF_X5_Y21_N1 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s1[0]"
+set_location_assignment FF_X4_Y21_N1 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s1[1]"
+set_location_assignment FF_X3_Y21_N1 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s1[2]"
+set_location_assignment FF_X2_Y21_N1 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s1[3]"
+set_location_assignment FF_X5_Y21_N3 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s1[4]"
+set_location_assignment FF_X4_Y21_N3 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s1[5]"
+set_location_assignment FF_X3_Y21_N3 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s1[6]"
+set_location_assignment FF_X2_Y21_N3 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s1[7]"
 
-set_location_assignment FF_X5_Y21_N5 -to instDESER400_3|ovs|s2[0]
-set_location_assignment FF_X5_Y21_N7 -to instDESER400_3|ovs|s2[1]
-set_location_assignment FF_X5_Y21_N9 -to instDESER400_3|ovs|s2[2]
-set_location_assignment FF_X5_Y21_N11 -to instDESER400_3|ovs|s2[3]
-set_location_assignment FF_X5_Y21_N13 -to instDESER400_3|ovs|s2[4]
-set_location_assignment FF_X4_Y21_N5 -to instDESER400_3|ovs|s2[5]
-set_location_assignment FF_X3_Y21_N5 -to instDESER400_3|ovs|s2[6]
-set_location_assignment FF_X2_Y21_N5 -to instDESER400_3|ovs|s2[7]
+set_location_assignment FF_X5_Y21_N5 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s2[0]"
+set_location_assignment FF_X5_Y21_N7 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s2[1]"
+set_location_assignment FF_X5_Y21_N9 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s2[2]"
+set_location_assignment FF_X5_Y21_N11 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s2[3]"
+set_location_assignment FF_X5_Y21_N13 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s2[4]"
+set_location_assignment FF_X4_Y21_N5 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s2[5]"
+set_location_assignment FF_X3_Y21_N5 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s2[6]"
+set_location_assignment FF_X2_Y21_N5 -to "*|deser400_top:ds400_III|deser400_PSI:inst_deser400|oversampling:ovs|s2[7]"
 
 
 
@@ -938,13 +938,13 @@ set_global_assignment -name AUTO_ROM_RECOGNITION ON
 set_global_assignment -name AUTO_RAM_RECOGNITION ON
 set_global_assignment -name INFER_RAMS_FROM_RAW_LOGIC ON
 
-set_instance_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -to instDESER400_1
-set_instance_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -to instDESER400_2
-set_instance_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -to instDESER400_3
+set_instance_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -to "*|deser400_top:ds400_I"
+set_instance_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -to "*|deser400_top:ds400_II"
+set_instance_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -to "*|deser400_top:ds400_III"
 
-set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION OFF -to instDESER400_1
-set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION OFF -to instDESER400_2
-set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION OFF -to instDESER400_3
+set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION OFF -to "*|deser400_top:ds400_I"
+set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION OFF -to "*|deser400_top:ds400_II"
+set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION OFF -to "*|deser400_top:ds400_III"
 
 
 set_global_assignment -name SMART_RECOMPILE ON
@@ -998,10 +998,21 @@ set_global_assignment -name LL_WIDTH 6 -section_id deser3
 set_global_assignment -name LL_HEIGHT 1 -section_id deser3
 set_global_assignment -name LL_ORIGIN X1_Y21 -section_id deser3
 
-set_instance_assignment -name LL_MEMBER_OF deser1 -to "deser400_PSI:instDESER400_1|oversampling:ovs" -section_id deser1
-set_instance_assignment -name LL_MEMBER_OF deser2 -to "deser400_PSI:instDESER400_2|oversampling:ovs" -section_id deser2
-set_instance_assignment -name LL_MEMBER_OF deser3 -to "deser400_PSI:instDESER400_3|oversampling:ovs" -section_id deser3
-set_location_assignment IOIBUF_X0_Y21_N15 -to LVDS2LCDS_sdata_III~input
+set_instance_assignment -name LL_MEMBER_OF deser1 -to "*|deser400_top:ds400_I|oversampling:ovs|*" -section_id deser1
+set_instance_assignment -name LL_MEMBER_OF deser2 -to "*|deser400_top:ds400_II|oversampling:ovs|*" -section_id deser2
+set_instance_assignment -name LL_MEMBER_OF deser3 -to "*|deser400_top:ds400_III|oversampling:ovs|*" -section_id deser3
+
+# set_location_assignment IOIBUF_X0_Y21_N15 -to LVDS2LCDS_sdata_III~input
+
+set_instance_assignment -name LL_PRIORITY 1 -to "*|deser400_top:ds400_I|oversampling:ovs|*" -section_id deser1
+
+set_global_assignment -name BDF_FILE data_aqu.bdf
+set_global_assignment -name BDF_FILE deser400/pedge_s.bdf
+set_global_assignment -name GDF_FILE deser400/nedge_s.gdf
+set_global_assignment -name BDF_FILE deser400/FormatFSM.bdf
+set_global_assignment -name BDF_FILE deser400/deser400_top.bdf
+set_global_assignment -name BSF_FILE deser400/deser_tbm.bsf
+set_global_assignment -name BDF_FILE deser400/deser_tbm.bdf
 set_global_assignment -name BDF_FILE deser400/PosFl.bdf
 set_global_assignment -name VHDL_FILE deser400/lpm_shiftreg12.vhd
 set_global_assignment -name AHDL_FILE deser400/lpm_shiftreg0.tdf
@@ -1025,7 +1036,6 @@ set_global_assignment -name VHDL_FILE deser400/ROC_H_FSM.vhd
 set_global_assignment -name VHDL_FILE deser400/PXData_FSM.vhd
 set_global_assignment -name BDF_FILE deser400/NegFl.bdf
 set_global_assignment -name AHDL_FILE deser400/gl_and3.tdf
-set_global_assignment -name BDF_FILE deser400/FormatFSM.bdf
 set_global_assignment -name BDF_FILE deser400/sr4.bdf
 set_global_assignment -name BDF_FILE deser400/sr2.bdf
 set_global_assignment -name AHDL_FILE deser400/g_and5b.tdf
@@ -1059,7 +1069,6 @@ set_global_assignment -name VERILOG_FILE trigger_control.v
 set_global_assignment -name VERILOG_FILE trigger.v
 set_global_assignment -name VERILOG_FILE deser400/oversampling.v
 set_global_assignment -name VERILOG_FILE deser400/HeaderTrailer.v
-set_global_assignment -name QIP_FILE deser400/gl_or6x15.qip
 set_global_assignment -name QIP_FILE deser400/gl_or7x16.qip
 set_global_assignment -name SDC_FILE dtb.sdc
 set_global_assignment -name QIP_FILE dtb_system/synthesis/dtb_system.qip
@@ -1080,9 +1089,6 @@ set_global_assignment -name VERILOG_FILE eth_clock.v
 set_global_assignment -name VERILOG_FILE cdr.v
 set_global_assignment -name VERILOG_FILE adc_readout.v
 set_global_assignment -name AHDL_FILE edges.tdf
-set_global_assignment -name BDF_FILE deser400/deser400.bdf
-set_global_assignment -name BDF_FILE deser400/deser400v.bdf
-set_global_assignment -name BSF_FILE deser400/deser400v.bsf
 set_global_assignment -name BDF_FILE deser400/deser400_PSI.bdf
 set_global_assignment -name BSF_FILE deser400/deser400_PSI.bsf
 set_global_assignment -name QIP_FILE altpll1.qip
@@ -1090,25 +1096,11 @@ set_global_assignment -name QIP_FILE altpll2.qip
 set_global_assignment -name QIP_FILE pll_system.qip
 set_global_assignment -name QIP_FILE delay.qip
 set_global_assignment -name QIP_FILE datamux.qip
-set_global_assignment -name QIP_FILE xxx_test_counter.qip
-set_global_assignment -name QIP_FILE lpm_counter5.qip
 set_global_assignment -name QIP_FILE deser400/PhSeROM.qip
-set_global_assignment -name QIP_FILE deser400/ram_dqINST_la.qip
-set_global_assignment -name QIP_FILE deser400/ram_dqINST_lb.qip
-set_global_assignment -name QIP_FILE deser400/ram_dq_INST_ka.qip
-set_global_assignment -name QIP_FILE deser400/ram_dq_INST_kb.qip
-set_global_assignment -name QIP_FILE deser400/ram_init.qip
-set_global_assignment -name QIP_FILE deser400/ram_dq_INST_lb.qip
-set_global_assignment -name QIP_FILE deser400/ram_dq_INST_ma.qip
-set_global_assignment -name QIP_FILE deser400/ram_dq_INST_mb.qip
-set_global_assignment -name QIP_FILE deser400/ram_dq_INST_na.qip
-set_global_assignment -name QIP_FILE deser400/ram_dq_INST_nb.qip
-set_global_assignment -name QIP_FILE deser400/ram_dq_PHASE_l.qip
-set_global_assignment -name QIP_FILE deser400/ram_dq_PHASE_k.qip
-set_global_assignment -name QIP_FILE deser400/ram_dq_PHASE_m.qip
-set_global_assignment -name QIP_FILE deser400/ram_dq_PHASE_n.qip
 set_global_assignment -name VERILOG_FILE daq_switch.v
-set_global_assignment -name VERILOG_FILE deser400_gate.v
 set_global_assignment -name HEX_FILE deser400/PhaseSelectErr.hex
+set_global_assignment -name BDF_FILE deser400/phase_selector.bdf
+set_global_assignment -name BDF_FILE deser400/frame_detector.bdf
+set_global_assignment -name BDF_FILE deser400/phase_detector.bdf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY inst_74401 -to "dtb_system:inst" -section_id "dtb_system:inst"

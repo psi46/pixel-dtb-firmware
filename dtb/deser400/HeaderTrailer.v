@@ -18,7 +18,7 @@ module HeaderTrailer
 
   reg start;
 	reg [4:0]delay;
-	wire veto = delay != 0;
+	wire veto = delay != 5'd0;
 	reg [14:0]shift;
 
 	// --- shift register (shift <- Sdat)
@@ -34,8 +34,8 @@ module HeaderTrailer
 	// --- veto counter to skip TBM header/trailer data
 	always @(posedge CLK)
 	begin
-		if (TBM_HEADER || TBM_TRAILER) delay <= 22;
-		else if (veto) delay <= delay - 1;
+		if (TBM_HEADER || TBM_TRAILER) delay <= 5'd22;
+		else if (veto) delay <= delay - 5'd1;
 	end
 
 	// --- header/trailer type separation

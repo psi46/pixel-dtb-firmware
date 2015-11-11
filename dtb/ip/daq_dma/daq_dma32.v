@@ -74,9 +74,9 @@ module daq_dma32
 	wire set_start = write_ctrl &&  avs_ctrl_writedata[0];
 	wire set_stop  = write_ctrl && !avs_ctrl_writedata[0];
 
-	wire [26:1]inc_addr = mem_write + 1;
+	wire [26:1]inc_addr = mem_write + 26'd1;
 	wire carry = inc_addr == mem_size;
-	wire [26:1]next_addr = carry ? 0 : inc_addr;
+	wire [26:1]next_addr = carry ? 26'd0 : inc_addr;
 	wire overflow = next_addr == mem_read;
 
 

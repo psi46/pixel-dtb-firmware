@@ -19,7 +19,7 @@
 ## PROGRAM "Quartus II"
 ## VERSION "Version 13.1.4 Build 182 03/12/2014 SJ Full Version"
 
-## DATE    "Fri Oct 30 16:42:34 2015"
+## DATE    "Wed Nov 11 16:20:44 2015"
 
 ##
 ## DEVICE  "EP3C40F484C6"
@@ -48,13 +48,20 @@ create_clock -name {usb_clk} -period 16.667 -waveform { 0.000 8.333 } [get_ports
 # Create Generated Clock
 #**************************************************************
 
-create_generated_clock -name {inst14|inst5|altpll_component|auto_generated|pll1|clk[0]} -source [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 2 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|clk[0]}] 
-create_generated_clock -name {inst14|inst5|altpll_component|auto_generated|pll1|clk[2]} -source [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 4 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|clk[2]}] 
-create_generated_clock -name {inst14|inst5|altpll_component|auto_generated|pll1|clk[3]} -source [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 8 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|clk[3]}] 
-create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[0]} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 10 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[0]}] 
-create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[1]} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 10 -phase 45.000 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[1]}] 
-create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[2]} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 10 -phase 90.000 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[2]}] 
-create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[3]} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 10 -phase 135.000 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[3]}] 
+create_generated_clock -name {inst14|inst5|altpll_component|auto_generated|pll1|clk[0]~1} -source [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|inclk[1]}] -duty_cycle 50.000 -multiply_by 2 -master_clock {clk40_ext} [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|clk[0]}] -add
+create_generated_clock -name {inst14|inst5|altpll_component|auto_generated|pll1|clk[0]} -source [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 2 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|clk[0]}] -add
+create_generated_clock -name {inst14|inst5|altpll_component|auto_generated|pll1|clk[2]~1} -source [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|inclk[1]}] -duty_cycle 50.000 -multiply_by 4 -master_clock {clk40_ext} [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|clk[2]}] -add
+create_generated_clock -name {inst14|inst5|altpll_component|auto_generated|pll1|clk[2]} -source [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 4 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|clk[2]}] -add
+create_generated_clock -name {inst14|inst5|altpll_component|auto_generated|pll1|clk[3]~1} -source [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|inclk[1]}] -duty_cycle 50.000 -multiply_by 8 -master_clock {clk40_ext} [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|clk[3]}] -add
+create_generated_clock -name {inst14|inst5|altpll_component|auto_generated|pll1|clk[3]} -source [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 8 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst5|altpll_component|auto_generated|pll1|clk[3]}] -add
+create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[0]~1} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[1]}] -duty_cycle 50.000 -multiply_by 10 -master_clock {clk40_ext} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[0]}] -add
+create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[0]} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 10 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[0]}] -add
+create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[1]~1} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[1]}] -duty_cycle 50.000 -multiply_by 10 -phase 45.000 -master_clock {clk40_ext} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[1]}] -add
+create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[1]} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 10 -phase 45.000 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[1]}] -add
+create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[2]~1} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[1]}] -duty_cycle 50.000 -multiply_by 10 -phase 90.000 -master_clock {clk40_ext} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[2]}] -add
+create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[2]} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 10 -phase 90.000 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[2]}] -add
+create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[3]~1} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[1]}] -duty_cycle 50.000 -multiply_by 10 -phase 135.000 -master_clock {clk40_ext} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[3]}] -add
+create_generated_clock -name {inst14|inst3|altpll_component|auto_generated|pll1|clk[3]} -source [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 10 -phase 135.000 -master_clock {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} [get_pins {inst14|inst3|altpll_component|auto_generated|pll1|clk[3]}] -add
 create_generated_clock -name {inst14|inst23|altpll_component|auto_generated|pll1|clk[0]} -source [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 1 -master_clock {clk50} [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|clk[0]}] 
 create_generated_clock -name {inst14|inst23|altpll_component|auto_generated|pll1|clk[1]} -source [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 5 -divide_by 2 -master_clock {clk50} [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|clk[1]}] 
 create_generated_clock -name {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]} -source [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 4 -divide_by 5 -master_clock {clk50} [get_pins {inst14|inst23|altpll_component|auto_generated|pll1|clk[4]}] 
@@ -167,26 +174,25 @@ set_false_path -from [get_keepers {dtb_system:inst|delay_out:delay_*|ext_sel}]
 set_false_path -from [get_keepers {dtb_system:inst|dtb_system_main_control:main_control|data_out[*]}] 
 set_false_path -from [get_keepers {dtb_system:inst|probe_async:probe_async_d1|sel[*]}] 
 set_false_path -from [get_keepers {dtb_system:inst|probe_async:probe_async_d2|sel[*]}] 
-set_false_path -from [get_keepers {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|error}] 
-set_false_path -from [get_keepers {deser400_PSI:instDESER400_*|dffom:inst377|inst}] 
+set_false_path -from [get_keepers {*|deser400_PSI:inst_deser400|NRZI_decoder:inst4003|error}] 
 
 
 #**************************************************************
 # Set Multicycle Path
 #**************************************************************
 
-set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|lpm_dff0:inst487|lpm_ff:lpm_ff_component|dffs[*]}] 4
-set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|lpm_dff0:inst487|lpm_ff:lpm_ff_component|dffs[*]}] 3
-set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|inst4487}] 4
-set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|inst4487}] 3
-set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg}] -to [get_keepers {deser400_PSI:instDESER400_*|inst10[*]}] 3
-set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg}] -to [get_keepers {deser400_PSI:instDESER400_*|inst10[*]}] 2
-set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|DECODE_5b4b:inst488|OUT_4b_o[*]}] -to [get_keepers {deser400_PSI:instDESER400_*|gl_dff4e:inst469|lpm_ff:lpm_ff_component|dffs[*]}] 3
-set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|DECODE_5b4b:inst488|OUT_4b_o[*]}] -to [get_keepers {deser400_PSI:instDESER400_*|gl_dff4e:inst469|lpm_ff:lpm_ff_component|dffs[*]}] 2
-set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]}] -to [get_keepers {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]}] 3
-set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]}] -to [get_keepers {deser400_PSI:instDESER400_*|NRZI_decoder:inst4003|OUT_5b_o[*]}] 2
-set_multicycle_path -setup -end -from [get_keepers {deser400_PSI:instDESER400_*|gl_dff8e:inst442|lpm_ff:lpm_ff_component|dffs[*]}] 4
-set_multicycle_path -hold -end -from [get_keepers {deser400_PSI:instDESER400_*|gl_dff8e:inst442|lpm_ff:lpm_ff_component|dffs[*]}] 3
+set_multicycle_path -setup -end -from [get_keepers {*|deser400_PSI:inst_deser400|lpm_dff0:inst487|lpm_ff:lpm_ff_component|dffs[*]}] 4
+set_multicycle_path -hold -end -from [get_keepers {*|deser400_PSI:inst_deser400|lpm_dff0:inst487|lpm_ff:lpm_ff_component|dffs[*]}] 3
+set_multicycle_path -setup -end -from [get_keepers {*|deser400_PSI:inst_deser400|inst4487}] 4
+set_multicycle_path -hold -end -from [get_keepers {*|deser400_PSI:inst_deser400|inst4487}] 3
+set_multicycle_path -setup -end -from [get_registers {*|phase_detector:inst31|gl_dff8e:inst442|*}] 2
+set_multicycle_path -hold -end -from [get_registers {*|phase_detector:inst31|gl_dff8e:inst442|*}] 1
+set_multicycle_path -setup -end -from [get_keepers {*|phase_detector:inst31|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg}] -to [get_keepers {*|phase_detector:inst31|inst10[*]}] 3
+set_multicycle_path -hold -end -from [get_keepers {*|phase_detector:inst31|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg}] -to [get_keepers {*|phase_detector:inst31|inst10[*]}] 2
+set_multicycle_path -setup -end -from [get_keepers {*|deser400_PSI:inst_deser400|DECODE_5b4b:inst488|OUT_4b_o[*]}] -to [get_keepers {*|deser400_PSI:inst_deser400|gl_dff4e:inst469|lpm_ff:lpm_ff_component|dffs[*]}] 3
+set_multicycle_path -hold -end -from [get_keepers {*|deser400_PSI:inst_deser400|DECODE_5b4b:inst488|OUT_4b_o[*]}] -to [get_keepers {*|deser400_PSI:inst_deser400|gl_dff4e:inst469|lpm_ff:lpm_ff_component|dffs[*]}] 2
+set_multicycle_path -setup -end -from [get_keepers {*|deser400_PSI:inst_deser400|NRZI_decoder:inst4003|OUT_5b_o[*]}] -to [get_keepers {*|*|deser400_PSI:inst_deser400|NRZI_decoder:inst4003|OUT_5b_o[*]}] 3
+set_multicycle_path -hold -end -from [get_keepers {*|deser400_PSI:inst_deser400|NRZI_decoder:inst4003|OUT_5b_o[*]}] -to [get_keepers {*|*|deser400_PSI:inst_deser400|NRZI_decoder:inst4003|OUT_5b_o[*]}] 2
 
 
 #**************************************************************

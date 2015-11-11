@@ -219,7 +219,7 @@ module i2c_master_top(
 	          cr[7:4] <= #1 4'h0;           // clear command bits when done
 	                                        // or when aribitration lost
 	        cr[2:1] <= #1 2'b0;             // reserved bits
-	        cr[0]   <= #1 2'b0;             // clear IRQ_ACK bit
+	        cr[0]   <= #1 1'b0;             // clear IRQ_ACK bit
 	    end
 
 

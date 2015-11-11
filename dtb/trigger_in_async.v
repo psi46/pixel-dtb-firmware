@@ -165,7 +165,7 @@ module trigger_in_async
 	  end
 	end
 	
-	assign trg40_blk = trg40 & !trg_veto;
+	wire trg40_blk = trg40 & !trg_veto;
 
 	
 	// --- create event output

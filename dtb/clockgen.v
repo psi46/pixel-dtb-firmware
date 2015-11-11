@@ -24,8 +24,8 @@ module clockgen
 
 	always @(posedge clk or posedge reset)
 	begin
-		if (reset) counter <= 0;
-		else if (!shift) counter <= counter + 1;
+		if (reset) counter <= 6'd0;
+		else if (!shift) counter <= counter + 6'd1;
 	end
 	
 	

@@ -47,6 +47,7 @@ wire syn;  // sync event
 wire trg;  // trigger event
 wire rsr;  // ROC reset event
 wire rst;  // TBM reset event
+wire cal;  // calibrate
 
 reg set_rsr;
 wire rsr_int = rsr || set_rsr;

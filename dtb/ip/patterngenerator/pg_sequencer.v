@@ -56,7 +56,7 @@ module pg_sequencer
     else if (sync)
     begin
       if (!running)  ip <= 0;
-      else if (next) ip <= ip + 1;
+      else if (next) ip <= ip + 8'd1;
     end
   end
  
@@ -82,7 +82,7 @@ module pg_sequencer
       end
       else
       begin
-        delay <= delay - 1;
+        delay <= delay - 8'd1;
         pgout <= 5'b00000;
       end
     end

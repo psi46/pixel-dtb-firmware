@@ -36,8 +36,8 @@ module lvds2lcds (
 	//
 	assign reset_n            = !reset;
 	assign avs_slave_readdata = shift_busy;
-	assign scl                = scl_en ? div_clk : 0;
-	assign sld                = (!scl_en && shift_busy) ? div_clk : 0;
+	assign scl                = scl_en ? div_clk : 1'b0;
+	assign sld                = (!scl_en && shift_busy) ? div_clk : 1'b0;
 	assign sdi                = shift_buffer[6];
 
 	always @(posedge clk or posedge reset)
@@ -46,11 +46,11 @@ module lvds2lcds (
 		if(reset)
 		begin
 		
-			clk_counter   <= 1;
-			div_clk       <= 0;
-			scl_en        <= 0;
-			shift_busy    <= 0;
-			shift_counter <= 0;
+			clk_counter   <= 9'd1;
+			div_clk       <= 1'b0;
+			scl_en        <= 1'b0;
+			shift_busy    <= 1'b0;
+			shift_counter <= 3'd0;
 
 		end
 		else
@@ -61,24 +61,24 @@ module lvds2lcds (
 			
 				if(clk_counter == (divider/2))
 				begin
-					clk_counter <= 1;
+					clk_counter <= 9'd1;
 					div_clk     <= !div_clk;
 					if(div_clk)
 					begin
 						
 						if(!scl_en)
 						begin
-							shift_busy <= 0;
+							shift_busy <= 1'b0;
 						end
 						else
 						begin
-							if(shift_counter == 6)
+							if(shift_counter == 3'd6)
 							begin
-								scl_en        <= 0;
+								scl_en        <= 1'b0;
 							end
 							else
 							begin
-								shift_counter <= shift_counter + 1;
+								shift_counter <= shift_counter + 3'd1;
 								shift_buffer  <= shift_buffer << 1;
 							end
 						end
@@ -86,21 +86,21 @@ module lvds2lcds (
 				end
 				else
 				begin
-					clk_counter = clk_counter + 1;
+					clk_counter = clk_counter + 9'd1;
 				end
 			
 			end
 			else
 			begin
 			
-				clk_counter   <= 1;
-				shift_counter <= 0;
-				div_clk       <= 0;
+				clk_counter   <= 9'd1;
+				shift_counter <= 3'd0;
+				div_clk       <= 1'b0;
 				if(avs_slave_write)
 				begin
-					shift_buffer <= avs_slave_writedata;
-					shift_busy   <= 1;
-					scl_en       <= 1;
+					shift_buffer <= avs_slave_writedata[6:0];
+					shift_busy   <= 1'b1;
+					scl_en       <= 1'b1;
 				end
 			
 			end

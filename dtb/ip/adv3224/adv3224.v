@@ -40,8 +40,8 @@ module adv3224 (
 	assign cps_reset_n        = !reset;
 	assign cps_ce_n           = 0;
 	assign avs_slave_readdata = shift_busy;
-	assign cps_clk            = clk_en ? div_clk : 1;
-	assign cps_update_n       = (!clk_en && shift_busy) ? !div_clk : 1;
+	assign cps_clk            = clk_en ? div_clk : 1'b1;
+	assign cps_update_n       = (!clk_en && shift_busy) ? !div_clk : 1'b1;
 	assign cps_datain         = shift_buffer[39];
 
 	always @(posedge clk or posedge reset)
@@ -90,7 +90,7 @@ module adv3224 (
 							end
 							else
 							begin
-								shift_counter <= shift_counter + 1;
+								shift_counter <= shift_counter + 6'd1;
 								shift_buffer  <= shift_buffer << 1;
 							end
 						end
@@ -98,7 +98,7 @@ module adv3224 (
 				end
 				else
 				begin
-					clk_counter = clk_counter + 1;
+					clk_counter = clk_counter + 9'd1;
 				end
 			
 			end
