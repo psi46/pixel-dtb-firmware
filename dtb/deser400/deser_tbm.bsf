@@ -1,0 +1,229 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2014 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 336 648)
+	(text "deser_tbm" (rect 5 0 65 14)(font "Arial" (font_size 8)))
+	(text "inst" (rect 16 568 33 580)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk_daq" (rect 0 0 43 14)(font "Arial" (font_size 8)))
+		(text "clk_daq" (rect 21 27 64 41)(font "Arial" (font_size 8)))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "res" (rect 0 0 18 14)(font "Arial" (font_size 8)))
+		(text "res" (rect 21 43 39 57)(font "Arial" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "sync" (rect 0 0 28 14)(font "Arial" (font_size 8)))
+		(text "sync" (rect 21 59 49 73)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "sclk[7..0]" (rect 0 0 50 14)(font "Arial" (font_size 8)))
+		(text "sclk[7..0]" (rect 21 75 71 89)(font "Arial" (font_size 8)))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "CLK160" (rect 0 0 44 14)(font "Arial" (font_size 8)))
+		(text "CLK160" (rect 21 91 65 105)(font "Arial" (font_size 8)))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "CLK320" (rect 0 0 44 14)(font "Arial" (font_size 8)))
+		(text "CLK320" (rect 21 107 65 121)(font "Arial" (font_size 8)))
+		(line (pt 0 112)(pt 16 112))
+	)
+	(port
+		(pt 0 264)
+		(input)
+		(text "sdata_I" (rect 0 0 41 14)(font "Arial" (font_size 8)))
+		(text "sdata_I" (rect 21 259 62 273)(font "Arial" (font_size 8)))
+		(line (pt 0 264)(pt 16 264))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "Sel_Old_TBM_Trailer" (rect 0 0 118 14)(font "Arial" (font_size 8)))
+		(text "Sel_Old_TBM_Trailer" (rect 21 139 139 153)(font "Arial" (font_size 8)))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "areset400" (rect 0 0 57 14)(font "Arial" (font_size 8)))
+		(text "areset400" (rect 21 155 78 169)(font "Arial" (font_size 8)))
+		(line (pt 0 160)(pt 16 160))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "REGreset" (rect 0 0 54 14)(font "Arial" (font_size 8)))
+		(text "REGreset" (rect 21 171 75 185)(font "Arial" (font_size 8)))
+		(line (pt 0 176)(pt 16 176))
+	)
+	(port
+		(pt 0 344)
+		(input)
+		(text "sdata_II" (rect 0 0 43 14)(font "Arial" (font_size 8)))
+		(text "sdata_II" (rect 21 339 64 353)(font "Arial" (font_size 8)))
+		(line (pt 0 344)(pt 16 344))
+	)
+	(port
+		(pt 0 424)
+		(input)
+		(text "sdata_III" (rect 0 0 46 14)(font "Arial" (font_size 8)))
+		(text "sdata_III" (rect 21 419 67 433)(font "Arial" (font_size 8)))
+		(line (pt 0 424)(pt 16 424))
+	)
+	(port
+		(pt 0 504)
+		(input)
+		(text "sdata_IV" (rect 0 0 50 14)(font "Arial" (font_size 8)))
+		(text "sdata_IV" (rect 21 499 71 513)(font "Arial" (font_size 8)))
+		(line (pt 0 504)(pt 16 504))
+	)
+	(port
+		(pt 272 280)
+		(output)
+		(text "data_Ia[15..0]" (rect 0 0 76 14)(font "Arial" (font_size 8)))
+		(text "data_Ia[15..0]" (rect 175 275 251 289)(font "Arial" (font_size 8)))
+		(line (pt 272 280)(pt 256 280)(line_width 3))
+	)
+	(port
+		(pt 272 264)
+		(output)
+		(text "write_Ia" (rect 0 0 46 14)(font "Arial" (font_size 8)))
+		(text "write_Ia" (rect 205 259 251 273)(font "Arial" (font_size 8)))
+		(line (pt 272 264)(pt 256 264))
+	)
+	(port
+		(pt 272 312)
+		(output)
+		(text "data_Ib[15..0]" (rect 0 0 76 14)(font "Arial" (font_size 8)))
+		(text "data_Ib[15..0]" (rect 175 307 251 321)(font "Arial" (font_size 8)))
+		(line (pt 272 312)(pt 256 312)(line_width 3))
+	)
+	(port
+		(pt 272 296)
+		(output)
+		(text "write_Ib" (rect 0 0 46 14)(font "Arial" (font_size 8)))
+		(text "write_Ib" (rect 205 291 251 305)(font "Arial" (font_size 8)))
+		(line (pt 272 296)(pt 256 296))
+	)
+	(port
+		(pt 272 48)
+		(output)
+		(text "TP_deser_I[9..0]" (rect 0 0 92 14)(font "Arial" (font_size 8)))
+		(text "TP_deser_I[9..0]" (rect 159 43 251 57)(font "Arial" (font_size 8)))
+		(line (pt 272 48)(pt 256 48)(line_width 3))
+	)
+	(port
+		(pt 272 360)
+		(output)
+		(text "data_IIa[15..0]" (rect 0 0 79 14)(font "Arial" (font_size 8)))
+		(text "data_IIa[15..0]" (rect 172 355 251 369)(font "Arial" (font_size 8)))
+		(line (pt 272 360)(pt 256 360)(line_width 3))
+	)
+	(port
+		(pt 272 344)
+		(output)
+		(text "write_IIa" (rect 0 0 48 14)(font "Arial" (font_size 8)))
+		(text "write_IIa" (rect 203 339 251 353)(font "Arial" (font_size 8)))
+		(line (pt 272 344)(pt 256 344))
+	)
+	(port
+		(pt 272 392)
+		(output)
+		(text "data_IIb[15..0]" (rect 0 0 79 14)(font "Arial" (font_size 8)))
+		(text "data_IIb[15..0]" (rect 172 387 251 401)(font "Arial" (font_size 8)))
+		(line (pt 272 392)(pt 256 392)(line_width 3))
+	)
+	(port
+		(pt 272 376)
+		(output)
+		(text "write_IIb" (rect 0 0 48 14)(font "Arial" (font_size 8)))
+		(text "write_IIb" (rect 203 371 251 385)(font "Arial" (font_size 8)))
+		(line (pt 272 376)(pt 256 376))
+	)
+	(port
+		(pt 272 64)
+		(output)
+		(text "TP_deser_II[9..0]" (rect 0 0 94 14)(font "Arial" (font_size 8)))
+		(text "TP_deser_II[9..0]" (rect 157 59 251 73)(font "Arial" (font_size 8)))
+		(line (pt 272 64)(pt 256 64)(line_width 3))
+	)
+	(port
+		(pt 272 440)
+		(output)
+		(text "data_IIIa[15..0]" (rect 0 0 81 14)(font "Arial" (font_size 8)))
+		(text "data_IIIa[15..0]" (rect 170 435 251 449)(font "Arial" (font_size 8)))
+		(line (pt 272 440)(pt 256 440)(line_width 3))
+	)
+	(port
+		(pt 272 424)
+		(output)
+		(text "write_IIIa" (rect 0 0 50 14)(font "Arial" (font_size 8)))
+		(text "write_IIIa" (rect 201 419 251 433)(font "Arial" (font_size 8)))
+		(line (pt 272 424)(pt 256 424))
+	)
+	(port
+		(pt 272 472)
+		(output)
+		(text "data_IIIb[15..0]" (rect 0 0 81 14)(font "Arial" (font_size 8)))
+		(text "data_IIIb[15..0]" (rect 170 467 251 481)(font "Arial" (font_size 8)))
+		(line (pt 272 472)(pt 256 472)(line_width 3))
+	)
+	(port
+		(pt 272 456)
+		(output)
+		(text "write_IIIb" (rect 0 0 50 14)(font "Arial" (font_size 8)))
+		(text "write_IIIb" (rect 201 451 251 465)(font "Arial" (font_size 8)))
+		(line (pt 272 456)(pt 256 456))
+	)
+	(port
+		(pt 272 80)
+		(output)
+		(text "TP_deser_III[9..0]" (rect 0 0 96 14)(font "Arial" (font_size 8)))
+		(text "TP_deser_III[9..0]" (rect 155 75 251 89)(font "Arial" (font_size 8)))
+		(line (pt 272 80)(pt 256 80)(line_width 3))
+	)
+	(drawing
+		(line (pt 16 248)(pt 256 248))
+		(line (pt 16 328)(pt 256 328))
+		(line (pt 16 408)(pt 256 408))
+		(line (pt 16 488)(pt 256 488))
+		(rectangle (rect 16 16 256 568))
+	)
+)

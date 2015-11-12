@@ -1,0 +1,71 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2014 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 272 184)
+	(text "frame_detector" (rect 5 0 92 14)(font "Arial" (font_size 8)))
+	(text "inst" (rect 8 104 25 116)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "CLK400" (rect 0 0 44 14)(font "Arial" (font_size 8)))
+		(text "CLK400" (rect 21 27 65 41)(font "Arial" (font_size 8)))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "serin" (rect 0 0 28 14)(font "Arial" (font_size 8)))
+		(text "serin" (rect 21 75 49 89)(font "Arial" (font_size 8)))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "reset" (rect 0 0 29 14)(font "Arial" (font_size 8)))
+		(text "reset" (rect 21 43 50 57)(font "Arial" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 208 40)
+		(output)
+		(text "blockPHASEchange" (rect 0 0 112 14)(font "Arial" (font_size 8)))
+		(text "blockPHASEchange" (rect 91 35 203 49)(font "Arial" (font_size 8)))
+		(line (pt 208 40)(pt 192 40))
+	)
+	(port
+		(pt 208 56)
+		(output)
+		(text "IresetFramecnt" (rect 0 0 84 14)(font "Arial" (font_size 8)))
+		(text "IresetFramecnt" (rect 111 51 195 65)(font "Arial" (font_size 8)))
+		(line (pt 208 56)(pt 192 56))
+	)
+	(port
+		(pt 208 88)
+		(output)
+		(text "pdata[4..0]" (rect 157 80 217 94)(font "Arial" (font_size 8)))
+		(text "pdata[4..0]" (rect 133 80 193 94)(font "Arial" (font_size 8)))
+		(line (pt 208 88)(pt 192 88)(color 128 0 255)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 192 104))
+	)
+)
