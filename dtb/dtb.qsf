@@ -1013,7 +1013,6 @@ set_global_assignment -name BDF_FILE deser400/pedge_s.bdf
 set_global_assignment -name GDF_FILE deser400/nedge_s.gdf
 set_global_assignment -name BDF_FILE deser400/FormatFSM.bdf
 set_global_assignment -name BDF_FILE deser400/deser400_top.bdf
-set_global_assignment -name BSF_FILE deser400/deser_tbm.bsf
 set_global_assignment -name BDF_FILE deser400/deser_tbm.bdf
 set_global_assignment -name BDF_FILE deser400/PosFl.bdf
 set_global_assignment -name VHDL_FILE deser400/lpm_shiftreg12.vhd

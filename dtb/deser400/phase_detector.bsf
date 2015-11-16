@@ -52,20 +52,6 @@ applicable agreement for further details.
 		(line (pt 0 96)(pt 16 96))
 	)
 	(port
-		(pt 0 112)
-		(input)
-		(text "ENDofGATE" (rect 0 0 68 14)(font "Arial" (font_size 8)))
-		(text "ENDofGATE" (rect 21 107 89 121)(font "Arial" (font_size 8)))
-		(line (pt 0 112)(pt 16 112))
-	)
-	(port
-		(pt 0 128)
-		(input)
-		(text "idle" (rect 0 0 18 14)(font "Arial" (font_size 8)))
-		(text "idle" (rect 21 123 39 137)(font "Arial" (font_size 8)))
-		(line (pt 0 128)(pt 16 128))
-	)
-	(port
 		(pt 0 64)
 		(input)
 		(text "reset" (rect 0 0 29 14)(font "Arial" (font_size 8)))

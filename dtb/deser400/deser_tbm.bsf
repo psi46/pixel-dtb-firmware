@@ -59,13 +59,6 @@ applicable agreement for further details.
 		(line (pt 0 96)(pt 16 96))
 	)
 	(port
-		(pt 0 112)
-		(input)
-		(text "CLK320" (rect 0 0 44 14)(font "Arial" (font_size 8)))
-		(text "CLK320" (rect 21 107 65 121)(font "Arial" (font_size 8)))
-		(line (pt 0 112)(pt 16 112))
-	)
-	(port
 		(pt 0 264)
 		(input)
 		(text "sdata_I" (rect 0 0 41 14)(font "Arial" (font_size 8)))
@@ -113,6 +106,13 @@ applicable agreement for further details.
 		(text "sdata_IV" (rect 0 0 50 14)(font "Arial" (font_size 8)))
 		(text "sdata_IV" (rect 21 499 71 513)(font "Arial" (font_size 8)))
 		(line (pt 0 504)(pt 16 504))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "CLK320" (rect 24 104 68 118)(font "Arial" (font_size 8)))
+		(text "CLK320" (rect 24 104 68 118)(font "Arial" (font_size 8)))
+		(line (pt 0 112)(pt 16 112))
 	)
 	(port
 		(pt 272 280)

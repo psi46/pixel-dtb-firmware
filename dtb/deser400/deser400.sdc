@@ -2,23 +2,8 @@
 
 
 # --- phase_detector
-set_multicycle_path \
-	-from [get_registers {*|phase_detector:inst31|gl_dff8e:inst442|*}] \
-	-to {*} \
-	-setup 2
-set_multicycle_path \
-	-from [get_registers {*|phase_detector:inst31|gl_dff8e:inst442|*}] \
-	-to {*} \
-	-hold 1
+set_false_path -from {*|phase_detector:inst31|inst1[*]} -to {*}
 
-set_multicycle_path \
-	-from {*|phase_detector:inst31|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg} \
-	-to {*|phase_detector:inst31|inst10[*]} \
-	-setup 3
-set_multicycle_path \
-	-from {*|phase_detector:inst31|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg} \
-	-to {*|phase_detector:inst31|inst10[*]} \
-	-hold 2
 
 
 # --- frame_detector

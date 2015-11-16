@@ -38,13 +38,6 @@ applicable agreement for further details.
 		(line (pt 0 376)(pt 16 376))
 	)
 	(port
-		(pt 0 320)
-		(input)
-		(text "CLK320" (rect 0 0 44 14)(font "Arial" (font_size 8)))
-		(text "CLK320" (rect 21 315 65 329)(font "Arial" (font_size 8)))
-		(line (pt 0 320)(pt 16 320))
-	)
-	(port
 		(pt 0 344)
 		(input)
 		(text "CLK160" (rect 0 0 44 14)(font "Arial" (font_size 8)))
@@ -57,13 +50,6 @@ applicable agreement for further details.
 		(text "GATE" (rect 24 120 57 134)(font "Arial" (font_size 8)))
 		(text "GATE" (rect 24 120 57 134)(font "Arial" (color 0 170 0)(font_size 8)))
 		(line (pt 0 128)(pt 16 128))
-	)
-	(port
-		(pt 0 144)
-		(input)
-		(text "ENDofGATE" (rect 24 136 92 150)(font "Arial" (font_size 8)))
-		(text "ENDofGATE" (rect 24 136 92 150)(font "Arial" (color 0 170 0)(font_size 8)))
-		(line (pt 0 144)(pt 16 144))
 	)
 	(port
 		(pt 0 392)
@@ -85,6 +71,20 @@ applicable agreement for further details.
 		(text "sclk[7..0]" (rect 0 0 50 14)(font "Arial" (font_size 8)))
 		(text "sclk[7..0]" (rect 21 171 71 185)(font "Arial" (font_size 8)))
 		(line (pt 0 176)(pt 16 176)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 0 320)
+		(input)
+		(text "CLK80" (rect 0 0 37 14)(font "Arial" (font_size 8)))
+		(text "CLK80" (rect 21 315 58 329)(font "Arial" (font_size 8)))
+		(line (pt 0 320)(pt 16 320))
+	)
+	(port
+		(pt 0 296)
+		(input)
+		(text "CLK320" (rect 24 320 68 334)(font "Arial" (font_size 8)))
+		(text "CLK320" (rect 24 296 68 310)(font "Arial" (font_size 8)))
+		(line (pt 0 296)(pt 16 296))
 	)
 	(port
 		(pt 248 264)

@@ -38,25 +38,11 @@ applicable agreement for further details.
 		(line (pt 0 144)(pt 16 144))
 	)
 	(port
-		(pt 0 160)
-		(input)
-		(text "ENDofGATE" (rect 0 0 68 14)(font "Arial" (font_size 8)))
-		(text "ENDofGATE" (rect 21 155 89 169)(font "Arial" (font_size 8)))
-		(line (pt 0 160)(pt 16 160))
-	)
-	(port
 		(pt 0 32)
 		(input)
 		(text "sclk[7..0]" (rect 0 0 50 14)(font "Arial" (font_size 8)))
 		(text "sclk[7..0]" (rect 21 27 71 41)(font "Arial" (font_size 8)))
 		(line (pt 0 32)(pt 16 32)(line_width 3))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "CLK320" (rect 0 0 44 14)(font "Arial" (font_size 8)))
-		(text "CLK320" (rect 21 43 65 57)(font "Arial" (font_size 8)))
-		(line (pt 0 48)(pt 16 48))
 	)
 	(port
 		(pt 0 64)
@@ -85,6 +71,20 @@ applicable agreement for further details.
 		(text "Sel_Old_TBM_Trailer" (rect 0 0 118 14)(font "Arial" (font_size 8)))
 		(text "Sel_Old_TBM_Trailer" (rect 21 123 139 137)(font "Arial" (font_size 8)))
 		(line (pt 0 128)(pt 16 128))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "CLK80" (rect 0 0 37 14)(font "Arial" (font_size 8)))
+		(text "CLK80" (rect 21 43 58 57)(font "Arial" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "CLK320" (rect 24 72 68 86)(font "Arial" (font_size 8)))
+		(text "CLK320" (rect 24 72 68 86)(font "Arial" (font_size 8)))
+		(line (pt 0 80)(pt 16 80))
 	)
 	(port
 		(pt 256 208)

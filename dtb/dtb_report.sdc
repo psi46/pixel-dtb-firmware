@@ -19,7 +19,7 @@
 ## PROGRAM "Quartus II"
 ## VERSION "Version 13.1.4 Build 182 03/12/2014 SJ Full Version"
 
-## DATE    "Thu Nov 12 16:19:16 2015"
+## DATE    "Mon Nov 16 09:06:58 2015"
 
 ##
 ## DEVICE  "EP3C40F484C6"
@@ -167,6 +167,7 @@ set_false_path -from [get_keepers {*rdptr_g*}] -to [get_keepers {*ws_dgrp|dffpip
 set_false_path -from [get_keepers {*delayed_wrptr_g*}] -to [get_keepers {*rs_dgwp|dffpipe_pe9:dffpipe12|dffe13a*}]
 set_false_path -from [get_keepers {*rdptr_g*}] -to [get_keepers {*ws_dgrp|dffpipe_re9:dffpipe17|dffe18a*}]
 set_false_path -from [get_keepers {*delayed_wrptr_g*}] -to [get_keepers {*rs_dgwp|dffpipe_qe9:dffpipe14|dffe15a*}]
+set_false_path -from [get_keepers {*|phase_detector:inst31|inst1[*]}] 
 set_false_path -from [get_keepers {*|frame_detector:inst30|dffom:inst377|inst}] 
 set_false_path -from [get_keepers {*|NRZI_5B4B_decoder:inst4|NRZI_decoder:inst4003|error}] 
 set_false_path -from [get_keepers {dtb_system:inst|delay_out:delay_*|ext_mode[*]}] 
@@ -182,10 +183,6 @@ set_false_path -from [get_keepers {dtb_system:inst|probe_async:probe_async_d2|se
 # Set Multicycle Path
 #**************************************************************
 
-set_multicycle_path -setup -end -from [get_registers {*|phase_detector:inst31|gl_dff8e:inst442|*}] 2
-set_multicycle_path -hold -end -from [get_registers {*|phase_detector:inst31|gl_dff8e:inst442|*}] 1
-set_multicycle_path -setup -end -from [get_keepers {*|phase_detector:inst31|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg}] -to [get_keepers {*|phase_detector:inst31|inst10[*]}] 3
-set_multicycle_path -hold -end -from [get_keepers {*|phase_detector:inst31|PhSeROM:inst66|altsyncram:altsyncram_component|altsyncram_uat3:auto_generated|ram_block1a0~porta_re_reg}] -to [get_keepers {*|phase_detector:inst31|inst10[*]}] 2
 set_multicycle_path -setup -end -from [get_keepers {*|NRZI_5B4B_decoder:inst4|lpm_dff0:inst487|lpm_ff:lpm_ff_component|dffs[*]}] 4
 set_multicycle_path -hold -end -from [get_keepers {*|NRZI_5B4B_decoder:inst4|lpm_dff0:inst487|lpm_ff:lpm_ff_component|dffs[*]}] 3
 set_multicycle_path -setup -end -from [get_keepers {*|NRZI_5B4B_decoder:inst4|inst4487}] 4
