@@ -67,7 +67,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
   </table>
   <table class="blueBar">
    <tr>
-    <td class="l">2015.11.10.10:42:31</td>
+    <td class="l">2015.11.24.15:36:03</td>
     <td class="r">Datasheet</td>
    </tr>
   </table>
@@ -208,6 +208,12 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
      <a href="#module_daq_dma_5"><b>daq_dma_5</b>
      </a> daq_dma 1.1
      <br/>&#160;&#160;
+     <a href="#module_daq_dma_6"><b>daq_dma_6</b>
+     </a> daq_dma 1.1
+     <br/>&#160;&#160;
+     <a href="#module_daq_dma_7"><b>daq_dma_7</b>
+     </a> daq_dma 1.1
+     <br/>&#160;&#160;
      <a href="#module_deser400"><b>deser400</b>
      </a> altera_avalon_pio 13.1
      <br/>&#160;&#160;
@@ -237,12 +243,6 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
      <br/>&#160;&#160;
      <a href="#module_rda_delay"><b>rda_delay</b>
      </a> delay_in 1.0
-     <br/>&#160;&#160;
-     <a href="#module_probe_async_d1"><b>probe_async_d1</b>
-     </a> probe_async 1.0
-     <br/>&#160;&#160;
-     <a href="#module_probe_async_d2"><b>probe_async_d2</b>
-     </a> probe_async 1.0
      <br/>&#160;&#160;
      <a href="#module_trigger"><b>trigger</b>
      </a> trigger_port 1.0</span>
@@ -285,6 +285,14 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
      <a href="#module_daq_dma_5"><b>daq_dma_5</b>
      </a>
     </td>
+    <td class="mastermodule" colspan="1">
+     <a href="#module_daq_dma_6"><b>daq_dma_6</b>
+     </a>
+    </td>
+    <td class="mastermodule" colspan="1">
+     <a href="#module_daq_dma_7"><b>daq_dma_7</b>
+     </a>
+    </td>
     <td class="mastermodule" colspan="3">
      <a href="#module_usb_tx_dma"><b>usb_tx_dma</b>
      </a>
@@ -308,6 +316,8 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="masterlr">&#160;data</td>
     <td class="masterlr">&#160;data</td>
     <td class="masterlr">&#160;data</td>
+    <td class="masterlr">&#160;data</td>
+    <td class="masterlr">&#160;data</td>
     <td class="masterl">&#160;descriptor_read</td>
     <td class="masterm">&#160;descriptor_write</td>
     <td class="masterr">&#160;m_read</td>
@@ -318,6 +328,8 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
      <a href="#module_ram_ext"><b>ram_ext</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -351,6 +363,8 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="addr"><span style="color:#989898">0x</span>00000000</td>
     <td class="addr"><span style="color:#989898">0x</span>00000000</td>
     <td class="addr"><span style="color:#989898">0x</span>00000000</td>
+    <td class="addr"><span style="color:#989898">0x</span>00000000</td>
+    <td class="addr"><span style="color:#989898">0x</span>00000000</td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="addr"><span style="color:#989898">0x</span>00000000</td>
@@ -361,6 +375,8 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
      <a href="#module_sys_timer"><b>sys_timer</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -398,12 +414,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_jtag_uart"><b>jtag_uart</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -441,12 +461,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_performance_counter"><b>performance_counter</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -484,12 +508,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_sgdma_rx"><b>sgdma_rx</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -527,12 +555,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_sgdma_tx"><b>sgdma_tx</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -570,12 +602,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_descriptor_memory"><b>descriptor_memory</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -609,6 +645,8 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="addr"><span style="color:#989898">0x</span>08402000</td>
     <td class="addr"><span style="color:#989898">0x</span>08402000</td>
     <td class="empty"></td>
@@ -619,6 +657,8 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
      <a href="#module_LED"><b>LED</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -656,12 +696,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_button"><b>button</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -699,12 +743,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_cpu"><b>cpu</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -742,12 +790,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_sysid"><b>sysid</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -785,12 +837,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_epcs_controller"><b>epcs_controller</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -828,12 +884,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_LCDS_io"><b>LCDS_io</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -871,12 +931,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_crosspoint_switch"><b>crosspoint_switch</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -914,12 +978,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_i2c_main"><b>i2c_main</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -957,12 +1025,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_patterngen"><b>patterngen</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1000,6 +1072,8 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavem">data&#160;</td>
@@ -1020,12 +1094,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_main_control"><b>main_control</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1063,12 +1141,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_main_status"><b>main_status</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1106,12 +1188,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_ROC_addr"><b>ROC_addr</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1149,12 +1235,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_delay_clk"><b>delay_clk</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1192,12 +1282,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_delay_sda"><b>delay_sda</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1235,12 +1329,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_delay_ctr"><b>delay_ctr</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1278,12 +1376,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_delay_tin"><b>delay_tin</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1321,12 +1423,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_PSI2C"><b>PSI2C</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1364,12 +1470,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_probe_d1"><b>probe_d1</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1407,12 +1517,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_probe_d2"><b>probe_d2</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1450,12 +1564,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_SDC_SPI2"><b>SDC_SPI2</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1493,12 +1611,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_deser160"><b>deser160</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1536,12 +1658,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_fifo"><b>fifo</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1579,12 +1705,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_adc_0"><b>adc_0</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1622,12 +1752,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_daq_dma_1"><b>daq_dma_1</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1665,12 +1799,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_daq_dma_2"><b>daq_dma_2</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1708,12 +1846,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_daq_dma_3"><b>daq_dma_3</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1751,12 +1893,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_daq_dma_4"><b>daq_dma_4</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1794,12 +1940,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_daq_dma_5"><b>daq_dma_5</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1837,12 +1987,110 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+   </tr>
+   <tr>
+    <td class="slavemodule">&#160;
+     <a href="#module_daq_dma_6"><b>daq_dma_6</b>
+     </a>
+    </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+   </tr>
+   <tr>
+    <td class="slaveb">ctrl&#160;</td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="addr"><span style="color:#989898">0x</span>080021c0</td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+   </tr>
+   <tr>
+    <td class="slavemodule">&#160;
+     <a href="#module_daq_dma_7"><b>daq_dma_7</b>
+     </a>
+    </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+   </tr>
+   <tr>
+    <td class="slaveb">ctrl&#160;</td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="addr"><span style="color:#989898">0x</span>08002200</td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_deser400"><b>deser400</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1880,12 +2128,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_clk_stretch"><b>clk_stretch</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1923,12 +2175,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_clkdiv"><b>clkdiv</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -1966,12 +2222,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_i2c_external"><b>i2c_external</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -2009,12 +2269,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_USB2"><b>USB2</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -2052,12 +2316,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_usb_tx_dma"><b>usb_tx_dma</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -2095,12 +2363,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_tse_mac"><b>tse_mac</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -2138,12 +2410,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_eventgen"><b>eventgen</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -2181,12 +2457,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_daq_dma_0"><b>daq_dma_0</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -2224,12 +2504,16 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
+    <td class="empty"></td>
+    <td class="empty"></td>
    </tr>
    <tr>
     <td class="slavemodule">&#160;
      <a href="#module_rda_delay"><b>rda_delay</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -2267,90 +2551,6 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
-   </tr>
-   <tr>
-    <td class="slavemodule">&#160;
-     <a href="#module_probe_async_d1"><b>probe_async_d1</b>
-     </a>
-    </td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-   </tr>
-   <tr>
-    <td class="slaveb">ctrl&#160;</td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="addr"><span style="color:#989898">0x</span>081000c0</td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-   </tr>
-   <tr>
-    <td class="slavemodule">&#160;
-     <a href="#module_probe_async_d2"><b>probe_async_d2</b>
-     </a>
-    </td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-   </tr>
-   <tr>
-    <td class="slaveb">ctrl&#160;</td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="addr"><span style="color:#989898">0x</span>081000d0</td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
-    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
    </tr>
@@ -2359,6 +2559,8 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
      <a href="#module_trigger"><b>trigger</b>
      </a>
     </td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -2386,6 +2588,8 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="addr"><span style="color:#989898">0x</span>08108100</td>
+    <td class="empty"></td>
+    <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
     <td class="empty"></td>
@@ -2457,7 +2661,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
        <a href="#module_cpu">cpu</a>
       </td>
       <td class="from">instruction_master&#160;&#160;</td>
-      <td class="main" rowspan="40">ram_ext</td>
+      <td class="main" rowspan="46">ram_ext</td>
      </tr>
      <tr>
       <td class="to">&#160;&#160;s1</td>
@@ -2600,6 +2804,30 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
      <tr>
       <td class="neighbor" rowspan="2">
        <a href="#module_daq_dma_0">daq_dma_0</a>
+      </td>
+      <td class="from">data&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;s1</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_daq_dma_6">daq_dma_6</a>
+      </td>
+      <td class="from">data&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;s1</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_daq_dma_7">daq_dma_7</a>
       </td>
       <td class="from">data&#160;&#160;</td>
      </tr>
@@ -5160,7 +5388,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
        <a href="#module_cpu">cpu</a>
       </td>
       <td class="from">data_master&#160;&#160;</td>
-      <td class="main" rowspan="47">peripheral_bridge</td>
+      <td class="main" rowspan="41">peripheral_bridge</td>
      </tr>
      <tr>
       <td class="to">&#160;&#160;s0</td>
@@ -5362,38 +5590,6 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
       <td></td>
       <td class="to">&#160;&#160;slave</td>
      </tr>
-     <tr style="height:6px">
-      <td></td>
-     </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td class="from">m0&#160;&#160;</td>
-      <td class="neighbor" rowspan="2">
-       <a href="#module_probe_async_d1">probe_async_d1</a>
-      </td>
-     </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td class="to">&#160;&#160;ctrl</td>
-     </tr>
-     <tr style="height:6px">
-      <td></td>
-     </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td class="from">m0&#160;&#160;</td>
-      <td class="neighbor" rowspan="2">
-       <a href="#module_probe_async_d2">probe_async_d2</a>
-      </td>
-     </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td class="to">&#160;&#160;ctrl</td>
-     </tr>
     </table>
    </div>
    <br/>
@@ -5482,7 +5678,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
        <a href="#module_clk_sys">clk_sys</a>
       </td>
       <td class="from">clk_reset&#160;&#160;</td>
-      <td class="main" rowspan="99">cpu</td>
+      <td class="main" rowspan="105">cpu</td>
      </tr>
      <tr>
       <td class="to">&#160;&#160;reset_n</td>
@@ -5885,6 +6081,38 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
       <td class="from">data_master&#160;&#160;</td>
       <td class="neighbor" rowspan="2">
        <a href="#module_daq_dma_5">daq_dma_5</a>
+      </td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;ctrl</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">data_master&#160;&#160;</td>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_daq_dma_6">daq_dma_6</a>
+      </td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;ctrl</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">data_master&#160;&#160;</td>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_daq_dma_7">daq_dma_7</a>
       </td>
      </tr>
      <tr>
@@ -6479,7 +6707,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
        </tr>
        <tr>
         <td class="parametername">dataSlaveMapParam</td>
-        <td class="parametervalue">&lt;address-map&gt;&lt;slave name='ram_ext.s1' start='0x0' end='0x8000000' /&gt;&lt;slave name='epcs_controller.epcs_control_port' start='0x8000000' end='0x8000800' /&gt;&lt;slave name='cpu.jtag_debug_module' start='0x8000800' end='0x8001000' /&gt;&lt;slave name='sysid.control_slave' start='0x8001000' end='0x8001008' /&gt;&lt;slave name='usb_tx_dma.csr' start='0x8001040' end='0x8001080' /&gt;&lt;slave name='USB2.ctrl' start='0x8001110' end='0x8001112' /&gt;&lt;slave name='performance_counter.control_slave' start='0x8001800' end='0x8001840' /&gt;&lt;slave name='sys_timer.s1' start='0x8002000' end='0x8002020' /&gt;&lt;slave name='jtag_uart.avalon_jtag_slave' start='0x8002020' end='0x8002028' /&gt;&lt;slave name='daq_dma_0.ctrl' start='0x8002040' end='0x8002060' /&gt;&lt;slave name='daq_dma_1.ctrl' start='0x8002080' end='0x80020A0' /&gt;&lt;slave name='daq_dma_2.ctrl' start='0x80020C0' end='0x80020E0' /&gt;&lt;slave name='daq_dma_3.ctrl' start='0x8002100' end='0x8002120' /&gt;&lt;slave name='daq_dma_4.ctrl' start='0x8002140' end='0x8002160' /&gt;&lt;slave name='daq_dma_5.ctrl' start='0x8002180' end='0x80021A0' /&gt;&lt;slave name='LED.s1' start='0x8100020' end='0x8100030' /&gt;&lt;slave name='button.s1' start='0x8100030' end='0x8100040' /&gt;&lt;slave name='LCDS_io.slave' start='0x8100040' end='0x8100041' /&gt;&lt;slave name='crosspoint_switch.slave' start='0x8100050' end='0x8100058' /&gt;&lt;slave name='i2c_main.slave' start='0x8100060' end='0x8100068' /&gt;&lt;slave name='ROC_addr.s1' start='0x8100070' end='0x8100080' /&gt;&lt;slave name='SDC_SPI2.s1' start='0x8100080' end='0x8100090' /&gt;&lt;slave name='i2c_external.slave' start='0x8100090' end='0x8100098' /&gt;&lt;slave name='main_control.s1' start='0x81000A0' end='0x81000B0' /&gt;&lt;slave name='main_status.s1' start='0x81000B0' end='0x81000C0' /&gt;&lt;slave name='probe_async_d1.ctrl' start='0x81000C0' end='0x81000C1' /&gt;&lt;slave name='probe_async_d2.ctrl' start='0x81000D0' end='0x81000D1' /&gt;&lt;slave name='PSI2C.ctrl' start='0x8108000' end='0x8108020' /&gt;&lt;slave name='delay_clk.ctrl' start='0x8108020' end='0x8108028' /&gt;&lt;slave name='delay_sda.ctrl' start='0x8108028' end='0x8108030' /&gt;&lt;slave name='delay_ctr.ctrl' start='0x8108030' end='0x8108038' /&gt;&lt;slave name='delay_tin.ctrl' start='0x8108038' end='0x8108040' /&gt;&lt;slave name='patterngen.ctrl' start='0x8108040' end='0x8108048' /&gt;&lt;slave name='probe_d1.ctrl' start='0x8108050' end='0x8108051' /&gt;&lt;slave name='probe_d2.ctrl' start='0x8108060' end='0x8108061' /&gt;&lt;slave name='deser160.s1' start='0x8108070' end='0x8108080' /&gt;&lt;slave name='fifo.s1' start='0x8108080' end='0x8108090' /&gt;&lt;slave name='adc_0.ctrl' start='0x8108090' end='0x8108098' /&gt;&lt;slave name='deser400.s1' start='0x81080A0' end='0x81080B0' /&gt;&lt;slave name='clk_stretch.ctrl' start='0x81080B0' end='0x81080B8' /&gt;&lt;slave name='clkdiv.s1' start='0x81080C0' end='0x81080D0' /&gt;&lt;slave name='eventgen.ctrl' start='0x81080D0' end='0x81080D8' /&gt;&lt;slave name='rda_delay.ctrl' start='0x81080E0' end='0x81080E4' /&gt;&lt;slave name='trigger.slave' start='0x8108100' end='0x8108140' /&gt;&lt;slave name='patterngen.data' start='0x8108200' end='0x8108400' /&gt;&lt;slave name='tse_mac.control_port' start='0x8400000' end='0x8400400' /&gt;&lt;slave name='sgdma_rx.csr' start='0x8400400' end='0x8400440' /&gt;&lt;slave name='sgdma_tx.csr' start='0x8400440' end='0x8400480' /&gt;&lt;slave name='descriptor_memory.s1' start='0x8402000' end='0x8402100' /&gt;&lt;/address-map&gt;</td>
+        <td class="parametervalue">&lt;address-map&gt;&lt;slave name='ram_ext.s1' start='0x0' end='0x8000000' /&gt;&lt;slave name='epcs_controller.epcs_control_port' start='0x8000000' end='0x8000800' /&gt;&lt;slave name='cpu.jtag_debug_module' start='0x8000800' end='0x8001000' /&gt;&lt;slave name='sysid.control_slave' start='0x8001000' end='0x8001008' /&gt;&lt;slave name='usb_tx_dma.csr' start='0x8001040' end='0x8001080' /&gt;&lt;slave name='USB2.ctrl' start='0x8001110' end='0x8001112' /&gt;&lt;slave name='performance_counter.control_slave' start='0x8001800' end='0x8001840' /&gt;&lt;slave name='sys_timer.s1' start='0x8002000' end='0x8002020' /&gt;&lt;slave name='jtag_uart.avalon_jtag_slave' start='0x8002020' end='0x8002028' /&gt;&lt;slave name='daq_dma_0.ctrl' start='0x8002040' end='0x8002060' /&gt;&lt;slave name='daq_dma_1.ctrl' start='0x8002080' end='0x80020A0' /&gt;&lt;slave name='daq_dma_2.ctrl' start='0x80020C0' end='0x80020E0' /&gt;&lt;slave name='daq_dma_3.ctrl' start='0x8002100' end='0x8002120' /&gt;&lt;slave name='daq_dma_4.ctrl' start='0x8002140' end='0x8002160' /&gt;&lt;slave name='daq_dma_5.ctrl' start='0x8002180' end='0x80021A0' /&gt;&lt;slave name='daq_dma_6.ctrl' start='0x80021C0' end='0x80021E0' /&gt;&lt;slave name='daq_dma_7.ctrl' start='0x8002200' end='0x8002220' /&gt;&lt;slave name='LED.s1' start='0x8100020' end='0x8100030' /&gt;&lt;slave name='button.s1' start='0x8100030' end='0x8100040' /&gt;&lt;slave name='LCDS_io.slave' start='0x8100040' end='0x8100041' /&gt;&lt;slave name='crosspoint_switch.slave' start='0x8100050' end='0x8100058' /&gt;&lt;slave name='i2c_main.slave' start='0x8100060' end='0x8100068' /&gt;&lt;slave name='ROC_addr.s1' start='0x8100070' end='0x8100080' /&gt;&lt;slave name='SDC_SPI2.s1' start='0x8100080' end='0x8100090' /&gt;&lt;slave name='i2c_external.slave' start='0x8100090' end='0x8100098' /&gt;&lt;slave name='main_control.s1' start='0x81000A0' end='0x81000B0' /&gt;&lt;slave name='main_status.s1' start='0x81000B0' end='0x81000C0' /&gt;&lt;slave name='PSI2C.ctrl' start='0x8108000' end='0x8108020' /&gt;&lt;slave name='delay_clk.ctrl' start='0x8108020' end='0x8108028' /&gt;&lt;slave name='delay_sda.ctrl' start='0x8108028' end='0x8108030' /&gt;&lt;slave name='delay_ctr.ctrl' start='0x8108030' end='0x8108038' /&gt;&lt;slave name='delay_tin.ctrl' start='0x8108038' end='0x8108040' /&gt;&lt;slave name='patterngen.ctrl' start='0x8108040' end='0x8108048' /&gt;&lt;slave name='probe_d1.ctrl' start='0x8108050' end='0x8108051' /&gt;&lt;slave name='probe_d2.ctrl' start='0x8108060' end='0x8108061' /&gt;&lt;slave name='deser160.s1' start='0x8108070' end='0x8108080' /&gt;&lt;slave name='fifo.s1' start='0x8108080' end='0x8108090' /&gt;&lt;slave name='adc_0.ctrl' start='0x8108090' end='0x8108098' /&gt;&lt;slave name='deser400.s1' start='0x81080A0' end='0x81080B0' /&gt;&lt;slave name='clk_stretch.ctrl' start='0x81080B0' end='0x81080B8' /&gt;&lt;slave name='clkdiv.s1' start='0x81080C0' end='0x81080D0' /&gt;&lt;slave name='eventgen.ctrl' start='0x81080D0' end='0x81080D8' /&gt;&lt;slave name='rda_delay.ctrl' start='0x81080E0' end='0x81080E4' /&gt;&lt;slave name='trigger.slave' start='0x8108100' end='0x8108140' /&gt;&lt;slave name='patterngen.data' start='0x8108200' end='0x8108400' /&gt;&lt;slave name='tse_mac.control_port' start='0x8400000' end='0x8400400' /&gt;&lt;slave name='sgdma_rx.csr' start='0x8400400' end='0x8400440' /&gt;&lt;slave name='sgdma_tx.csr' start='0x8400440' end='0x8400480' /&gt;&lt;slave name='descriptor_memory.s1' start='0x8402000' end='0x8402100' /&gt;&lt;/address-map&gt;</td>
        </tr>
        <tr>
         <td class="parametername">clockFrequency</td>
@@ -6705,7 +6933,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
        </tr>
        <tr>
         <td class="parametername">timestamp</td>
-        <td class="parametervalue">1447148548</td>
+        <td class="parametervalue">1448375759</td>
        </tr>
        <tr>
         <td class="parametername">AUTO_CLK_CLOCK_RATE</td>
@@ -6738,7 +6966,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
        </tr>
        <tr>
         <td class="parametername">TIMESTAMP</td>
-        <td class="parametervalue">1447148548</td>
+        <td class="parametervalue">1448375759</td>
        </tr>
       </table>
      </td>
@@ -10086,6 +10314,166 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     </tr>
    </table>
   </div>
+  <a name="module_daq_dma_6"> </a>
+  <div>
+   <hr/>
+   <h2>daq_dma_6</h2>daq_dma v1.1
+   <br/>
+   <div class="greydiv">
+    <table class="connectionboxes">
+     <tr>
+      <td class="neighbor" rowspan="4">
+       <a href="#module_clk_sys">clk_sys</a>
+      </td>
+      <td class="from">clk&#160;&#160;</td>
+      <td class="main" rowspan="9">daq_dma_6</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;clock</td>
+     </tr>
+     <tr>
+      <td class="from">clk_reset&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;reset</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_cpu">cpu</a>
+      </td>
+      <td class="from">data_master&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;ctrl</td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">data&#160;&#160;</td>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_ram_ext">ram_ext</a>
+      </td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;s1</td>
+     </tr>
+    </table>
+   </div>
+   <br/>
+   <br/>
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Parameters</h2>
+      <table>
+       <tr>
+        <td class="parametername">AUTO_CLOCK_CLOCK_RATE</td>
+        <td class="parametervalue">50000000</td>
+       </tr>
+       <tr>
+        <td class="parametername">deviceFamily</td>
+        <td class="parametervalue">UNKNOWN</td>
+       </tr>
+       <tr>
+        <td class="parametername">generateLegacySim</td>
+        <td class="parametervalue">false</td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>&#160;&#160;
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Software Assignments</h2>(none)</td>
+    </tr>
+   </table>
+  </div>
+  <a name="module_daq_dma_7"> </a>
+  <div>
+   <hr/>
+   <h2>daq_dma_7</h2>daq_dma v1.1
+   <br/>
+   <div class="greydiv">
+    <table class="connectionboxes">
+     <tr>
+      <td class="neighbor" rowspan="4">
+       <a href="#module_clk_sys">clk_sys</a>
+      </td>
+      <td class="from">clk&#160;&#160;</td>
+      <td class="main" rowspan="9">daq_dma_7</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;clock</td>
+     </tr>
+     <tr>
+      <td class="from">clk_reset&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;reset</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_cpu">cpu</a>
+      </td>
+      <td class="from">data_master&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;ctrl</td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">data&#160;&#160;</td>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_ram_ext">ram_ext</a>
+      </td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;s1</td>
+     </tr>
+    </table>
+   </div>
+   <br/>
+   <br/>
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Parameters</h2>
+      <table>
+       <tr>
+        <td class="parametername">AUTO_CLOCK_CLOCK_RATE</td>
+        <td class="parametervalue">50000000</td>
+       </tr>
+       <tr>
+        <td class="parametername">deviceFamily</td>
+        <td class="parametervalue">UNKNOWN</td>
+       </tr>
+       <tr>
+        <td class="parametername">generateLegacySim</td>
+        <td class="parametervalue">false</td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>&#160;&#160;
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Software Assignments</h2>(none)</td>
+    </tr>
+   </table>
+  </div>
   <a name="module_deser400"> </a>
   <div>
    <hr/>
@@ -11605,140 +11993,6 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     </tr>
    </table>
   </div>
-  <a name="module_probe_async_d1"> </a>
-  <div>
-   <hr/>
-   <h2>probe_async_d1</h2>probe_async v1.0
-   <br/>
-   <div class="greydiv">
-    <table class="connectionboxes">
-     <tr>
-      <td class="neighbor" rowspan="4">
-       <a href="#module_clk_sys">clk_sys</a>
-      </td>
-      <td class="from">clk&#160;&#160;</td>
-      <td class="main" rowspan="7">probe_async_d1</td>
-     </tr>
-     <tr>
-      <td class="to">&#160;&#160;clock</td>
-     </tr>
-     <tr>
-      <td class="from">clk_reset&#160;&#160;</td>
-     </tr>
-     <tr>
-      <td class="to">&#160;&#160;clock_reset</td>
-     </tr>
-     <tr style="height:6px">
-      <td></td>
-     </tr>
-     <tr>
-      <td class="neighbor" rowspan="2">
-       <a href="#module_peripheral_bridge">peripheral_bridge</a>
-      </td>
-      <td class="from">m0&#160;&#160;</td>
-     </tr>
-     <tr>
-      <td class="to">&#160;&#160;ctrl</td>
-     </tr>
-    </table>
-   </div>
-   <br/>
-   <br/>
-   <table class="flowbox">
-    <tr>
-     <td class="parametersbox">
-      <h2>Parameters</h2>
-      <table>
-       <tr>
-        <td class="parametername">AUTO_CLOCK_CLOCK_RATE</td>
-        <td class="parametervalue">50000000</td>
-       </tr>
-       <tr>
-        <td class="parametername">deviceFamily</td>
-        <td class="parametervalue">UNKNOWN</td>
-       </tr>
-       <tr>
-        <td class="parametername">generateLegacySim</td>
-        <td class="parametervalue">false</td>
-       </tr>
-      </table>
-     </td>
-    </tr>
-   </table>&#160;&#160;
-   <table class="flowbox">
-    <tr>
-     <td class="parametersbox">
-      <h2>Software Assignments</h2>(none)</td>
-    </tr>
-   </table>
-  </div>
-  <a name="module_probe_async_d2"> </a>
-  <div>
-   <hr/>
-   <h2>probe_async_d2</h2>probe_async v1.0
-   <br/>
-   <div class="greydiv">
-    <table class="connectionboxes">
-     <tr>
-      <td class="neighbor" rowspan="4">
-       <a href="#module_clk_sys">clk_sys</a>
-      </td>
-      <td class="from">clk&#160;&#160;</td>
-      <td class="main" rowspan="7">probe_async_d2</td>
-     </tr>
-     <tr>
-      <td class="to">&#160;&#160;clock</td>
-     </tr>
-     <tr>
-      <td class="from">clk_reset&#160;&#160;</td>
-     </tr>
-     <tr>
-      <td class="to">&#160;&#160;clock_reset</td>
-     </tr>
-     <tr style="height:6px">
-      <td></td>
-     </tr>
-     <tr>
-      <td class="neighbor" rowspan="2">
-       <a href="#module_peripheral_bridge">peripheral_bridge</a>
-      </td>
-      <td class="from">m0&#160;&#160;</td>
-     </tr>
-     <tr>
-      <td class="to">&#160;&#160;ctrl</td>
-     </tr>
-    </table>
-   </div>
-   <br/>
-   <br/>
-   <table class="flowbox">
-    <tr>
-     <td class="parametersbox">
-      <h2>Parameters</h2>
-      <table>
-       <tr>
-        <td class="parametername">AUTO_CLOCK_CLOCK_RATE</td>
-        <td class="parametervalue">50000000</td>
-       </tr>
-       <tr>
-        <td class="parametername">deviceFamily</td>
-        <td class="parametervalue">UNKNOWN</td>
-       </tr>
-       <tr>
-        <td class="parametername">generateLegacySim</td>
-        <td class="parametervalue">false</td>
-       </tr>
-      </table>
-     </td>
-    </tr>
-   </table>&#160;&#160;
-   <table class="flowbox">
-    <tr>
-     <td class="parametersbox">
-      <h2>Software Assignments</h2>(none)</td>
-    </tr>
-   </table>
-  </div>
   <a name="module_trigger"> </a>
   <div>
    <hr/>
@@ -11809,7 +12063,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
   <table class="blueBar">
    <tr>
     <td class="l">generation took 0.02 seconds</td>
-    <td class="r">rendering took 0.75 seconds</td>
+    <td class="r">rendering took 1.06 seconds</td>
    </tr>
   </table>
  </body>

@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
  *
- * Generated: Thu Nov 12 16:29:24 CET 2015
+ * Generated: Wed Nov 25 10:29:30 CET 2015
  */
 
 /*
@@ -149,7 +149,6 @@
 #define __LVDS2LCDS
 #define __PATTERNGENERATOR
 #define __PROBE
-#define __PROBE_ASYNC
 #define __PSI2C
 #define __SPI_MASTER
 #define __TRIGGER_PORT
@@ -480,6 +479,34 @@
 #define DAQ_DMA_5_NAME "/dev/daq_dma_5"
 #define DAQ_DMA_5_SPAN 32
 #define DAQ_DMA_5_TYPE "daq_dma"
+
+
+/*
+ * daq_dma_6 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_daq_dma_6 daq_dma
+#define DAQ_DMA_6_BASE 0x80021c0
+#define DAQ_DMA_6_IRQ -1
+#define DAQ_DMA_6_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define DAQ_DMA_6_NAME "/dev/daq_dma_6"
+#define DAQ_DMA_6_SPAN 32
+#define DAQ_DMA_6_TYPE "daq_dma"
+
+
+/*
+ * daq_dma_7 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_daq_dma_7 daq_dma
+#define DAQ_DMA_7_BASE 0x8002200
+#define DAQ_DMA_7_IRQ -1
+#define DAQ_DMA_7_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define DAQ_DMA_7_NAME "/dev/daq_dma_7"
+#define DAQ_DMA_7_SPAN 32
+#define DAQ_DMA_7_TYPE "daq_dma"
 
 
 /*
@@ -831,34 +858,6 @@
 
 
 /*
- * probe_async_d1 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_probe_async_d1 probe_async
-#define PROBE_ASYNC_D1_BASE 0x81000c0
-#define PROBE_ASYNC_D1_IRQ -1
-#define PROBE_ASYNC_D1_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define PROBE_ASYNC_D1_NAME "/dev/probe_async_d1"
-#define PROBE_ASYNC_D1_SPAN 1
-#define PROBE_ASYNC_D1_TYPE "probe_async"
-
-
-/*
- * probe_async_d2 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_probe_async_d2 probe_async
-#define PROBE_ASYNC_D2_BASE 0x81000d0
-#define PROBE_ASYNC_D2_IRQ -1
-#define PROBE_ASYNC_D2_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define PROBE_ASYNC_D2_NAME "/dev/probe_async_d2"
-#define PROBE_ASYNC_D2_SPAN 1
-#define PROBE_ASYNC_D2_TYPE "probe_async"
-
-
-/*
  * probe_d1 configuration
  *
  */
@@ -1071,7 +1070,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1447148548
+#define SYSID_TIMESTAMP 1448375759
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 

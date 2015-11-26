@@ -217,10 +217,8 @@ CTestboard::CTestboard()
 	DAQ_WRITE(DAQ_DMA_3_BASE, DAQ_CONTROL, 0);
 	DAQ_WRITE(DAQ_DMA_4_BASE, DAQ_CONTROL, 0);
 	DAQ_WRITE(DAQ_DMA_5_BASE, DAQ_CONTROL, 0);
-
-	// *3SDATA
-//	DAQ_WRITE(DAQ_DMA_6_BASE, DAQ_CONTROL, 0);
-//	DAQ_WRITE(DAQ_DMA_7_BASE, DAQ_CONTROL, 0);
+	DAQ_WRITE(DAQ_DMA_6_BASE, DAQ_CONTROL, 0);
+	DAQ_WRITE(DAQ_DMA_7_BASE, DAQ_CONTROL, 0);
 
 	Init();
 }
@@ -251,9 +249,8 @@ void CTestboard::Init()
 	Daq_Close(3);
 	Daq_Close(4);
 	Daq_Close(5);
-// *SDATA
-//	Daq_Close(6);
-//	Daq_Close(7);
+	Daq_Close(6);
+	Daq_Close(7);
 	Daq_DeselectAll();
 
 
@@ -664,9 +661,8 @@ void CTestboard::Poff()
 	Daq_Close(3);
 	Daq_Close(4);
 	Daq_Close(5);
-// *3SDATA
-//	Daq_Close(6);
-//	Daq_Close(7);
+	Daq_Close(6);
+	Daq_Close(7);
 
 	SetClock_(MHZ_1_25);
 }
@@ -902,22 +898,10 @@ void CTestboard::SignalProbeD1(uint8_t signal)
 	if (signal == 0)
 	{
 		_Probe1(0);
-		_Probe1a(0);
 	}
 	else if (signal <= 30)
 	{
 		_Probe1(signal);
-		_Probe1a(31);
-	}
-	else if (signal >= 100 && signal <= 129)
-	{
-		_Probe1(0);
-		_Probe1a(signal-99);
-	}
-	else
-	{
-		_Probe1(0);
-		_Probe1a(0);
 	}
 }
 
@@ -927,22 +911,10 @@ void CTestboard::SignalProbeD2(uint8_t signal)
 	if (signal == 0)
 	{
 		_Probe2(0);
-		_Probe2a(0);
 	}
-	else if (signal <= 24)
+	else if (signal <= 30)
 	{
 		_Probe2(signal);
-		_Probe2a(31);
-	}
-	else if (signal >= 100 && signal <= 129)
-	{
-		_Probe2(0);
-		_Probe2a(signal-99);
-	}
-	else
-	{
-		_Probe2(0);
-		_Probe2a(0);
 	}
 }
 
@@ -1373,7 +1345,6 @@ void CTestboard::Trigger_Send( uint8_t send)
 
 // --- Data aquisition ------------------------------------------------------
 
-// *3SDATA
 
 uint8_t CTestboard::Daq_FillLevel(uint8_t channel) {
 

@@ -84,7 +84,7 @@ inline void _Deser400_Control(unsigned int value)
 
 
 // *3SDATA
-extern const unsigned int DAQ_DMA_BASE[6];
+extern const unsigned int DAQ_DMA_BASE[8];
 
 // -- daq dma register
 #define DAQ_MEM_BASE   0
@@ -110,8 +110,6 @@ inline void Trigger_Write(short reg, unsigned long value)
 
 inline void _Probe1(unsigned char value) { IOWR_8DIRECT(PROBE_D1_BASE, 0, value); }
 inline void _Probe2(unsigned char value) { IOWR_8DIRECT(PROBE_D2_BASE, 0, value); }
-inline void _Probe1a(unsigned char value) { IOWR_8DIRECT(PROBE_ASYNC_D1_BASE, 0, value); }
-inline void _Probe2a(unsigned char value) { IOWR_8DIRECT(PROBE_ASYNC_D2_BASE, 0, value); }
 
 void Adv3224Init();
 

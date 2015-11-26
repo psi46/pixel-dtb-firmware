@@ -11,17 +11,16 @@
 
 // === DAQ ==================================================================
 
-// *3SDATA
-const unsigned int DAQ_DMA_BASE[6] =
+const unsigned int DAQ_DMA_BASE[8] =
 {
   DAQ_DMA_0_BASE,
   DAQ_DMA_1_BASE,
   DAQ_DMA_2_BASE,
   DAQ_DMA_3_BASE,
   DAQ_DMA_4_BASE,
-  DAQ_DMA_5_BASE
-//  DAQ_DMA_6_BASE,
-//  DAQ_DMA_7_BASE
+  DAQ_DMA_5_BASE,
+  DAQ_DMA_6_BASE,
+  DAQ_DMA_7_BASE
 };
 
 

@@ -4,7 +4,7 @@ PLLSPEmax	84
 PLLSPEmin	-53
 
 PLL_Name	clocks:inst14|altpll2:inst5|altpll:altpll_component|altpll2_altpll:auto_generated|pll1
-PLLJITTER	49
+PLLJITTER	41
 PLLSPEmax	84
 PLLSPEmin	-53
 

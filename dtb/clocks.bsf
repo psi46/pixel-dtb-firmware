@@ -115,20 +115,6 @@ applicable agreement for further details.
 		(line (pt 296 128)(pt 280 128))
 	)
 	(port
-		(pt 296 160)
-		(output)
-		(text "clk160" (rect 245 160 281 174)(font "Arial" (font_size 8)))
-		(text "clk160" (rect 245 152 281 166)(font "Arial" (font_size 8)))
-		(line (pt 296 160)(pt 280 160))
-	)
-	(port
-		(pt 296 176)
-		(output)
-		(text "clk320" (rect 245 184 281 198)(font "Arial" (font_size 8)))
-		(text "clk320" (rect 245 168 281 182)(font "Arial" (font_size 8)))
-		(line (pt 296 176)(pt 280 176))
-	)
-	(port
 		(pt 296 200)
 		(output)
 		(text "clk400[7..0]" (rect 245 184 309 198)(font "Arial" (font_size 8)))

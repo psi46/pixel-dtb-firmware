@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>12.11.2015 16:29:19</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1447342159460</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>25.11.2015 10:29:26</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1448443766534</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>X:\source\FPGA\pixel-dtb-firmware\software\dtb_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\dtb\dtb_system.sopcinfo</SopcDesignFile>
@@ -947,6 +947,18 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>daq_dma_6</slaveDescriptor>
+                <addressRange>0x080021C0 - 0x080021DF</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_7</slaveDescriptor>
+                <addressRange>0x08002200 - 0x0800221F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>LED</slaveDescriptor>
                 <addressRange>0x08100020 - 0x0810002F</addressRange>
                 <addressSpan>16</addressSpan>
@@ -1004,18 +1016,6 @@
                 <slaveDescriptor>main_status</slaveDescriptor>
                 <addressRange>0x081000B0 - 0x081000BF</addressRange>
                 <addressSpan>16</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>probe_async_d1</slaveDescriptor>
-                <addressRange>0x081000C0 - 0x081000C0</addressRange>
-                <addressSpan>1</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>probe_async_d2</slaveDescriptor>
-                <addressRange>0x081000D0 - 0x081000D0</addressRange>
-                <addressSpan>1</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>

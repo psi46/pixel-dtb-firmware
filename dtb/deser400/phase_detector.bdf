@@ -85,7 +85,7 @@ applicable agreement for further details.
 )
 (pin
 	(input)
-	(rect 72 544 240 560)
+	(rect 72 616 240 632)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
 	(text "reset" (rect 5 0 29 12)(font "Arial" ))
 	(pt 168 8)
@@ -145,39 +145,6 @@ applicable agreement for further details.
 		(line (pt 78 4)(pt 82 8))
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
-	)
-)
-(symbol
-	(rect 312 520 376 568)
-	(text "OR2" (rect 1 0 19 10)(font "Arial" (font_size 6)))
-	(text "inst7" (rect 3 37 26 49)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "IN2" (rect 2 23 19 35)(font "Courier New" (bold))(invisible))
-		(text "IN2" (rect 2 23 19 35)(font "Courier New" (bold))(invisible))
-		(line (pt 0 32)(pt 15 32))
-	)
-	(port
-		(pt 0 16)
-		(input)
-		(text "IN1" (rect 2 7 19 19)(font "Courier New" (bold))(invisible))
-		(text "IN1" (rect 2 7 19 19)(font "Courier New" (bold))(invisible))
-		(line (pt 0 16)(pt 15 16))
-	)
-	(port
-		(pt 64 24)
-		(output)
-		(text "OUT" (rect 48 15 65 27)(font "Courier New" (bold))(invisible))
-		(text "OUT" (rect 48 15 65 27)(font "Courier New" (bold))(invisible))
-		(line (pt 48 24)(pt 64 24))
-	)
-	(drawing
-		(line (pt 14 36)(pt 25 36))
-		(line (pt 14 13)(pt 25 13))
-		(arc (pt 7 29)(pt 7 19)(rect -14 8 19 41))
-		(arc (pt 49 24)(pt 25 13)(rect -6 13 57 76))
-		(arc (pt 25 35)(pt 49 24)(rect -6 -27 57 36))
 	)
 )
 (symbol
@@ -875,6 +842,31 @@ applicable agreement for further details.
 		(line (pt 0 0)(pt 0 0))
 	)
 )
+(symbol
+	(rect 264 608 312 640)
+	(text "NOT" (rect 1 0 21 10)(font "Arial" (font_size 6)))
+	(text "inst4" (rect 3 21 26 33)(font "Arial" ))
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN" (rect 2 7 13 19)(font "Courier New" (bold))(invisible))
+		(text "IN" (rect 2 7 13 19)(font "Courier New" (bold))(invisible))
+		(line (pt 0 16)(pt 13 16))
+	)
+	(port
+		(pt 48 16)
+		(output)
+		(text "OUT" (rect 32 7 49 19)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 32 7 49 19)(font "Courier New" (bold))(invisible))
+		(line (pt 39 16)(pt 48 16))
+	)
+	(drawing
+		(line (pt 13 25)(pt 13 7))
+		(line (pt 13 7)(pt 31 16))
+		(line (pt 13 25)(pt 31 16))
+		(circle (rect 31 12 39 20))
+	)
+)
 (connector
 	(text "aXORsel[3..0]" (rect 1179 256 1247 268)(font "Arial" ))
 	(pt 1160 272)
@@ -990,28 +982,8 @@ applicable agreement for further details.
 	(pt 1784 336)
 )
 (connector
-	(text "clk80" (rect 922 536 947 548)(font "Arial" ))
-	(pt 952 552)
-	(pt 912 552)
-)
-(connector
 	(pt 1016 536)
 	(pt 1296 536)
-)
-(connector
-	(text "clk80" (rect 914 336 939 348)(font "Arial" ))
-	(pt 944 352)
-	(pt 904 352)
-)
-(connector
-	(text "clk80" (rect 1394 272 1419 284)(font "Arial" ))
-	(pt 1424 288)
-	(pt 1384 288)
-)
-(connector
-	(text "clk80" (rect 1570 272 1595 284)(font "Arial" ))
-	(pt 1600 288)
-	(pt 1560 288)
 )
 (connector
 	(text "CLK400" (rect 472 272 513 287)(font "Arial Narrow" (color 255 0 0)(font_size 8)(bold)))
@@ -1035,11 +1007,6 @@ applicable agreement for further details.
 	(pt 840 272)
 	(pt 880 272)
 	(bus)
-)
-(connector
-	(text "clk80" (rect 746 272 771 284)(font "Arial" ))
-	(pt 776 288)
-	(pt 736 288)
 )
 (connector
 	(text "lLXOR[7..0]" (rect 616 256 672 268)(font "Arial" ))
@@ -1092,22 +1059,12 @@ applicable agreement for further details.
 	(pt 952 536)
 )
 (connector
-	(text "clk80" (rect 778 536 803 548)(font "Arial" ))
-	(pt 768 552)
-	(pt 808 552)
-)
-(connector
 	(pt 736 536)
 	(pt 760 536)
 )
 (connector
 	(pt 760 536)
 	(pt 808 536)
-)
-(connector
-	(text "clk80" (rect 642 536 667 548)(font "Arial" ))
-	(pt 632 552)
-	(pt 672 552)
 )
 (connector
 	(pt 392 544)
@@ -1130,11 +1087,6 @@ applicable agreement for further details.
 	(pt 608 536)
 )
 (connector
-	(text "clk80" (rect 402 544 427 556)(font "Arial" ))
-	(pt 392 560)
-	(pt 432 560)
-)
-(connector
 	(pt 392 496)
 	(pt 480 496)
 )
@@ -1143,20 +1095,8 @@ applicable agreement for further details.
 	(pt 544 544)
 )
 (connector
-	(pt 376 544)
-	(pt 392 544)
-)
-(connector
 	(pt 392 544)
 	(pt 432 544)
-)
-(connector
-	(pt 296 536)
-	(pt 312 536)
-)
-(connector
-	(pt 296 536)
-	(pt 296 304)
 )
 (connector
 	(pt 528 272)
@@ -1164,8 +1104,43 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 312 552)
-	(pt 240 552)
+	(text "CLK80" (rect 402 544 435 556)(font "Arial" ))
+	(pt 392 560)
+	(pt 432 560)
+)
+(connector
+	(text "CLK80" (rect 642 536 675 548)(font "Arial" ))
+	(pt 632 552)
+	(pt 672 552)
+)
+(connector
+	(text "CLK80" (rect 778 536 811 548)(font "Arial" ))
+	(pt 768 552)
+	(pt 808 552)
+)
+(connector
+	(text "CLK80" (rect 922 536 955 548)(font "Arial" ))
+	(pt 912 552)
+	(pt 952 552)
+)
+(connector
+	(text "CLK80" (rect 914 336 947 348)(font "Arial" ))
+	(pt 904 352)
+	(pt 944 352)
+)
+(connector
+	(text "CLK80" (rect 1394 272 1427 284)(font "Arial" ))
+	(pt 1384 288)
+	(pt 1424 288)
+)
+(connector
+	(text "CLK80" (rect 1570 272 1603 284)(font "Arial" ))
+	(pt 1560 288)
+	(pt 1600 288)
+)
+(connector
+	(pt 296 304)
+	(pt 296 544)
 )
 (connector
 	(pt 240 304)
@@ -1175,6 +1150,62 @@ applicable agreement for further details.
 	(pt 296 304)
 	(pt 528 304)
 )
+(connector
+	(pt 296 544)
+	(pt 392 544)
+)
+(connector
+	(pt 240 624)
+	(pt 264 624)
+)
+(connector
+	(pt 984 624)
+	(pt 984 592)
+)
+(connector
+	(pt 840 592)
+	(pt 840 624)
+)
+(connector
+	(text "res" (rect 322 608 337 620)(font "Arial" ))
+	(pt 984 624)
+	(pt 840 624)
+)
+(connector
+	(pt 704 592)
+	(pt 704 624)
+)
+(connector
+	(pt 840 624)
+	(pt 704 624)
+)
+(connector
+	(pt 464 600)
+	(pt 464 624)
+)
+(connector
+	(pt 704 624)
+	(pt 464 624)
+)
+(connector
+	(pt 464 624)
+	(pt 312 624)
+)
+(connector
+	(text "res" (rect 792 337 804 352)(font "Arial" )(vertical))
+	(pt 808 328)
+	(pt 808 360)
+)
+(connector
+	(text "res" (rect 1440 337 1452 352)(font "Arial" )(vertical))
+	(pt 1456 328)
+	(pt 1456 360)
+)
+(connector
+	(text "CLK80" (rect 746 272 779 284)(font "Arial" ))
+	(pt 736 288)
+	(pt 776 288)
+)
 (junction (pt 1512 272))
 (junction (pt 1296 432))
 (junction (pt 880 272))
@@ -1182,4 +1213,7 @@ applicable agreement for further details.
 (junction (pt 760 536))
 (junction (pt 392 544))
 (junction (pt 296 304))
+(junction (pt 840 624))
+(junction (pt 704 624))
+(junction (pt 464 624))
 (line (pt 472 288)(pt 480 288)(color 255 0 0)(line_width 3))
