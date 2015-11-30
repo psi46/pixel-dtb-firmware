@@ -1,6 +1,6 @@
 ## Generated SDC file "dtb_report.sdc"
 
-## Copyright (C) 1991-2014 Altera Corporation
+## Copyright (C) 1991-2013 Altera Corporation
 ## Your use of Altera Corporation's design tools, logic functions 
 ## and other software and tools, and its AMPP partner logic 
 ## functions, and any output files from any of the foregoing 
@@ -17,9 +17,9 @@
 
 ## VENDOR  "Altera"
 ## PROGRAM "Quartus II"
-## VERSION "Version 13.1.4 Build 182 03/12/2014 SJ Full Version"
+## VERSION "Version 13.1.0 Build 162 10/23/2013 SJ Full Version"
 
-## DATE    "Mon Nov 30 15:53:17 2015"
+## DATE    "Mon Nov 30 22:53:05 2015"
 
 ##
 ## DEVICE  "EP3C40F484C6"

@@ -1031,14 +1031,12 @@ set_global_assignment -name LL_WIDTH 6 -section_id deser4
 set_global_assignment -name LL_HEIGHT 1 -section_id deser4
 set_global_assignment -name LL_ORIGIN X1_Y16 -section_id deser4
 
-set_instance_assignment -name LL_MEMBER_OF deser1 -to "*|deser400_PSI:ds400_I|oversampling:ovs|*" -section_id deser1
 set_instance_assignment -name LL_MEMBER_OF deser2 -to "*|deser400_PSI:ds400_II|oversampling:ovs|*" -section_id deser2
 set_instance_assignment -name LL_MEMBER_OF deser3 -to "*|deser400_PSI:ds400_III|oversampling:ovs|*" -section_id deser3
 set_instance_assignment -name LL_MEMBER_OF deser4 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|*" -section_id deser4
 
 # set_location_assignment IOIBUF_X0_Y21_N15 -to LVDS2LCDS_sdata_III~input
 
-set_instance_assignment -name LL_PRIORITY 1 -to "*|deser400_PSI:ds400_I|oversampling:ovs|*" -section_id deser1
 
 set_global_assignment -name QIP_FILE deser400/deser400.qip
 set_global_assignment -name SDC_FILE clocks.sdc
@@ -1082,5 +1080,7 @@ set_global_assignment -name QIP_FILE pll_system.qip
 set_global_assignment -name QIP_FILE delay.qip
 set_global_assignment -name QIP_FILE datamux.qip
 set_global_assignment -name VERILOG_FILE daq_switch.v
+set_instance_assignment -name LL_MEMBER_OF deser1 -to "*|deser400_PSI:ds400_I|oversampling:ovs|*" -section_id deser1
+set_instance_assignment -name LL_PRIORITY 1 -to "*|deser400_PSI:ds400_I|oversampling:ovs|*" -section_id deser1
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY inst_74401 -to "dtb_system:inst" -section_id "dtb_system:inst"

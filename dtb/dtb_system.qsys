@@ -228,14 +228,6 @@
          type = "int";
       }
    }
-   element sgdma_tx.csr
-   {
-      datum baseAddress
-      {
-         value = "138413120";
-         type = "long";
-      }
-   }
    element usb_tx_dma.csr
    {
       datum baseAddress
@@ -252,12 +244,20 @@
          type = "long";
       }
    }
-   element probe_async_d2.ctrl
+   element sgdma_tx.csr
    {
       datum baseAddress
       {
-         value = "208";
-         type = "String";
+         value = "138413120";
+         type = "long";
+      }
+   }
+   element adc_0.ctrl
+   {
+      datum baseAddress
+      {
+         value = "144";
+         type = "long";
       }
    }
    element clk_stretch.ctrl
@@ -265,30 +265,6 @@
       datum baseAddress
       {
          value = "176";
-         type = "long";
-      }
-   }
-   element rda_delay.ctrl
-   {
-      datum baseAddress
-      {
-         value = "224";
-         type = "String";
-      }
-   }
-   element patterngen.ctrl
-   {
-      datum baseAddress
-      {
-         value = "64";
-         type = "long";
-      }
-   }
-   element delay_sda.ctrl
-   {
-      datum baseAddress
-      {
-         value = "40";
          type = "long";
       }
    }
@@ -300,35 +276,11 @@
          type = "String";
       }
    }
-   element probe_d1.ctrl
+   element delay_tin.ctrl
    {
       datum baseAddress
       {
-         value = "80";
-         type = "long";
-      }
-   }
-   element eventgen.ctrl
-   {
-      datum baseAddress
-      {
-         value = "208";
-         type = "String";
-      }
-   }
-   element deser400_ctrl.ctrl
-   {
-      datum baseAddress
-      {
-         value = "384";
-         type = "String";
-      }
-   }
-   element delay_ctr.ctrl
-   {
-      datum baseAddress
-      {
-         value = "48";
+         value = "56";
          type = "long";
       }
    }
@@ -340,12 +292,76 @@
          type = "long";
       }
    }
+   element deser400_ctrl.ctrl
+   {
+      datum baseAddress
+      {
+         value = "384";
+         type = "String";
+      }
+   }
+   element probe_async_d2.ctrl
+   {
+      datum baseAddress
+      {
+         value = "208";
+         type = "String";
+      }
+   }
+   element delay_sda.ctrl
+   {
+      datum baseAddress
+      {
+         value = "40";
+         type = "long";
+      }
+   }
+   element eventgen.ctrl
+   {
+      datum baseAddress
+      {
+         value = "208";
+         type = "String";
+      }
+   }
+   element delay_ctr.ctrl
+   {
+      datum baseAddress
+      {
+         value = "48";
+         type = "long";
+      }
+   }
+   element patterngen.ctrl
+   {
+      datum baseAddress
+      {
+         value = "64";
+         type = "long";
+      }
+   }
    element daq_dma_0.ctrl
    {
       datum baseAddress
       {
          value = "134225984";
          type = "String";
+      }
+   }
+   element rda_delay.ctrl
+   {
+      datum baseAddress
+      {
+         value = "224";
+         type = "String";
+      }
+   }
+   element probe_d1.ctrl
+   {
+      datum baseAddress
+      {
+         value = "80";
+         type = "long";
       }
    }
    element delay_clk.ctrl
@@ -358,22 +374,6 @@
       datum baseAddress
       {
          value = "32";
-         type = "long";
-      }
-   }
-   element delay_tin.ctrl
-   {
-      datum baseAddress
-      {
-         value = "56";
-         type = "long";
-      }
-   }
-   element adc_0.ctrl
-   {
-      datum baseAddress
-      {
-         value = "144";
          type = "long";
       }
    }
@@ -773,43 +773,6 @@
          type = "long";
       }
    }
-   element deser160.s1
-   {
-      datum baseAddress
-      {
-         value = "112";
-         type = "long";
-      }
-   }
-   element ROC_addr.s1
-   {
-      datum baseAddress
-      {
-         value = "112";
-         type = "long";
-      }
-   }
-   element SDC_SPI2.s1
-   {
-      datum baseAddress
-      {
-         value = "128";
-         type = "long";
-      }
-   }
-   element sys_timer.s1
-   {
-      datum _tags
-      {
-         value = "";
-         type = "String";
-      }
-      datum baseAddress
-      {
-         value = "134225920";
-         type = "long";
-      }
-   }
    element deser400.s1
    {
       datum baseAddress
@@ -826,6 +789,30 @@
          type = "long";
       }
    }
+   element clkdiv.s1
+   {
+      datum baseAddress
+      {
+         value = "192";
+         type = "long";
+      }
+   }
+   element deser160.s1
+   {
+      datum baseAddress
+      {
+         value = "112";
+         type = "long";
+      }
+   }
+   element descriptor_memory.s1
+   {
+      datum baseAddress
+      {
+         value = "138420224";
+         type = "long";
+      }
+   }
    element ram_ext.s1
    {
       datum _lockedAddress
@@ -839,19 +826,32 @@
          type = "long";
       }
    }
-   element clkdiv.s1
+   element sys_timer.s1
    {
+      datum _tags
+      {
+         value = "";
+         type = "String";
+      }
       datum baseAddress
       {
-         value = "192";
+         value = "134225920";
          type = "long";
       }
    }
-   element descriptor_memory.s1
+   element ROC_addr.s1
    {
       datum baseAddress
       {
-         value = "138420224";
+         value = "112";
+         type = "long";
+      }
+   }
+   element SDC_SPI2.s1
+   {
+      datum baseAddress
+      {
+         value = "128";
          type = "long";
       }
    }
@@ -891,14 +891,6 @@
          type = "boolean";
       }
    }
-   element i2c_external.slave
-   {
-      datum baseAddress
-      {
-         value = "144";
-         type = "long";
-      }
-   }
    element i2c_main.slave
    {
       datum baseAddress
@@ -913,6 +905,14 @@
       {
          value = "256";
          type = "String";
+      }
+   }
+   element i2c_external.slave
+   {
+      datum baseAddress
+      {
+         value = "144";
+         type = "long";
       }
    }
    element SDC_SPI.spi_control_port
@@ -1174,10 +1174,16 @@
    dir="end" />
  <interface name="sig_d1a" internal="probe_async_d1.signal" />
  <interface name="sig_d2a" internal="probe_async_d2.signal" />
- <interface name="trigger" internal="trigger.trigger" type="conduit" dir="end" />
+ <interface name="trigger" internal="trigger.trigger" />
+ <interface name="deser400_ctrl" internal="deser400_ctrl.deser400_ctrl" />
  <interface
-   name="deser400_ctrl"
-   internal="deser400_ctrl.deser400_ctrl"
+   name="trigger_port"
+   internal="trigger.trigger_io"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="deser400_port"
+   internal="deser400_ctrl.deser400_io"
    type="conduit"
    dir="end" />
  <module kind="clock_source" version="13.1" enabled="1" name="clk_sys">
@@ -1969,7 +1975,9 @@
    kind="deser400_control"
    version="1.0"
    enabled="1"
-   name="deser400_ctrl" />
+   name="deser400_ctrl">
+  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="40000000" />
+ </module>
  <connection
    kind="avalon"
    version="13.1"

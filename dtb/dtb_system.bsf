@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2014 Altera Corporation
+Copyright (C) 1991-2013 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -502,8 +502,8 @@ applicable agreement for further details.
 	(port
 		(pt 0 3912)
 		(input)
-		(text "deser400_ctrl_readdata[31..0]" (rect 0 0 119 12)(font "Arial" (font_size 8)))
-		(text "deser400_ctrl_readdata[31..0]" (rect 4 3901 178 3912)(font "Arial" (font_size 8)))
+		(text "deser400_port_readdata[31..0]" (rect 0 0 122 12)(font "Arial" (font_size 8)))
+		(text "deser400_port_readdata[31..0]" (rect 4 3901 178 3912)(font "Arial" (font_size 8)))
 		(line (pt 0 3912)(pt 208 3912)(line_width 3))
 	)
 	(port
@@ -1111,36 +1111,36 @@ applicable agreement for further details.
 	(port
 		(pt 0 3808)
 		(output)
-		(text "trigger_export[36..0]" (rect 0 0 80 12)(font "Arial" (font_size 8)))
-		(text "trigger_export[36..0]" (rect 4 3797 130 3808)(font "Arial" (font_size 8)))
+		(text "trigger_port_export[36..0]" (rect 0 0 101 12)(font "Arial" (font_size 8)))
+		(text "trigger_port_export[36..0]" (rect 4 3797 160 3808)(font "Arial" (font_size 8)))
 		(line (pt 0 3808)(pt 208 3808)(line_width 3))
 	)
 	(port
 		(pt 0 3848)
 		(output)
-		(text "deser400_ctrl_write" (rect 0 0 79 12)(font "Arial" (font_size 8)))
-		(text "deser400_ctrl_write" (rect 4 3837 118 3848)(font "Arial" (font_size 8)))
+		(text "deser400_port_write" (rect 0 0 82 12)(font "Arial" (font_size 8)))
+		(text "deser400_port_write" (rect 4 3837 118 3848)(font "Arial" (font_size 8)))
 		(line (pt 0 3848)(pt 208 3848)(line_width 1))
 	)
 	(port
 		(pt 0 3864)
 		(output)
-		(text "deser400_ctrl_read" (rect 0 0 79 12)(font "Arial" (font_size 8)))
-		(text "deser400_ctrl_read" (rect 4 3853 112 3864)(font "Arial" (font_size 8)))
+		(text "deser400_port_read" (rect 0 0 82 12)(font "Arial" (font_size 8)))
+		(text "deser400_port_read" (rect 4 3853 112 3864)(font "Arial" (font_size 8)))
 		(line (pt 0 3864)(pt 208 3864)(line_width 1))
 	)
 	(port
 		(pt 0 3880)
 		(output)
-		(text "deser400_ctrl_address[3..0]" (rect 0 0 113 12)(font "Arial" (font_size 8)))
-		(text "deser400_ctrl_address[3..0]" (rect 4 3869 166 3880)(font "Arial" (font_size 8)))
+		(text "deser400_port_address[3..0]" (rect 0 0 116 12)(font "Arial" (font_size 8)))
+		(text "deser400_port_address[3..0]" (rect 4 3869 166 3880)(font "Arial" (font_size 8)))
 		(line (pt 0 3880)(pt 208 3880)(line_width 3))
 	)
 	(port
 		(pt 0 3896)
 		(output)
-		(text "deser400_ctrl_writedata[31..0]" (rect 0 0 119 12)(font "Arial" (font_size 8)))
-		(text "deser400_ctrl_writedata[31..0]" (rect 4 3885 184 3896)(font "Arial" (font_size 8)))
+		(text "deser400_port_writedata[31..0]" (rect 0 0 122 12)(font "Arial" (font_size 8)))
+		(text "deser400_port_writedata[31..0]" (rect 4 3885 184 3896)(font "Arial" (font_size 8)))
 		(line (pt 0 3896)(pt 208 3896)(line_width 3))
 	)
 	(port
@@ -1417,9 +1417,9 @@ applicable agreement for further details.
 		(text "sig_out40" (rect 213 3731 480 7472)(font "Arial" (color 0 0 0)))
 		(text "sig_out80" (rect 213 3747 480 7504)(font "Arial" (color 0 0 0)))
 		(text "sig_in" (rect 213 3763 462 7536)(font "Arial" (color 0 0 0)))
-		(text "trigger" (rect 171 3779 384 7571)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "trigger_port" (rect 140 3779 352 7571)(font "Arial" (color 128 0 0)(font_size 9)))
 		(text "export" (rect 213 3803 462 7616)(font "Arial" (color 0 0 0)))
-		(text "deser400_ctrl" (rect 129 3819 336 7651)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "deser400_port" (rect 124 3819 326 7651)(font "Arial" (color 128 0 0)(font_size 9)))
 		(text "write" (rect 213 3843 456 7696)(font "Arial" (color 0 0 0)))
 		(text "read" (rect 213 3859 450 7728)(font "Arial" (color 0 0 0)))
 		(text "address" (rect 213 3875 468 7760)(font "Arial" (color 0 0 0)))
