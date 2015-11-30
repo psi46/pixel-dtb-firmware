@@ -45,6 +45,13 @@ applicable agreement for further details.
 		(line (pt 0 56)(pt 16 56))
 	)
 	(port
+		(pt 0 72)
+		(input)
+		(text "enable" (rect 24 64 61 78)(font "Arial" (font_size 8)))
+		(text "enable" (rect 24 64 61 78)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 16 72))
+	)
+	(port
 		(pt 160 88)
 		(output)
 		(text "samples[7..0]" (rect -32 24 35 36)(font "Arial" ))

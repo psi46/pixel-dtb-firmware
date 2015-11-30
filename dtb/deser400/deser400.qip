@@ -1,5 +1,7 @@
 set_global_assignment -name SDC_FILE     [file join $::quartus(qip_path) "deser400.sdc"]
 set_global_assignment -name BDF_FILE     [file join $::quartus(qip_path) "deser_tbm.bdf"]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "deser400_ctrl.v"]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "deser400_tp_mux.v"]
 set_global_assignment -name BDF_FILE     [file join $::quartus(qip_path) "deser400_PSI.bdf"]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "deser400_gate.v"]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "oversampling.v"]

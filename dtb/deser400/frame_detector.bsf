@@ -52,17 +52,24 @@ applicable agreement for further details.
 		(line (pt 0 96)(pt 16 96))
 	)
 	(port
+		(pt 0 80)
+		(input)
+		(text "enable" (rect 24 72 61 86)(font "Arial" (font_size 8)))
+		(text "enable" (rect 24 72 61 86)(font "Arial" (font_size 8)))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
 		(pt 168 96)
 		(output)
 		(text "pdata[4..0]" (rect 0 0 53 12)(font "Arial" ))
-		(text "pdata[4..0]" (rect 103 91 147 103)(font "Arial" ))
+		(text "pdata[4..0]" (rect 103 91 156 103)(font "Arial" ))
 		(line (pt 168 96)(pt 152 96)(line_width 3))
 	)
 	(port
 		(pt 168 64)
 		(output)
 		(text "error" (rect 0 0 22 12)(font "Arial" ))
-		(text "error" (rect 129 59 147 71)(font "Arial" ))
+		(text "error" (rect 129 59 151 71)(font "Arial" ))
 		(line (pt 168 64)(pt 152 64))
 	)
 	(drawing

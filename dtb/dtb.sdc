@@ -20,7 +20,4 @@ set_false_path -from {dtb_system:inst|delay_out:delay_*|ext_sel} -to {*}
 
 set_false_path -from {dtb_system:inst|dtb_system_main_control:main_control|data_out[*]}
 
-set_false_path -from {dtb_system:inst|probe_async:probe_async_d1|sel[*]} -to {*}
-set_false_path -from {dtb_system:inst|probe_async:probe_async_d2|sel[*]} -to {*}
-
 write_sdc -expand "dtb_report.sdc"

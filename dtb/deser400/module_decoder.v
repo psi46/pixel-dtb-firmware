@@ -14,13 +14,13 @@ module module_decoder
 	
 	input [3:0]din,
 	output write,
-	output reg [15:0]data
+	output reg [15:0]data,
+	
+	output reg tbm_hdr,
+	output reg tbm_trl,
+	output reg roc_hdr
 );
 
-	reg tbm_hdr;
-	reg tbm_trl;
-	reg roc_hdr;
-	
 	// --- delay chain
 	reg [3:0]data4;
 	reg [3:0]data3;

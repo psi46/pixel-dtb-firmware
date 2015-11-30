@@ -91,6 +91,9 @@ class CTestboard
 	bool daq_select_deser400;
 	bool daq_select_datasim;
 
+	uint32_t deser400_ena;
+	uint32_t deser400_pdena;
+
 	uint8_t sig_level_clk;
 	uint8_t sig_level_ctr;
 	uint8_t sig_level_sda;
@@ -258,45 +261,29 @@ public:
 	#define PROBE_ADC_START     22
 	#define PROBE_ADC_SGATE     23
 	#define PROBE_ADC_S         24
-
-	#define PROBE_TBM0_GATE    100
-	#define PROBE_TBM0_DATA    101
-	#define PROBE_TBM0_TBMHDR  102
-	#define PROBE_TBM0_ROCHDR  103
-	#define PROBE_TBM0_TBMTRL  104
-
-	#define PROBE_TBM1_GATE    105
-	#define PROBE_TBM1_DATA    106
-	#define PROBE_TBM1_TBMHDR  107
-	#define PROBE_TBM1_ROCHDR  108
-	#define PROBE_TBM1_TBMTRL  109
-
-	#define PROBE_TBM2_GATE    110
-	#define PROBE_TBM2_DATA    111
-	#define PROBE_TBM2_TBMHDR  112
-	#define PROBE_TBM2_ROCHDR  113
-	#define PROBE_TBM2_TBMTRL  114
-
-	#define PROBE_TBM3_GATE    115
-	#define PROBE_TBM3_DATA    116
-	#define PROBE_TBM3_TBMHDR  117
-	#define PROBE_TBM3_ROCHDR  118
-	#define PROBE_TBM3_TBMTRL  119
-
-	#define PROBE_TBM4_GATE    120
-	#define PROBE_TBM4_DATA    121
-	#define PROBE_TBM4_TBMHDR  122
-	#define PROBE_TBM4_ROCHDR  123
-	#define PROBE_TBM4_TBMTRL  124
-
-	#define PROBE_TBM5_GATE    125
-	#define PROBE_TBM5_DATA    126
-	#define PROBE_TBM5_TBMHDR  127
-	#define PROBE_TBM5_ROCHDR  128
-	#define PROBE_TBM5_TBMTRL  129
+	#define PROBE_DS_GATE       29
 
 	RPC_EXPORT void SignalProbeD1(uint8_t signal);
 	RPC_EXPORT void SignalProbeD2(uint8_t signal);
+
+
+	// DESER400
+	#define PROBE_FRAME_ERROR    0
+	#define PROBE_CODE_ERROR     1
+	#define PROBE_ERROR          2  // FRAME or CODE
+	#define PROBE_A_HEADER       3
+	#define PROBE_A_PACKET       4
+	#define PROBE_A_TBM_HDR      5
+	#define PROBE_A_ROC_HDR      6
+	#define PROBE_A_TBM_TRL      7
+	#define PROBE_B_HEADER       8
+	#define PROBE_B_PACKET       9
+	#define PROBE_B_TBM_HDR     10
+	#define PROBE_B_ROC_HDR     11
+	#define PROBE_B_TBM_TRL     12
+
+	RPC_EXPORT void SignalProbeDeserD1(uint8_t deser, uint8_t signal);
+	RPC_EXPORT void SignalProbeDeserD2(uint8_t deser, uint8_t signal);
 
 
 	// --- analog signal probe ----------------------------------------------
@@ -431,6 +418,44 @@ public:
 	RPC_EXPORT void Daq_Select_Datagenerator(uint16_t startvalue);
 
 	RPC_EXPORT void Daq_DeselectAll();
+
+	// --- DESER400 configuration -------------------------------------------
+	RPC_EXPORT void Deser400_Start(uint8_t deser);
+	RPC_EXPORT void Deser400_Stop(uint8_t deser);
+	RPC_EXPORT void Deser400_StopAll();
+
+	RPC_EXPORT void Deser400_SetPhase(uint8_t deser, uint8_t phase);
+	RPC_EXPORT void Deser400_SetPhaseAuto(uint8_t deser);
+	RPC_EXPORT void Deser400_SetPhaseAutoAll();
+
+	RPC_EXPORT uint8_t Deser400_GetXor(uint8_t deser);
+	RPC_EXPORT uint8_t Deser400_GetPhase(uint8_t deser);
+
+
+	/* --- deser400 gate
+		width: gate length
+		  0       200 ns
+		  1       800 ns
+		  2       3.2 us
+		  3      12.8 us
+		  4      51.2 us
+		  5     204.8 us
+		  6       1.6 ms (default)
+		  7      26.2 ms
+
+		period: gate repetition periode
+		  0       800 ns
+		  1       3.2 us
+		  2      12.8 us
+		  3      51.2 us
+		  4     204.8 us
+		  5       1.6 ms
+		  6      13.1 ms
+		  7     209.7 ms (default)
+	*/
+	RPC_EXPORT void Deser400_GateRun(uint8_t width, uint8_t period);
+	RPC_EXPORT void Deser400_GateSingle(uint8_t width);
+	RPC_EXPORT void Deser400_GateStop();
 
 
 	// --- ROC/module Communication -----------------------------------------

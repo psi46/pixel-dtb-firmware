@@ -8,6 +8,7 @@ module frame_detector
 	input clk400,
 	input clk80,
 	input reset,
+	input enable,
 	
 	input sdata,
 	output reg [4:0]pdata,
@@ -30,7 +31,7 @@ module frame_detector
 			p <= 0;
 			e <= 0;
 		end
-		else
+		else if (enable)
 		begin
 			s <= {s[4:0],sdata};
 			detect <= (s[5:0] == 6'b100000) || (s[5:0] == 6'b011111);
@@ -47,10 +48,15 @@ module frame_detector
 			pdata <= 5'd0;
 			error <= 0;
 		end
-		else
+		else if (enable)
 		begin
 			pdata <= p;
 			error <= e;
+		end
+		else
+		begin
+			pdata <= 5'd0;
+			error <= 0;
 		end
 	end
 

@@ -45,17 +45,24 @@ applicable agreement for further details.
 		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
 	(port
+		(pt 0 64)
+		(input)
+		(text "enable" (rect 24 56 61 70)(font "Arial" (font_size 8)))
+		(text "enable" (rect 24 56 61 70)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
 		(pt 168 80)
 		(output)
 		(text "dout[3..0]" (rect 0 0 47 12)(font "Arial" ))
-		(text "dout[3..0]" (rect 108 75 147 87)(font "Arial" ))
+		(text "dout[3..0]" (rect 108 75 155 87)(font "Arial" ))
 		(line (pt 168 80)(pt 152 80)(line_width 3))
 	)
 	(port
 		(pt 168 48)
 		(output)
 		(text "error" (rect 0 0 22 12)(font "Arial" ))
-		(text "error" (rect 129 43 147 55)(font "Arial" ))
+		(text "error" (rect 129 43 151 55)(font "Arial" ))
 		(line (pt 168 48)(pt 152 48))
 	)
 	(drawing

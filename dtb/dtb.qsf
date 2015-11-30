@@ -928,22 +928,22 @@ set_location_assignment FF_X2_Y21_N5 -to "*|deser400_PSI:ds400_III|oversampling:
 
 ####### sdata4
 set_location_assignment FF_X5_Y16_N1 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[0]"
-set_location_assignment FF_X4_V16_N1 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[1]"
-set_location_assignment FF_X3_V16_N1 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[2]"
-set_location_assignment FF_X2_V16_N1 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[3]"
-set_location_assignment FF_X5_V16_N3 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[4]"
-set_location_assignment FF_X4_V16_N3 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[5]"
-set_location_assignment FF_X3_V16_N3 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[6]"
-set_location_assignment FF_X2_V16_N3 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[7]"
+set_location_assignment FF_X4_Y16_N1 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[1]"
+set_location_assignment FF_X3_Y16_N1 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[2]"
+set_location_assignment FF_X2_Y16_N1 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[3]"
+set_location_assignment FF_X5_Y16_N3 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[4]"
+set_location_assignment FF_X4_Y16_N3 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[5]"
+set_location_assignment FF_X3_Y16_N3 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[6]"
+set_location_assignment FF_X2_Y16_N3 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s1[7]"
 
-set_location_assignment FF_X5_V16_N5 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[0]"
-set_location_assignment FF_X5_V16_N7 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[1]"
-set_location_assignment FF_X5_V16_N9 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[2]"
-set_location_assignment FF_X5_V16_N11 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[3]"
-set_location_assignment FF_X5_V16_N13 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[4]"
-set_location_assignment FF_X4_V16_N5 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[5]"
-set_location_assignment FF_X3_V16_N5 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[6]"
-set_location_assignment FF_X2_V16_N5 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[7]"
+set_location_assignment FF_X5_Y16_N5 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[0]"
+set_location_assignment FF_X5_Y16_N7 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[1]"
+set_location_assignment FF_X5_Y16_N9 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[2]"
+set_location_assignment FF_X5_Y16_N11 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[3]"
+set_location_assignment FF_X5_Y16_N13 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[4]"
+set_location_assignment FF_X4_Y16_N5 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[5]"
+set_location_assignment FF_X3_Y16_N5 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[6]"
+set_location_assignment FF_X2_Y16_N5 -to "*|deser400_PSI:ds400_IV|oversampling:ovs|s2[7]"
 
 
 

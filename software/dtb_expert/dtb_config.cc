@@ -14,6 +14,7 @@ void DTB_CONFIG::Init()
 {
 	board = 0;
 	hw_version = "";
+	hw_options = "";
 	usb_id = "";
 	mac_address = 0;
 	hostname = "";
@@ -74,6 +75,7 @@ bool DTB_CONFIG::Read(const char *filename)
 		// Check if Line is a known parameter (if so convert it to an appropriate value)
 		if     (strcmp(tag, "BOARD")       == 0) board = GetInt(par);
 		else if(strcmp(tag, "HW-VERSION")  == 0) hw_version = GetString(par);
+		else if(strcmp(tag, "OPTIONS")     == 0) hw_options = GetString(par);
 		else if(strcmp(tag, "USB-ID")      == 0) usb_id = GetString(par);
 		else if(strcmp(tag, "MAC-ADDRESS") == 0) mac_address = GetULL(par, 16);
 		else if(strcmp(tag, "HOSTNAME")    == 0) hostname = GetString(par);

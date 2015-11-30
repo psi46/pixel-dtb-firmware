@@ -1,0 +1,246 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2014 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 288 576)
+	(text "deser400_ctrl" (rect 5 8 71 20)(font "Arial" ))
+	(text "inst" (rect 16 496 33 508)(font "Arial" ))
+	(port
+		(pt 0 40)
+		(input)
+		(text "clk" (rect 0 40 14 52)(font "Arial" ))
+		(text "clk" (rect 21 35 35 47)(font "Arial" ))
+		(line (pt 0 40)(pt 16 40))
+	)
+	(port
+		(pt 0 56)
+		(input)
+		(text "reset" (rect 0 40 24 52)(font "Arial" ))
+		(text "reset" (rect 21 51 45 63)(font "Arial" ))
+		(line (pt 0 56)(pt 16 56))
+	)
+	(port
+		(pt 0 88)
+		(input)
+		(text "read" (rect 0 40 21 52)(font "Arial" ))
+		(text "read" (rect 21 83 42 95)(font "Arial" ))
+		(line (pt 0 88)(pt 16 88))
+	)
+	(port
+		(pt 0 104)
+		(input)
+		(text "write" (rect 0 40 22 52)(font "Arial" ))
+		(text "write" (rect 21 99 43 111)(font "Arial" ))
+		(line (pt 0 104)(pt 16 104))
+	)
+	(port
+		(pt 0 136)
+		(input)
+		(text "writedata[31..0]" (rect 0 40 75 52)(font "Arial" ))
+		(text "writedata[31..0]" (rect 21 131 96 143)(font "Arial" ))
+		(line (pt 0 136)(pt 16 136)(line_width 3))
+	)
+	(port
+		(pt 0 216)
+		(input)
+		(text "xorsum_I[7..0]" (rect 0 40 71 52)(font "Arial" ))
+		(text "xorsum_I[7..0]" (rect 21 211 92 223)(font "Arial" ))
+		(line (pt 0 216)(pt 16 216)(line_width 3))
+	)
+	(port
+		(pt 0 232)
+		(input)
+		(text "xorsum_II[7..0]" (rect 0 40 75 52)(font "Arial" ))
+		(text "xorsum_II[7..0]" (rect 21 227 96 239)(font "Arial" ))
+		(line (pt 0 232)(pt 16 232)(line_width 3))
+	)
+	(port
+		(pt 0 248)
+		(input)
+		(text "xorsum_III[7..0]" (rect 0 40 79 52)(font "Arial" ))
+		(text "xorsum_III[7..0]" (rect 21 243 100 255)(font "Arial" ))
+		(line (pt 0 248)(pt 16 248)(line_width 3))
+	)
+	(port
+		(pt 0 264)
+		(input)
+		(text "xorsum_IV[7..0]" (rect 0 40 79 52)(font "Arial" ))
+		(text "xorsum_IV[7..0]" (rect 21 259 100 271)(font "Arial" ))
+		(line (pt 0 264)(pt 16 264)(line_width 3))
+	)
+	(port
+		(pt 0 296)
+		(input)
+		(text "phsel_I[2..0]" (rect 0 40 61 52)(font "Arial" ))
+		(text "phsel_I[2..0]" (rect 21 291 82 303)(font "Arial" ))
+		(line (pt 0 296)(pt 16 296)(line_width 3))
+	)
+	(port
+		(pt 0 312)
+		(input)
+		(text "phsel_II[2..0]" (rect 0 40 64 52)(font "Arial" ))
+		(text "phsel_II[2..0]" (rect 21 307 85 319)(font "Arial" ))
+		(line (pt 0 312)(pt 16 312)(line_width 3))
+	)
+	(port
+		(pt 0 328)
+		(input)
+		(text "phsel_III[2..0]" (rect 0 40 68 52)(font "Arial" ))
+		(text "phsel_III[2..0]" (rect 21 323 89 335)(font "Arial" ))
+		(line (pt 0 328)(pt 16 328)(line_width 3))
+	)
+	(port
+		(pt 0 344)
+		(input)
+		(text "phsel_IV[2..0]" (rect 0 40 68 52)(font "Arial" ))
+		(text "phsel_IV[2..0]" (rect 21 339 89 351)(font "Arial" ))
+		(line (pt 0 344)(pt 16 344)(line_width 3))
+	)
+	(port
+		(pt 0 120)
+		(input)
+		(text "address[3..0]" (rect 0 40 64 52)(font "Arial" ))
+		(text "address[3..0]" (rect 21 115 85 127)(font "Arial" ))
+		(line (pt 0 120)(pt 16 120)(line_width 3))
+	)
+	(port
+		(pt 224 136)
+		(output)
+		(text "readdata[31..0]" (rect 0 40 74 52)(font "Arial" ))
+		(text "readdata[31..0]" (rect 141 131 215 143)(font "Arial" ))
+		(line (pt 224 136)(pt 208 136)(line_width 3))
+	)
+	(port
+		(pt 224 168)
+		(output)
+		(text "gate" (rect 0 40 21 52)(font "Arial" ))
+		(text "gate" (rect 186 163 207 175)(font "Arial" ))
+		(line (pt 224 168)(pt 208 168))
+	)
+	(port
+		(pt 224 200)
+		(output)
+		(text "enable_I" (rect 0 40 41 52)(font "Arial" ))
+		(text "enable_I" (rect 169 195 210 207)(font "Arial" ))
+		(line (pt 224 200)(pt 208 200))
+	)
+	(port
+		(pt 224 216)
+		(output)
+		(text "enable_II" (rect 0 40 44 52)(font "Arial" ))
+		(text "enable_II" (rect 166 211 210 223)(font "Arial" ))
+		(line (pt 224 216)(pt 208 216))
+	)
+	(port
+		(pt 224 232)
+		(output)
+		(text "enable_III" (rect 0 40 48 52)(font "Arial" ))
+		(text "enable_III" (rect 163 227 211 239)(font "Arial" ))
+		(line (pt 224 232)(pt 208 232))
+	)
+	(port
+		(pt 224 248)
+		(output)
+		(text "enable_IV" (rect 0 40 49 52)(font "Arial" ))
+		(text "enable_IV" (rect 162 243 211 255)(font "Arial" ))
+		(line (pt 224 248)(pt 208 248))
+	)
+	(port
+		(pt 224 280)
+		(output)
+		(text "phwrite_I" (rect 0 40 43 52)(font "Arial" ))
+		(text "phwrite_I" (rect 167 275 210 287)(font "Arial" ))
+		(line (pt 224 280)(pt 208 280))
+	)
+	(port
+		(pt 224 296)
+		(output)
+		(text "phwrite_II" (rect 0 40 47 52)(font "Arial" ))
+		(text "phwrite_II" (rect 164 291 211 303)(font "Arial" ))
+		(line (pt 224 296)(pt 208 296))
+	)
+	(port
+		(pt 224 312)
+		(output)
+		(text "phwrite_III" (rect 0 40 50 52)(font "Arial" ))
+		(text "phwrite_III" (rect 161 307 211 319)(font "Arial" ))
+		(line (pt 224 312)(pt 208 312))
+	)
+	(port
+		(pt 224 328)
+		(output)
+		(text "phwrite_IV" (rect 0 40 51 52)(font "Arial" ))
+		(text "phwrite_IV" (rect 160 323 211 335)(font "Arial" ))
+		(line (pt 224 328)(pt 208 328))
+	)
+	(port
+		(pt 224 344)
+		(output)
+		(text "phdata[2..0]" (rect 0 40 59 52)(font "Arial" ))
+		(text "phdata[2..0]" (rect 154 339 213 351)(font "Arial" ))
+		(line (pt 224 344)(pt 208 344)(line_width 3))
+	)
+	(port
+		(pt 224 424)
+		(output)
+		(text "phenable_IV" (rect 173 368 243 382)(font "Arial" (font_size 8)))
+		(text "phenable_IV" (rect 141 416 211 430)(font "Arial" (font_size 8)))
+		(line (pt 224 424)(pt 208 424))
+	)
+	(port
+		(pt 224 408)
+		(output)
+		(text "phenable_III" (rect 173 392 239 406)(font "Arial" (font_size 8)))
+		(text "phenable_III" (rect 141 400 207 414)(font "Arial" (font_size 8)))
+		(line (pt 224 408)(pt 208 408))
+	)
+	(port
+		(pt 224 392)
+		(output)
+		(text "phenable_II" (rect 173 376 236 390)(font "Arial" (font_size 8)))
+		(text "phenable_II" (rect 141 384 204 398)(font "Arial" (font_size 8)))
+		(line (pt 224 392)(pt 208 392))
+	)
+	(port
+		(pt 224 376)
+		(output)
+		(text "phenable_I" (rect 173 360 234 374)(font "Arial" (font_size 8)))
+		(text "phenable_I" (rect 141 368 202 382)(font "Arial" (font_size 8)))
+		(line (pt 224 376)(pt 208 376))
+	)
+	(port
+		(pt 224 456)
+		(output)
+		(text "tp_sel_a[5..0]" (rect 173 448 249 462)(font "Arial" (font_size 8)))
+		(text "tp_sel_a[5..0]" (rect 133 448 209 462)(font "Arial" (font_size 8)))
+		(line (pt 224 456)(pt 208 456)(color 128 0 255)(line_width 3))
+	)
+	(port
+		(pt 224 472)
+		(output)
+		(text "tp_sel_b[5..0]" (rect 173 464 249 478)(font "Arial" (font_size 8)))
+		(text "tp_sel_b[5..0]" (rect 133 464 209 478)(font "Arial" (font_size 8)))
+		(line (pt 224 472)(pt 208 472)(color 128 0 255)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 24 208 488))
+	)
+)

@@ -75,15 +75,44 @@ inline unsigned short ADC_READ(short reg)
 
 // === DAQ ==================================================================
 
+/*
+0    1   W    event: single trigger
+1    4   W    enable: enable_IV, enable_III, enable_II, enable_I
+2    7   W    gate: gate_ena, gate_periode, gate_width
+3    4   W    phenable: phenable_IV, phenable_III, phenable_II, phenable_I,
+4    7   W    phsel_IV, phsel_III, phsel_II, phsel_I, phdata
+5   32   R    xorsum_IV, xorsum_III, xorsum_II, xorsum_I
+6   12   R    phsel_IV, phsel_III, phsel_II, phsel_I
+8    6   W    Test point select A
+9    6   W    Test point select B
+*/
+
+#define GATE_START     0
+#define DESER_ENABLE   1
+#define GATE           2
+#define PD_ENABLE      3
+#define PD_SETPHASE    4
+#define PD_XOR         5
+#define PD_GETPHASE    6
+#define PD_TP_A        8
+#define PD_TP_B        9
+
+inline void _Deser400_Write(unsigned int reg, unsigned int value)
+{ IOWR_32DIRECT(DESER400_CTRL_BASE, reg, value); }
+
+inline unsigned int _Deser400_Read(unsigned int reg)
+{ return IORD_32DIRECT(DESER400_CTRL_BASE, reg); }
+
+
+// *** old **********************************************
 #define DESER400_RESET      0x01
 #define DESER400_REG_RESET  0x02
 #define DESER400_SEL_MOD0   0x04
 
 inline void _Deser400_Control(unsigned int value)
 { IOWR_ALTERA_AVALON_PIO_DATA(DESER400_BASE, value); }
+// ******************************************************
 
-
-// *3SDATA
 extern const unsigned int DAQ_DMA_BASE[8];
 
 // -- daq dma register

@@ -79,11 +79,13 @@ void CTestboard::GetInfo(stringR &info)
 	snprintf(s,   255, "HW version:  %s\n", dtbConfig.hw_version.c_str()); info += s;
 	snprintf(s,   255, "FW version:  %i.%i\n", fw/256, fw & 0xff); info += s;
 	snprintf(s,   255, "SW version:  %i.%i\n", sw/256, sw & 0xff); info += s;
+	snprintf(s,   255, "Options:     %s\n", dtbConfig.hw_options.c_str()); info += s;
 	snprintf(s,   255, "USB id:      %s\n", dtbConfig.usb_id.c_str()); info += s;
 	snprintf(s,   255, "MAC address: %012llX\n", dtbConfig.mac_address); info += s;
 	snprintf(s,   255, "Hostname:    %s\n", dtbConfig.hostname.c_str()); info += s;
 	snprintf(s,   255, "Comment:     %s\n", dtbConfig.comment.c_str()); info += s;
 }
+
 
 uint16_t CTestboard::GetBoardId()
 {
@@ -253,6 +255,9 @@ void CTestboard::Init()
 	Daq_Close(7);
 	Daq_DeselectAll();
 
+	Deser400_StopAll();
+	Deser400_SetPhaseAutoAll();
+	Deser400_GateRun(6, 7);
 
 	ChipId  = 0;
 	TBM_present = false;
@@ -895,26 +900,32 @@ void CTestboard::SetRocAddress(uint8_t addr)
 
 void CTestboard::SignalProbeD1(uint8_t signal)
 {
-	if (signal == 0)
-	{
-		_Probe1(0);
-	}
-	else if (signal <= 30)
-	{
-		_Probe1(signal);
-	}
+	if (signal <= 29) _Probe1(signal);
 }
 
 
 void CTestboard::SignalProbeD2(uint8_t signal)
 {
-	if (signal == 0)
+	if (signal <= 29) _Probe2(signal);
+}
+
+
+void SignalProbeDeserD1(uint8_t deser, uint8_t signal)
+{
+	if (deser < 4 && signal <= 12)
 	{
-		_Probe2(0);
+		_Deser400_Write(PD_TP_A, (deser << 4) | signal);
+		_Probe1(30);
 	}
-	else if (signal <= 30)
+}
+
+
+void SignalProbeDeserD2(uint8_t deser, uint8_t signal)
+{
+	if (deser < 4 && signal <= 12)
 	{
-		_Probe2(signal);
+		_Deser400_Write(PD_TP_B, (deser << 4) | signal);
+		_Probe1(31);
 	}
 }
 
@@ -1392,6 +1403,10 @@ uint32_t CTestboard::Daq_Open(uint32_t buffersize, uint8_t channel)
 
 	alt_dcache_flush(daq_mem_base[channel], buffersize*2);
 
+	// enable deser400
+	if (!(!daq_select_deser400 && (channel < 2)))
+		Deser400_Start(channel >> 1);
+
 	return daq_mem_size[channel];
 }
 
@@ -1408,6 +1423,9 @@ void CTestboard::Daq_Close(uint8_t channel)
 		delete[] daq_mem_base[channel];
 		daq_mem_base[channel] = 0;
 	}
+
+	// disable deser400 if both channels stopped
+	if (!(daq_mem_base[channel] || daq_mem_base[channel|1]))  Deser400_Stop(channel >> 1);
 
 	// Reset possible leftover Loop interrupt:
 	LoopInterruptReset();
@@ -1447,9 +1465,6 @@ void CTestboard::Daq_Start(uint8_t channel)
 //		IOWR_ALTERA_AVALON_PIO_DATA(ADC_BASE, daq_adc_state);
 //		IOWR_ALTERA_AVALON_PIO_DATA(DESER160_BASE, daq_deser160_state);
 	}
-
-	// Show DAQ status on LEDs, turn on DAQ LED:
-	ToggleLed(1,true);
 }
 
 
@@ -1467,9 +1482,6 @@ void CTestboard::Daq_Stop(uint8_t channel)
 		unsigned int daq_base = DAQ_DMA_BASE[channel];
 		DAQ_WRITE(daq_base, DAQ_CONTROL, 0);
 	}
-
-	// Show DAQ status on LEDs, turn on DAQ LED:
-	ToggleLed(1,false);
 }
 
 uint32_t CTestboard::Daq_GetSize(uint8_t channel)
@@ -1812,6 +1824,106 @@ void CTestboard::Daq_Select_Datagenerator(uint16_t startvalue)
 	// softTBM tout delay disable
 	Trigger_Write(6, 0);
 }
+
+
+// --- DESER400 configuration -------------------------------------------
+void CTestboard::Deser400_Start(uint8_t deser)
+{
+	if (deser > 3) return;
+
+	uint32_t n = 1 << deser;
+	deser400_ena |= n;
+	_Deser400_Write(DESER_ENABLE, deser400_ena);
+}
+
+
+void CTestboard::Deser400_Stop(uint8_t deser)
+{
+	if (deser > 3) return;
+
+	uint32_t n = 1 << deser;
+	deser400_ena   &= ~n;
+	_Deser400_Write(DESER_ENABLE, deser400_ena);
+}
+
+
+void CTestboard::Deser400_StopAll()
+{
+	deser400_ena = 0;
+	_Deser400_Write(DESER_ENABLE, deser400_ena);
+}
+
+
+void CTestboard::Deser400_SetPhase(uint8_t deser, uint8_t phase)
+{
+	if (deser > 3 || phase >= 8) return;
+
+	uint32_t n = 1 << deser;
+	deser400_pdena &= ~n;
+	_Deser400_Write(PD_ENABLE, deser400_pdena);
+	_Deser400_Write(PD_SETPHASE, (n << 3) | phase);
+}
+
+
+void CTestboard::Deser400_SetPhaseAuto(uint8_t deser)
+{
+	if (deser > 3) return;
+
+	uint32_t n = 1 << deser;
+	deser400_pdena |= n;
+	_Deser400_Write(PD_ENABLE, deser400_pdena);
+}
+
+
+void CTestboard::Deser400_SetPhaseAutoAll()
+{
+	deser400_pdena = 15;
+	_Deser400_Write(PD_ENABLE, deser400_pdena);
+}
+
+
+uint8_t CTestboard::Deser400_GetXor(uint8_t deser)
+{
+	if (deser > 3) return 0;
+
+	uint32_t x = _Deser400_Read(PD_XOR);
+	return uint8_t(x >> (8*deser));
+}
+
+
+uint8_t CTestboard::Deser400_GetPhase(uint8_t deser)
+{
+	if (deser > 3) return 0;
+
+	uint32_t x = _Deser400_Read(PD_GETPHASE);
+	return uint8_t(x >> (3*deser)) & 7;
+}
+
+
+void CTestboard::Deser400_GateRun(uint8_t width, uint8_t period)
+{
+	if (width > 7 || period > 7) return;
+	if (period < width) period = width;
+	_Deser400_Write(GATE,  0x40 | (period<<3) | width);
+}
+
+
+void CTestboard::Deser400_GateStop()
+{
+	_Deser400_Write(GATE, 0x08);
+}
+
+
+void CTestboard::Deser400_GateSingle(uint8_t width)
+{
+	if (width > 7) width = 7;
+	_Deser400_Write(GATE,  0x38 | width);
+	_Deser400_Write(GATE_START, 1);
+}
+
+
+
+// ----------------------------------------------------------------------
 
 
 int16_t CTestboard::TrimChip(vector<int16_t> &trim) {

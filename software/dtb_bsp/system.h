@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
  *
- * Generated: Wed Nov 25 10:29:30 CET 2015
+ * Generated: Fri Nov 27 16:47:03 CET 2015
  */
 
 /*
@@ -144,6 +144,7 @@
 #define __DELAY_IN
 #define __DELAY_OUT
 #define __DELAY_TRIGGER
+#define __DESER400_CONTROL
 #define __EVENTSIM
 #define __I2C_MASTER
 #define __LVDS2LCDS
@@ -649,6 +650,20 @@
 
 
 /*
+ * deser400_ctrl configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_deser400_ctrl deser400_control
+#define DESER400_CTRL_BASE 0x8108180
+#define DESER400_CTRL_IRQ -1
+#define DESER400_CTRL_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define DESER400_CTRL_NAME "/dev/deser400_ctrl"
+#define DESER400_CTRL_SPAN 64
+#define DESER400_CTRL_TYPE "deser400_control"
+
+
+/*
  * epcs_controller configuration
  *
  */
@@ -1070,7 +1085,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1448375759
+#define SYSID_TIMESTAMP 1448623766
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 

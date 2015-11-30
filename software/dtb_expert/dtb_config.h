@@ -16,6 +16,7 @@ struct DTB_CONFIG
 {
 	int board;
 	string hw_version;
+	string hw_options;
 	string usb_id;
 	unsigned long long mac_address;
 	string hostname;

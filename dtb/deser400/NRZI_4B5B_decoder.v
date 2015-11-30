@@ -7,6 +7,7 @@ module nrzi_4b5b_decoder
 (
 	input clk80,
 	input reset,
+	input enable,
 
 	input [4:0]din,
 	output reg [3:0]dout,
@@ -26,7 +27,7 @@ module nrzi_4b5b_decoder
 			error <= 0;
 		end
 		else
-		begin
+		begin if (enable)
 			d <= inv ? din : ~din;
 			inv <= din[0];
 			case (d)

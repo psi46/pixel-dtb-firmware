@@ -19,7 +19,7 @@
 ## PROGRAM "Quartus II"
 ## VERSION "Version 13.1.4 Build 182 03/12/2014 SJ Full Version"
 
-## DATE    "Wed Nov 25 08:37:03 2015"
+## DATE    "Mon Nov 30 15:10:37 2015"
 
 ##
 ## DEVICE  "EP3C40F484C6"
@@ -164,6 +164,7 @@ set_false_path -from [get_keepers {*delayed_wrptr_g*}] -to [get_keepers {*rs_dgw
 set_false_path -from [get_keepers {*rdptr_g*}] -to [get_keepers {*ws_dgrp|dffpipe_re9:dffpipe17|dffe18a*}]
 set_false_path -from [get_keepers {*delayed_wrptr_g*}] -to [get_keepers {*rs_dgwp|dffpipe_qe9:dffpipe14|dffe15a*}]
 set_false_path -from [get_keepers {*|phase_detector:phdet|inst1[*]}] 
+set_false_path -from [get_keepers {*|deser400_ctrl:inst|deser_enable[*]}] 
 set_false_path -from [get_keepers {dtb_system:inst|delay_out:delay_*|ext_mode[*]}] 
 set_false_path -from [get_keepers {dtb_system:inst|delay_out:delay_*|delr[*]}] 
 set_false_path -from [get_keepers {dtb_system:inst|delay_out:delay_*|delf[*]}] 
