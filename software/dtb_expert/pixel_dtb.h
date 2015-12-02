@@ -366,6 +366,7 @@ public:
 
 	#define TRG_SEL_CHAIN      0x0002
 	#define TRG_SEL_SYNC_OUT   0x0001
+
 	RPC_EXPORT void Trigger_Select(uint16_t mask);
 
 	RPC_EXPORT void Trigger_Delay(uint8_t delay);

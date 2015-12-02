@@ -910,7 +910,7 @@ void CTestboard::SignalProbeD2(uint8_t signal)
 }
 
 
-void SignalProbeDeserD1(uint8_t deser, uint8_t signal)
+void CTestboard::SignalProbeDeserD1(uint8_t deser, uint8_t signal)
 {
 	if (deser < 4 && signal <= 12)
 	{
@@ -920,12 +920,12 @@ void SignalProbeDeserD1(uint8_t deser, uint8_t signal)
 }
 
 
-void SignalProbeDeserD2(uint8_t deser, uint8_t signal)
+void CTestboard::SignalProbeDeserD2(uint8_t deser, uint8_t signal)
 {
 	if (deser < 4 && signal <= 12)
 	{
 		_Deser400_Write(PD_TP_B, (deser << 4) | signal);
-		_Probe1(31);
+		_Probe2(31);
 	}
 }
 
@@ -1919,6 +1919,7 @@ void CTestboard::Deser400_GateSingle(uint8_t width)
 	if (width > 7) width = 7;
 	_Deser400_Write(GATE,  0x38 | width);
 	_Deser400_Write(GATE_START, 1);
+	SetLed(1);
 }
 
 

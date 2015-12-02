@@ -87,15 +87,15 @@ inline unsigned short ADC_READ(short reg)
 9    6   W    Test point select B
 */
 
-#define GATE_START     0
-#define DESER_ENABLE   1
-#define GATE           2
-#define PD_ENABLE      3
-#define PD_SETPHASE    4
-#define PD_XOR         5
-#define PD_GETPHASE    6
-#define PD_TP_A        8
-#define PD_TP_B        9
+#define GATE_START      0
+#define DESER_ENABLE    4
+#define GATE            8
+#define PD_ENABLE      12
+#define PD_SETPHASE    16
+#define PD_XOR         20
+#define PD_GETPHASE    24
+#define PD_TP_A        32
+#define PD_TP_B        36
 
 inline void _Deser400_Write(unsigned int reg, unsigned int value)
 { IOWR_32DIRECT(DESER400_CTRL_BASE, reg, value); }
