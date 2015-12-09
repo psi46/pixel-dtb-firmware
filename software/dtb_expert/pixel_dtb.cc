@@ -255,7 +255,7 @@ void CTestboard::Init()
 	Daq_Close(7);
 	Daq_DeselectAll();
 
-	Deser400_StopAll();
+	Deser400_DisableAll();
 	Deser400_SetPhaseAutoAll();
 	Deser400_GateRun(6, 7);
 
@@ -1405,7 +1405,7 @@ uint32_t CTestboard::Daq_Open(uint32_t buffersize, uint8_t channel)
 
 	// enable deser400
 	if (!(!daq_select_deser400 && (channel < 2)))
-		Deser400_Start(channel >> 1);
+		Deser400_Enable(channel >> 1);
 
 	return daq_mem_size[channel];
 }
@@ -1425,7 +1425,7 @@ void CTestboard::Daq_Close(uint8_t channel)
 	}
 
 	// disable deser400 if both channels stopped
-	if (!(daq_mem_base[channel] || daq_mem_base[channel|1]))  Deser400_Stop(channel >> 1);
+	if (!(daq_mem_base[channel] || daq_mem_base[channel|1]))  Deser400_Disable(channel >> 1);
 
 	// Reset possible leftover Loop interrupt:
 	LoopInterruptReset();
@@ -1827,7 +1827,7 @@ void CTestboard::Daq_Select_Datagenerator(uint16_t startvalue)
 
 
 // --- DESER400 configuration -------------------------------------------
-void CTestboard::Deser400_Start(uint8_t deser)
+void CTestboard::Deser400_Enable(uint8_t deser)
 {
 	if (deser > 3) return;
 
@@ -1837,7 +1837,7 @@ void CTestboard::Deser400_Start(uint8_t deser)
 }
 
 
-void CTestboard::Deser400_Stop(uint8_t deser)
+void CTestboard::Deser400_Disable(uint8_t deser)
 {
 	if (deser > 3) return;
 
@@ -1847,7 +1847,7 @@ void CTestboard::Deser400_Stop(uint8_t deser)
 }
 
 
-void CTestboard::Deser400_StopAll()
+void CTestboard::Deser400_DisableAll()
 {
 	deser400_ena = 0;
 	_Deser400_Write(DESER_ENABLE, deser400_ena);

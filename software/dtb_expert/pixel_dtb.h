@@ -421,9 +421,9 @@ public:
 	RPC_EXPORT void Daq_DeselectAll();
 
 	// --- DESER400 configuration -------------------------------------------
-	RPC_EXPORT void Deser400_Start(uint8_t deser);
-	RPC_EXPORT void Deser400_Stop(uint8_t deser);
-	RPC_EXPORT void Deser400_StopAll();
+	RPC_EXPORT void Deser400_Enable(uint8_t deser);
+	RPC_EXPORT void Deser400_Disable(uint8_t deser);
+	RPC_EXPORT void Deser400_DisableAll();
 
 	RPC_EXPORT void Deser400_SetPhase(uint8_t deser, uint8_t phase);
 	RPC_EXPORT void Deser400_SetPhaseAuto(uint8_t deser);
