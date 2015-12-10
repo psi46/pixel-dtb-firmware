@@ -18,7 +18,10 @@ module module_decoder
 	
 	output reg tbm_hdr,
 	output reg tbm_trl,
-	output reg roc_hdr
+	output reg roc_hdr,
+	
+	input  idle_in,
+	output reg idle_out
 );
 
 	// --- delay chain
@@ -28,7 +31,7 @@ module module_decoder
 	reg [3:0]data1;
 	
 	// --- idle detector
-	reg [3:0]idle;
+	reg [3:0]idle_reg;
 
 	// --- decoder state machine
 	reg [5:0]sm;
@@ -69,17 +72,18 @@ module module_decoder
 	begin
 			if (reset)
 			begin
-				tbm_hdr <= 0;
-				tbm_trl <= 0;
-				roc_hdr <= 0;
+				tbm_hdr  <= 0;
+				tbm_trl  <= 0;
+				roc_hdr  <= 0;
 				
-				data4   <= 0;
-				data3   <= 0;
-				data2   <= 0;
-				data1   <= 0;
+				data4    <= 0;
+				data3    <= 0;
+				data2    <= 0;
+				data1    <= 0;
 				
-				idle    <= 0;
-				hdr     <= 0;
+				idle_reg <= 0;
+				idle_out <= 0;
+				hdr      <= 0;
 			end
 			else if (davail)
 			begin
@@ -96,9 +100,13 @@ module module_decoder
 				data2 <= data3;
 				data1 <= data2;
 				
-				idle <= {idle[2:0], &data1};
+				idle_reg <= {idle_reg[2:0], &data1};
+				idle_out <= &idle_reg;
 			end
 	end
+	
+	wire idle = idle_out & idle_in; // idle on TBM A and TBM B
+	
 	
 	// --- decoder state machine --------------------------------------------------------
 
@@ -176,9 +184,9 @@ module module_decoder
 					P2: sm <= P3;
 					P3: sm <= P4;
 					P4: sm <= P5;
-					P5: if      (tbm_trl)    sm <= T0;
-					    else if (roc_hdr)    sm <= R0;
-					    else if (~&idle)     sm <= P0;
+					P5: if      (tbm_trl)  sm <= T0;
+					    else if (roc_hdr)  sm <= R0;
+					    else if (~idle)    sm <= P0;
 					    else begin sme[1] <= 1'b1; sm <= T0; end
 
 					T0: sm <= T1;

@@ -1691,6 +1691,7 @@ void CTestboard::Daq_Select_ADC(uint16_t blocksize, uint8_t source, uint8_t star
 	// disable deser400
 	daq_select_deser400 = false;
 	_Deser400_Control(DESER400_RESET|DESER400_REG_RESET);
+	Deser400_Disable(0);
 
 	// enable adc
 	daq_select_adc = true;
@@ -1713,6 +1714,7 @@ void CTestboard::Daq_DeselectAll()
 	// disable deser400
 	daq_select_deser400 = false;
 	_Deser400_Control(DESER400_RESET|DESER400_REG_RESET);
+	Deser400_Disable(0);
 
 	// disable deser160
 	daq_select_deser160 = false;
@@ -1737,6 +1739,7 @@ void CTestboard::Daq_Select_Deser160(uint8_t shift)
 	// disable deser400
 	daq_select_deser400 = false;
 	_Deser400_Control(DESER400_RESET|DESER400_REG_RESET);
+	Deser400_Disable(0);
 
 	// disable adc
 	daq_select_adc = false;
@@ -1775,6 +1778,7 @@ void CTestboard::Daq_Select_Deser400()
 	// enable deser400
 	daq_select_deser400 = true;
 	Daq_Deser400_Reset();
+	if (daq_mem_base[0] || daq_mem_base[1]) Deser400_Enable(0);
 
 	// softTBM tout delay disable
 	Trigger_Write(6, 0);

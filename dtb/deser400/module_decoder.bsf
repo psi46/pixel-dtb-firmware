@@ -20,9 +20,9 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.2"))
 (symbol
-	(rect 64 64 240 232)
+	(rect 64 64 240 248)
 	(text "module_decoder" (rect 5 8 85 20)(font "Arial" ))
-	(text "inst" (rect 8 152 25 164)(font "Arial" ))
+	(text "inst" (rect 8 168 25 180)(font "Arial" ))
 	(port
 		(pt 0 40)
 		(input)
@@ -38,18 +38,18 @@ applicable agreement for further details.
 		(line (pt 0 56)(pt 16 56))
 	)
 	(port
-		(pt 0 120)
-		(input)
-		(text "davail" (rect 0 40 29 52)(font "Arial" ))
-		(text "davail" (rect 21 115 50 127)(font "Arial" ))
-		(line (pt 0 120)(pt 16 120))
-	)
-	(port
 		(pt 0 136)
 		(input)
+		(text "davail" (rect 0 40 29 52)(font "Arial" ))
+		(text "davail" (rect 21 131 50 143)(font "Arial" ))
+		(line (pt 0 136)(pt 16 136))
+	)
+	(port
+		(pt 0 152)
+		(input)
 		(text "din[3..0]" (rect 0 40 40 52)(font "Arial" ))
-		(text "din[3..0]" (rect 21 131 61 143)(font "Arial" ))
-		(line (pt 0 136)(pt 16 136)(line_width 3))
+		(text "din[3..0]" (rect 21 147 61 159)(font "Arial" ))
+		(line (pt 0 152)(pt 16 152)(line_width 3))
 	)
 	(port
 		(pt 0 88)
@@ -59,6 +59,13 @@ applicable agreement for further details.
 		(line (pt 0 88)(pt 16 88)(color 0 128 255)(line_width 3))
 	)
 	(port
+		(pt 0 104)
+		(input)
+		(text "idle_in" (rect 24 96 59 110)(font "Arial" (font_size 8)))
+		(text "idle_in" (rect 24 96 59 110)(font "Arial" (font_size 8)))
+		(line (pt 0 104)(pt 16 104))
+	)
+	(port
 		(pt 176 40)
 		(output)
 		(text "running" (rect 0 40 35 52)(font "Arial" ))
@@ -66,18 +73,18 @@ applicable agreement for further details.
 		(line (pt 176 40)(pt 160 40))
 	)
 	(port
-		(pt 176 120)
-		(output)
-		(text "write" (rect 0 40 22 52)(font "Arial" ))
-		(text "write" (rect 137 115 159 127)(font "Arial" ))
-		(line (pt 176 120)(pt 160 120))
-	)
-	(port
 		(pt 176 136)
 		(output)
+		(text "write" (rect 0 40 22 52)(font "Arial" ))
+		(text "write" (rect 137 131 159 143)(font "Arial" ))
+		(line (pt 176 136)(pt 160 136))
+	)
+	(port
+		(pt 176 152)
+		(output)
 		(text "data[15..0]" (rect 0 40 53 52)(font "Arial" ))
-		(text "data[15..0]" (rect 111 131 164 143)(font "Arial" ))
-		(line (pt 176 136)(pt 160 136)(line_width 3))
+		(text "data[15..0]" (rect 111 147 164 159)(font "Arial" ))
+		(line (pt 176 152)(pt 160 152)(line_width 3))
 	)
 	(port
 		(pt 176 56)
@@ -100,7 +107,14 @@ applicable agreement for further details.
 		(text "roc_hdr" (rect 117 80 161 94)(font "Arial" (font_size 8)))
 		(line (pt 176 88)(pt 160 88))
 	)
+	(port
+		(pt 176 104)
+		(output)
+		(text "idle_out" (rect 125 96 168 110)(font "Arial" (font_size 8)))
+		(text "idle_out" (rect 125 96 168 110)(font "Arial" (font_size 8)))
+		(line (pt 176 104)(pt 160 104))
+	)
 	(drawing
-		(rectangle (rect 16 24 160 152))
+		(rectangle (rect 16 24 160 168))
 	)
 )
