@@ -195,7 +195,8 @@ module module_decoder
 					T3: sm <= T4;
 					T4: sm <= T5;
 					T5: sm <= T6;
-					T6: sm <= 0;
+					T6: if (tbm_hdr) begin sme <= 0; sm <= H0; end
+					    else sm <= 0;
 					
 					default: sm <= 0;
 				endcase
