@@ -210,9 +210,9 @@ module module_decoder
 
 	always @(*)
 	begin
-		if      (mode[2]) data <= {mode, error_flags, data1, data2}; // TBM Header
-		else if (mode[1]) data <= {mode, 1'b0, xorsum, 1'b00, data1[1:0]}; // ROC Header
-		else              data <= {mode, 1'b0, data1, data2, data3}; // TBM Trailer
+		if      (mode[2]) data <= {mode, error_flags, data1, data2}; // TBM Header/Trailer
+		else if (mode[1]) data <= {mode, 1'b0, xorsum, 2'b00, data1[1:0]}; // ROC Header
+		else              data <= {mode, 1'b0, data1, data2, data3}; // ROC Hit
 	end
 
 endmodule
