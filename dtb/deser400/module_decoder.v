@@ -21,7 +21,9 @@ module module_decoder
 	output reg roc_hdr,
 	
 	input  idle_in,
-	output reg idle_out
+	output reg idle_out,
+	
+	input [7:0]xorsum
 );
 
 	// --- delay chain
@@ -208,9 +210,9 @@ module module_decoder
 
 	always @(*)
 	begin
-		if      (mode[2]) data <= {mode,  error_flags, data1, data2};
-		else if (mode[1]) data <= {mode, 11'b0_0000_0000_00, data1[1:0]};
-		else              data <= {mode,  1'b0, data1, data2, data3};
+		if      (mode[2]) data <= {mode, error_flags, data1, data2}; // TBM Header
+		else if (mode[1]) data <= {mode, 1'b0, xorsum, 1'b00, data1[1:0]}; // ROC Header
+		else              data <= {mode, 1'b0, data1, data2, data3}; // TBM Trailer
 	end
 
 endmodule

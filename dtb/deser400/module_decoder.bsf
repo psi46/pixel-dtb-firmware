@@ -66,6 +66,13 @@ applicable agreement for further details.
 		(line (pt 0 104)(pt 16 104))
 	)
 	(port
+		(pt 0 120)
+		(input)
+		(text "xorsum[7..0]" (rect 24 112 94 126)(font "Arial" (font_size 8)))
+		(text "xorsum[7..0]" (rect 24 112 94 126)(font "Arial" (font_size 8)))
+		(line (pt 0 120)(pt 16 120)(color 0 128 255)(line_width 3))
+	)
+	(port
 		(pt 176 40)
 		(output)
 		(text "running" (rect 0 40 35 52)(font "Arial" ))
