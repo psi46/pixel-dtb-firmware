@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>01.12.2015 07:46:58</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1448952418727</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>14.12.2015 11:48:39</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1450090119667</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>X:\source\FPGA\pixel-dtb-firmware\software\dtb_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\dtb\dtb_system.sopcinfo</SopcDesignFile>
@@ -875,12 +875,6 @@
                 <attributes>flash, memory, non-volatile</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>sysid</slaveDescriptor>
-                <addressRange>0x08001000 - 0x08001007</addressRange>
-                <addressSpan>8</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
                 <slaveDescriptor>usb_tx_dma</slaveDescriptor>
                 <addressRange>0x08001040 - 0x0800107F</addressRange>
                 <addressSpan>64</addressSpan>
@@ -893,130 +887,82 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>performance_counter</slaveDescriptor>
-                <addressRange>0x08001800 - 0x0800183F</addressRange>
-                <addressSpan>64</addressSpan>
+                <slaveDescriptor>sysid</slaveDescriptor>
+                <addressRange>0x08100000 - 0x08100007</addressRange>
+                <addressSpan>8</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>sys_timer</slaveDescriptor>
-                <addressRange>0x08002000 - 0x0800201F</addressRange>
+                <addressRange>0x08100020 - 0x0810003F</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes>timer</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x08002020 - 0x08002027</addressRange>
-                <addressSpan>8</addressSpan>
-                <attributes>printable</attributes>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>daq_dma_0</slaveDescriptor>
-                <addressRange>0x08002040 - 0x0800205F</addressRange>
-                <addressSpan>32</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>daq_dma_1</slaveDescriptor>
-                <addressRange>0x08002080 - 0x0800209F</addressRange>
-                <addressSpan>32</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>daq_dma_2</slaveDescriptor>
-                <addressRange>0x080020C0 - 0x080020DF</addressRange>
-                <addressSpan>32</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>daq_dma_3</slaveDescriptor>
-                <addressRange>0x08002100 - 0x0800211F</addressRange>
-                <addressSpan>32</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>daq_dma_4</slaveDescriptor>
-                <addressRange>0x08002140 - 0x0800215F</addressRange>
-                <addressSpan>32</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>daq_dma_5</slaveDescriptor>
-                <addressRange>0x08002180 - 0x0800219F</addressRange>
-                <addressSpan>32</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>daq_dma_6</slaveDescriptor>
-                <addressRange>0x080021C0 - 0x080021DF</addressRange>
-                <addressSpan>32</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>daq_dma_7</slaveDescriptor>
-                <addressRange>0x08002200 - 0x0800221F</addressRange>
-                <addressSpan>32</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
                 <slaveDescriptor>LED</slaveDescriptor>
-                <addressRange>0x08100020 - 0x0810002F</addressRange>
+                <addressRange>0x08100040 - 0x0810004F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>button</slaveDescriptor>
-                <addressRange>0x08100030 - 0x0810003F</addressRange>
+                <addressRange>0x08100060 - 0x0810006F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>LCDS_io</slaveDescriptor>
-                <addressRange>0x08100040 - 0x08100040</addressRange>
+                <addressRange>0x08100080 - 0x08100080</addressRange>
                 <addressSpan>1</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>crosspoint_switch</slaveDescriptor>
-                <addressRange>0x08100050 - 0x08100057</addressRange>
-                <addressSpan>8</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>i2c_main</slaveDescriptor>
-                <addressRange>0x08100060 - 0x08100067</addressRange>
-                <addressSpan>8</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>ROC_addr</slaveDescriptor>
-                <addressRange>0x08100070 - 0x0810007F</addressRange>
-                <addressSpan>16</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>SDC_SPI2</slaveDescriptor>
-                <addressRange>0x08100080 - 0x0810008F</addressRange>
-                <addressSpan>16</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>i2c_external</slaveDescriptor>
-                <addressRange>0x08100090 - 0x08100097</addressRange>
+                <addressRange>0x081000A0 - 0x081000A7</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>main_control</slaveDescriptor>
-                <addressRange>0x081000A0 - 0x081000AF</addressRange>
+                <addressRange>0x081000C0 - 0x081000CF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>main_status</slaveDescriptor>
-                <addressRange>0x081000B0 - 0x081000BF</addressRange>
+                <addressRange>0x081000E0 - 0x081000EF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>i2c_main</slaveDescriptor>
+                <addressRange>0x08100100 - 0x08100107</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>i2c_external</slaveDescriptor>
+                <addressRange>0x08100120 - 0x08100127</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>ROC_addr</slaveDescriptor>
+                <addressRange>0x08100140 - 0x0810014F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>SDC_SPI2</slaveDescriptor>
+                <addressRange>0x08100160 - 0x0810016F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>jtag_uart</slaveDescriptor>
+                <addressRange>0x08100180 - 0x08100187</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes>printable</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>PSI2C</slaveDescriptor>
@@ -1133,21 +1079,51 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>tse_mac</slaveDescriptor>
-                <addressRange>0x08400000 - 0x084003FF</addressRange>
-                <addressSpan>1024</addressSpan>
+                <slaveDescriptor>daq_dma_0</slaveDescriptor>
+                <addressRange>0x08200000 - 0x0820001F</addressRange>
+                <addressSpan>32</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>sgdma_rx</slaveDescriptor>
-                <addressRange>0x08400400 - 0x0840043F</addressRange>
-                <addressSpan>64</addressSpan>
+                <slaveDescriptor>daq_dma_1</slaveDescriptor>
+                <addressRange>0x08200020 - 0x0820003F</addressRange>
+                <addressSpan>32</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>sgdma_tx</slaveDescriptor>
-                <addressRange>0x08400440 - 0x0840047F</addressRange>
-                <addressSpan>64</addressSpan>
+                <slaveDescriptor>daq_dma_2</slaveDescriptor>
+                <addressRange>0x08200040 - 0x0820005F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_3</slaveDescriptor>
+                <addressRange>0x08200060 - 0x0820007F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_4</slaveDescriptor>
+                <addressRange>0x08200080 - 0x0820009F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_5</slaveDescriptor>
+                <addressRange>0x082000A0 - 0x082000BF</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_6</slaveDescriptor>
+                <addressRange>0x082000C0 - 0x082000DF</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>daq_dma_7</slaveDescriptor>
+                <addressRange>0x08200100 - 0x0820011F</addressRange>
+                <addressSpan>32</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>

@@ -22,7 +22,6 @@ set_clock_groups \
      inst14|inst3|altpll_component|auto_generated|pll1|clk[2] \
      inst14|inst3|altpll_component|auto_generated|pll1|clk[3] \
      inst14|inst5|altpll_component|auto_generated|pll1|clk[0] \
-     inst14|inst23|altpll_component|auto_generated|pll1|clk[0] \
      inst14|inst23|altpll_component|auto_generated|pll1|clk[1] \
      inst14|inst23|altpll_component|auto_generated|pll1|clk[4] \
    } \

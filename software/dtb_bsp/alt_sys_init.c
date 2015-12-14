@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
  *
- * Generated: Tue Dec 01 07:47:02 CET 2015
+ * Generated: Sat Dec 12 22:17:09 CET 2015
  */
 
 /*
@@ -61,11 +61,9 @@
 #include "altera_nios2_qsys_irq.h"
 #include "altera_avalon_epcs_flash_controller.h"
 #include "altera_avalon_jtag_uart.h"
-#include "altera_avalon_performance_counter.h"
 #include "altera_avalon_sgdma.h"
 #include "altera_avalon_sysid_qsys.h"
 #include "altera_avalon_timer.h"
-#include "altera_eth_tse.h"
 
 /*
  * Allocate the device storage
@@ -74,13 +72,9 @@
 ALTERA_NIOS2_QSYS_IRQ_INSTANCE ( CPU, cpu);
 ALTERA_AVALON_EPCS_FLASH_CONTROLLER_INSTANCE ( EPCS_CONTROLLER, epcs_controller);
 ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART, jtag_uart);
-ALTERA_AVALON_PERFORMANCE_COUNTER_INSTANCE ( PERFORMANCE_COUNTER, performance_counter);
-ALTERA_AVALON_SGDMA_INSTANCE ( SGDMA_RX, sgdma_rx);
-ALTERA_AVALON_SGDMA_INSTANCE ( SGDMA_TX, sgdma_tx);
 ALTERA_AVALON_SGDMA_INSTANCE ( USB_TX_DMA, usb_tx_dma);
 ALTERA_AVALON_SYSID_QSYS_INSTANCE ( SYSID, sysid);
 ALTERA_AVALON_TIMER_INSTANCE ( SYS_TIMER, sys_timer);
-ALTERA_ETH_TSE_INSTANCE ( TSE_MAC, tse_mac);
 
 /*
  * Initialize the interrupt controller devices
@@ -106,10 +100,6 @@ void alt_sys_init( void )
     ALTERA_AVALON_TIMER_INIT ( SYS_TIMER, sys_timer);
     ALTERA_AVALON_EPCS_FLASH_CONTROLLER_INIT ( EPCS_CONTROLLER, epcs_controller);
     ALTERA_AVALON_JTAG_UART_INIT ( JTAG_UART, jtag_uart);
-    ALTERA_AVALON_PERFORMANCE_COUNTER_INIT ( PERFORMANCE_COUNTER, performance_counter);
-    ALTERA_AVALON_SGDMA_INIT ( SGDMA_RX, sgdma_rx);
-    ALTERA_AVALON_SGDMA_INIT ( SGDMA_TX, sgdma_tx);
     ALTERA_AVALON_SGDMA_INIT ( USB_TX_DMA, usb_tx_dma);
     ALTERA_AVALON_SYSID_QSYS_INIT ( SYSID, sysid);
-    ALTERA_ETH_TSE_INIT ( TSE_MAC, tse_mac);
 }

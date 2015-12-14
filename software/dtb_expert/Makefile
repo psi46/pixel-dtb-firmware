@@ -151,7 +151,6 @@ CXX_SRCS += debug.cc
 CXX_SRCS += dtb_config.cc
 CXX_SRCS += dtb_hal.cc
 CXX_SRCS += dtb_main.cc
-CXX_SRCS += ethernet.cc
 CXX_SRCS += pixel_dtb.cc
 CXX_SRCS += roctest.cc
 CXX_SRCS += rpc.cc
@@ -159,6 +158,7 @@ CXX_SRCS += rpc_dtb.cc
 CXX_SRCS += ugerror.cc
 CXX_SRCS += trigger_loops.cpp
 CXX_SRCS += sgdma.cc
+CXX_SRCS += ethernet_0.cc
 ASM_SRCS :=
 
 

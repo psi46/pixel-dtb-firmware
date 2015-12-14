@@ -34,7 +34,7 @@ module oversampling
 
 	reg [7:0]s3;
 	reg [7:0]s4;
-	always @(posedge sclk[0])
+	always @(posedge sclk[0] or posedge res)
 	begin
 		if (res)
 		begin

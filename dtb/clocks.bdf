@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2014 Altera Corporation
+Copyright (C) 1991-2013 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -136,7 +136,7 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 584 56 760 72)
+	(rect 584 -40 760 -24)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "sysclk" (rect 90 0 123 12)(font "Arial" ))
 	(pt 0 8)
@@ -152,7 +152,7 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 584 136 760 152)
+	(rect 584 120 760 136)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "reset_n" (rect 90 0 126 12)(font "Arial" ))
 	(pt 0 8)
@@ -200,7 +200,7 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 584 104 760 120)
+	(rect 584 88 760 104)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "reset" (rect 90 0 114 12)(font "Arial" ))
 	(pt 0 8)
@@ -391,7 +391,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 488 96 536 128)
+	(rect 488 80 536 112)
 	(text "NOT" (rect 1 0 21 10)(font "Arial" (font_size 6)))
 	(text "inst1" (rect 3 21 26 33)(font "Arial" ))
 	(port
@@ -416,7 +416,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 328 48 376 80)
+	(rect 328 -48 376 -16)
 	(text "GLOBAL" (rect 1 0 36 10)(font "Arial" (font_size 6)))
 	(text "inst2" (rect 3 21 26 33)(font "Arial" ))
 	(port
@@ -609,85 +609,6 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect -144 0 112 184)
-	(text "pll_system" (rect 97 0 171 16)(font "Arial" (font_size 10)))
-	(text "inst23" (rect 8 168 37 180)(font "Arial" ))
-	(port
-		(pt 0 64)
-		(input)
-		(text "inclk0" (rect 0 0 31 14)(font "Arial" (font_size 8)))
-		(text "inclk0" (rect 4 50 35 64)(font "Arial" (font_size 8)))
-		(line (pt 0 64)(pt 40 64))
-	)
-	(port
-		(pt 256 64)
-		(output)
-		(text "c0" (rect 0 0 14 14)(font "Arial" (font_size 8)))
-		(text "c0" (rect 240 50 254 64)(font "Arial" (font_size 8)))
-	)
-	(port
-		(pt 256 80)
-		(output)
-		(text "c1" (rect 0 0 14 14)(font "Arial" (font_size 8)))
-		(text "c1" (rect 240 66 254 80)(font "Arial" (font_size 8)))
-	)
-	(port
-		(pt 256 96)
-		(output)
-		(text "c4" (rect 0 0 14 14)(font "Arial" (font_size 8)))
-		(text "c4" (rect 240 82 254 96)(font "Arial" (font_size 8)))
-	)
-	(port
-		(pt 256 112)
-		(output)
-		(text "locked" (rect 0 0 36 14)(font "Arial" (font_size 8)))
-		(text "locked" (rect 221 98 257 112)(font "Arial" (font_size 8)))
-	)
-	(drawing
-		(text "Cyclone III" (rect 194 168 249 180)(font "Arial" ))
-		(text "inclk0 frequency: 50.000 MHz" (rect 50 59 197 71)(font "Arial" ))
-		(text "Operation Mode: Normal" (rect 50 72 169 84)(font "Arial" ))
-		(text "Clk " (rect 51 93 71 105)(font "Arial" ))
-		(text "Ratio" (rect 72 93 97 105)(font "Arial" ))
-		(text "Ph (dg)" (rect 98 93 133 105)(font "Arial" ))
-		(text "DC (%)" (rect 132 93 168 105)(font "Arial" ))
-		(text "c0" (rect 54 107 65 119)(font "Arial" ))
-		(text "1/1" (rect 77 107 92 119)(font "Arial" ))
-		(text "0.00" (rect 104 107 125 119)(font "Arial" ))
-		(text "50.00" (rect 136 107 163 119)(font "Arial" ))
-		(text "c1" (rect 54 121 65 133)(font "Arial" ))
-		(text "5/2" (rect 77 121 92 133)(font "Arial" ))
-		(text "0.00" (rect 104 121 125 133)(font "Arial" ))
-		(text "50.00" (rect 136 121 163 133)(font "Arial" ))
-		(text "c4" (rect 54 135 65 147)(font "Arial" ))
-		(text "4/5" (rect 77 135 92 147)(font "Arial" ))
-		(text "0.00" (rect 104 135 125 147)(font "Arial" ))
-		(text "50.00" (rect 136 135 163 147)(font "Arial" ))
-		(line (pt 0 0)(pt 257 0))
-		(line (pt 257 0)(pt 257 185))
-		(line (pt 0 185)(pt 257 185))
-		(line (pt 0 0)(pt 0 185))
-		(line (pt 48 91)(pt 164 91))
-		(line (pt 48 104)(pt 164 104))
-		(line (pt 48 118)(pt 164 118))
-		(line (pt 48 132)(pt 164 132))
-		(line (pt 48 146)(pt 164 146))
-		(line (pt 48 91)(pt 48 146))
-		(line (pt 69 91)(pt 69 146)(line_width 3))
-		(line (pt 95 91)(pt 95 146)(line_width 3))
-		(line (pt 129 91)(pt 129 146)(line_width 3))
-		(line (pt 163 91)(pt 163 146))
-		(line (pt 40 48)(pt 207 48))
-		(line (pt 207 48)(pt 207 167))
-		(line (pt 40 167)(pt 207 167))
-		(line (pt 40 48)(pt 40 167))
-		(line (pt 255 64)(pt 207 64))
-		(line (pt 255 80)(pt 207 80))
-		(line (pt 255 96)(pt 207 96))
-		(line (pt 255 112)(pt 207 112))
-	)
-)
-(symbol
 	(rect 0 536 288 704)
 	(text "altpll2" (rect 127 0 167 16)(font "Arial" (font_size 10)))
 	(text "inst5" (rect 8 152 31 164)(font "Arial" ))
@@ -785,6 +706,73 @@ applicable agreement for further details.
 		(line (pt 287 128)(pt 223 128))
 	)
 )
+(symbol
+	(rect -144 0 136 168)
+	(text "pll_system" (rect 109 0 183 16)(font "Arial" (font_size 10)))
+	(text "inst23" (rect 8 152 37 164)(font "Arial" ))
+	(port
+		(pt 0 64)
+		(input)
+		(text "inclk0" (rect 0 0 31 14)(font "Arial" (font_size 8)))
+		(text "inclk0" (rect 4 50 35 64)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 40 64))
+	)
+	(port
+		(pt 280 64)
+		(output)
+		(text "c1" (rect 0 0 14 14)(font "Arial" (font_size 8)))
+		(text "c1" (rect 264 50 278 64)(font "Arial" (font_size 8)))
+	)
+	(port
+		(pt 280 80)
+		(output)
+		(text "c4" (rect 0 0 14 14)(font "Arial" (font_size 8)))
+		(text "c4" (rect 264 66 278 80)(font "Arial" (font_size 8)))
+	)
+	(port
+		(pt 280 96)
+		(output)
+		(text "locked" (rect 0 0 36 14)(font "Arial" (font_size 8)))
+		(text "locked" (rect 245 82 281 96)(font "Arial" (font_size 8)))
+	)
+	(drawing
+		(text "Cyclone III" (rect 218 152 273 164)(font "Arial" ))
+		(text "inclk0 frequency: 50.000 MHz" (rect 50 59 197 71)(font "Arial" ))
+		(text "Operation Mode: No Compensation" (rect 50 72 222 84)(font "Arial" ))
+		(text "Clk " (rect 51 93 71 105)(font "Arial" ))
+		(text "Ratio" (rect 72 93 97 105)(font "Arial" ))
+		(text "Ph (dg)" (rect 98 93 133 105)(font "Arial" ))
+		(text "DC (%)" (rect 132 93 168 105)(font "Arial" ))
+		(text "c1" (rect 54 107 65 119)(font "Arial" ))
+		(text "5/2" (rect 77 107 92 119)(font "Arial" ))
+		(text "0.00" (rect 104 107 125 119)(font "Arial" ))
+		(text "50.00" (rect 136 107 163 119)(font "Arial" ))
+		(text "c4" (rect 54 121 65 133)(font "Arial" ))
+		(text "4/5" (rect 77 121 92 133)(font "Arial" ))
+		(text "0.00" (rect 104 121 125 133)(font "Arial" ))
+		(text "50.00" (rect 136 121 163 133)(font "Arial" ))
+		(line (pt 0 0)(pt 281 0))
+		(line (pt 281 0)(pt 281 169))
+		(line (pt 0 169)(pt 281 169))
+		(line (pt 0 0)(pt 0 169))
+		(line (pt 48 91)(pt 164 91))
+		(line (pt 48 104)(pt 164 104))
+		(line (pt 48 118)(pt 164 118))
+		(line (pt 48 132)(pt 164 132))
+		(line (pt 48 91)(pt 48 132))
+		(line (pt 69 91)(pt 69 132)(line_width 3))
+		(line (pt 95 91)(pt 95 132)(line_width 3))
+		(line (pt 129 91)(pt 129 132)(line_width 3))
+		(line (pt 163 91)(pt 163 132))
+		(line (pt 40 48)(pt 231 48))
+		(line (pt 231 48)(pt 231 151))
+		(line (pt 40 151)(pt 231 151))
+		(line (pt 40 48)(pt 40 151))
+		(line (pt 279 64)(pt 231 64))
+		(line (pt 279 80)(pt 231 80))
+		(line (pt 279 96)(pt 231 96))
+	)
+)
 (connector
 	(pt 0 616)
 	(pt -104 616)
@@ -810,32 +798,12 @@ applicable agreement for further details.
 	(pt 0 896)
 )
 (connector
-	(pt -264 64)
-	(pt -144 64)
-)
-(connector
-	(pt -120 240)
-	(pt 144 240)
-)
-(connector
 	(pt -120 240)
 	(pt -120 600)
 )
 (connector
 	(pt -120 600)
 	(pt -120 880)
-)
-(connector
-	(pt 240 352)
-	(pt 328 352)
-)
-(connector
-	(pt 456 144)
-	(pt 584 144)
-)
-(connector
-	(pt 536 112)
-	(pt 584 112)
 )
 (connector
 	(pt 512 288)
@@ -846,14 +814,6 @@ applicable agreement for further details.
 	(pt 584 304)
 )
 (connector
-	(pt 112 64)
-	(pt 328 64)
-)
-(connector
-	(pt 376 64)
-	(pt 584 64)
-)
-(connector
 	(pt -264 368)
 	(pt 328 368)
 )
@@ -862,72 +822,8 @@ applicable agreement for further details.
 	(pt 328 384)
 )
 (connector
-	(pt 328 320)
-	(pt 256 320)
-)
-(connector
-	(pt 288 288)
-	(pt 288 80)
-)
-(connector
-	(pt 328 288)
-	(pt 288 288)
-)
-(connector
-	(pt 328 304)
-	(pt 272 304)
-)
-(connector
 	(pt 0 912)
 	(pt -40 912)
-)
-(connector
-	(pt 256 80)
-	(pt 256 320)
-)
-(connector
-	(pt 112 80)
-	(pt 256 80)
-)
-(connector
-	(pt 272 80)
-	(pt 272 304)
-)
-(connector
-	(pt 256 80)
-	(pt 272 80)
-)
-(connector
-	(pt 272 80)
-	(pt 288 80)
-)
-(connector
-	(pt 456 112)
-	(pt 456 144)
-)
-(connector
-	(pt 456 112)
-	(pt 488 112)
-)
-(connector
-	(pt 240 112)
-	(pt 240 352)
-)
-(connector
-	(pt 112 112)
-	(pt 240 112)
-)
-(connector
-	(pt 240 112)
-	(pt 456 112)
-)
-(connector
-	(pt 144 240)
-	(pt 144 96)
-)
-(connector
-	(pt 144 96)
-	(pt 112 96)
 )
 (connector
 	(pt 288 600)
@@ -1036,14 +932,115 @@ applicable agreement for further details.
 	(pt 288 632)
 	(pt 424 632)
 )
+(connector
+	(pt 376 -32)
+	(pt 584 -32)
+)
+(connector
+	(pt 328 -32)
+	(pt -200 -32)
+)
+(connector
+	(pt -200 -32)
+	(pt -200 64)
+)
+(connector
+	(pt -264 64)
+	(pt -200 64)
+)
+(connector
+	(pt -200 64)
+	(pt -144 64)
+)
+(connector
+	(pt 328 352)
+	(pt 240 352)
+)
+(connector
+	(pt 328 320)
+	(pt 256 320)
+)
+(connector
+	(pt 288 288)
+	(pt 288 64)
+)
+(connector
+	(pt 328 288)
+	(pt 288 288)
+)
+(connector
+	(pt 328 304)
+	(pt 272 304)
+)
+(connector
+	(pt 256 320)
+	(pt 256 64)
+)
+(connector
+	(pt 272 304)
+	(pt 272 64)
+)
+(connector
+	(pt 240 352)
+	(pt 240 96)
+)
+(connector
+	(pt -120 240)
+	(pt 184 240)
+)
+(connector
+	(pt 184 240)
+	(pt 184 80)
+)
+(connector
+	(pt 136 80)
+	(pt 184 80)
+)
+(connector
+	(pt 136 64)
+	(pt 256 64)
+)
+(connector
+	(pt 256 64)
+	(pt 272 64)
+)
+(connector
+	(pt 272 64)
+	(pt 288 64)
+)
+(connector
+	(pt 456 128)
+	(pt 584 128)
+)
+(connector
+	(pt 536 96)
+	(pt 584 96)
+)
+(connector
+	(pt 456 96)
+	(pt 456 128)
+)
+(connector
+	(pt 136 96)
+	(pt 240 96)
+)
+(connector
+	(pt 240 96)
+	(pt 456 96)
+)
+(connector
+	(pt 456 96)
+	(pt 488 96)
+)
 (junction (pt -104 896))
 (junction (pt -120 600))
-(junction (pt 256 80))
-(junction (pt 272 80))
-(junction (pt 456 112))
-(junction (pt 240 112))
 (junction (pt -40 912))
+(junction (pt -200 64))
+(junction (pt 256 64))
+(junction (pt 272 64))
+(junction (pt 240 96))
+(junction (pt 456 96))
 (text "DAQ Clock" (rect 0 488 112 510)(font "Arial" (font_size 14)))
 (text "Sampling Clock" (rect 0 768 155 790)(font "Arial" (font_size 14)))
-(text "CPU Clock" (rect -144 -48 -35 -26)(font "Arial" (font_size 14)))
+(text "CPU Clock" (rect 416 -64 525 -42)(font "Arial" (font_size 14)))
 (text "ETHERNET Clock" (rect 328 216 512 238)(font "Arial" (font_size 14)))

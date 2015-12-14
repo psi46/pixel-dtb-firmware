@@ -22,10 +22,10 @@
 <td width="20%" bgcolor="#77BBFF">BSP Version:</td><td>default</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>01.12.2015 07:46:58</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>14.12.2015 11:48:39</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1448952418727</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1450090119667</td>
 </tr>
 <tr mode="wrap">
 <td width="20%" bgcolor="#77BBFF">BSP Generated Location:</td><td>X:\source\FPGA\pixel-dtb-firmware\software\dtb_bsp</td>
@@ -41,13 +41,28 @@
 <td>descriptor_memory</td><td>0x08402000 - 0x084020FF</td><td>256</td><td class="listing">memory</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>sgdma_tx</td><td>0x08400440 - 0x0840047F</td><td>64</td><td class="listing">&nbsp;</td>
+<td>daq_dma_7</td><td>0x08200100 - 0x0820011F</td><td>32</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>sgdma_rx</td><td>0x08400400 - 0x0840043F</td><td>64</td><td class="listing">&nbsp;</td>
+<td>daq_dma_6</td><td>0x082000C0 - 0x082000DF</td><td>32</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>tse_mac</td><td>0x08400000 - 0x084003FF</td><td>1024</td><td class="listing">&nbsp;</td>
+<td>daq_dma_5</td><td>0x082000A0 - 0x082000BF</td><td>32</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>daq_dma_4</td><td>0x08200080 - 0x0820009F</td><td>32</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>daq_dma_3</td><td>0x08200060 - 0x0820007F</td><td>32</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>daq_dma_2</td><td>0x08200040 - 0x0820005F</td><td>32</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>daq_dma_1</td><td>0x08200020 - 0x0820003F</td><td>32</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>daq_dma_0</td><td>0x08200000 - 0x0820001F</td><td>32</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>patterngen_data</td><td>0x08108200 - 0x081083FF</td><td>512</td><td class="listing">&nbsp;</td>
@@ -107,76 +122,49 @@
 <td>PSI2C</td><td>0x08108000 - 0x0810801F</td><td>32</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>main_status</td><td>0x081000B0 - 0x081000BF</td><td>16</td><td class="listing">&nbsp;</td>
+<td>jtag_uart</td><td>0x08100180 - 0x08100187</td><td>8</td><td class="listing">printable</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>main_control</td><td>0x081000A0 - 0x081000AF</td><td>16</td><td class="listing">&nbsp;</td>
+<td>SDC_SPI2</td><td>0x08100160 - 0x0810016F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>i2c_external</td><td>0x08100090 - 0x08100097</td><td>8</td><td class="listing">&nbsp;</td>
+<td>ROC_addr</td><td>0x08100140 - 0x0810014F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>SDC_SPI2</td><td>0x08100080 - 0x0810008F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>i2c_external</td><td>0x08100120 - 0x08100127</td><td>8</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>ROC_addr</td><td>0x08100070 - 0x0810007F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>i2c_main</td><td>0x08100100 - 0x08100107</td><td>8</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>i2c_main</td><td>0x08100060 - 0x08100067</td><td>8</td><td class="listing">&nbsp;</td>
+<td>main_status</td><td>0x081000E0 - 0x081000EF</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>crosspoint_switch</td><td>0x08100050 - 0x08100057</td><td>8</td><td class="listing">&nbsp;</td>
+<td>main_control</td><td>0x081000C0 - 0x081000CF</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>LCDS_io</td><td>0x08100040 - 0x08100040</td><td>1</td><td class="listing">&nbsp;</td>
+<td>crosspoint_switch</td><td>0x081000A0 - 0x081000A7</td><td>8</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>button</td><td>0x08100030 - 0x0810003F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>LCDS_io</td><td>0x08100080 - 0x08100080</td><td>1</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>LED</td><td>0x08100020 - 0x0810002F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>button</td><td>0x08100060 - 0x0810006F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>daq_dma_7</td><td>0x08002200 - 0x0800221F</td><td>32</td><td class="listing">&nbsp;</td>
+<td>LED</td><td>0x08100040 - 0x0810004F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>daq_dma_6</td><td>0x080021C0 - 0x080021DF</td><td>32</td><td class="listing">&nbsp;</td>
+<td>sys_timer</td><td>0x08100020 - 0x0810003F</td><td>32</td><td class="listing">timer</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>daq_dma_5</td><td>0x08002180 - 0x0800219F</td><td>32</td><td class="listing">&nbsp;</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>daq_dma_4</td><td>0x08002140 - 0x0800215F</td><td>32</td><td class="listing">&nbsp;</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>daq_dma_3</td><td>0x08002100 - 0x0800211F</td><td>32</td><td class="listing">&nbsp;</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>daq_dma_2</td><td>0x080020C0 - 0x080020DF</td><td>32</td><td class="listing">&nbsp;</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>daq_dma_1</td><td>0x08002080 - 0x0800209F</td><td>32</td><td class="listing">&nbsp;</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>daq_dma_0</td><td>0x08002040 - 0x0800205F</td><td>32</td><td class="listing">&nbsp;</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>jtag_uart</td><td>0x08002020 - 0x08002027</td><td>8</td><td class="listing">printable</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>sys_timer</td><td>0x08002000 - 0x0800201F</td><td>32</td><td class="listing">timer</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>performance_counter</td><td>0x08001800 - 0x0800183F</td><td>64</td><td class="listing">&nbsp;</td>
+<td>sysid</td><td>0x08100000 - 0x08100007</td><td>8</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>USB2</td><td>0x08001110 - 0x08001111</td><td>2</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>usb_tx_dma</td><td>0x08001040 - 0x0800107F</td><td>64</td><td class="listing">&nbsp;</td>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>sysid</td><td>0x08001000 - 0x08001007</td><td>8</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>epcs_controller</td><td>0x08000000 - 0x080007FF</td><td>2048</td><td class="listing">flash, memory, non-volatile</td>

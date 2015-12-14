@@ -21,7 +21,7 @@ module frame_detector
 	reg [4:0]p;  // parallel data register
 	reg e;       // error flag
 
-	always @(posedge clk400)
+	always @(posedge clk400 or posedge reset)
 	begin
 		if (reset)
 		begin
