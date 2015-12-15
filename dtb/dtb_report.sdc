@@ -19,7 +19,7 @@
 ## PROGRAM "Quartus II"
 ## VERSION "Version 13.1.4 Build 182 03/12/2014 SJ Full Version"
 
-## DATE    "Mon Dec 14 12:02:09 2015"
+## DATE    "Tue Dec 15 08:37:23 2015"
 
 ##
 ## DEVICE  "EP3C40F484C6"
@@ -196,7 +196,7 @@ set_false_path -from [get_keepers {dtb_system:inst|dtb_system_main_control:main_
 # Set Max Skew
 #**************************************************************
 
-set_max_skew -from [get_ports {LVDS2LCDS_sdata_III}] -to [get_keepers {*|deser400_PSI:ds400_III|oversampling:ovs|s1[*]}] 0.100 -exclude { from_clock to_clock clock_uncertainty }
-set_max_skew -from [get_ports {LVDS2LCDS_sdata_II}] -to [get_keepers {*|deser400_PSI:ds400_II|oversampling:ovs|s1[*]}] 0.100 -exclude { from_clock to_clock clock_uncertainty }
-set_max_skew -from [get_ports {LVDS2LCDS_sdata_IV}] -to [get_keepers {*|deser400_PSI:ds400_IV|oversampling:ovs|s1[*]}] 0.100 -exclude { from_clock to_clock clock_uncertainty }
-set_max_skew -from [get_ports {LVDS2LCDS_sdata_I}] -to [get_keepers {*|deser400_PSI:ds400_I|oversampling:ovs|s1[*]}] 0.100 -exclude { from_clock to_clock clock_uncertainty }
+set_max_skew -from [get_ports {LVDS2LCDS_sdata_III}] -to [get_keepers {*|deser400_PSI:ds400_III|cdr:cdr1|oversampling:ovs|s1[*]}] 0.100 -exclude { from_clock to_clock clock_uncertainty }
+set_max_skew -from [get_ports {LVDS2LCDS_sdata_II}] -to [get_keepers {*|deser400_PSI:ds400_II|cdr:cdr1|oversampling:ovs|s1[*]}] 0.100 -exclude { from_clock to_clock clock_uncertainty }
+set_max_skew -from [get_ports {LVDS2LCDS_sdata_IV}] -to [get_keepers {*|deser400_PSI:ds400_IV|cdr:cdr1|oversampling:ovs|s1[*]}] 0.100 -exclude { from_clock to_clock clock_uncertainty }
+set_max_skew -from [get_ports {LVDS2LCDS_sdata_I}] -to [get_keepers {*|deser400_PSI:ds400_I|cdr:cdr1|oversampling:ovs|s1[*]}] 0.100 -exclude { from_clock to_clock clock_uncertainty }
