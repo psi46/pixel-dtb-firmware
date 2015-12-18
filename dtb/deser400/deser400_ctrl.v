@@ -7,11 +7,11 @@ reg  bits       description
   1    4   W    enable: enable_IV, enable_III, enable_II, enable_I
   2    7   W    gate: gate_ena, gate_periode, gate_width
   3    4   W    phenable: phenable_IV, phenable_III, phenable_II, phenable_I,
-  4    7   W    phsel_IV, phsel_III, phsel_II, phsel_I, phdata
+  4    8   W    phsel_IV, phsel_III, phsel_II, phsel_I, phdata
   5   32   R    xorsum_IV, xorsum_III, xorsum_II, xorsum_I
-  6   12   R    phsel_IV, phsel_III, phsel_II, phsel_I
-  8    6   W    Test point select A
-  9    6   W    Test point select B
+  6   16   R    phsel_IV, phsel_III, phsel_II, phsel_I
+  8    7   W    Test point select A
+  9    7   W    Test point select B
 
   Test signals:
   - phase det gate
@@ -22,11 +22,15 @@ reg  bits       description
   - tbmA header
   - tbmA roc header
   - tbmA trailer
+  - tbmA error header
+  - tbmA error idle
   - tbmB data
   - tbmB gate
   - tbmB header
   - tbmB roc header
   - tbmB trailer
+  - tbmB error header
+  - tbmB error idle
 */
 	
 module deser400_ctrl
@@ -51,7 +55,7 @@ module deser400_ctrl
 	output phwrite_II,
 	output phwrite_III,
 	output phwrite_IV,
-	output [2:0]phdata,
+	output [3:0]phdata,
 	
 	output phenable_I,
 	output phenable_II,
@@ -63,13 +67,13 @@ module deser400_ctrl
 	input [7:0]xorsum_III,
 	input [7:0]xorsum_IV,
 
-	input [2:0]phsel_I,
-	input [2:0]phsel_II,
-	input [2:0]phsel_III,
-	input [2:0]phsel_IV,
+	input [3:0]phsel_I,
+	input [3:0]phsel_II,
+	input [3:0]phsel_III,
+	input [3:0]phsel_IV,
 	
-	output reg [5:0]tp_sel_a,
-	output reg [5:0]tp_sel_b
+	output reg [6:0]tp_sel_a,
+	output reg [6:0]tp_sel_b
 );
 
 	reg [3:0]deser_enable;  // deser IV..I enable
@@ -111,8 +115,8 @@ module deser400_ctrl
 				 4'd1: deser_enable <= writedata[3:0];
 				 4'd2: {gate_enable, gate_period, gate_width} <= writedata[6:0];
 				 4'd3: phenable <= writedata[3:0];
-				 4'd8: tp_sel_a <= writedata[5:0];
-				 4'd9: tp_sel_b <= writedata[5:0];
+				 4'd8: tp_sel_a <= writedata[6:0];
+				 4'd9: tp_sel_b <= writedata[6:0];
 				endcase
 			end
 			else
@@ -126,7 +130,7 @@ module deser400_ctrl
 	always @(*)
 	begin
 		if (write && address == 4'd4)
-			phwrite <= writedata[6:3];
+			phwrite <= writedata[7:4];
 		else
 			phwrite <= 4'b0000;
 	end
@@ -136,14 +140,14 @@ module deser400_ctrl
 	assign phwrite_III = phwrite[2];
 	assign phwrite_IV  = phwrite[3];
 	
-	assign phdata = writedata[2:0];
+	assign phdata = writedata[3:0];
 
 
 	always @(*)
 	begin
 		case (address)
 			4'd5: readdata <= {xorsum_IV, xorsum_III, xorsum_II, xorsum_I};
-			4'd6: readdata <= {20'd0, phsel_IV, phsel_III, phsel_II, phsel_I};
+			4'd6: readdata <= {16'd0, phsel_IV, phsel_III, phsel_II, phsel_I};
 			default: readdata <= 32'd0;
 		endcase
 	end

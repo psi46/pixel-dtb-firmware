@@ -73,18 +73,18 @@ applicable agreement for further details.
 		(line (pt 0 128)(pt 16 128))
 	)
 	(port
-		(pt 0 144)
-		(input)
-		(text "phdata[2..0]" (rect 0 0 67 14)(font "Arial" (font_size 8)))
-		(text "phdata[2..0]" (rect 21 139 88 153)(font "Arial" (font_size 8)))
-		(line (pt 0 144)(pt 16 144)(line_width 3))
-	)
-	(port
 		(pt 0 160)
 		(input)
 		(text "GATE" (rect 0 0 33 14)(font "Arial" (font_size 8)))
 		(text "GATE" (rect 21 155 54 169)(font "Arial" (font_size 8)))
 		(line (pt 0 160)(pt 16 160))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "phdata[3..0]" (rect 0 0 67 14)(font "Arial" (font_size 8)))
+		(text "phdata[3..0]" (rect 21 139 88 153)(font "Arial" (font_size 8)))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
 	)
 	(port
 		(pt 192 192)
@@ -103,8 +103,8 @@ applicable agreement for further details.
 	(port
 		(pt 192 144)
 		(output)
-		(text "phsel[2..0]" (rect 0 0 59 14)(font "Arial" (font_size 8)))
-		(text "phsel[2..0]" (rect 112 139 171 153)(font "Arial" (font_size 8)))
+		(text "phsel[3..0]" (rect 0 0 59 14)(font "Arial" (font_size 8)))
+		(text "phsel[3..0]" (rect 112 139 171 153)(font "Arial" (font_size 8)))
 		(line (pt 192 144)(pt 176 144)(line_width 3))
 	)
 	(drawing

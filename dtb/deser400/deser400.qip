@@ -8,7 +8,7 @@ set_global_assignment -name BDF_FILE     [file join $::quartus(qip_path) "cdr.bd
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "oversampling.v"]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "sample_delay.v"]
 set_global_assignment -name BDF_FILE     [file join $::quartus(qip_path) "phase_detector.bdf"]
-set_global_assignment -name VHDL_FILE    [file join $::quartus(qip_path) "lpm_decode0.vhd"]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "phase_detector_filter.v"]
 set_global_assignment -name QIP_FILE     [file join $::quartus(qip_path) "PhSeROM.qip"]
 set_global_assignment -name MIF_FILE     [file join $::quartus(qip_path) "PhaseSelectErr.mif"]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "phase_selector.v"]

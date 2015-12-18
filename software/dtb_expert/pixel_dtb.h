@@ -271,16 +271,22 @@ public:
 	#define PROBE_FRAME_ERROR    0
 	#define PROBE_CODE_ERROR     1
 	#define PROBE_ERROR          2  // FRAME or CODE
+
 	#define PROBE_A_HEADER       3
 	#define PROBE_A_PACKET       4
 	#define PROBE_A_TBM_HDR      5
 	#define PROBE_A_ROC_HDR      6
 	#define PROBE_A_TBM_TRL      7
-	#define PROBE_B_HEADER       8
-	#define PROBE_B_PACKET       9
-	#define PROBE_B_TBM_HDR     10
-	#define PROBE_B_ROC_HDR     11
-	#define PROBE_B_TBM_TRL     12
+	#define PROBE_A_IDLE_ERROR   8
+	#define PROBE_A_HDR_ERROR    9
+
+	#define PROBE_B_HEADER      10
+	#define PROBE_B_PACKET      11
+	#define PROBE_B_TBM_HDR     12
+	#define PROBE_B_ROC_HDR     13
+	#define PROBE_B_TBM_TRL     14
+	#define PROBE_B_IDLE_ERROR  15
+	#define PROBE_B_HDR_ERROR   16
 
 	RPC_EXPORT void SignalProbeDeserD1(uint8_t deser, uint8_t signal);
 	RPC_EXPORT void SignalProbeDeserD2(uint8_t deser, uint8_t signal);

@@ -949,7 +949,7 @@ set_location_assignment FF_X2_Y16_N5 -to "*|deser400_PSI:ds400_IV|cdr:cdr1|overs
 
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING ON
-set_global_assignment -name SEED 5
+set_global_assignment -name SEED 0
 set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
@@ -1081,5 +1081,10 @@ set_global_assignment -name QIP_FILE delay.qip
 set_global_assignment -name QIP_FILE datamux.qip
 set_global_assignment -name VERILOG_FILE daq_switch.v
 set_global_assignment -name CDF_FILE Chain1.cdf
+set_global_assignment -name HEX_FILE deser400/doc/cdr/phase_detector/PhaseSelectErr.hex
+set_global_assignment -name MIF_FILE deser400/doc/cdr/phase_detector/ph_table/data/PhaseSelectErr.mif
+set_global_assignment -name MIF_FILE deser400/doc/cdr/phase_detector/ph_table/data/PhaseSelectErr_L.mif
+set_global_assignment -name MIF_FILE deser400/doc/cdr/phase_detector/ph_table/data/PhaseSelectErr_R.mif
+set_global_assignment -name HEX_FILE deser400/PhaseSelectErr.hex
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY inst_74401 -to "dtb_system:inst" -section_id "dtb_system:inst"

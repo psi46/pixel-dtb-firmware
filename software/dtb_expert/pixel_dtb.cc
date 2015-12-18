@@ -257,7 +257,7 @@ void CTestboard::Init()
 
 	Deser400_DisableAll();
 	Deser400_SetPhaseAutoAll();
-	Deser400_GateRun(6, 7);
+	Deser400_GateRun(0, 0);
 
 	ChipId  = 0;
 	TBM_present = false;
@@ -912,9 +912,9 @@ void CTestboard::SignalProbeD2(uint8_t signal)
 
 void CTestboard::SignalProbeDeserD1(uint8_t deser, uint8_t signal)
 {
-	if (deser < 4 && signal <= 12)
+	if (deser < 4 && signal <= 31)
 	{
-		_Deser400_Write(PD_TP_A, (deser << 4) | signal);
+		_Deser400_Write(PD_TP_A, (deser << 5) | signal);
 		_Probe1(30);
 	}
 }
@@ -922,9 +922,9 @@ void CTestboard::SignalProbeDeserD1(uint8_t deser, uint8_t signal)
 
 void CTestboard::SignalProbeDeserD2(uint8_t deser, uint8_t signal)
 {
-	if (deser < 4 && signal <= 12)
+	if (deser < 4 && signal <= 31)
 	{
-		_Deser400_Write(PD_TP_B, (deser << 4) | signal);
+		_Deser400_Write(PD_TP_B, (deser << 5) | signal);
 		_Probe2(31);
 	}
 }
@@ -1860,12 +1860,12 @@ void CTestboard::Deser400_DisableAll()
 
 void CTestboard::Deser400_SetPhase(uint8_t deser, uint8_t phase)
 {
-	if (deser > 3 || phase >= 8) return;
+	if (deser > 3 || phase >= 16) return;
 
 	uint32_t n = 1 << deser;
 	deser400_pdena &= ~n;
 	_Deser400_Write(PD_ENABLE, deser400_pdena);
-	_Deser400_Write(PD_SETPHASE, (n << 3) | phase);
+	_Deser400_Write(PD_SETPHASE, (n << 4) | phase);
 }
 
 
@@ -1900,7 +1900,7 @@ uint8_t CTestboard::Deser400_GetPhase(uint8_t deser)
 	if (deser > 3) return 0;
 
 	uint32_t x = _Deser400_Read(PD_GETPHASE);
-	return uint8_t(x >> (3*deser)) & 7;
+	return uint8_t(x >> (4*deser)) & 15;
 }
 
 

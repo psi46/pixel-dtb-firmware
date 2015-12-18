@@ -82,8 +82,8 @@ applicable agreement for further details.
 	(port
 		(pt 0 136)
 		(input)
-		(text "phdata[2..0]" (rect 24 144 91 158)(font "Arial" (font_size 8)))
-		(text "phdata[2..0]" (rect 24 128 91 142)(font "Arial" (font_size 8)))
+		(text "phdata[3..0]" (rect 24 144 91 158)(font "Arial" (font_size 8)))
+		(text "phdata[3..0]" (rect 24 128 91 142)(font "Arial" (font_size 8)))
 		(line (pt 0 136)(pt 16 136)(color 0 128 255)(line_width 3))
 	)
 	(port
@@ -124,15 +124,15 @@ applicable agreement for further details.
 	(port
 		(pt 208 136)
 		(output)
-		(text "phsel[2..0]" (rect 157 128 216 142)(font "Arial" (font_size 8)))
-		(text "phsel[2..0]" (rect 133 128 192 142)(font "Arial" (font_size 8)))
+		(text "phsel[3..0]" (rect 157 128 216 142)(font "Arial" (font_size 8)))
+		(text "phsel[3..0]" (rect 133 128 192 142)(font "Arial" (font_size 8)))
 		(line (pt 208 136)(pt 192 136)(color 128 0 255)(line_width 3))
 	)
 	(port
 		(pt 208 48)
 		(output)
-		(text "TP[12..0]" (rect 0 0 49 14)(font "Arial" (font_size 8)))
-		(text "TP[12..0]" (rect 145 43 194 57)(font "Arial" (font_size 8)))
+		(text "TP[31..0]" (rect 0 0 49 14)(font "Arial" (font_size 8)))
+		(text "TP[31..0]" (rect 145 43 194 57)(font "Arial" (font_size 8)))
 		(line (pt 208 48)(pt 192 48)(line_width 3))
 	)
 	(drawing

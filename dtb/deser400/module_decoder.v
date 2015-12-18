@@ -9,6 +9,7 @@ module module_decoder
 	input reset,
 	
 	input [1:0]error,
+	output [1:0]error_out,
 	input davail,
 	output reg running,
 	
@@ -50,6 +51,8 @@ module module_decoder
 		bit 3: frame error
 		bit 4: one of the four errors detected
 	*/
+	
+	assign error_out = error_flags[1:0];
 	
 	always @(posedge clk80 or posedge reset)
 	begin
