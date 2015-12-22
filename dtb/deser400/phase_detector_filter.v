@@ -7,10 +7,10 @@ module phase_detector_filter
 	input  reset,
 	
 	input  update,
-	input  [2:0]phase_in, // 2*pi phase
-	output [3:0]phase_out // 4*pi phase
+	input  [3:0]phase_in, // 2*pi phase, half steps
+	output [4:0]phase_out // 4*pi phase, half steps
 );
-	localparam N = 10;
+	localparam N = 10;  // must be >= 5
 
 	// --- phase adder register
 	wire [(N-1):0]ph_cnt;
@@ -20,26 +20,28 @@ module phase_detector_filter
 
 	
 	// phase difference
-	wire [2:0]diff = ph_cnt[(N-2):(N-4)] - phase_in;
+	wire [3:0]diff = ph_cnt[(N-2):(N-5)] - phase_in;
 	
-	wire cnt_ena = update && (diff != 3'd0);
-	wire up = diff[2];
+	wire cnt_ena = update && (diff != 4'd0);
+	wire up = diff[3];
 	
 	
 	// --- phase counter: cnt_ena, up -> ph_cnt ------------------------------
 	
-	wire [(N-2):0]ph_cnt_L;
-	reg ph_cnt_H;
+	wire [(N-2):0]ph_cnt_L; // lower (N-1) bits
+	reg ph_cnt_H;           // upper most bit
 	wire carry;
 	
 	assign ph_cnt = {ph_cnt_H, ph_cnt_L};
-	
+
+	// special handling of upper most bit	
 	always @(posedge clk or posedge reset)
 	begin
 		if (reset) ph_cnt_H <= 1'd1;
 		else if (cnt_ena && carry) ph_cnt_H <= up;
 	end	
-	
+
+	// counter for lower bits	
 	lpm_counter	phase_counter
 	(
 		.aclr (reset),

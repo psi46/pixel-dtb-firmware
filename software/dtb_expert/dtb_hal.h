@@ -76,15 +76,15 @@ inline unsigned short ADC_READ(short reg)
 // === DAQ ==================================================================
 
 /*
-0    1   W    event: single trigger
-1    4   W    enable: enable_IV, enable_III, enable_II, enable_I
-2    7   W    gate: gate_ena, gate_periode, gate_width
-3    4   W    phenable: phenable_IV, phenable_III, phenable_II, phenable_I,
-4    7   W    phsel_IV, phsel_III, phsel_II, phsel_I, phdata
-5   32   R    xorsum_IV, xorsum_III, xorsum_II, xorsum_I
-6   12   R    phsel_IV, phsel_III, phsel_II, phsel_I
-8    6   W    Test point select A
-9    6   W    Test point select B
+  0    1   W    event: single trigger
+  1    4   W    enable: enable_IV, enable_III, enable_II, enable_I
+  2    2   W    phase detector period (0=112.5, 1=212.5, 2=412.5, 3=812.5 ns)
+  3    4   W    phenable: phenable_IV, phenable_III, phenable_II, phenable_I,
+  4    8   W    phsel_IV, phsel_III, phsel_II, phsel_I, phdata
+  5   32   R    xorsum_IV, xorsum_III, xorsum_II, xorsum_I
+  6   16   R    phsel_IV, phsel_III, phsel_II, phsel_I
+  8    7   W    Test point select A
+  9    7   W    Test point select B
 */
 
 #define GATE_START      0

@@ -129,13 +129,6 @@ applicable agreement for further details.
 		(line (pt 224 136)(pt 208 136)(line_width 3))
 	)
 	(port
-		(pt 224 168)
-		(output)
-		(text "gate" (rect 0 40 21 52)(font "Arial" ))
-		(text "gate" (rect 186 163 207 175)(font "Arial" ))
-		(line (pt 224 168)(pt 208 168))
-	)
-	(port
 		(pt 224 200)
 		(output)
 		(text "enable_I" (rect 0 40 41 52)(font "Arial" ))
@@ -239,6 +232,13 @@ applicable agreement for further details.
 		(text "tp_sel_b[6..0]" (rect 173 464 249 478)(font "Arial" (font_size 8)))
 		(text "tp_sel_b[6..0]" (rect 133 464 209 478)(font "Arial" (font_size 8)))
 		(line (pt 224 472)(pt 208 472)(color 128 0 255)(line_width 3))
+	)
+	(port
+		(pt 224 168)
+		(output)
+		(text "pd_trig" (rect 0 40 33 52)(font "Arial" ))
+		(text "pd_trig" (rect 170 163 203 175)(font "Arial" ))
+		(line (pt 224 168)(pt 208 168)(color 128 0 255))
 	)
 	(drawing
 		(rectangle (rect 16 24 208 488))

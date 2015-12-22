@@ -503,7 +503,7 @@ applicable agreement for further details.
 	(output)
 	(rect 1384 -216 1560 -200)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "gate" (rect 90 0 111 12)(font "Arial" ))
+	(text "pd_trig" (rect 90 0 123 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -541,13 +541,6 @@ applicable agreement for further details.
 		(line (pt 0 64)(pt 16 64))
 	)
 	(port
-		(pt 0 152)
-		(input)
-		(text "GATE" (rect 0 0 33 14)(font "Arial" (font_size 8)))
-		(text "GATE" (rect 21 147 54 161)(font "Arial" (font_size 8)))
-		(line (pt 0 152)(pt 16 152))
-	)
-	(port
 		(pt 0 232)
 		(input)
 		(text "sdata" (rect 0 0 31 14)(font "Arial" (font_size 8)))
@@ -581,6 +574,13 @@ applicable agreement for further details.
 		(text "phdata[3..0]" (rect 24 144 91 158)(font "Arial" (font_size 8)))
 		(text "phdata[3..0]" (rect 24 128 91 142)(font "Arial" (font_size 8)))
 		(line (pt 0 136)(pt 16 136)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 0 152)
+		(input)
+		(text "pd_trig" (rect 0 0 38 14)(font "Arial" (font_size 8)))
+		(text "pd_trig" (rect 21 147 59 161)(font "Arial" (font_size 8)))
+		(line (pt 0 152)(pt 16 152)(color 0 128 255))
 	)
 	(port
 		(pt 208 168)
@@ -661,13 +661,6 @@ applicable agreement for further details.
 		(line (pt 0 64)(pt 16 64))
 	)
 	(port
-		(pt 0 152)
-		(input)
-		(text "GATE" (rect 0 0 33 14)(font "Arial" (font_size 8)))
-		(text "GATE" (rect 21 147 54 161)(font "Arial" (font_size 8)))
-		(line (pt 0 152)(pt 16 152))
-	)
-	(port
 		(pt 0 232)
 		(input)
 		(text "sdata" (rect 0 0 31 14)(font "Arial" (font_size 8)))
@@ -701,6 +694,13 @@ applicable agreement for further details.
 		(text "phdata[3..0]" (rect 24 144 91 158)(font "Arial" (font_size 8)))
 		(text "phdata[3..0]" (rect 24 128 91 142)(font "Arial" (font_size 8)))
 		(line (pt 0 136)(pt 16 136)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 0 152)
+		(input)
+		(text "pd_trig" (rect 0 0 38 14)(font "Arial" (font_size 8)))
+		(text "pd_trig" (rect 21 147 59 161)(font "Arial" (font_size 8)))
+		(line (pt 0 152)(pt 16 152)(color 0 128 255))
 	)
 	(port
 		(pt 208 168)
@@ -781,13 +781,6 @@ applicable agreement for further details.
 		(line (pt 0 64)(pt 16 64))
 	)
 	(port
-		(pt 0 152)
-		(input)
-		(text "GATE" (rect 0 0 33 14)(font "Arial" (font_size 8)))
-		(text "GATE" (rect 21 147 54 161)(font "Arial" (font_size 8)))
-		(line (pt 0 152)(pt 16 152))
-	)
-	(port
 		(pt 0 232)
 		(input)
 		(text "sdata" (rect 0 0 31 14)(font "Arial" (font_size 8)))
@@ -821,6 +814,13 @@ applicable agreement for further details.
 		(text "phdata[3..0]" (rect 24 144 91 158)(font "Arial" (font_size 8)))
 		(text "phdata[3..0]" (rect 24 128 91 142)(font "Arial" (font_size 8)))
 		(line (pt 0 136)(pt 16 136)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 0 152)
+		(input)
+		(text "pd_trig" (rect 0 0 38 14)(font "Arial" (font_size 8)))
+		(text "pd_trig" (rect 21 147 59 161)(font "Arial" (font_size 8)))
+		(line (pt 0 152)(pt 16 152)(color 0 128 255))
 	)
 	(port
 		(pt 208 168)
@@ -901,13 +901,6 @@ applicable agreement for further details.
 		(line (pt 0 64)(pt 16 64))
 	)
 	(port
-		(pt 0 152)
-		(input)
-		(text "GATE" (rect 0 0 33 14)(font "Arial" (font_size 8)))
-		(text "GATE" (rect 21 147 54 161)(font "Arial" (font_size 8)))
-		(line (pt 0 152)(pt 16 152))
-	)
-	(port
 		(pt 0 232)
 		(input)
 		(text "sdata" (rect 0 0 31 14)(font "Arial" (font_size 8)))
@@ -941,6 +934,13 @@ applicable agreement for further details.
 		(text "phdata[3..0]" (rect 24 144 91 158)(font "Arial" (font_size 8)))
 		(text "phdata[3..0]" (rect 24 128 91 142)(font "Arial" (font_size 8)))
 		(line (pt 0 136)(pt 16 136)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 0 152)
+		(input)
+		(text "pd_trig" (rect 0 0 38 14)(font "Arial" (font_size 8)))
+		(text "pd_trig" (rect 21 147 59 161)(font "Arial" (font_size 8)))
+		(line (pt 0 152)(pt 16 152)(color 0 128 255))
 	)
 	(port
 		(pt 208 168)
@@ -1183,13 +1183,6 @@ applicable agreement for further details.
 		(line (pt 224 136)(pt 208 136)(line_width 3))
 	)
 	(port
-		(pt 224 168)
-		(output)
-		(text "gate" (rect 0 40 21 52)(font "Arial" ))
-		(text "gate" (rect 186 163 207 175)(font "Arial" ))
-		(line (pt 224 168)(pt 208 168))
-	)
-	(port
 		(pt 224 200)
 		(output)
 		(text "enable_I" (rect 0 40 41 52)(font "Arial" ))
@@ -1293,6 +1286,13 @@ applicable agreement for further details.
 		(text "tp_sel_b[6..0]" (rect 173 464 249 478)(font "Arial" (font_size 8)))
 		(text "tp_sel_b[6..0]" (rect 133 464 209 478)(font "Arial" (font_size 8)))
 		(line (pt 224 472)(pt 208 472)(color 128 0 255)(line_width 3))
+	)
+	(port
+		(pt 224 168)
+		(output)
+		(text "pd_trig" (rect 0 40 33 52)(font "Arial" ))
+		(text "pd_trig" (rect 170 163 203 175)(font "Arial" ))
+		(line (pt 224 168)(pt 208 168)(color 128 0 255))
 	)
 	(drawing
 		(rectangle (rect 16 24 208 488))
@@ -1418,21 +1418,6 @@ applicable agreement for further details.
 	(pt 592 312)
 )
 (connector
-	(text "gate" (rect 602 328 623 340)(font "Arial" ))
-	(pt 672 344)
-	(pt 592 344)
-)
-(connector
-	(text "gate" (rect 602 656 623 668)(font "Arial" ))
-	(pt 672 672)
-	(pt 592 672)
-)
-(connector
-	(text "gate" (rect 602 984 623 996)(font "Arial" ))
-	(pt 672 1000)
-	(pt 592 1000)
-)
-(connector
 	(text "sclk[7..0]" (rect 602 1192 648 1204)(font "Arial" ))
 	(pt 672 1208)
 	(pt 592 1208)
@@ -1469,11 +1454,6 @@ applicable agreement for further details.
 	(pt 952 1408)
 	(pt 880 1408)
 	(bus)
-)
-(connector
-	(text "gate" (rect 602 1312 623 1324)(font "Arial" ))
-	(pt 672 1328)
-	(pt 592 1328)
 )
 (connector
 	(text "phwrite_II" (rect 602 624 649 636)(font "Arial" ))
@@ -1698,10 +1678,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 880 -208)
-	(pt 1384 -208)
-)
-(connector
 	(text "phdata[3..0]" (rect 602 312 661 324)(font "Arial" ))
 	(pt 672 328)
 	(pt 592 328)
@@ -1826,4 +1802,28 @@ applicable agreement for further details.
 	(pt 1128 176)
 	(pt 1200 176)
 	(bus)
+)
+(connector
+	(text "pd_trig" (rect 602 328 635 340)(font "Arial" ))
+	(pt 672 344)
+	(pt 592 344)
+)
+(connector
+	(text "pd_trig" (rect 602 656 635 668)(font "Arial" ))
+	(pt 672 672)
+	(pt 592 672)
+)
+(connector
+	(text "pd_trig" (rect 602 984 635 996)(font "Arial" ))
+	(pt 672 1000)
+	(pt 592 1000)
+)
+(connector
+	(text "pd_trig" (rect 602 1312 635 1324)(font "Arial" ))
+	(pt 672 1328)
+	(pt 592 1328)
+)
+(connector
+	(pt 880 -208)
+	(pt 1384 -208)
 )

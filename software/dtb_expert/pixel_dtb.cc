@@ -257,7 +257,7 @@ void CTestboard::Init()
 
 	Deser400_DisableAll();
 	Deser400_SetPhaseAutoAll();
-	Deser400_GateRun(0, 0);
+	Deser400_PdRate(1);
 
 	ChipId  = 0;
 	TBM_present = false;
@@ -1904,26 +1904,26 @@ uint8_t CTestboard::Deser400_GetPhase(uint8_t deser)
 }
 
 
+void CTestboard::Deser400_PdRate(uint8_t rate)
+{
+	if (rate > 3) rate = 3;
+	_Deser400_Write(GATE, rate);
+}
+
+
 void CTestboard::Deser400_GateRun(uint8_t width, uint8_t period)
 {
-	if (width > 7 || period > 7) return;
-	if (period < width) period = width;
-	_Deser400_Write(GATE,  0x40 | (period<<3) | width);
+	Deser400_PdRate(period);
 }
 
 
 void CTestboard::Deser400_GateStop()
 {
-	_Deser400_Write(GATE, 0x08);
 }
 
 
 void CTestboard::Deser400_GateSingle(uint8_t width)
 {
-	if (width > 7) width = 7;
-	_Deser400_Write(GATE,  0x38 | width);
-	_Deser400_Write(GATE_START, 1);
-	SetLed(1);
 }
 
 

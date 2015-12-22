@@ -45,13 +45,6 @@ applicable agreement for further details.
 		(line (pt 0 176)(pt 16 176)(line_width 3))
 	)
 	(port
-		(pt 0 144)
-		(input)
-		(text "GATE" (rect 0 0 33 14)(font "Arial" (font_size 8)))
-		(text "GATE" (rect 21 139 54 153)(font "Arial" (font_size 8)))
-		(line (pt 0 144)(pt 16 144))
-	)
-	(port
 		(pt 0 64)
 		(input)
 		(text "reset" (rect 0 0 29 14)(font "Arial" (font_size 8)))
@@ -78,6 +71,13 @@ applicable agreement for further details.
 		(text "phdata[3..0]" (rect 24 104 91 118)(font "Arial" (font_size 8)))
 		(text "phdata[3..0]" (rect 24 120 91 134)(font "Arial" (font_size 8)))
 		(line (pt 0 128)(pt 16 128)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "pd_trig" (rect 0 0 38 14)(font "Arial" (font_size 8)))
+		(text "pd_trig" (rect 21 139 59 153)(font "Arial" (font_size 8)))
+		(line (pt 0 144)(pt 16 144)(color 0 128 255))
 	)
 	(port
 		(pt 192 112)

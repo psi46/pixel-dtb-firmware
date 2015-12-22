@@ -234,11 +234,11 @@ applicable agreement for further details.
 		(line (pt 272 160)(pt 256 160)(color 128 0 255)(line_width 3))
 	)
 	(port
-		(pt 272 120)
+		(pt 272 56)
 		(output)
-		(text "gate" (rect 221 112 245 126)(font "Arial" (font_size 8)))
-		(text "gate" (rect 221 112 245 126)(font "Arial" (font_size 8)))
-		(line (pt 272 120)(pt 256 120))
+		(text "pd_trig" (rect 221 48 259 62)(font "Arial" (font_size 8)))
+		(text "pd_trig" (rect 213 48 251 62)(font "Arial" (font_size 8)))
+		(line (pt 272 56)(pt 256 56))
 	)
 	(drawing
 		(line (pt 16 248)(pt 256 248))
