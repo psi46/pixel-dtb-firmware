@@ -501,6 +501,8 @@ public:
 
 	RPC_EXPORT void tbm_Set(uint8_t reg, uint8_t value);
 
+	RPC_EXPORT void tbm_SelectRDA(uint8_t channel);
+
 	RPC_EXPORT bool tbm_Get(uint8_t reg, uint8_t &value);
 
 	RPC_EXPORT bool tbm_GetRaw(uint8_t reg, uint32_t &value);

@@ -19,6 +19,10 @@ inline void _SetLED(unsigned int value)
 { IOWR_ALTERA_AVALON_PIO_DATA(LED_BASE, value); }
 
 
+inline void _Plug_IO(unsigned int value)
+{ IOWR_ALTERA_AVALON_PIO_DATA(PLUG_IO_BASE, value); }
+
+
 #define MAINCTRL_CLK_SEL_SMPL 0x0001
 #define MAINCTRL_CLK_SEL_DAQ  0x0002
 #define MAINCTRL_PWR_ON       0x0004

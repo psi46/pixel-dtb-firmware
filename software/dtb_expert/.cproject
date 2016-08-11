@@ -472,7 +472,13 @@
 				</configuration>
 			</storageModule>
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.1326205363" moduleId="org.eclipse.cdt.core.settings" name="Nios II">
-				<externalSettings/>
+				<externalSettings>
+					<externalSetting>
+						<entry flags="BUILTIN|READONLY|RESOLVED" kind="includePath" name="X:/source/FPGA/pixel-dtb-firmware/software/dtb_expert/libfatfs/inc"/>
+						<entry flags="BUILTIN|READONLY|RESOLVED" kind="includePath" name="X:/source/FPGA/pixel-dtb-firmware/software/dtb_expert/libfatfs/core"/>
+						<entry flags="BUILTIN|READONLY|RESOLVED" kind="includePath" name="X:/source/FPGA/pixel-dtb-firmware/software/dtb_expert/libfatfs/src"/>
+					</externalSetting>
+				</externalSettings>
 				<extensions>
 					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>

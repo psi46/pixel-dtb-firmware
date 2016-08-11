@@ -266,6 +266,7 @@ void CTestboard::Init()
 	HUB_address0 = 0;
 	HUB_address1 = 0;
 	layer_1 = false;
+	tbm_SelectRDA(0);
 
 	currentClock = MHZ_40;
 	SetClock_(MHZ_1_25);
@@ -1279,6 +1280,8 @@ void CTestboard::mod_Addr(uint8_t hub0, uint8_t hub1)
 }
 
 
+
+
 void CTestboard::tbm_Set(uint8_t reg, uint8_t value)
 {
         if (!TBM_present) return;
@@ -1289,6 +1292,17 @@ void CTestboard::tbm_Set(uint8_t reg, uint8_t value)
         SetI2cHs(4, value);
         SetI2cHs(0, 3);
 }
+
+
+void CTestboard::tbm_SelectRDA(uint8_t channel)
+{
+	switch (channel)
+	{
+	case 0: _Plug_IO(0x0); break;
+	case 1: _Plug_IO(0x1); break;
+	}
+}
+
 
 bool CTestboard::tbm_GetRaw(uint8_t reg, uint32_t &value)
 {

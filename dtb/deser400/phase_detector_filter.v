@@ -8,7 +8,7 @@ module phase_detector_filter
 	
 	input  update,
 	input  [3:0]phase_in, // 2*pi phase, half steps
-	output [4:0]phase_out // 4*pi phase, half steps
+	output [3:0]phase_out // 4*pi phase, full steps
 );
 	localparam N = 10;  // must be >= 5
 
