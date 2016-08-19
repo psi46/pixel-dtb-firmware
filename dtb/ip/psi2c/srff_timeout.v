@@ -39,7 +39,7 @@ always @(posedge clk or posedge reset)
 begin
 	if (reset) timeout_counter <= 0;
 	else if (sync)
-		timeout_counter <= (q && !to_disable) ? timeout_counter - 1 : 0;
+		timeout_counter <= (q && !to_disable) ? timeout_counter - 5'd1 : 5'd0;
 end
 
 endmodule

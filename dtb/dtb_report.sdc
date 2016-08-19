@@ -19,7 +19,7 @@
 ## PROGRAM "Quartus II"
 ## VERSION "Version 13.1.4 Build 182 03/12/2014 SJ Full Version"
 
-## DATE    "Fri Jun 10 12:05:55 2016"
+## DATE    "Thu Aug 18 16:35:48 2016"
 
 ##
 ## DEVICE  "EP3C40F484C6"
@@ -166,6 +166,7 @@ set_false_path -from [get_keepers {dtb_system:inst|delay_out:delay_*|delr[*]}]
 set_false_path -from [get_keepers {dtb_system:inst|delay_out:delay_*|delf[*]}] 
 set_false_path -from [get_keepers {dtb_system:inst|delay_out:delay_*|ext_sel}] 
 set_false_path -from [get_keepers {dtb_system:inst|dtb_system_main_control:main_control|data_out[*]}] 
+set_false_path -from [get_keepers {dtb_system:inst|daq_dma32:daq_dma_*|running_int}] -to [get_keepers {dtb_system:inst|daq_dma32:daq_dma_*|running1}]
 
 
 #**************************************************************

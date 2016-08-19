@@ -23,7 +23,7 @@ module trigger_delay #(parameter N=3)
 	always @(posedge clk or posedge reset)
 	begin
 		if (reset) t <= 0;
-		else if (sync) t <= t + 1;
+		else if (sync) t <= t + 8'd1;
 	end
 
 	wire empty;

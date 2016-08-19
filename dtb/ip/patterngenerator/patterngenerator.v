@@ -89,7 +89,7 @@ module patterngenerator
 	assign set_start = ctrl_start;
 	
 	// --- trigger generator --------------------------------------------------
-	wire trig_loop = loopcnt == 0;
+	wire trig_loop = loopcnt == 16'd0;
   
 	always @(posedge csi_clock_clk or posedge csi_clock_reset)
 	begin
@@ -98,9 +98,9 @@ module patterngenerator
 		begin
 			if (ena_loop)
 			begin
-				if (trig_loop) loopcnt <= period;	else loopcnt <= loopcnt - 1;
+				if (trig_loop) loopcnt <= period;	else loopcnt <= loopcnt - 16'd1;
 			end
-			else loopcnt <= 0;
+			else loopcnt <= 16'd0;
 		end
 	end
 

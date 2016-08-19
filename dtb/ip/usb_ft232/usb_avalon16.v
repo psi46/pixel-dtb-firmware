@@ -44,7 +44,7 @@ module usb_avalon_16bit
 
 	assign si_request = avs_ctrl_write && avs_ctrl_address && avs_ctrl_writedata[0];
 	assign avs_ctrl_readdata = avs_ctrl_read ?
-		(avs_ctrl_address ? status : readdata_fifo) : 0;
+		(avs_ctrl_address ? status : readdata_fifo) : 8'd0;
 
 	// --- data register
 	reg rx_upper;

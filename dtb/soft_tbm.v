@@ -199,7 +199,7 @@ always @(posedge clk or posedge reset) begin
 	if (reset) trigger_counter <= 0;
 	else if (sync) begin
 		if (syn) trigger_counter <= 0;
-		else if (trg_pass) trigger_counter <= trigger_counter + 1;
+		else if (trg_pass) trigger_counter <= trigger_counter + 8'd1;
 	end
 end
 

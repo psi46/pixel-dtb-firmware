@@ -79,8 +79,8 @@ module trigger_in_async
 	  end
 		else
 		begin
-			if (clear) poscnt <= 0;
-			else poscnt <= poscnt + 1;
+			if (clear) poscnt <= 4'd0;
+			else poscnt <= poscnt + 4'd1;
 		end
 	end
 

@@ -29,6 +29,8 @@ wire	[11:0] din;
 wire	full;
 wire	[31:0]rda_data;
 wire	wr;
+wire  rd;
+wire  tbm;
 
 
 psi2c_bitsend	bitsend(

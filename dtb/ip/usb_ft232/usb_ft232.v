@@ -39,7 +39,6 @@ module usb_ft232
 	reg  tx_upper;
 	
 	wire tx_is_send  = tx_ready && !tx_mask[0];
-	wire tx_is_8bit  = tx_ready && (tx_mask == 2'b01);
 	wire tx_is_16bit = tx_ready && tx_mask[1];
 	
 	// tx_data -> data transfer; flow control with tx_ena & tx_wait
@@ -81,7 +80,7 @@ module usb_ft232
 				tx_siwu <= 0;
 			end
 	
-			if (tx_si || !(send_delay == 0)) send_delay = send_delay + 1;
+			if (tx_si || !(send_delay == 5'd0)) send_delay = send_delay + 5'b1;
 		end
 	end
 

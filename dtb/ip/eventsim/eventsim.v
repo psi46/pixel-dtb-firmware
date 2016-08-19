@@ -55,8 +55,8 @@ module eventsim
 
 			if (enable && sync)
 			begin
-				if (trigger[3]) count <= 0;
-				else if (write) count <= count + 1;
+				if (trigger[3]) count <= 14'd0;
+				else if (write) count <= count + 14'd1;
 			end
 		end
 	end

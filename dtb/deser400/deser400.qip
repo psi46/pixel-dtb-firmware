@@ -15,5 +15,5 @@ set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "phase_
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "frame_detector.v"]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "nrzi_4b5b_decoder.v"]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "demux_ab.v"]
-set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "header_realigner.v"]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "header_detector.v"]
 set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) "module_decoder.v"]

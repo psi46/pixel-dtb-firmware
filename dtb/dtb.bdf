@@ -4937,153 +4937,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "clk_sys" (rect -654 176 -616 188)(font "Arial" ))
-	(pt -664 192)
-	(pt -560 192)
-)
-(connector
-	(pt -1440 272)
-	(pt -560 272)
-	(bus)
-)
-(connector
-	(pt -1440 592)
-	(pt -560 592)
-)
-(connector
-	(pt -1440 376)
-	(pt -560 376)
-)
-(connector
-	(pt -1440 360)
-	(pt -560 360)
-)
-(connector
-	(pt -1440 424)
-	(pt -560 424)
-)
-(connector
-	(pt -1440 440)
-	(pt -560 440)
-)
-(connector
-	(pt -1440 456)
-	(pt -560 456)
-)
-(connector
-	(pt -1440 312)
-	(pt -560 312)
-)
-(connector
-	(pt -1440 408)
-	(pt -560 408)
-	(bus)
-)
-(connector
-	(pt -1440 504)
-	(pt -560 504)
-	(bus)
-)
-(connector
-	(pt -1440 232)
-	(pt -560 232)
-	(bus)
-)
-(connector
-	(pt -1440 576)
-	(pt -560 576)
-)
-(connector
-	(pt -1440 544)
-	(pt -560 544)
-)
-(connector
-	(pt -1440 560)
-	(pt -560 560)
-)
-(connector
-	(pt -1440 392)
-	(pt -560 392)
-	(bus)
-)
-(connector
-	(pt -1440 488)
-	(pt -560 488)
-	(bus)
-)
-(connector
-	(pt -1440 328)
-	(pt -560 328)
-)
-(connector
-	(pt -1440 344)
-	(pt -560 344)
-)
-(connector
-	(pt -1440 472)
-	(pt -560 472)
-	(bus)
-)
-(connector
-	(text "db_sdram_refresh_ack" (rect -670 616 -557 628)(font "Arial" ))
-	(pt -560 632)
-	(pt -672 632)
-)
-(connector
-	(text "db_sdram_wdata_req" (rect -670 632 -567 644)(font "Arial" ))
-	(pt -560 648)
-	(pt -672 648)
-)
-(connector
-	(pt -1440 720)
-	(pt -560 720)
-)
-(connector
-	(pt -1440 736)
-	(pt -560 736)
-)
-(connector
-	(pt -1440 752)
-	(pt -560 752)
-)
-(connector
-	(pt -1440 768)
-	(pt -560 768)
-)
-(connector
-	(pt -1440 856)
-	(pt -560 856)
-)
-(connector
-	(pt -1440 824)
-	(pt -560 824)
-)
-(connector
-	(pt -1440 872)
-	(pt -560 872)
-)
-(connector
-	(pt -1440 808)
-	(pt -560 808)
-)
-(connector
-	(pt -1440 840)
-	(pt -560 840)
-)
-(connector
-	(pt -1440 928)
-	(pt -560 928)
-)
-(connector
-	(pt -1440 912)
-	(pt -560 912)
-)
-(connector
-	(text "sync" (rect -614 952 -590 964)(font "Arial" ))
-	(pt -560 968)
-	(pt -616 968)
-)
-(connector
 	(pt -1416 1088)
 	(pt -1440 1088)
 )
@@ -5109,23 +4962,6 @@ applicable agreement for further details.
 (connector
 	(pt -1352 1024)
 	(pt -1360 1024)
-)
-(connector
-	(pt -560 1120)
-	(pt -1192 1120)
-	(bus)
-)
-(connector
-	(text "SD_card_detect,CRC_error_in,clk_locked_daq,clk_locked_smpl,clk_active_daq,clk_active_smpl,clk_ext_bad" (rect -1142 1064 -604 1076)(font "Arial" ))
-	(pt -560 1080)
-	(pt -1152 1080)
-	(bus)
-)
-(connector
-	(text "Sel_Old_TBM_Trailer,PLL_reset,ADC_powerup,Chip_term,Chip_reset,Chip_HV,Power_run,clk_sel_daq,clk_sel_smpl" (rect -1142 1024 -575 1036)(font "Arial" ))
-	(pt -560 1040)
-	(pt -1152 1040)
-	(bus)
 )
 (connector
 	(text "probe[2]" (rect -870 1232 -830 1244)(font "Arial" ))
@@ -5213,6 +5049,351 @@ applicable agreement for further details.
 	(pt -608 1600)
 )
 (connector
+	(pt -1400 1960)
+	(pt -1288 1960)
+	(bus)
+)
+(connector
+	(pt -1384 1976)
+	(pt -1272 1976)
+)
+(connector
+	(pt -976 2136)
+	(pt -960 2136)
+)
+(connector
+	(pt -960 2136)
+	(pt -848 2136)
+)
+(connector
+	(pt -976 2224)
+	(pt -944 2224)
+)
+(connector
+	(pt -944 2224)
+	(pt -848 2224)
+)
+(connector
+	(pt -768 2600)
+	(pt -744 2600)
+)
+(connector
+	(text "probe[25]" (rect -694 2584 -648 2596)(font "Arial" ))
+	(pt -696 2600)
+	(pt -640 2600)
+)
+(connector
+	(text "res_daq_n" (rect -854 -80 -804 -68)(font "Arial" ))
+	(pt -800 -64)
+	(pt -888 -64)
+)
+(connector
+	(pt -936 -64)
+	(pt -968 -64)
+)
+(connector
+	(pt -968 -64)
+	(pt -968 -144)
+)
+(connector
+	(text "clk_locked_daq" (rect -1078 -160 -1003 -148)(font "Arial" ))
+	(pt -1096 -144)
+	(pt -968 -144)
+)
+(connector
+	(pt -968 -144)
+	(pt -928 -144)
+)
+(connector
+	(text "pg[5..0]" (rect -1022 2560 -985 2572)(font "Arial" ))
+	(pt -1400 2576)
+	(pt -976 2576)
+	(bus)
+)
+(connector
+	(pt -1400 1960)
+	(pt -1400 2256)
+	(bus)
+)
+(connector
+	(pt -1400 2256)
+	(pt -1400 2576)
+	(bus)
+)
+(connector
+	(pt -1576 2680)
+	(pt -1544 2680)
+)
+(connector
+	(pt -1640 2680)
+	(pt -1624 2680)
+)
+(connector
+	(text "probe[12]" (rect -806 3200 -760 3212)(font "Arial" ))
+	(pt -808 3216)
+	(pt -744 3216)
+)
+(connector
+	(pt -696 3216)
+	(pt -656 3216)
+)
+(connector
+	(pt -1568 3520)
+	(pt -1536 3520)
+)
+(connector
+	(pt -1648 3616)
+	(pt -1608 3616)
+)
+(connector
+	(pt -1648 3384)
+	(pt -1456 3384)
+)
+(connector
+	(pt -1568 3504)
+	(pt -1568 3520)
+)
+(connector
+	(pt -1648 3400)
+	(pt -1392 3400)
+)
+(connector
+	(pt -1392 3440)
+	(pt -1648 3440)
+)
+(connector
+	(pt -1392 3440)
+	(pt -1392 3400)
+)
+(connector
+	(pt -1392 3488)
+	(pt -1544 3488)
+)
+(connector
+	(pt -1392 3488)
+	(pt -1392 3440)
+)
+(connector
+	(pt -1392 3520)
+	(pt -1488 3520)
+)
+(connector
+	(pt -1392 3520)
+	(pt -1392 3488)
+)
+(connector
+	(pt -1648 3488)
+	(pt -1592 3488)
+)
+(connector
+	(pt -1344 3368)
+	(pt -1648 3368)
+	(bus)
+)
+(connector
+	(pt -1344 3368)
+	(pt -1344 3400)
+	(bus)
+)
+(connector
+	(pt -1424 -104)
+	(pt -1392 -104)
+)
+(connector
+	(pt -1392 -88)
+	(pt -1424 -88)
+)
+(connector
+	(pt -1424 -56)
+	(pt -1424 -88)
+)
+(connector
+	(pt -1424 -88)
+	(pt -1424 -104)
+)
+(connector
+	(pt -1560 3616)
+	(pt -1392 3616)
+)
+(connector
+	(pt -1392 3520)
+	(pt -1392 3616)
+)
+(connector
+	(pt -1392 3616)
+	(pt -1392 3632)
+)
+(connector
+	(text "probe[28..26]" (rect 154 3048 218 3060)(font "Arial" ))
+	(pt 104 3064)
+	(pt 216 3064)
+	(bus)
+)
+(connector
+	(text "clk_sys" (rect -654 176 -616 188)(font "Arial" ))
+	(pt -664 192)
+	(pt -560 192)
+)
+(connector
+	(pt -1440 232)
+	(pt -560 232)
+	(bus)
+)
+(connector
+	(pt -1440 272)
+	(pt -560 272)
+	(bus)
+)
+(connector
+	(pt -1440 312)
+	(pt -560 312)
+)
+(connector
+	(pt -1440 328)
+	(pt -560 328)
+)
+(connector
+	(pt -1440 344)
+	(pt -560 344)
+)
+(connector
+	(pt -1440 360)
+	(pt -560 360)
+)
+(connector
+	(pt -1440 376)
+	(pt -560 376)
+)
+(connector
+	(pt -1440 392)
+	(pt -560 392)
+	(bus)
+)
+(connector
+	(pt -1440 408)
+	(pt -560 408)
+	(bus)
+)
+(connector
+	(pt -1440 424)
+	(pt -560 424)
+)
+(connector
+	(pt -1440 440)
+	(pt -560 440)
+)
+(connector
+	(pt -1440 456)
+	(pt -560 456)
+)
+(connector
+	(pt -1440 472)
+	(pt -560 472)
+	(bus)
+)
+(connector
+	(pt -1440 488)
+	(pt -560 488)
+	(bus)
+)
+(connector
+	(pt -1440 504)
+	(pt -560 504)
+	(bus)
+)
+(connector
+	(pt -1440 544)
+	(pt -560 544)
+)
+(connector
+	(pt -1440 560)
+	(pt -560 560)
+)
+(connector
+	(pt -1440 576)
+	(pt -560 576)
+)
+(connector
+	(pt -1440 592)
+	(pt -560 592)
+)
+(connector
+	(text "db_sdram_refresh_ack" (rect -670 616 -557 628)(font "Arial" ))
+	(pt -560 632)
+	(pt -672 632)
+)
+(connector
+	(text "db_sdram_wdata_req" (rect -670 632 -567 644)(font "Arial" ))
+	(pt -560 648)
+	(pt -672 648)
+)
+(connector
+	(pt -1440 720)
+	(pt -560 720)
+)
+(connector
+	(pt -1440 736)
+	(pt -560 736)
+)
+(connector
+	(pt -1440 752)
+	(pt -560 752)
+)
+(connector
+	(pt -1440 768)
+	(pt -560 768)
+)
+(connector
+	(pt -1440 808)
+	(pt -560 808)
+)
+(connector
+	(pt -1440 824)
+	(pt -560 824)
+)
+(connector
+	(pt -1440 840)
+	(pt -560 840)
+)
+(connector
+	(pt -1440 856)
+	(pt -560 856)
+)
+(connector
+	(pt -1440 872)
+	(pt -560 872)
+)
+(connector
+	(pt -1440 912)
+	(pt -560 912)
+)
+(connector
+	(pt -1440 928)
+	(pt -560 928)
+)
+(connector
+	(text "sync" (rect -614 952 -590 964)(font "Arial" ))
+	(pt -560 968)
+	(pt -616 968)
+)
+(connector
+	(pt -1192 1120)
+	(pt -560 1120)
+	(bus)
+)
+(connector
+	(text "SD_card_detect,CRC_error_in,clk_locked_daq,clk_locked_smpl,clk_active_daq,clk_active_smpl,clk_ext_bad" (rect -1142 1064 -604 1076)(font "Arial" ))
+	(pt -560 1080)
+	(pt -1152 1080)
+	(bus)
+)
+(connector
+	(text "Sel_Old_TBM_Trailer,PLL_reset,ADC_powerup,Chip_term,Chip_reset,Chip_HV,Power_run,clk_sel_daq,clk_sel_smpl" (rect -1142 1024 -575 1036)(font "Arial" ))
+	(pt -560 1040)
+	(pt -1152 1040)
+	(bus)
+)
+(connector
 	(pt -584 1552)
 	(pt -584 1608)
 	(bus)
@@ -5238,122 +5419,58 @@ applicable agreement for further details.
 	(pt -608 1624)
 )
 (connector
-	(pt -1400 1960)
-	(pt -1288 1960)
-	(bus)
-)
-(connector
-	(pt -1384 1976)
-	(pt -1272 1976)
-)
-(connector
 	(pt -1272 1976)
 	(pt -1272 1000)
 )
 (connector
+	(pt -1272 1000)
 	(pt -560 1000)
-	(pt -1272 1000)
 )
 (connector
+	(pt -1288 984)
 	(pt -560 984)
-	(pt -1288 984)
 	(bus)
-)
-(connector
-	(pt -976 2136)
-	(pt -960 2136)
-)
-(connector
-	(pt -960 2136)
-	(pt -848 2136)
-)
-(connector
-	(pt -976 2224)
-	(pt -944 2224)
-)
-(connector
-	(pt -944 2224)
-	(pt -848 2224)
-)
-(connector
-	(pt -1288 984)
-	(pt -1288 1440)
-	(bus)
-)
-(connector
-	(pt -1288 1440)
-	(pt -1288 1960)
-	(bus)
-)
-(connector
-	(text "sclk[7]" (rect -734 1144 -701 1156)(font "Arial" ))
-	(pt -736 1160)
-	(pt -608 1160)
-)
-(connector
-	(pt -608 1160)
-	(pt -560 1160)
 )
 (connector
 	(text "phase" (rect -726 1160 -697 1172)(font "Arial" ))
-	(pt -560 1176)
 	(pt -760 1176)
+	(pt -560 1176)
 )
 (connector
-	(pt -560 1192)
 	(pt -1440 1192)
+	(pt -560 1192)
 )
 (connector
+	(pt -608 1232)
 	(pt -560 1232)
-	(pt -608 1232)
 )
 (connector
-	(pt -608 1160)
-	(pt -608 1232)
-)
-(connector
-	(pt -760 1248)
-	(pt -640 1248)
-)
-(connector
-	(pt -640 1248)
-	(pt -560 1248)
-)
-(connector
-	(pt -560 1264)
 	(pt -1440 1264)
+	(pt -560 1264)
 )
 (connector
+	(pt -608 1304)
 	(pt -560 1304)
-	(pt -608 1304)
 )
 (connector
-	(pt -608 1232)
-	(pt -608 1304)
-)
-(connector
-	(pt -608 1304)
-	(pt -608 1376)
-)
-(connector
-	(pt -560 1320)
 	(pt -656 1320)
+	(pt -560 1320)
 )
 (connector
-	(pt -560 1336)
 	(pt -1440 1336)
+	(pt -560 1336)
 )
 (connector
-	(pt -560 1376)
 	(pt -608 1376)
+	(pt -560 1376)
 )
 (connector
-	(pt -560 1392)
 	(pt -624 1392)
+	(pt -560 1392)
 )
 (connector
-	(pt -560 1408)
 	(pt -1440 1408)
+	(pt -560 1408)
 )
 (connector
 	(text "sync" (rect -750 1432 -726 1444)(font "Arial" ))
@@ -5366,16 +5483,8 @@ applicable agreement for further details.
 	(pt -752 1464)
 )
 (connector
-	(pt -928 1480)
-	(pt -888 1480)
-)
-(connector
-	(pt -888 1480)
-	(pt -560 1480)
-)
-(connector
-	(pt -560 1496)
 	(pt -640 1496)
+	(pt -560 1496)
 )
 (connector
 	(text "rda" (rect -750 1496 -735 1508)(font "Arial" ))
@@ -5383,44 +5492,33 @@ applicable agreement for further details.
 	(pt -752 1512)
 )
 (connector
-	(text "probe[31..1]" (rect -758 1536 -699 1548)(font "Arial" ))
-	(pt -768 1552)
-	(pt -584 1552)
-	(bus)
-)
-(connector
-	(pt -584 1552)
-	(pt -560 1552)
-	(bus)
-)
-(connector
-	(pt -560 1568)
 	(pt -608 1568)
+	(pt -560 1568)
 )
 (connector
-	(pt -560 1608)
 	(pt -584 1608)
+	(pt -560 1608)
 	(bus)
 )
 (connector
-	(pt -560 1624)
 	(pt -608 1624)
+	(pt -560 1624)
 )
 (connector
-	(pt -560 1664)
 	(pt -1440 1664)
+	(pt -560 1664)
 )
 (connector
-	(pt -560 1680)
 	(pt -1440 1680)
+	(pt -560 1680)
 )
 (connector
-	(pt -560 1696)
 	(pt -1440 1696)
+	(pt -560 1696)
 )
 (connector
-	(pt -560 1712)
 	(pt -1440 1712)
+	(pt -560 1712)
 )
 (connector
 	(text "ctrl_deser160[3..0]" (rect -670 1736 -578 1748)(font "Arial" ))
@@ -5586,8 +5684,8 @@ applicable agreement for further details.
 )
 (connector
 	(text "clk_stretch_pulse" (rect -742 2560 -656 2572)(font "Arial" ))
-	(pt -560 2576)
 	(pt -768 2576)
+	(pt -560 2576)
 )
 (connector
 	(text "clk_daq" (rect -606 2576 -569 2588)(font "Arial" ))
@@ -5595,95 +5693,28 @@ applicable agreement for further details.
 	(pt -608 2592)
 )
 (connector
-	(pt -768 2600)
-	(pt -744 2600)
-)
-(connector
-	(text "probe[25]" (rect -694 2584 -648 2596)(font "Arial" ))
-	(pt -696 2600)
-	(pt -640 2600)
-)
-(connector
-	(text "res_daq_n" (rect -854 -80 -804 -68)(font "Arial" ))
-	(pt -800 -64)
-	(pt -888 -64)
-)
-(connector
-	(pt -936 -64)
-	(pt -968 -64)
-)
-(connector
-	(pt -968 -64)
-	(pt -968 -144)
-)
-(connector
-	(text "clk_locked_daq" (rect -1078 -160 -1003 -148)(font "Arial" ))
-	(pt -1096 -144)
-	(pt -968 -144)
-)
-(connector
-	(pt -968 -144)
-	(pt -928 -144)
-)
-(connector
-	(text "pg[5..0]" (rect -1022 2560 -985 2572)(font "Arial" ))
-	(pt -1400 2576)
-	(pt -976 2576)
-	(bus)
-)
-(connector
-	(pt -1400 1960)
-	(pt -1400 2256)
-	(bus)
-)
-(connector
-	(pt -1400 2256)
-	(pt -1400 2576)
-	(bus)
+	(pt -1640 2632)
+	(pt -560 2632)
 )
 (connector
 	(pt -1640 2648)
 	(pt -560 2648)
 )
 (connector
-	(pt -1640 2632)
-	(pt -560 2632)
-)
-(connector
 	(pt -1544 2680)
 	(pt -1544 2688)
 )
 (connector
+	(pt -1544 2688)
 	(pt -560 2688)
-	(pt -1544 2688)
-)
-(connector
-	(pt -1576 2680)
-	(pt -1544 2680)
-)
-(connector
-	(pt -1640 2680)
-	(pt -1624 2680)
-)
-(connector
-	(pt -1640 2784)
-	(pt -560 2784)
-)
-(connector
-	(pt -1640 2768)
-	(pt -560 2768)
-)
-(connector
-	(pt -1640 2720)
-	(pt -560 2720)
 )
 (connector
 	(pt -1640 2704)
 	(pt -560 2704)
 )
 (connector
-	(pt -1640 2800)
-	(pt -560 2800)
+	(pt -1640 2720)
+	(pt -560 2720)
 )
 (connector
 	(pt -1640 2736)
@@ -5693,6 +5724,18 @@ applicable agreement for further details.
 	(pt -1640 2752)
 	(pt -560 2752)
 	(bus)
+)
+(connector
+	(pt -1640 2768)
+	(pt -560 2768)
+)
+(connector
+	(pt -1640 2784)
+	(pt -560 2784)
+)
+(connector
+	(pt -1640 2800)
+	(pt -560 2800)
 )
 (connector
 	(text "usb_full" (rect -670 2800 -632 2812)(font "Arial" ))
@@ -5734,17 +5777,17 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt -560 2920)
 	(pt -1096 2920)
+	(pt -560 2920)
 )
 (connector
-	(pt -560 2936)
 	(pt -1112 2936)
+	(pt -560 2936)
 	(bus)
 )
 (connector
-	(pt -560 2952)
 	(pt -1128 2952)
+	(pt -560 2952)
 )
 (connector
 	(text "sync" (rect -606 2952 -582 2964)(font "Arial" ))
@@ -5809,17 +5852,8 @@ applicable agreement for further details.
 )
 (connector
 	(text "rda" (rect -614 3216 -599 3228)(font "Arial" ))
-	(pt -560 3232)
 	(pt -656 3232)
-)
-(connector
-	(text "probe[12]" (rect -806 3200 -760 3212)(font "Arial" ))
-	(pt -808 3216)
-	(pt -744 3216)
-)
-(connector
-	(pt -696 3216)
-	(pt -656 3216)
+	(pt -560 3232)
 )
 (connector
 	(pt -1064 2488)
@@ -5827,8 +5861,8 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt -560 3288)
 	(pt -1064 3288)
+	(pt -560 3288)
 	(bus)
 )
 (connector
@@ -5875,94 +5909,71 @@ applicable agreement for further details.
 	(pt -648 3512)
 )
 (connector
-	(pt -560 3248)
 	(pt -1640 3248)
+	(pt -560 3248)
 )
 (connector
-	(pt -1568 3520)
-	(pt -1536 3520)
-)
-(connector
-	(pt -1648 3616)
-	(pt -1608 3616)
-)
-(connector
-	(pt -1648 3384)
-	(pt -1456 3384)
-)
-(connector
-	(pt -1568 3504)
-	(pt -1568 3520)
-)
-(connector
-	(pt -1648 3400)
-	(pt -1392 3400)
-)
-(connector
-	(pt -1392 3440)
-	(pt -1648 3440)
-)
-(connector
-	(pt -1392 3440)
-	(pt -1392 3400)
-)
-(connector
-	(pt -1392 3488)
-	(pt -1544 3488)
-)
-(connector
-	(pt -1392 3488)
-	(pt -1392 3440)
-)
-(connector
-	(pt -1392 3520)
-	(pt -1488 3520)
-)
-(connector
-	(pt -1392 3520)
-	(pt -1392 3488)
-)
-(connector
-	(pt -1648 3488)
-	(pt -1592 3488)
-)
-(connector
-	(pt -1344 3368)
-	(pt -1648 3368)
+	(pt -776 3552)
+	(pt -560 3552)
 	(bus)
 )
 (connector
-	(pt -1344 3368)
-	(pt -1344 3400)
+	(pt -1288 984)
+	(pt -1288 1440)
 	(bus)
 )
 (connector
-	(pt -1424 -104)
-	(pt -1392 -104)
+	(pt -1288 1440)
+	(pt -1288 1960)
+	(bus)
 )
 (connector
-	(pt -1392 -88)
-	(pt -1424 -88)
+	(text "sclk[7]" (rect -734 1144 -701 1156)(font "Arial" ))
+	(pt -736 1160)
+	(pt -608 1160)
 )
 (connector
-	(pt -1424 -56)
-	(pt -1424 -88)
+	(pt -608 1160)
+	(pt -560 1160)
 )
 (connector
-	(pt -1424 -88)
-	(pt -1424 -104)
+	(pt -608 1160)
+	(pt -608 1232)
 )
 (connector
-	(pt -1560 3616)
-	(pt -1392 3616)
+	(pt -760 1248)
+	(pt -640 1248)
 )
 (connector
-	(pt -1392 3520)
-	(pt -1392 3616)
+	(pt -640 1248)
+	(pt -560 1248)
 )
 (connector
-	(pt -1392 3616)
-	(pt -1392 3632)
+	(pt -608 1232)
+	(pt -608 1304)
+)
+(connector
+	(pt -608 1304)
+	(pt -608 1376)
+)
+(connector
+	(pt -928 1480)
+	(pt -888 1480)
+)
+(connector
+	(pt -888 1480)
+	(pt -560 1480)
+)
+(connector
+	(text "probe[31..1]" (rect -758 1536 -699 1548)(font "Arial" ))
+	(pt -768 1552)
+	(pt -584 1552)
+	(bus)
+)
+(connector
+	(pt -584 1552)
+	(pt -560 1552)
+	(bus)
 )
 (connector
 	(text "deser400_write_Ia" (rect 522 3536 610 3548)(font "Arial" ))
@@ -6127,20 +6138,9 @@ applicable agreement for further details.
 	(pt 80 3416)
 )
 (connector
-	(text "probe[28..26]" (rect 154 3048 218 3060)(font "Arial" ))
-	(pt 104 3064)
-	(pt 216 3064)
-	(bus)
-)
-(connector
 	(text "probe[29]" (rect 522 3328 568 3340)(font "Arial" ))
 	(pt 512 3344)
 	(pt 576 3344)
-)
-(connector
-	(pt -560 3552)
-	(pt -776 3552)
-	(bus)
 )
 (junction (pt -912 2304))
 (junction (pt -944 2224))

@@ -5,45 +5,36 @@
 
 module module_decoder
 (
-	input clk80,
+	input clk,
 	input reset,
-	
-	input [1:0]error,
-	output [1:0]error_out,
+		
 	input davail,
-	output reg running,
-	
 	input [3:0]din,
-	output write,
-	output reg [15:0]data,
 	
-	output reg tbm_hdr,
-	output reg tbm_trl,
-	output reg roc_hdr,
+	input tbm_hdr,
+	input tbm_trl,
+	input roc_hdr,
 	
 	input  idle_in,
-	output reg idle_out,
+	output idle_out,
 	
-	input [7:0]xorsum
+	output reg running,
+	
+	input  [7:0]xorsum,
+
+	input  [1:0]error_in,
+	output [1:0]error_out,
+	
+	output reg write,
+	output reg [15:0]data
 );
 
-	// --- delay chain
-	reg [3:0]data4;
-	reg [3:0]data3;
-	reg [3:0]data2;
-	reg [3:0]data1;
+	// --- error flags -----------------------------------------------------
 	
-	// --- idle detector
-	reg [3:0]idle_reg;
-
-	// --- decoder state machine
-	reg [5:0]sm;
-	
-	// --- error flags
 	reg [1:0]sme; // state machine error
 	reg [2:0]ef;  // external error flags
-
 	wire [4:0]error_flags = {ef, sme};
+
 	/*
 		bit 0: no TBM trailer or ROC header after TBM header
 		bit 1: idle pattern detected during readout
@@ -52,170 +43,226 @@ module module_decoder
 		bit 4: one of the four errors detected
 	*/
 	
+
+	// --- idle detector ---------------------------------------------------
+
+	reg [2:0]idle_reg;
+	reg idle_data;
+	
+	always @(posedge clk or posedge reset)
+	begin
+		if (reset)
+		begin
+			idle_reg  <= 0;
+			idle_data <= 0;
+		end
+		else if (davail)
+		begin
+			idle_reg  <= {idle_reg[1:0], &din};
+			idle_data <= &idle_reg;
+		end
+	end
+	
+	assign idle_out = idle_data;
+	wire idle = idle_data & idle_in;
+
+	// --- data delay chain
+	reg [3:0]d0;
+	reg [3:0]d1;
+	reg [3:0]d2;
+	
+
+	always @(posedge clk or posedge reset)
+	begin
+		if (reset) {d2, d1, d0} <= 12'd0;
+		else if (davail) {d2, d1, d0} <= {d1, d0, din};
+	end
+
+
+	// --- decoder FSM -----------------------------------------------------
+	
+	localparam SM_IDLE = 6'd0;
+	localparam SM_H0   = 6'd1;
+	localparam SM_H1   = 6'd2;
+	localparam SM_H2   = 6'd3;  // writeH
+	localparam SM_H3   = 6'd4;
+	localparam SM_H4   = 6'd5;  // writeH
+	localparam SM_H5   = 6'd6;
+	localparam SM_H6   = 6'd7;
+	localparam SM_H7   = 6'd8;
+	localparam SM_H8   = 6'd9;
+	localparam SM_R0   = 6'd10; // writeR
+	localparam SM_R1   = 6'd11;
+	localparam SM_R2   = 6'd12;
+	localparam SM_R3   = 6'd13; // writeP
+	localparam SM_R4   = 6'd14;
+	localparam SM_R5   = 6'd15;
+	localparam SM_R6   = 6'd16; // writeP
+	localparam SM_T0   = 6'd20;
+	localparam SM_T1   = 6'd21;
+	localparam SM_T2   = 6'd22; // writeT
+	localparam SM_T3   = 6'd23;
+	localparam SM_T4   = 6'd24; // writeT
+	localparam SM_T5   = 6'd25;
+	localparam SM_ERR  = 6'd26;
+
+	
+	reg [5:0]sm;
+	always @(posedge clk or posedge reset)
+	begin
+		if (reset)
+		begin
+			sm  <= SM_IDLE;
+			sme <= 0;
+		end
+		else
+		begin if (davail)
+			case (sm)
+			
+				// --- TBM header detection
+				SM_IDLE: if (tbm_hdr)
+				         begin
+				           sme <= 2'b00; sm <= SM_H0;
+				         end
+				SM_H0: sm <= SM_H1; // D0
+				SM_H1: sm <= SM_H2; // D1
+				SM_H2: sm <= SM_H3; // D2
+				SM_H3: sm <= SM_H4; // D3
+				SM_H4: sm <= SM_H5;
+				SM_H5: sm <= SM_H6;
+				
+				// earliest possible position for TT or RH
+				SM_H6: if      (tbm_trl) sm <= SM_T0;
+				       else if (roc_hdr) sm <= SM_R0;
+				       else              sm <= SM_H7;
+				
+				// delayed position
+				SM_H7: if      (tbm_trl) sm <= SM_T0;
+				       else if (roc_hdr) sm <= SM_R0;
+				       else			         sm <= SM_H8;
+
+				// delayed position
+				SM_H8: if      (tbm_trl) sm <= SM_T0;
+				       else if (roc_hdr) sm <= SM_R0;
+				       else
+				       begin
+					       sme[0] <= 1'b1; sm <= SM_ERR;
+				       end
+				
+				// --- ROC data
+				SM_R0:                   sm <= SM_R1;
+				       
+				SM_R1: if      (tbm_trl) sm <= SM_T0;
+				       else              sm <= SM_R2;
+				       
+				SM_R2: if      (tbm_trl) sm <= SM_T0;
+				       else if (roc_hdr) sm <= SM_R0;
+				       else              sm <= SM_R3;
+				       
+				SM_R3: if      (tbm_trl) sm <= SM_T0;
+				       else if (roc_hdr) sm <= SM_R0;
+				       else              sm <= SM_R4;
+				       
+				SM_R4: if      (tbm_trl) sm <= SM_T0;
+				       else if (roc_hdr) sm <= SM_R0;
+				       else              sm <= SM_R5;
+				       
+				SM_R5: if      (tbm_trl) sm <= SM_T0;
+				       else              sm <= SM_R6;
+				       
+				SM_R6: if      (tbm_trl) sm <= SM_T0;
+				       else if (idle)
+				       begin
+				         sme[1] <= 1'b1; sm <= SM_ERR;
+				       end
+				       else              sm <= SM_R1;
+	
+				SM_ERR: sm <= SM_T0; // set error flags
+	
+				SM_T0: sm <= SM_T1; // D0
+				SM_T1: sm <= SM_T2; // D1
+				SM_T2: sm <= SM_T3; // D2
+				SM_T3: sm <= SM_T4; // D3
+				SM_T4: sm <= SM_T5;
+				default: sm <= SM_IDLE;
+			endcase
+		end
+	end // always
+
+
+	always @(posedge clk or posedge reset)
+	begin
+		if (reset) running <= 0;
+		else       running = |sm;
+	end
+	
+
+	// --- error handling --------------------------------------------------
+
 	assign error_out = error_flags[1:0];
 	
-	always @(posedge clk80 or posedge reset)
+	always @(posedge clk or posedge reset)
 	begin
 		if (reset) ef <= 0;
 		else
 		begin
-			if (!running) ef <= 0;
+			if (sm==SM_IDLE) ef <= 0;
 			else
 			begin
-				if (error[0]) ef[0] <= 1'b1;
-				if (error[1]) ef[1] <= 1'b1;
+				if (error_in[0]) ef[0] <= 1'b1;
+				if (error_in[1]) ef[1] <= 1'b1;
 				ef[2] <= |{ef[1:0], sme};
 			end
 		end
 	end
 	
-	// --- header detector ----------------------------------------------------
-	reg [2:0]hdr;
-	wire is_hdr = (hdr == 3'b110) && din[3];
 	
-	always @(posedge clk80 or posedge reset)
+	// --- data handling ---------------------------------------------------
+
+	reg [1:0]send;
+	reg [15:0]data2;
+
+	wire writeH = davail && (sm==SM_H2 || sm==SM_H4); // write TBM header
+	wire writeR = davail &&  sm==SM_R0;               // write ROC header
+	wire writeP = davail && (sm==SM_R3 || sm==SM_R6); // write ROC data
+	wire writeT = davail && (sm==SM_T2 || sm==SM_T4); // write TBM trailer
+
+	always @(posedge clk or posedge reset)
 	begin
-			if (reset)
-			begin
-				tbm_hdr  <= 0;
-				tbm_trl  <= 0;
-				roc_hdr  <= 0;
-				
-				data4    <= 0;
-				data3    <= 0;
-				data2    <= 0;
-				data1    <= 0;
-				
-				idle_reg <= 0;
-				idle_out <= 0;
-				hdr      <= 0;
-			end
-			else if (davail)
-			begin
-				if      (din == 4'b0111) hdr <= {hdr[0], 2'b01};
-				else if (din == 4'b1111) hdr <= {hdr[0], 2'b10};
-				else hdr <= {hdr[0], 2'b00};
-				
-				tbm_hdr <= is_hdr && (din[2:0] == 3'b100);
-				tbm_trl <= is_hdr && (din[2:0] == 3'b110);
-				roc_hdr <= is_hdr && !din[2];
-				
-				data4 <= din;
-				data3 <= data4;
-				data2 <= data3;
-				data1 <= data2;
-				
-				idle_reg <= {idle_reg[2:0], &data1};
-				idle_out <= &idle_reg;
-			end
-	end
-	
-	wire idle = idle_out & idle_in; // idle on TBM A and TBM B
-	
-	
-	// --- decoder state machine --------------------------------------------------------
-
-	// --- states
-	// TBM header states
-	localparam H0 = 6'b0_101_00; // 14
-	localparam H1 = 6'b0_101_01; // 15
-	localparam H2 = 6'b0_101_10; // 16
-	localparam H3 = 6'b1_101_11; // 37
-	localparam H4 = 6'b0_100_00; // 10
-	localparam H5 = 6'b1_100_01; // 31
-	localparam H6 = 6'b0_100_10; // 12
-	
-	// TBM trailer states
-	localparam T0 = 6'b0_111_00; // 1c
-	localparam T1 = 6'b0_111_01; // 1d
-	localparam T2 = 6'b0_111_10; // 1e
-	localparam T3 = 6'b1_111_11; // 3f
-	localparam T4 = 6'b0_110_00; // 18
-	localparam T5 = 6'b1_110_01; // 39
-	localparam T6 = 6'b0_110_10; // 1a
-	
-	// ROC header states
-	localparam R0 = 6'b0_010_00; // 08
-	localparam R1 = 6'b0_010_01; // 09
-	localparam R2 = 6'b1_010_10; // 2a
-	
-	// ROC pixel data states
-	localparam P0 = 6'b1_000_00; // 20
-	localparam P1 = 6'b0_000_01; // 01
-	localparam P2 = 6'b0_000_10; // 02
-	localparam P3 = 6'b1_001_00; // 24
-	localparam P4 = 6'b0_001_01; // 05
-	localparam P5 = 6'b0_001_10; // 06
-	//                 | |||
-	//                 | |||
-	//                 | +++-------- data mode (qualifier)
-	//                 +------------ write
-	
-	
-	// data output state
-	wire [2:0]mode = sm[4:2];
-	  
-	always @(posedge clk80 or posedge reset)
-	begin
-			if (reset)
-			begin
-				sm <= 0;
-				running <= 0;
-			end
-			else if (davail)
-			begin
-				running = |sm;
-				case (sm)
-					4'd0: if (tbm_hdr) begin sme <= 0; sm <= H0; end
-
-					H0: sm <= H1;
-					H1: sm <= H2;
-					H2: sm <= H3;
-					H3: sm <= H4;
-					H4: sm <= H5;
-					H5: sm <= H6;
-					H6: if      (tbm_trl)    sm <= T0;
-					    else if (roc_hdr)    sm <= R0;
-					    else begin sme[0] <= 1'b1; sm <= T0; end
-					
-					R0: sm <= R1;
-					R1: sm <= R2;
-					R2: if      (tbm_trl) sm <= T0;
-					    else if (roc_hdr) sm <= R0;
-					    else              sm <= P0;
-					
-					P0: sm <= P1;
-					P1: sm <= P2;
-					P2: sm <= P3;
-					P3: sm <= P4;
-					P4: sm <= P5;
-					P5: if      (tbm_trl)  sm <= T0;
-					    else if (roc_hdr)  sm <= R0;
-					    else if (~idle)    sm <= P0;
-					    else begin sme[1] <= 1'b1; sm <= T0; end
-
-					T0: sm <= T1;
-					T1: sm <= T2;
-					T2: sm <= T3;
-					T3: sm <= T4;
-					T4: sm <= T5;
-					T5: sm <= T6;
-					T6: if (tbm_hdr) begin sme <= 0; sm <= H0; end
-					    else sm <= 0;
-					
-					default: sm <= 0;
-				endcase
-			end
-	end
-
-	// --- data output
-	assign write = sm[5] & davail;
-
-	always @(*)
-	begin
-		if      (mode[2]) data <= {mode, error_flags, data1, data2}; // TBM Header/Trailer
-		else if (mode[1]) data <= {mode, 1'b0, xorsum, 2'b00, data1[1:0]}; // ROC Header
-		else              data <= {mode, 1'b0, data1, data2, data3}; // ROC Hit
+		if (reset)
+		begin
+			send  <= 0;
+			write <= 0;
+			data  <= 16'd0;
+		end
+		else
+		begin
+			write <= writeH || writeR || writeT || (|send && davail);
+			
+			case (sm)
+				SM_H2: data  <= {4'b1010, 4'b0000, d1,      d0};
+				SM_H4: data  <= {4'b1000, 4'b0000, d1,      d0};
+				SM_R0: data  <= {4'b0100,      xorsum, 2'b00, d0[1:0]};
+				SM_R3: data  <= {4'b0000, d2,      d1,      d0};
+				SM_R6:
+					begin
+						data2 <= {4'b0010, d2,      d1,      d0};
+						if (!(tbm_trl || roc_hdr || idle_data)) send <= 2'b11;
+					end
+				SM_T2: data  <= error_flags[4] ?
+				                {3'b111, error_flags, 4'd0, 4'd0} :
+				                {3'b111, error_flags, d1,   d0};
+				SM_T4: data  <= error_flags[4] ?
+				                {3'b110, error_flags, 4'd0, 4'd0} :
+				                {3'b110, error_flags, d1,   d0};
+				default:
+					begin
+						if (tbm_trl || roc_hdr) send <= 2'b00;
+						else if (send[1]) begin send[1] <= 0; data <= data2; end
+						else if (send[0])  send[0] <= 0;
+					end
+			endcase
+		end
 	end
 
 endmodule

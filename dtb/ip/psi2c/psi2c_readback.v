@@ -17,7 +17,7 @@ module psi2c_readback
 );
 
 	reg rdaff;
-	always @(posedge clk or posedge reset) rdaff <= reset ? 0 : rda;
+	always @(posedge clk or posedge reset) rdaff <= reset ? 1'b0 : rda;
 
 
 	wire nto;  // not timeout
