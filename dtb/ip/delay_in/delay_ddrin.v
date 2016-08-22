@@ -35,7 +35,7 @@ module delay_ddrin
 		half_delay.power_up_high = "OFF",
 		half_delay.width = 1;
 
-	always @(posedge clk)
+	always @(posedge clk or posedge reset)
 	begin
 		if (reset) out <= 0;
 		else out <= select ? in1 : in0;
