@@ -112,14 +112,24 @@ class CTestboard
 	static const unsigned char MODCONF_L1[16];
 	bool layer_1;
 
+	// --- Sector Test Board Variables
+	bool stbPresent;
+	uint16_t stb_port_states;
+	uint8_t  stb_hv_states;
+	uint16_t stb_vd[6];
+	uint16_t stb_va[6];
+	uint16_t stb_id[6];
+	uint16_t stb_ia[6];
+
 
 	void InitDac();
 	void SetDac(int addr, int value);
+
 	unsigned int ReadADC(unsigned char addr);
-	unsigned int mV_to_DAC(int mV);
-	unsigned int uA100_to_DAC(int ua100);
-	int ADC_to_mV(unsigned int dac);
-	int ADC_to_uA100(unsigned int dac);
+	static unsigned int mV_to_DAC(int mV);
+	static unsigned int uA100_to_DAC(int ua100);
+	static int ADC_to_mV(unsigned int dac);
+	static int ADC_to_uA100(unsigned int dac);
 
 	void Sig_Off();
 	void Sig_Restore();
@@ -340,6 +350,53 @@ public:
 	RPC_EXPORT void SetRocAddress(uint8_t addr);
 
 
+	// === Sector Test Board STB =========================================
+
+	RPC_EXPORT void stb_SetPresent(bool present);
+	void stb_Detect();
+	void stb_Init();
+
+	RPC_EXPORT bool stb_WriteFlash(string &text);
+	RPC_EXPORT bool stb_ReadFlash(stringR &text);
+
+	RPC_EXPORT bool stb_IsPresent();
+	bool _stb_IsPresent() { return stbPresent; }
+
+	RPC_EXPORT void stb_Enable(bool on);
+
+	// --- Layer test adapter detection
+	// 0 = Layer 1 & 2
+	// 1 = Layer 3
+	// 2 = layer 4
+	// 3 = adapter not connected
+	RPC_EXPORT uint8_t stb_GetAdapterId();
+
+	RPC_EXPORT void stb_Pon(uint8_t src);
+	RPC_EXPORT void stb_Poff(uint8_t src);
+
+	RPC_EXPORT void _stb_SetVD(uint8_t src, uint16_t mV);
+	RPC_EXPORT void _stb_SetVA(uint8_t src, uint16_t mV);
+	RPC_EXPORT void _stb_SetID(uint8_t src, uint16_t uA100);
+	RPC_EXPORT void _stb_SetIA(uint8_t src, uint16_t uA100);
+
+	RPC_EXPORT uint16_t _stb_GetVD(uint8_t src);
+	RPC_EXPORT uint16_t _stb_GetVA(uint8_t src);
+	RPC_EXPORT uint16_t _stb_GetID(uint8_t src);
+	RPC_EXPORT uint16_t _stb_GetIA(uint8_t src);
+
+	RPC_EXPORT void stb_HVon(uint8_t channel);
+	RPC_EXPORT void stb_HVoff(uint8_t channel);
+
+	RPC_EXPORT void stb_SetSdata(uint8_t conf);
+	RPC_EXPORT uint16_t _stb_GetVSdata(uint8_t channel, bool pos);
+
+	static uint16_t stb_mV_to_DAC(uint16_t mV);
+	static uint16_t stb_uA100_to_DAC(uint8_t src, uint16_t ua100);
+	static uint16_t stb_ADC_to_mV(uint16_t adc);
+	static uint16_t stb_ADC1_to_mV(uint16_t adc); // for SDATA
+	static uint16_t stb_ADC_to_uA100(uint8_t src, uint16_t adc);
+
+
 	// --- pulse pattern generator ------------------------------------------
 	#define PG_TOK   0x0100
 	#define PG_TRG   0x0200
@@ -512,7 +569,7 @@ public:
 
 	// Wafer test functions
 	RPC_EXPORT bool TestColPixel(uint8_t col, uint8_t trimbit, bool sensor_cal, vectorR<uint8_t> &res);
- 
+
 	// Ethernet test functions
 	bool Ethernet_Init();
 	RPC_EXPORT void Ethernet_Send(string &message);
@@ -562,7 +619,7 @@ public:
 	RPC_EXPORT bool LoopMultiRocOnePixelCalibrate(vector<uint8_t> &roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags);
 	RPC_EXPORT bool LoopSingleRocAllPixelsCalibrate(uint8_t roc_i2c, uint16_t nTriggers, uint16_t flags);
 	RPC_EXPORT bool LoopSingleRocOnePixelCalibrate(uint8_t roc_i2c, uint8_t column, uint8_t row, uint16_t nTriggers, uint16_t flags);
-	  
+
 	// Exported RPC-Calls for 1D DacScans
 	RPC_EXPORT bool LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1low, uint8_t dac1high);
 	RPC_EXPORT bool LoopMultiRocAllPixelsDacScan(vector<uint8_t> &roc_i2c, uint16_t nTriggers, uint16_t flags, uint8_t dac1register, uint8_t dac1step, uint8_t dac1low, uint8_t dac1high);

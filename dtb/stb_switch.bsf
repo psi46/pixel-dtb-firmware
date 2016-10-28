@@ -1,0 +1,113 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2014 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 280 304)
+	(text "stb_switch" (rect 5 0 56 12)(font "Arial" ))
+	(text "inst" (rect 8 224 25 236)(font "Arial" ))
+	(port
+		(pt 216 32)
+		(input)
+		(text "port_out[3..0]" (rect 165 24 240 38)(font "Arial" (font_size 8)))
+		(text "port_out[3..0]" (rect 133 24 208 38)(font "Arial" (font_size 8)))
+		(line (pt 216 32)(pt 200 32)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 216 88)
+		(input)
+		(text "spi_mosi" (rect 165 80 214 94)(font "Arial" (font_size 8)))
+		(text "spi_mosi" (rect 149 80 198 94)(font "Arial" (font_size 8)))
+		(line (pt 216 88)(pt 200 88))
+	)
+	(port
+		(pt 216 104)
+		(input)
+		(text "spi_sclk" (rect 165 96 211 110)(font "Arial" (font_size 8)))
+		(text "spi_sclk" (rect 157 96 203 110)(font "Arial" (font_size 8)))
+		(line (pt 216 104)(pt 200 104))
+	)
+	(port
+		(pt 216 120)
+		(input)
+		(text "spi_ss" (rect 165 112 202 126)(font "Arial" (font_size 8)))
+		(text "spi_ss" (rect 165 112 202 126)(font "Arial" (font_size 8)))
+		(line (pt 216 120)(pt 200 120))
+	)
+	(port
+		(pt 216 208)
+		(input)
+		(text "nReset_in" (rect 165 176 221 190)(font "Arial" (font_size 8)))
+		(text "nReset_in" (rect 149 200 205 214)(font "Arial" (font_size 8)))
+		(line (pt 216 208)(pt 200 208))
+	)
+	(port
+		(pt 216 160)
+		(input)
+		(text "ctrl[5..0]" (rect 165 112 211 126)(font "Arial" (font_size 8)))
+		(text "ctrl[5..0]" (rect 157 152 203 166)(font "Arial" (font_size 8)))
+		(line (pt 216 160)(pt 200 160)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 216 192)
+		(input)
+		(text "addr_in[3..0]" (rect 165 48 235 62)(font "Arial" (font_size 8)))
+		(text "addr_in[3..0]" (rect 133 184 203 198)(font "Arial" (font_size 8)))
+		(line (pt 216 192)(pt 200 192)(color 0 128 255)(line_width 3))
+	)
+	(port
+		(pt 216 72)
+		(output)
+		(text "spi_miso" (rect 0 0 43 12)(font "Arial" ))
+		(text "spi_miso" (rect 159 67 202 79)(font "Arial" ))
+		(line (pt 216 72)(pt 200 72))
+	)
+	(port
+		(pt 0 32)
+		(output)
+		(text "i2c_scl" (rect 24 40 64 54)(font "Arial" (font_size 8)))
+		(text "i2c_scl" (rect 24 24 64 38)(font "Arial" (font_size 8)))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 208)
+		(bidir)
+		(text "nReset" (rect 24 88 64 102)(font "Arial" (font_size 8)))
+		(text "nReset" (rect 24 200 64 214)(font "Arial" (font_size 8)))
+		(line (pt 0 208)(pt 16 208))
+	)
+	(port
+		(pt 0 72)
+		(bidir)
+		(text "io[3..0]" (rect 24 120 61 134)(font "Arial" (font_size 8)))
+		(text "io[3..0]" (rect 24 64 61 78)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 16 72)(color 0 128 0)(line_width 3))
+	)
+	(port
+		(pt 0 192)
+		(bidir)
+		(text "addr[3..0]" (rect 24 64 78 78)(font "Arial" (font_size 8)))
+		(text "addr[3..0]" (rect 24 184 78 198)(font "Arial" (font_size 8)))
+		(line (pt 0 192)(pt 16 192)(color 0 128 0)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 200 224))
+	)
+)

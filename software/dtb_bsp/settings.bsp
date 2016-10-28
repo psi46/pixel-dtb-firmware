@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>19.08.2016 15:45:41</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1471614341380</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>16.09.2016 09:32:02</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1474011122663</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>X:\source\FPGA\pixel-dtb-firmware\software\dtb_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\dtb\dtb_system.sopcinfo</SopcDesignFile>
@@ -959,8 +959,20 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>spi_external</slaveDescriptor>
+                <addressRange>0x08100180 - 0x0810019F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>stb_ctrl</slaveDescriptor>
+                <addressRange>0x08100200 - 0x0810020F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x08100180 - 0x08100187</addressRange>
+                <addressRange>0x08100220 - 0x08100227</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>

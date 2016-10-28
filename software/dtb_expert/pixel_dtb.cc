@@ -206,6 +206,8 @@ CTestboard::CTestboard()
 	rpc_io = &usb; // USB default interface
 	flashMem = 0;  // no memory assigned for upgrade
 
+	stbPresent = false;
+
 	for (unsigned int i=0; i<8; i++)
 	{
 		daq_mem_base[i] = 0;
@@ -227,6 +229,9 @@ CTestboard::CTestboard()
 
 void CTestboard::Init()
 {
+//	stbPresent = false;
+	Leave_STB_mode();
+
 	// delete assigned memory for flash upgrade
 	if (flashMem) { delete flashMem; flashMem = 0; }
 
@@ -334,6 +339,7 @@ void CTestboard::Init()
 	  ROC_I2C_ADDRESSES[i] = i;
 	}
 
+	stb_Init();
 }
 
 
@@ -897,6 +903,398 @@ void CTestboard::SetRocAddress(uint8_t addr)
 	IOWR_ALTERA_AVALON_PIO_DATA(ROC_ADDR_BASE, addr);
 }
 
+
+
+// === Sector Test Board STB =============================================
+
+
+bool CTestboard::stb_WriteFlash(string &text)
+{
+	size_t length = text.length();
+	if (length > 250) { length = 250; text[250] = 0; }
+	uint8_t res = I2C_EEPROM_Write(0, (uint8_t*)text.c_str(), (uint8_t)length+1);
+	return res == EEPROM_OK;
+}
+
+
+bool CTestboard::stb_ReadFlash(stringR &text)
+{
+	uint8_t buffer[256];
+	uint8_t res = I2C_EEPROM_Write(0, 0, 0); // set addr = 0
+	if (res != EEPROM_OK)
+	{
+		text = "";
+		return false;
+	}
+	res = I2C_EEPROM_Read(buffer, 251);
+	if (res != EEPROM_OK)
+	{
+		text = "";
+		return false;
+	}
+	buffer[250] = 0;
+	text = (char*)buffer;
+	return true;
+}
+
+
+void CTestboard::stb_SetPresent(bool present)
+{
+	stbPresent = present;
+}
+
+
+void CTestboard::stb_Detect()
+{
+	// to do
+
+//	stbPresent = true;
+}
+
+
+bool CTestboard::stb_IsPresent()
+{
+	return stbPresent;
+}
+
+
+void CTestboard::stb_Enable(bool on)
+{
+	if (on && _stb_IsPresent())
+	{
+		Enter_STB_mode();
+	}
+	else
+	{
+		Leave_STB_mode();
+	}
+}
+
+
+void CTestboard::stb_Init()
+{
+	stb_port_states = 0x0060;
+	stb_hv_states = 0x00;
+	uint16_t vd = stb_mV_to_DAC(2600);
+	uint16_t va = stb_mV_to_DAC(1600);
+
+	stb_Detect();
+
+	stb_Enable(_stb_IsPresent());
+
+	if (stb_IsPresent())
+	{
+		STB_WritePort(stb_port_states | 0x8000);
+		STB_SetHV(stb_hv_states);
+
+		STB_InitDAC(0);
+		STB_InitDAC(1);
+		STB_InitDAC(2);
+
+		for (int i=0; i<6; i++)
+		{
+			stb_vd[i] = vd;
+			stb_va[i] = va;
+			stb_id[i] = stb_uA100_to_DAC(i, 5000);
+			stb_ia[i] = stb_uA100_to_DAC(i, 5000);
+		}
+
+		// wake up ADCs
+		STB_ReadADC(0, 0);
+		STB_ReadADC(1, 0);
+		STB_ReadADC(2, 0);
+		mDelay(60);
+	}
+}
+
+
+void CTestboard::stb_Pon(uint8_t src)
+{
+	if (src > 5) return;
+
+	uint16_t pmask = 1 << (src+8);
+
+	// is power source already on
+	if (stb_port_states & pmask) return;
+
+	uint8_t dac = src >> 1;
+	uint8_t ch  = (src & 1) ? 4 : 0;
+
+	STB_SetDAC(dac, ch+0, 211);	// va = 1V;
+	STB_SetDAC(dac, ch+2, 211);	// vd = 1V;
+
+	stb_port_states |= pmask;
+	stb_port_states |= 0x0060;
+	STB_WritePort(stb_port_states);
+
+	STB_SetDAC(dac, ch+1, stb_ia[0]);
+	STB_SetDAC(dac, ch+0, stb_va[0]);
+	STB_SetDAC(dac, ch+3, stb_id[0]);
+	STB_SetDAC(dac, ch+2, stb_vd[0]);
+}
+
+
+void CTestboard::stb_Poff(uint8_t src)
+{
+	if (src > 5) return;
+
+	uint8_t dac = src >> 1;
+	uint8_t ch  = (src & 1) ? 4 : 0;
+
+	STB_SetDAC(dac, ch+0, 211);	// va = 1V;
+	STB_SetDAC(dac, ch+2, 211);	// vd = 1V;
+
+	uint16_t pmask = 1 << (src+8);
+	stb_port_states &= ~pmask;
+	stb_port_states |= 0x0060;
+	STB_WritePort(stb_port_states);
+}
+
+
+void CTestboard::_stb_SetVD(uint8_t src, uint16_t mV)
+{
+	if (src > 5) return;
+
+    stb_vd[src] = stb_mV_to_DAC(mV);
+
+    uint16_t pmask = 1 << (src+8);
+    if (stb_port_states & pmask) // power on ?
+    {
+    	uint8_t dac = src >> 1;
+    	uint8_t ch  = (src & 1) ? 4 : 0;
+    	STB_SetDAC(dac, ch+2, stb_vd[src]);
+    }
+}
+
+
+void CTestboard::_stb_SetVA(uint8_t src, uint16_t mV)
+{
+	if (src > 5) return;
+
+    stb_va[src] = stb_mV_to_DAC(mV);
+
+    uint16_t pmask = 1 << (src+8);
+    if (stb_port_states & pmask) // power on ?
+    {
+    	uint8_t dac = src >> 1;
+    	uint8_t ch  = (src & 1) ? 4 : 0;
+    	STB_SetDAC(dac, ch+0, stb_va[src]);
+    }
+}
+
+
+void CTestboard::_stb_SetID(uint8_t src, uint16_t uA100)
+{
+	if (src > 5) return;
+
+    stb_id[src] = stb_uA100_to_DAC(src, uA100);
+
+    uint16_t pmask = 1 << (src+8);
+    if (stb_port_states & pmask) // power on ?
+    {
+    	uint8_t dac = src >> 1;
+    	uint8_t ch  = (src & 1) ? 4 : 0;
+    	STB_SetDAC(dac, ch+3, stb_id[src]);
+    }
+}
+
+
+void CTestboard::_stb_SetIA(uint8_t src, uint16_t uA100)
+{
+	if (src > 5) return;
+
+    stb_ia[src] = stb_uA100_to_DAC(src, uA100);
+
+    uint16_t pmask = 1 << (src+8);
+    if (stb_port_states & pmask) // power on ?
+    {
+    	uint8_t dac = src >> 1;
+    	uint8_t ch  = (src & 1) ? 4 : 0;
+    	STB_SetDAC(dac, ch+1, stb_id[src]);
+    }
+}
+
+
+uint16_t CTestboard::_stb_GetVD(uint8_t src)
+{
+	if (src > 5) return 0;
+
+	uint8_t adc = src >> 1;
+	uint8_t ch  = (src & 1) ? 2 : 0;
+	return stb_ADC_to_mV(STB_ReadADC(adc, ch+1));
+}
+
+
+uint16_t CTestboard::_stb_GetVA(uint8_t src)
+{
+	if (src > 5) return 0;
+
+	uint8_t adc = src >> 1;
+	uint8_t ch  = (src & 1) ? 2 : 0;
+	return stb_ADC_to_mV(STB_ReadADC(adc, ch+0));
+}
+
+
+uint16_t CTestboard::_stb_GetID(uint8_t src)
+{
+	if (src > 5) return 0;
+
+	uint8_t adc = src >> 1;
+	uint8_t ch  = (src & 1) ? 2 : 0;
+	return stb_ADC_to_uA100(src, STB_ReadADC(adc, ch+5));
+}
+
+
+uint16_t CTestboard::_stb_GetIA(uint8_t src)
+{
+	if (src > 5) return 0;
+
+	uint8_t adc = src >> 1;
+	uint8_t ch  = (src & 1) ? 2 : 0;
+	return stb_ADC_to_uA100(src, STB_ReadADC(adc, ch+4));
+}
+
+
+void CTestboard::stb_HVon(uint8_t channel)
+{
+	if (channel > 6) return;
+
+	uint8_t hvmask = 1 << channel;
+	stb_hv_states |= hvmask;
+	STB_SetHV(stb_hv_states);
+}
+
+
+void CTestboard::stb_HVoff(uint8_t channel)
+{
+	if (channel > 6) return;
+
+	uint8_t hvmask = 1 << channel;
+	stb_hv_states &= ~hvmask;
+	STB_SetHV(stb_hv_states);
+}
+
+
+uint8_t CTestboard::stb_GetAdapterId()
+{
+	uint16_t x;
+	STB_ReadPort(x);
+	return uint8_t((x >> 5) & 3);
+}
+
+
+void CTestboard::stb_SetSdata(uint8_t conf)
+{
+	if (conf > 38) return;
+
+	static const uint16_t sw[39] =
+	{
+	  // Layer 1&2
+	  //   0     1     2     3     4     5     6     7     8     9    10
+	  // 0000  0100  1000  0010  0010  1010  1010  0110  0110  0111  0111 switch
+	  //00.00 00.10 00.01 01.00 01.00 01.01 01.01 01.10 01.10 11.10 11.10 port
+	     0x00, 0x02, 0x01, 0x08, 0x08, 0x09, 0x09, 0x0a, 0x0a, 0x1a, 0x1a,
+	  // Layer 3
+	  //  11    12    13    14    15    16    17    18    19    20    21    22
+	  // 0000  0000  0000  0000  0100  0100  0100  0100  1000  1000  1000  1000 switch
+	  //00.00 00.00 00.00 00.00 00.10 00.10 00.10 00.10 00.01 00.01 00.01 00.01 port
+	     0x00, 0x00, 0x00, 0x00, 0x02, 0x02, 0x02, 0x02, 0x01, 0x01, 0x01, 0x01,
+	  // Layer 4
+	  //  23    24    25    26    27    28    29    30    31    32    33    34    35    36    37    38
+	  // 0000  0000  0000  0000  0100  0100  0100  0100  1000  1000  1000  1000  1010  1010  1010  1010 switch
+	  //00.00 00.00 00.00 00.00 00.10 00.10 00.10 00.10 00.01 00.01 00.01 00.01 01.01 01.01 01.01 01.01 port
+	     0x00, 0x00, 0x00, 0x00, 0x02, 0x02, 0x02, 0x02, 0x01, 0x01, 0x01, 0x01, 0x09, 0x09, 0x09, 0x09
+	};
+
+	stb_port_states = (stb_port_states & 0x7fe0) + sw[conf];
+	stb_port_states |= 0x0060; // B_ID_x = input
+	STB_WritePort(stb_port_states);
+}
+
+
+uint16_t CTestboard::_stb_GetVSdata(uint8_t channel, bool pos)
+{
+	if (channel > 3) return 0;
+	/* channel/pos  ADC_CH ADC_SEL
+	 *     0/p         4      2
+	 *     1/p         5      6
+	 *     2/p         6      3
+	 *     3/p         7      7
+	 *     0/n         0      0
+	 *     1/n         1      4
+	 *     2/n         2      1
+	 *     3/n         3      5
+	 */
+	static const uint8_t chp[4] = {2, 6, 3, 7};
+	static const uint8_t chn[4] = {0, 4, 1, 5};
+	uint8_t sel = pos ? chp[channel] : chn[channel];
+	return stb_ADC1_to_mV(STB_ReadADC(3, sel));
+}
+
+
+// --- Voltage conversion for DAC ---
+// 100 * mV = 338800 - 1134 * dac
+//   mV  = voltage in mV
+//   dac = DAC value
+uint16_t CTestboard::stb_mV_to_DAC(uint16_t mV)
+{
+	int dac = (338800-100*(int)mV)/1134;
+	if (dac < 0) dac = 0; else if (dac>1023) dac = 1023;
+	return (uint16_t)dac;
+}
+
+
+// --- Voltage conversion for ADC ---
+// mV = (adc * 1000) / 21243
+//   mV  = voltage in mV
+//   adc = DAC value
+uint16_t CTestboard::stb_ADC_to_mV(uint16_t adc)
+{
+	int mV = (adc * 1000) / 21243;
+	if (mV>10000) mV = 10000;
+	return (uint16_t)mV;
+}
+
+
+// --- Voltage conversion for SDATA ADC ---
+// mV = (adc * 1000) / 26214
+//   mV  = voltage in mV
+//   adc = DAC value
+uint16_t CTestboard::stb_ADC1_to_mV(uint16_t adc)
+{
+	int mV = (adc * 1000) / 26214;
+	if (mV>10000) mV = 10000;
+	return (uint16_t)mV;
+}
+
+
+// --- current conversion for power control ---
+// dac = (ua100 * 4915) / 100000
+//   ua100 = current in 100 uA units
+//   dac   = DAC value
+uint16_t CTestboard::stb_uA100_to_DAC(uint8_t src, uint16_t ua100)
+{
+	static const int k[6] = { 5986, 9260, 6193, 7309, 8709, 9918 };
+	int dac = ((int)ua100 * k[src]) / 100000;
+	if (dac > 1023) dac = 1023;
+	return (uint16_t)dac;
+}
+
+
+// --- current conversion for ADC ---
+// ua100 = (adc * 10000) / 15729
+//   ua100  = current in 100 uA units
+//   adc = ADC value
+uint16_t CTestboard::stb_ADC_to_uA100(uint8_t src, uint16_t adc)
+{
+	static const int k[6] = { 12914,  8349, 12483, 10578,  8876,  7794 };
+	int ua100 = (adc * 10000) / k[src];
+	if (ua100 > 65000) ua100 = 65000;
+	return (uint16_t)ua100;
+}
+
+
+
 // === digital signal probe =================================================
 
 void CTestboard::SignalProbeD1(uint8_t signal)
@@ -1265,6 +1663,7 @@ void CTestboard::tbm_Addr(uint8_t hub, uint8_t port)
 
 void CTestboard::mod_Addr(uint8_t hub)
 {
+		layer_1 = false;
         MOD_present = true;
         HUB_address = ((hub & 0x1f)<<3);
 }
@@ -1298,8 +1697,8 @@ void CTestboard::tbm_SelectRDA(uint8_t channel)
 {
 	switch (channel)
 	{
-	case 0: _Plug_IO(0x0); break;
-	case 1: _Plug_IO(0x1); break;
+	case 0: _Plug_IO(0x00); break;
+	case 1: _Plug_IO(0x01); break;
 	}
 }
 

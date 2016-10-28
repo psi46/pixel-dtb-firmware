@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
  *
- * Generated: Sat Dec 12 22:17:09 CET 2015
+ * Generated: Tue Aug 30 11:04:48 CEST 2016
  */
 
 /*
@@ -62,6 +62,7 @@
 #include "altera_avalon_epcs_flash_controller.h"
 #include "altera_avalon_jtag_uart.h"
 #include "altera_avalon_sgdma.h"
+#include "altera_avalon_spi.h"
 #include "altera_avalon_sysid_qsys.h"
 #include "altera_avalon_timer.h"
 
@@ -73,6 +74,7 @@ ALTERA_NIOS2_QSYS_IRQ_INSTANCE ( CPU, cpu);
 ALTERA_AVALON_EPCS_FLASH_CONTROLLER_INSTANCE ( EPCS_CONTROLLER, epcs_controller);
 ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART, jtag_uart);
 ALTERA_AVALON_SGDMA_INSTANCE ( USB_TX_DMA, usb_tx_dma);
+ALTERA_AVALON_SPI_INSTANCE ( SPI_EXTERNAL, spi_external);
 ALTERA_AVALON_SYSID_QSYS_INSTANCE ( SYSID, sysid);
 ALTERA_AVALON_TIMER_INSTANCE ( SYS_TIMER, sys_timer);
 
@@ -101,5 +103,6 @@ void alt_sys_init( void )
     ALTERA_AVALON_EPCS_FLASH_CONTROLLER_INIT ( EPCS_CONTROLLER, epcs_controller);
     ALTERA_AVALON_JTAG_UART_INIT ( JTAG_UART, jtag_uart);
     ALTERA_AVALON_SGDMA_INIT ( USB_TX_DMA, usb_tx_dma);
+    ALTERA_AVALON_SPI_INIT ( SPI_EXTERNAL, spi_external);
     ALTERA_AVALON_SYSID_QSYS_INIT ( SYSID, sysid);
 }

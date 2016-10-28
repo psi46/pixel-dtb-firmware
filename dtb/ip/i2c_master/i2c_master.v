@@ -20,6 +20,7 @@ module i2c_master
   output       slave_int,
 
 	// I2C signals
+	input ext_scl,
   inout scl,
   inout sda
 );
@@ -29,7 +30,8 @@ module i2c_master
 
   wire rst = 0;
 
-  assign scl = scl_padoen_o ? 1'bz : 1'b0;
+	wire scl_out = scl_padoen_o && ext_scl;
+  assign scl = scl_out ? 1'bz : 1'b0;
   assign sda = sda_padoen_o ? 1'bz : 1'b0;
 
   i2c_master_top i2c

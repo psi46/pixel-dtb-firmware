@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'dtb_system'
  * SOPC Builder design path: ../../dtb/dtb_system.sopcinfo
  *
- * Generated: Fri Aug 19 15:45:44 CEST 2016
+ * Generated: Fri Sep 16 09:32:05 CEST 2016
  */
 
 /*
@@ -134,6 +134,7 @@
 #define __ALTERA_AVALON_ONCHIP_MEMORY2
 #define __ALTERA_AVALON_PIO
 #define __ALTERA_AVALON_SGDMA
+#define __ALTERA_AVALON_SPI
 #define __ALTERA_AVALON_SYSID_QSYS
 #define __ALTERA_AVALON_TIMER
 #define __ALTERA_NIOS2_QSYS
@@ -293,19 +294,19 @@
 #define ALT_NUM_INTERNAL_INTERRUPT_CONTROLLERS 1
 #define ALT_NUM_INTERRUPT_CONTROLLERS 1
 #define ALT_STDERR "/dev/jtag_uart"
-#define ALT_STDERR_BASE 0x8100180
+#define ALT_STDERR_BASE 0x8100220
 #define ALT_STDERR_DEV jtag_uart
 #define ALT_STDERR_IS_JTAG_UART
 #define ALT_STDERR_PRESENT
 #define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDIN "/dev/jtag_uart"
-#define ALT_STDIN_BASE 0x8100180
+#define ALT_STDIN_BASE 0x8100220
 #define ALT_STDIN_DEV jtag_uart
 #define ALT_STDIN_IS_JTAG_UART
 #define ALT_STDIN_PRESENT
 #define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDOUT "/dev/jtag_uart"
-#define ALT_STDOUT_BASE 0x8100180
+#define ALT_STDOUT_BASE 0x8100220
 #define ALT_STDOUT_DEV jtag_uart
 #define ALT_STDOUT_IS_JTAG_UART
 #define ALT_STDOUT_PRESENT
@@ -788,7 +789,7 @@
  */
 
 #define ALT_MODULE_CLASS_jtag_uart altera_avalon_jtag_uart
-#define JTAG_UART_BASE 0x8100180
+#define JTAG_UART_BASE 0x8100220
 #define JTAG_UART_IRQ 10
 #define JTAG_UART_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define JTAG_UART_NAME "/dev/jtag_uart"
@@ -952,6 +953,64 @@
 
 
 /*
+ * spi_external configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_spi_external altera_avalon_spi
+#define SPI_EXTERNAL_BASE 0x8100180
+#define SPI_EXTERNAL_CLOCKMULT 1
+#define SPI_EXTERNAL_CLOCKPHASE 0
+#define SPI_EXTERNAL_CLOCKPOLARITY 0
+#define SPI_EXTERNAL_CLOCKUNITS "Hz"
+#define SPI_EXTERNAL_DATABITS 8
+#define SPI_EXTERNAL_DATAWIDTH 16
+#define SPI_EXTERNAL_DELAYMULT "1.0E-9"
+#define SPI_EXTERNAL_DELAYUNITS "ns"
+#define SPI_EXTERNAL_EXTRADELAY 0
+#define SPI_EXTERNAL_INSERT_SYNC 0
+#define SPI_EXTERNAL_IRQ -1
+#define SPI_EXTERNAL_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SPI_EXTERNAL_ISMASTER 1
+#define SPI_EXTERNAL_LSBFIRST 0
+#define SPI_EXTERNAL_NAME "/dev/spi_external"
+#define SPI_EXTERNAL_NUMSLAVES 1
+#define SPI_EXTERNAL_PREFIX "spi_"
+#define SPI_EXTERNAL_SPAN 32
+#define SPI_EXTERNAL_SYNC_REG_DEPTH 2
+#define SPI_EXTERNAL_TARGETCLOCK 1000000u
+#define SPI_EXTERNAL_TARGETSSDELAY "0.0"
+#define SPI_EXTERNAL_TYPE "altera_avalon_spi"
+
+
+/*
+ * stb_ctrl configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_stb_ctrl altera_avalon_pio
+#define STB_CTRL_BASE 0x8100200
+#define STB_CTRL_BIT_CLEARING_EDGE_REGISTER 0
+#define STB_CTRL_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define STB_CTRL_CAPTURE 0
+#define STB_CTRL_DATA_WIDTH 6
+#define STB_CTRL_DO_TEST_BENCH_WIRING 0
+#define STB_CTRL_DRIVEN_SIM_VALUE 0
+#define STB_CTRL_EDGE_TYPE "NONE"
+#define STB_CTRL_FREQ 75000000
+#define STB_CTRL_HAS_IN 0
+#define STB_CTRL_HAS_OUT 1
+#define STB_CTRL_HAS_TRI 0
+#define STB_CTRL_IRQ -1
+#define STB_CTRL_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define STB_CTRL_IRQ_TYPE "NONE"
+#define STB_CTRL_NAME "/dev/stb_ctrl"
+#define STB_CTRL_RESET_VALUE 0
+#define STB_CTRL_SPAN 16
+#define STB_CTRL_TYPE "altera_avalon_pio"
+
+
+/*
  * sys_timer configuration
  *
  */
@@ -989,7 +1048,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1471614103
+#define SYSID_TIMESTAMP 1474010273
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 

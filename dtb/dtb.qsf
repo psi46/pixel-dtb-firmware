@@ -358,7 +358,7 @@ set_instance_assignment -name IO_STANDARD LVDS -to ADC_clk
 
 # EDA Netlist Writer Assignments
 # ==============================
-set_global_assignment -name EDA_SIMULATION_TOOL "<None>"
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
 
 # Assembler Assignments
 # =====================
@@ -376,7 +376,7 @@ set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -
 
 	# EDA Netlist Writer Assignments
 	# ==============================
-set_global_assignment -name EDA_OUTPUT_DATA_FORMAT NONE -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
 
 # end EDA_TOOL_SETTINGS(eda_simulation)
 # -------------------------------------
@@ -949,7 +949,7 @@ set_location_assignment FF_X2_Y16_N5 -to "*|deser400_PSI:ds400_IV|cdr:cdr1|overs
 
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING ON
-set_global_assignment -name SEED 0
+set_global_assignment -name SEED 1
 set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
@@ -1039,6 +1039,8 @@ set_instance_assignment -name LL_MEMBER_OF deser4 -to "*|deser400_PSI:ds400_IV|c
 # set_location_assignment IOIBUF_X0_Y21_N15 -to LVDS2LCDS_sdata_III~input
 
 
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to Plug_IOs[1]
+set_global_assignment -name VERILOG_FILE stb_switch.v
 set_global_assignment -name QIP_FILE deser400/deser400.qip
 set_global_assignment -name SDC_FILE clocks.sdc
 set_global_assignment -name BDF_FILE data_aqu.bdf

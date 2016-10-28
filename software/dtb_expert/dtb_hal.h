@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include "system.h"
 #include "altera_avalon_pio_regs.h"
+#include "altera_avalon_spi_regs.h"
 #include "io.h"
 #include "rpc_io.h"
 #include "sgdma.h"
@@ -185,7 +186,7 @@ inline unsigned int GetI2cHs(unsigned char reg)
 void I2C_Main_Init();
 void I2C_External_Init();
 
-uint8_t I2C_EEPROM_Write(uint8_t addr, const uint8_t *data, uint8_t length);
+uint8_t I2C_EEPROM_Write(uint16_t addr, const uint8_t *data, uint8_t length);
 uint8_t I2C_EEPROM_Read(uint8_t *data, uint8_t length);
 
 // I2C EEPROM return codes
@@ -209,6 +210,87 @@ public:
 	void Flush();
 	bool Read(void *buffer, unsigned int size);
 };
+
+
+// === Sector Test Board =================================================
+
+// STB control register
+//     bit 5      bit 4     bit 3       bit 2      bit 1       bit 0
+// +----------+----------+---------+-----------+-----------+-----------+
+// | mode_stb | mode_spi | spi_pol | spi_cs[2] | spi_cs[1] | spi_cs[0] |
+	// +----------+----------+---------+-----------+-----------+-----------+
+
+#define STB_ctrl(cmd) IOWR_ALTERA_AVALON_PIO_DATA(STB_CTRL_BASE, (cmd));
+
+extern uint8_t stbCtrlReg;
+
+inline void Enter_STB_mode() { STB_ctrl(stbCtrlReg = 0x20); }
+
+inline void Leave_STB_mode() { STB_ctrl(stbCtrlReg = 0x00); }
+
+inline void Enter_SPI_mode(uint8_t mode)
+{
+	stbCtrlReg = (stbCtrlReg & 0x20) | 0x10 | mode;
+	STB_ctrl(stbCtrlReg);
+}
+
+inline void Enter_I2C_mode() { stbCtrlReg &= 0x20; STB_ctrl(stbCtrlReg); }
+
+
+/* --- read ADC value -----------------------------------------------
+  adc = 0: ADC_0 (U31)
+  adc = 1: ADC_1 (U32)
+  adc = 2: ADC_2 (U33)
+  adc = 3: ADC_CS (U34)
+
+  channel = 0: CH0
+  channel = 1: CH2
+  channel = 2: CH4
+  channel = 3: CH6
+  channel = 4: CH1
+  channel = 5: CH3
+  channel = 6: CH5
+  channel = 7: CH7
+
+  return: 16*adc_value
+*/
+uint16_t STB_ReadADC(uint8_t adc, uint8_t channel);
+
+
+/* --- set DAC value ------------------------------------------------
+  dac = 0: DAC_0 (U36)
+  dac = 1: DAC_1 (U35)
+  dac = 2: DAC_2 (U37)
+
+  channel = 0: DAC A
+  channel = 1: DAC B
+  channel = 2: DAC C
+  channel = 3: DAC D
+  channel = 4: DAC E
+  channel = 5: DAC F
+  channel = 6: DAC G
+  channel = 7: DAC H
+*/
+void STB_InitDAC(uint8_t dac);
+void STB_SetDAC(uint8_t dac, uint8_t channel, uint16_t data);
+
+
+/* --- Set HV Relays ------------------------------------------------
+  data bit 7   6   5   4   3   2   1   0
+           -  HV7 HV6 HV5 HV4 HV3 HV2 HV1
+*/
+void STB_SetHV(uint8_t data);
+
+
+/* --- Port Expander ------------------------------------------------
+data bit  15  14  13  12  11  10   9   8   7   6   5   4   3   2   1   0
+         P17 P16 P15 P14 P13 P12 P11 P10 P07 P06 P05 P04 P03 P02 P01 P00
+*/
+#define STB_PORT_OK 0
+#define STB_PORT_NOT_PRESENT 1
+
+uint8_t STB_WritePort(uint16_t data);
+uint8_t STB_ReadPort(uint16_t &data);
 
 
 #endif //_ATB_BASE_H_
