@@ -49,12 +49,12 @@ module stb_switch
 				io[0]   <= spi_mosi;
 				io[1]   <= 1'bz;
 				io[2]   <= !spi_ss;
-				io[3]   <= port_out[3];
+				io[3]   <= 1'bz;
 				addr[0] <= spi_cs[0];
 				addr[1] <= spi_cs[1];
 				addr[2] <= spi_cs[2];
 				addr[3] <= 1'bz;
-				nReset  <= 1'bz;
+				nReset  <= nReset_in ? 1'bz : 1'b0;
 			end // spi_mode
 			else
 			begin // I2C mode
@@ -62,12 +62,12 @@ module stb_switch
 				io[0]   <= spi_mosi;
 				io[1]   <= 1'bz;
 				io[2]   <= 1'b0;
-				io[3]   <= port_out[3];
+				io[3]   <= 1'bz;
 				addr[0] <= spi_cs[0];
 				addr[1] <= spi_cs[1];
 				addr[2] <= spi_cs[2];
 				addr[3] <= 1'bz;
-				nReset  <= 1'bz;
+				nReset  <= nReset_in ? 1'bz : 1'b0;
 			end // I2C mode
 		end // --- STB mode
 		else
@@ -76,12 +76,12 @@ module stb_switch
 			io[0]   <= port_out[0];
 			io[1]   <= port_out[1];
 			io[2]   <= 1'b0;
-			io[3]   <= port_out[3];
+			io[3]   <= 1'bz;  // port_out[3]
 			addr[0] <= addr_in[0] ? 1'bz : 1'b0;
 			addr[1] <= addr_in[1] ? 1'bz : 1'b0;
 			addr[2] <= addr_in[2] ? 1'bz : 1'b0;
 			addr[3] <= addr_in[3] ? 1'bz : 1'b0;
-			nReset  <= nReset_in      ? 1'bz : 1'b0;
+			nReset  <= nReset_in  ? 1'bz : 1'b0;
 		end // --- DTB mode
 	end
 

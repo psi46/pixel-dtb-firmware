@@ -1263,7 +1263,7 @@ applicable agreement for further details.
 	(pt -3416 -128)
 )
 (connector
-	(text "sclk[6]" (rect -3710 -144 -3677 -132)(font "Arial" ))
+	(text "sclk[3]" (rect -3710 -144 -3677 -132)(font "Arial" ))
 	(pt -3656 -128)
 	(pt -3712 -128)
 )
